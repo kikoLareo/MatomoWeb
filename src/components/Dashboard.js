@@ -1,6 +1,7 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { getExampleData } from '../api';
+import ChartComponent from './ChartComponent';
 
 function Dashboard() {
   const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
+      <ChartComponent data={data} />
       <ul>
         {data.map(item => (
           <li key={item.id}>{item.title}</li>
