@@ -1,6 +1,5 @@
-// src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
-import { getExampleData } from '../api';
+import { getIpcData } from '../api';
 import ChartComponent from './ChartComponent';
 
 function Dashboard() {
@@ -11,8 +10,13 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getExampleData();
-        setData(result);
+        const result = await getIpcData();
+        console.log('Data received in Dashboard:', result);
+        if (Array.isArray(result)) {
+          setData(result);
+        } else {
+          setData([]);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -30,11 +34,11 @@ function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <ChartComponent data={data} />
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>{item.title}</li>
+      {/* <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item.Nombre}: {item.Data && item.Data[0]?.Valor}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
