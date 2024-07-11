@@ -8,7 +8,7 @@ const api = axios.create({
 // Función para obtener datos del IPC del INE
 export const getIpcData = async () => {
   try {
-    const response = await api.get('index.php?viewDataTable=graphEvolution&module=Widgetize&action=iframe&columns[]=nb_plays&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=getEvolutionGraph&idSite=9&token_auth=87148f8d4f8a9f7e5e21f6bd705bfdbd&period=day&date=yesterday'); // Ajusta según sea necesario
+    const response = await api.get('index.php?date=2024-07-10&viewDataTable=graphEvolution&dateUsedInGraph=2024-06-11%2C2024-07-10&evolution_day_last_n=30&columns=nb_plays&module=MediaAnalytics&action=getEvolutionGraph&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=getEvolutionGraph&idSite=9&period=week&totals=0'); // Ajusta según sea necesario
     console.log('IPC Data:', response.data);
     return response.data;
   } catch (error) {
