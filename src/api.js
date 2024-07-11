@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Configurar axios con la URL base de la API del INE
 const api = axios.create({
-  baseURL: 'https://servicios.ine.es/wstempus/js/ES/',
+  baseURL: 'https://tiivii-ott.matomo.cloud/',
 });
 
 // Función para obtener datos del IPC del INE
