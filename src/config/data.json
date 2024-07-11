@@ -11,7 +11,6 @@
         "11": "Ayuntamiento de Menorca",
         "12": "Reto Demográfico - Dip. Pontevedra",
         "9": "OTT_Tiivii"},
-    // "api_token": "a34c617c9034b2066f6b65dead4541f2",
     "api_token": "9n9oeisvvh2i91spotc9go1u7r",
     "opensearch_config": {
         "host": "Tiibiglog-OpenSearch-39e9ebd54c7be9d3.elb.eu-west-1.amazonaws.com",
