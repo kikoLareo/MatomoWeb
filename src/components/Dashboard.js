@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getIpcData } from '../api';
 import ChartComponent from './ChartComponent';
+import { getData } from '../api';
 
 function Dashboard() {
   const [data, setData] = useState([]);
@@ -10,7 +10,8 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getIpcData();
+        
+        const result = await getData();
         console.log('Data received in Dashboard:', result);
         if (Array.isArray(result)) {
           setData(result);
