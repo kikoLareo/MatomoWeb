@@ -10,23 +10,20 @@ const api = axios.create({
 
 // Función para obtener datos del IPC del INE
 export const getIpcData = async () => {
-  try {
 
     const myHeaders = new Headers();
     myHeaders.append("Cookie", "MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6");
-
+    
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow"
     };
-
-    const response = await fetch(baseURL+graficaUrl, requestOptions); // Ajusta según sea necesario
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching IPC data:', error);
-    throw error;
-  }
+    
+    fetch(baseURL + "index.php?module=API&format=JSON&idSite=2&period=range&date=2023-12-01,2024-07-01&method=MediaAnalytics.getVideoTitles&filter_column=label&filter_pattern=ID%3A+377&secondaryDimension=spent_time&format_metrics=1&expanded=1&token_auth=87148f8d4f8a9f7e5e21f6bd705bfdbd", requestOptions)
+      .then((response) => response.text())
+      .then((result) => { return result})
+      .catch((error) => console.error(error));
 };
 
 export default api;
