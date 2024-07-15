@@ -34,12 +34,7 @@ function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      <ChartComponent data={data} />
-      {/* <ul>
-        {data.map((item, index) => (
-          <li key={index}>{item.Nombre}: {item.Data && item.Data[0]?.Valor}</li>
-        ))}
-      </ul> */}
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }

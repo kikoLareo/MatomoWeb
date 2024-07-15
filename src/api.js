@@ -5,9 +5,9 @@ const baseURL = 'https://tiivii-ott.matomo.cloud/';
 
 // Configurar axios con la URL base de la API del INE
 const api = axios.create({
-  baseURL: 'https://tiivii-ott.matomo.cloud/',
+  baseURL: baseURL,
+  withCredentials: true
 });
-
 // Función para obtener datos del IPC del INE
 export const getData = async () => {
 
@@ -19,17 +19,19 @@ export const getData = async () => {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
-      mode: "no-cors"
     };
     
-    const completeUrl = baseURL + graficaUrl;
-    console.log(completeUrl)
+    const response = await api.get(graficaUrl , {
+      headers: {
+        'Cookie': 'MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6'
+      }
+    });
+    
+    // console.log(response)
+    // const data = await response.json();
 
-    const response = await fetch(completeUrl, requestOptions)
-    const data = await response.json();
-
-    console.log(data)
-    return data;
+    console.log(response.data)
+    return response.data;
 
   }catch(error) {
       console.error(error)
