@@ -23,9 +23,7 @@ export const getData = async () => {
       }
     });
     
-    // console.log(response)
-    // const data = await response.json();
-
+ 
     console.log(response.data)
     return response.data[0];
 

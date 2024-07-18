@@ -1,29 +1,33 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const ChartComponent = ({ data }) => {
-  if (!Array.isArray(data) || data.length === 0) {
-    return <div>No valid data available</div>;
-  }
+  // Preprocesar los datos para Chart.js
+  const labels = data.map(item => item.label);
+  const nbPlays = data.map(item => item.nb_plays);
 
   const chartData = {
-    labels: data.map(item => item.Nombre),
+    labels: labels,
     datasets: [
       {
-        label: 'Valor',
-        data: data.map(item => item.Data && item.Data[0]?.Valor),
+        label: 'Número de Reproducciones',
+        data: nbPlays,
+        fill: false,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
       },
     ],
   };
 
-  console.log('Chart Data:', chartData);
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
-  return (
-    <div>
-      <Bar data={chartData} />
-    </div>
-  );
+  return <Line data={chartData} options={options} />;
 };
 
 export default ChartComponent;
