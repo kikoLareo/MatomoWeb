@@ -1,18 +1,172 @@
-// src/api.js
 import axios from 'axios';
+import graficaUrl from './config/Urls';
 
+const baseURL = 'https://tiivii-ott.matomo.cloud/';
+
+// Configurar axios con la URL base de la API del INE
 const api = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: baseURL,
+  withCredentials: true
 });
+// Función para obtener datos del IPC del INE
+export const getData = async () => {
 
-export const getExampleData = async () => {
-  try {
-    const response = await api.get('/posts');
+  try{
+    const myHeaders = new Headers();
+    myHeaders.append("Cookie", "MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6");
+    
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    
+    const response = await api.get(graficaUrl , {
+      headers: {
+        'Cookie': 'MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6'
+      }
+    });
+    
+    // console.log(response)
+    // const data = await response.json();
+
+    console.log(response.data)
     return response.data;
-  } catch (error) {
-    console.error('Error fetching example data:', error);
-    throw error;
+
+  }catch(error) {
+      console.error(error)
   }
 };
 
 export default api;
+
+/**
+ * // $(document).ready( async function() {
+
+    // let matomoURL1 = `https://tiivii-ott.matomo.cloud/index.php?module=API&format=JSON&idSite=${idSite}&period=range&date=${inputFechaInicio.value},${inputFechaFin.value}&method=MediaAnalytics.getVideoTitles&filter_column=label&filter_pattern=ID%3A+${petiscoID}&secondaryDimension=spent_time&format_metrics=1&expanded=1&token_auth=${token}`;
+    // const response_matomoURL1 = await fetch(matomoURL1)
+    // const Data_0_matomoURL1 = response_matomoURL1[0]
+    // const Data_matomoURL1 = await Data_0_matomoURL1.json();
+
+    // console.log(Data_matomoURL1)
+
+    // let matomoURL2 = `https://tiivii-ott.matomo.cloud/index.php?module=API&format=JSON&idSite=${idSite}&period=range&date=${inputFechaInicio.value},${inputFechaFin.value}&method=MediaAnalytics.getVideoTitles&filter_column=label&filter_pattern=ID%3A+${petiscoID}&secondaryDimension=media_progress&format_metrics=1&expanded=1&token_auth=${token}`
+    // const response_matomoURL2 = await fetch(matomoURL2)
+    // const Data_0_matomoURL2 = response_matomoURL2[0]
+    // const Data_matomoURL2 = await Data_0_matomoURL2.json();
+
+    // console.log(Data_matomoURL2)
+
+    // const labels = Data_matomoURL1.map(item => item.label);
+    // const nbPlays = Data_matomoURL1.map(item => item.nb_plays || 0);
+
+    // const labels2 = Data_matomoURL2.map(item => item.label);
+    // const nbPlays2 = Data_matomoURL2.map(item => item.nb_plays || 0);
+
+    // //**charts */
+    // $(function () {
+    // //** Data and config for chartjs */
+    // 'use strict';
+    // if (labels.length === 0 || nbPlays.length === 0) {
+    //     // Mostrar mensaje de "No hay datos"
+    //     $("#barChart").html("<p>No hay datos disponibles.</p>");
+    // } else {
+    //     var barChartData = {
+    //         labels: labels,
+    //         datasets: [{
+    //             label: 'total',
+    //             data: nbPlays,
+    //             backgroundColor: 'rgba(255, 66, 15, 0.7)',
+    //             borderColor: 'rgba(255, 66, 15, 0.7)'
+    //         }]
+    //     }; //data
+    //     var barChartOptions = {
+    //         scales: {
+    //             xAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: true,
+    //                     fontSize: 20,
+    //                 }
+    //             }],
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: true,
+    //                     fontSize: 20,
+    //                     precision: 0, // Mostrar solo números enteros en el eje Y
+    //                 }
+    //             }]
+    //         },
+    //         legend: {
+    //             display: false
+    //         },
+    //         tooltips: {
+    //             enabled: true,
+    //             titleFontSize: 26, // Tamaño de la fuente del título del tooltip
+    //             bodyFontSize: 24 // Tamaño de la fuente del cuerpo del tooltip
+    //         }
+    //     }; //options
+
+    //     // Get context with jQuery - using jQuery's .get() method.
+    //     var barChartCanvas = $("#barChart").get(0).getContext("2d");
+    //     // This will get the first returned node in the jQuery collection.
+    //     var barChart = new Chart(barChartCanvas, {
+    //         type: 'bar',
+    //         data: barChartData,
+    //         options: barChartOptions
+    //     });    
+    // }
+    // if (labels2.length === 0 || nbPlays2.length === 0) {
+    //     // Mostrar mensaje de "No hay datos"
+    //     $("#barChart2").html("<p>No hay datos disponibles.</p>");
+    // } else {
+    //     var barChart2Data = {
+    //         labels: labels2,
+    //         datasets: [{
+    //             label: 'total',
+    //             data: nbPlays2,
+    //             backgroundColor: 'rgba(255, 66, 15, 0.7)',
+    //             borderColor: 'rgba(255, 66, 15, 0.7)'
+    //         }]
+    //     }; //data
+    //     var barChart2Options = {
+    //         scales: {
+    //             xAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: true,
+    //                     fontSize: 20,
+    //                 }
+    //             }],
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: true,
+    //                     fontSize: 20,
+    //                     precision: 0, // Mostrar solo números enteros en el eje Y
+    //                 }
+    //             }]
+    //         },
+    //         legend: {
+    //             display: false
+    //         },
+    //         tooltips: {
+    //             enabled: true,
+    //             titleFontSize: 26, // Tamaño de la fuente del título del tooltip
+    //             bodyFontSize: 24 // Tamaño de la fuente del cuerpo del tooltip
+    //         }
+    //     }; //options
+
+    //     // Get context with jQuery - using jQuery's .get() method.
+    //     var barChart2Canvas = $("#barChart2").get(0).getContext("2d");
+    //     // This will get the first returned node in the jQuery collection.
+    //     var barChart2 = new Chart(barChart2Canvas, {
+    //         type: 'bar',
+    //         data: barChart2Data,
+    //         options: barChart2Options
+    //     });
+    // }
+    
+    // }); //chart
+    // });
+
+    
+
+ 

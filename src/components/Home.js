@@ -5,8 +5,15 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <div>
-      <h1>Welcome to Analytics Web</h1>
-      <Link to="/dashboard">Go to Dashboard</Link>
+      <header>
+      
+      </header>
+      <body>
+        <div>
+          <h1>Welcome to Matomo Web</h1>
+          
+        </div>
+      </body>
     </div>
   );
 }

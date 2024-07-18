@@ -1,6 +1,6 @@
-// src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
-import { getExampleData } from '../api';
+import ChartComponent from './ChartComponent';
+import { getData } from '../api';
 
 function Dashboard() {
   const [data, setData] = useState([]);
@@ -10,8 +10,14 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getExampleData();
-        setData(result);
+        
+        const result = await getData();
+        console.log('Data received in Dashboard:', result);
+        if (Array.isArray(result)) {
+          setData(result);
+        } else {
+          setData([]);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -28,11 +34,7 @@ function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }

@@ -1,0 +1,22 @@
+{
+    "idsites": {
+        "10": "Ohjazz",
+        "4": "Concello de Lalin",
+        "3": "Teatro Principal Palma Mallorca",
+        "5": "Diputació de Castelló",
+        "6": "Concello de Arteixo",
+        "7": "Concello de Redondela",
+        "8": "Da tua man - Dip. Pontevedra",
+        "15": "RTVCyL",
+        "11": "Ayuntamiento de Menorca",
+        "12": "Reto Demográfico - Dip. Pontevedra",
+        "9": "OTT_Tiivii"},
+    "api_token": "9n9oeisvvh2i91spotc9go1u7r",
+    "opensearch_config": {
+        "host": "Tiibiglog-OpenSearch-39e9ebd54c7be9d3.elb.eu-west-1.amazonaws.com",
+        "port": 9200,
+        "user": "OTT-Pro",
+        "password": "8v4vvnz1T45x",
+        "environment": "pro"
+    }
+}
