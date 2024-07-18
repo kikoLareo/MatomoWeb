@@ -15,11 +15,7 @@ export const getData = async () => {
     const myHeaders = new Headers();
     myHeaders.append("Cookie", "MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6");
     
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+
     
     const response = await api.get(graficaUrl , {
       headers: {

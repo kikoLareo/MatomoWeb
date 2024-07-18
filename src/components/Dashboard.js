@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ChartComponent from './ChartComponent';
 import { getData } from '../api';
 
 function Dashboard() {
