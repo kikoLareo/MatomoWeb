@@ -11,7 +11,11 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const result = await getData();
-        setData(result);
+        if (Array.isArray(result)) {
+          setData(result);
+        } else {
+          setError(new Error('El formato de los datos no es válido'));
+        }
       } catch (error) {
         setError(error);
       } finally {

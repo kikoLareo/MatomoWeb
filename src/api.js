@@ -3,36 +3,27 @@ import graficaUrl from './config/Urls';
 
 const baseURL = 'https://tiivii-ott.matomo.cloud/';
 
-// Configurar axios con la URL base de la API del INE
+
 const api = axios.create({
-  baseURL: baseURL,
+  baseURL:baseURL,
   withCredentials: true
 });
-// Función para obtener datos del IPC del INE
+
 export const getData = async () => {
-
-  try{
-    const myHeaders = new Headers();
-    myHeaders.append("Cookie", "MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6");
-    
-
-    
-    const response = await api.get(graficaUrl , {
+  try {
+    const response = await api.get(graficaUrl, {
       headers: {
-        'Cookie': 'MATOMO_SESSID=defcl5qmgmq538gsgfdq2h2qr6'
+        'Authorization': `Bearer YOUR_TOKEN_HERE` // Reemplaza YOUR_TOKEN_HERE con tu token real si es necesario
       }
     });
-    
- 
-    console.log(response.data)
-    return response.data[0];
 
-  }catch(error) {
-      console.error(error)
+    console.log('Matomo Response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return []; // Devolver un array vacío en caso de error
   }
 };
-
-export default api;
 
 /**
  * // $(document).ready( async function() {

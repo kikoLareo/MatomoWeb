@@ -2,6 +2,11 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const ChartComponent = ({ data }) => {
+  // Verificar si data es un array antes de procesar
+  if (!Array.isArray(data) || data.length === 0) {
+    return <div>Datos no disponibles</div>;
+  }
+
   // Preprocesar los datos para Chart.js
   const labels = data.map(item => item.label);
   const nbPlays = data.map(item => item.nb_plays);
