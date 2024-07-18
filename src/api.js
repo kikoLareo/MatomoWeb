@@ -27,7 +27,7 @@ export const getData = async () => {
     // const data = await response.json();
 
     console.log(response.data)
-    return response.data;
+    return response.data[0];
 
   }catch(error) {
       console.error(error)
