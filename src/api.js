@@ -3,19 +3,17 @@ import graficaUrl from './config/Urls';
 
 const baseURL = 'https://tiivii-ott.matomo.cloud/';
 
+import axios from 'axios';
+import graficaUrl from './config/Urls';
 
 const api = axios.create({
-  baseURL:baseURL,
+  baseURL: '/',
   withCredentials: true
 });
 
 export const getData = async () => {
   try {
-    const response = await api.get(graficaUrl, {
-      headers: {
-        'Authorization': `Bearer YOUR_TOKEN_HERE` // Reemplaza YOUR_TOKEN_HERE con tu token real si es necesario
-      }
-    });
+    const response = await api.get(graficaUrl);
 
     console.log('Matomo Response:', response.data);
     return response.data;
