@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../api';
 import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics_functions';
-import ChartComponent from './chartComponent';
+import ChartComponent from './ChartComponent';
 
 function Dashboard() {
   const [chartsData, setChartsData] = useState([]);
