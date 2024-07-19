@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../api';
-import { mediaAnalyticsConfig } from '../api/mediaAnalytics';
+import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics';
 import ChartComponent from './ChartComponent';
 
 function Dashboard() {
