@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchData } from '../api';
+import { fetchData } from '../api/index';
 import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics';
 import ChartComponent from './ChartComponent';
 
@@ -12,7 +12,7 @@ function Dashboard() {
     const fetchDataForCharts = async () => {
       try {
         const idSite = 2; // Example idSite
-        const list = Object.keys(mediaAnalyticsConfig); // Load all functionalities
+        const list = ["get", "getCurrentNumPlays"]; // Load all functionalities
         
         const dataPromises = list.map(async (functionName) => {
           const data = await fetchData(functionName, idSite, mediaAnalyticsConfig);
