@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../api';
-import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics_functions';
+import { mediaAnalyticsConfig } from '../api/mediaAnalytics';
 import ChartComponent from './ChartComponent';
 
 function Dashboard() {
@@ -12,7 +12,7 @@ function Dashboard() {
     const fetchDataForCharts = async () => {
       try {
         const idSite = 2; // Example idSite
-        const list = ['get', 'getCurrentNumPlays'];
+        const list = Object.keys(mediaAnalyticsConfig); // Load all functionalities
         
         const dataPromises = list.map(async (functionName) => {
           const data = await fetchData(functionName, idSite, mediaAnalyticsConfig);
@@ -35,13 +35,11 @@ function Dashboard() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div >
+    <div>
       <h1>Dashboard</h1>
-      <div class="graphDashBoard">
       {chartsData.map(chart => (
         <ChartComponent key={chart.key} data={chart.data} title={chart.key} />
       ))}
-      </div>  
     </div>
   );
 }

@@ -1,8 +1,9 @@
 /* src/components/Sidebar.css */
 .sidebar {
-    width: 200px;
-    background: #f4f4f4;
-    padding: 20px;
+  background: #f4f4f4;
+  padding: 1vh 1vw;
+  width: 5vw;
+  height: 100vh
   }
   
   .sidebar nav ul {
