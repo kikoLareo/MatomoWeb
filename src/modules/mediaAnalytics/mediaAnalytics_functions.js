@@ -5,12 +5,12 @@ const methodBase = 'MediaAnalytics';
 
 export const MediaAnalytics_getCurrentNumPlays = (idSite, baseUrl, lastMinutes = 180) => {
   const method = `${methodBase}.getCurrentNumPlays`;
-  return getBaseUrl( methodBase, method, { idSite, lastMinutes });
+  return getBaseUrl(  method, { idSite, lastMinutes });
 };
 
 export const MediaAnalytics_get = (idSite, baseUrl, period = 'day', date = '2023-12-01,2024-07-01') => {
   const method = `${methodBase}.get`;
-  return getBaseUrl( methodBase, method, { idSite, period, date });
+  return getBaseUrl(  method, { idSite, period, date });
 };
 
 export const mediaAnalyticsConfig = {
@@ -20,3 +20,4 @@ export const mediaAnalyticsConfig = {
     getCurrentNumPlays: MediaAnalytics_getCurrentNumPlays,
   }
 };
+

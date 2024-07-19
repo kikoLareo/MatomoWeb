@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { baseURL, token_auth, format } from './config.js';
+import { baseURL,module, token_auth, format } from './config.js';
 
 // Función para construir la URL base
-export const getBaseUrl = (module, method, params = {}) => {
+export const getBaseUrl = ( method, params = {}) => {
   const base = `${baseURL}index.php?module=${module}&format=${format}&method=${method}&token_auth=${token_auth}`;
   const queryParams = new URLSearchParams(params).toString();
   return `${base}&${queryParams}`;
