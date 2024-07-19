@@ -36,7 +36,7 @@ const ChartComponent = ({ data, title }) => {
   };
 
   return (
-    <div>
+    <div class="graph">
       <h2>{title}</h2>
       <Line data={chartData} options={options} />
     </div>

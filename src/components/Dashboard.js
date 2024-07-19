@@ -35,11 +35,13 @@ function Dashboard() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div >
       <h1>Dashboard</h1>
+      <div class="graphDashBoard">
       {chartsData.map(chart => (
         <ChartComponent key={chart.key} data={chart.data} title={chart.key} />
       ))}
+      </div>  
     </div>
   );
 }
