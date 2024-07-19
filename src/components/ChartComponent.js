@@ -1,22 +1,20 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const ChartComponent = ({ data }) => {
-  // Verificar si data es un array antes de procesar
+const ChartComponent = ({ data, title }) => {
   if (!Array.isArray(data) || data.length === 0) {
     return <div>Datos no disponibles</div>;
   }
 
-  // Preprocesar los datos para Chart.js
   const labels = data.map(item => item.label);
-  const nbPlays = data.map(item => item.nb_plays);
+  const values = data.map(item => item.nb_plays);
 
   const chartData = {
     labels: labels,
     datasets: [
       {
-        label: 'Número de Reproducciones',
-        data: nbPlays,
+        label: title,
+        data: values,
         fill: false,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',

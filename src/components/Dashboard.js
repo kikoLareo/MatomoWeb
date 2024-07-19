@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { getData } from '../api';
-import ChartComponent from './ChartComponent';
+import { fetchData } from '../api';
+import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics_functions';
+import ChartComponent from './chartComponent';
 
 function Dashboard() {
-  const [data, setData] = useState([]);
+  const [chartsData, setChartsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataForCharts = async () => {
       try {
-        const result = await getData();
-        if (Array.isArray(result)) {
-          setData(result);
-        } else {
-          setError(new Error('El formato de los datos no es válido'));
-        }
+        const idSite = 2; // Example idSite
+        const list = ['get', 'getCurrentNumPlays'];
+        
+        const dataPromises = list.map(async (functionName) => {
+          const data = await fetchData(functionName, idSite, mediaAnalyticsConfig);
+          return { key: functionName, data };
+        });
+
+        const results = await Promise.all(dataPromises);
+        setChartsData(results);
       } catch (error) {
         setError(error);
       } finally {
@@ -23,7 +28,7 @@ function Dashboard() {
       }
     };
 
-    fetchData();
+    fetchDataForCharts();
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -32,7 +37,9 @@ function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      <ChartComponent data={data} />
+      {chartsData.map(chart => (
+        <ChartComponent key={chart.key} data={chart.data} title={chart.key} />
+      ))}
     </div>
   );
 }
