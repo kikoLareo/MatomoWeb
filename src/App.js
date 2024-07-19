@@ -6,6 +6,9 @@ import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import './css/App.css';
+import './css/Sidebar.css';
+import './css/Header.css';
+import './css/graph.css';
 
 function App() {
   return (
