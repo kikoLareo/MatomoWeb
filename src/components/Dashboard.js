@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
 import { mediaAnalytics } from '../modules/mediaAnalytics/mediaAnalytics';
@@ -17,17 +17,14 @@ const Dashboard = () => {
           return { [chartName]: response.data };
         })
       );
-
+  
       const mergedData = fetchedData.reduce((acc, curr) => ({ ...acc, ...curr }), {});
       setChartData(mergedData);
     } catch (error) {
       console.error('Error fetching data for charts:', error);
     }
   };
-
-  useEffect(() => {
-    fetchDataForCharts();
-  }, [selectedCharts]);
+  
 
   const handleChartSelection = (chartName) => {
     setSelectedCharts((prevSelectedCharts) =>
