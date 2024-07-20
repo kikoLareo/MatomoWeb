@@ -1,46 +1,25 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import 'chart.js/auto'; // Import the full Chart.js bundle
 
-const ChartComponent = ({ data, title }) => {
-  const labels = Object.keys(data);
+function ChartComponent({ data, title }) {
   const chartData = {
-    labels: labels,
+    labels: Object.keys(data),
     datasets: [
       {
         label: title,
-        data: labels.map(label => (data[label] && data[label].nb_plays) ? data[label].nb_plays : 0),
-        fill: false,
+        data: Object.values(data).map((item) => item.nb_plays || 0),
         borderColor: 'rgba(75,192,192,1)',
-        tension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.2)',
       },
     ],
   };
 
-  const options = {
-    responsive: true,
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Date'
-        }
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Number of Plays'
-        }
-      }
-    }
-  };
-
   return (
-    <div class="graph">
-      <h2>{title}</h2>
-      <Line data={chartData} options={options} />
+    <div>
+      <h3>{title}</h3>
+      <Line data={chartData} />
     </div>
   );
-};
+}
 
 export default ChartComponent;
