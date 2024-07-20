@@ -32,9 +32,18 @@ export const MediaAnalytics_get = (idSite, { period = 'day', date = '2023-12-01,
 // Define the rest of the functions similarly
 
 export const mediaAnalyticsConfig = {
-  get: MediaAnalytics_get,
-  getCurrentNumPlays: MediaAnalytics_getCurrentNumPlays,
-  getCurrentSumTimeSpent: MediaAnalytics_getCurrentSumTimeSpent,
-  getCurrentMostPlays: MediaAnalytics_getCurrentMostPlays,
-  // Add other functions here
-};
+    get: MediaAnalytics_get,
+    getCurrentNumPlays: MediaAnalytics_getCurrentNumPlays,
+    getCurrentSumTimeSpent: MediaAnalytics_getCurrentSumTimeSpent,
+    getCurrentMostPlays: MediaAnalytics_getCurrentMostPlays,
+    getVideoResources: MediaAnalytics_getVideoResources,
+    getAudioResources: MediaAnalytics_getAudioResources,
+    getVideoTitles: MediaAnalytics_getVideoTitles,
+    getAudioTitles: MediaAnalytics_getAudioTitles,
+    getGroupedVideoResources: MediaAnalytics_getGroupedVideoResources,
+    getGroupedAudioResources: MediaAnalytics_getGroupedAudioResources,
+    getVideoHours: MediaAnalytics_getVideoHours,
+    getAudioHours: MediaAnalytics_getAudioHours,
+    getVideoResolutions: MediaAnalytics_getVideoResolutions,
+    getPlayers: MediaAnalytics_getPlayers
+  };
