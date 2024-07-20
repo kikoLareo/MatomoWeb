@@ -4,6 +4,23 @@ import ChartComponent from './ChartComponent';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
 
+const metrics = {
+  nb_uniq_visitors: 'Unique Visitors',
+  nb_plays: 'Number of Plays',
+  nb_unique_visitors_plays: 'Unique Visitors Plays',
+  nb_impressions: 'Number of Impressions',
+  nb_unique_visitors_impressions: 'Unique Visitors Impressions',
+  nb_finishes: 'Number of Finishes',
+  sum_total_time_watched: 'Total Time Watched',
+  sum_total_audio_plays: 'Total Audio Plays',
+  sum_total_audio_impressions: 'Total Audio Impressions',
+  sum_total_video_plays: 'Total Video Plays',
+  sum_total_video_impressions: 'Total Video Impressions',
+  play_rate: 'Play Rate',
+  finish_rate: 'Finish Rate',
+  impression_rate: 'Impression Rate',
+};
+
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1); // Valor por defecto
   const [chartData, setChartData] = useState({});
@@ -11,9 +28,20 @@ const Reproductions = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { url, title } = MediaAnalytics_get(idSite);
+        const { url } = MediaAnalytics_get(idSite);
         const response = await axios.get(url);
-        setChartData({ data: response.data, title });
+        const data = response.data;
+
+        const newChartData = Object.keys(metrics).reduce((acc, metric) => {
+          acc[metric] = {
+            labels: Object.keys(data),
+            data: Object.keys(data).map(date => data[date]?.[metric] || 0),
+            title: metrics[metric],
+          };
+          return acc;
+        }, {});
+
+        setChartData(newChartData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -37,10 +65,14 @@ const Reproductions = () => {
         </label>
       </div>
       <div className="graphDashBoard">
-        {Object.keys(chartData.data || {}).map((key) => (
-          <div key={key}>
-            <h3>{key}</h3>
-            <ChartComponent data={chartData.data[key]} label={key} />
+        {Object.keys(metrics).map((metric) => (
+          <div key={metric}>
+            <h3>{chartData[metric]?.title}</h3>
+            <ChartComponent
+              data={chartData[metric]?.data || []}
+              labels={chartData[metric]?.labels || []}
+              label={chartData[metric]?.title || ''}
+            />
           </div>
         ))}
       </div>
