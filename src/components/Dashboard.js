@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
 import { mediaAnalytics } from '../modules/mediaAnalytics/mediaAnalytics';
@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [chartData, setChartData] = useState({});
   const idSite = 2; // ID del sitio que estás analizando
 
-  const fetchDataForCharts = async () => {
+  const fetchDataForCharts = useCallback(async () => {
     try {
       const fetchedData = await Promise.all(
         selectedCharts.map(async (chartName) => {
@@ -23,8 +23,11 @@ const Dashboard = () => {
     } catch (error) {
       console.error('Error fetching data for charts:', error);
     }
-  };
+  }, [selectedCharts, idSite]);
   
+  useEffect(() => {
+    fetchDataForCharts();
+  }, [fetchDataForCharts, selectedCharts]);
 
   const handleChartSelection = (chartName) => {
     setSelectedCharts((prevSelectedCharts) =>
