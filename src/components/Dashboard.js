@@ -11,23 +11,23 @@ const Dashboard = () => {
   const [chartData, setChartData] = useState({});
   const [idSite, setIdSite] = useState(1); // Valor por defecto
 
-  const fetchDataForCharts = async () => {
-    try {
-      const newChartData = {};
-      for (const chartName of selectedCharts) {
-        if (mediaAnalyticsFunctions[chartName]) {
-          const { url, title } = mediaAnalyticsFunctions[chartName](idSite);
-          const response = await axios.get(url);
-          newChartData[chartName] = { data: response.data, title };
-        }
-      }
-      setChartData(newChartData);
-    } catch (error) {
-      console.error('Error fetching data for charts:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchDataForCharts = async () => {
+      try {
+        const newChartData = {};
+        for (const chartName of selectedCharts) {
+          if (mediaAnalyticsFunctions[chartName]) {
+            const { url, title } = mediaAnalyticsFunctions[chartName](idSite);
+            const response = await axios.get(url);
+            newChartData[chartName] = { data: response.data, title };
+          }
+        }
+        setChartData(newChartData);
+      } catch (error) {
+        console.error('Error fetching data for charts:', error);
+      }
+    };
+  
     fetchDataForCharts();
   }, [selectedCharts, idSite]);
 
