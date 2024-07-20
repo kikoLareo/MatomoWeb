@@ -1,74 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { fetchData } from '../api';
-import { mediaAnalyticsConfig } from '../modules/mediaAnalytics/mediaAnalytics';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ChartComponent from './ChartComponent';
+import { mediaAnalytics } from '../modules/mediaAnalytics/mediaAnalytics';
 
-function Dashboard() {
-  const [chartsData, setChartsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedCharts, setSelectedCharts] = useState({});
+const Dashboard = () => {
+  const [selectedCharts, setSelectedCharts] = useState(['get', 'getCurrentNumPlays']);
+  const [chartData, setChartData] = useState({});
+  const idSite = 2; // ID del sitio que estás analizando
 
-  useEffect(() => {
-    const fetchDataForCharts = async () => {
-      try {
-        const idSite = 2; // Example idSite
-        const list = Object.keys(mediaAnalyticsConfig); // Load all functionalities
-        
-        const dataPromises = list.map(async (functionName) => {
-          const data = await fetchData(functionName, idSite, mediaAnalyticsConfig);
-          return { key: functionName, data };
-        });
+  const fetchDataForCharts = async () => {
+    try {
+      const fetchedData = await Promise.all(
+        selectedCharts.map(async (chartName) => {
+          const url = mediaAnalytics[chartName].func(idSite);
+          const response = await axios.get(url);
+          return { [chartName]: response.data };
+        })
+      );
 
-        const results = await Promise.all(dataPromises);
-        setChartsData(results);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDataForCharts();
-  }, []);
-
-  const handleCheckboxChange = (functionName) => {
-    setSelectedCharts((prevSelectedCharts) => ({
-      ...prevSelectedCharts,
-      [functionName]: !prevSelectedCharts[functionName],
-    }));
+      const mergedData = fetchedData.reduce((acc, curr) => ({ ...acc, ...curr }), {});
+      setChartData(mergedData);
+    } catch (error) {
+      console.error('Error fetching data for charts:', error);
+    }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  useEffect(() => {
+    fetchDataForCharts();
+  }, [selectedCharts]);
+
+  const handleChartSelection = (chartName) => {
+    setSelectedCharts((prevSelectedCharts) =>
+      prevSelectedCharts.includes(chartName)
+        ? prevSelectedCharts.filter((name) => name !== chartName)
+        : [...prevSelectedCharts, chartName]
+    );
+  };
 
   return (
     <div>
       <h1>Dashboard</h1>
       <div>
         <h2>Select Charts to Display</h2>
-        {Object.keys(mediaAnalyticsConfig).map((functionName) => (
-          <div key={functionName}>
-            <label>
-              <input
-                type="checkbox"
-                checked={!!selectedCharts[functionName]}
-                onChange={() => handleCheckboxChange(functionName)}
-              />
-              {functionName}
-            </label>
+        {Object.keys(mediaAnalytics).map((chartName) => (
+          <div key={chartName}>
+            <input
+              type="checkbox"
+              checked={selectedCharts.includes(chartName)}
+              onChange={() => handleChartSelection(chartName)}
+            />
+            {mediaAnalytics[chartName].title}
           </div>
         ))}
       </div>
-      <div>
-        {chartsData
-          .filter((chart) => selectedCharts[chart.key])
-          .map((chart) => (
-            <ChartComponent key={chart.key} data={chart.data} title={chart.key} />
-          ))}
+      <div class="graphDashBoard">
+        {selectedCharts.map((chartName) => (
+          <div key={chartName}>
+            <h3>{mediaAnalytics[chartName].title}</h3>
+            <ChartComponent data={chartData[chartName] || {}} />
+          </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;
