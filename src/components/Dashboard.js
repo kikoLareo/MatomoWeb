@@ -1,63 +1,81 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
-import { mediaAnalytics } from '../modules/mediaAnalytics/mediaAnalytics';
+import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
+import { idSiteOptions } from '../config';
+
+const chartOptions = Object.keys(mediaAnalyticsFunctions);
 
 const Dashboard = () => {
   const [selectedCharts, setSelectedCharts] = useState(['get', 'getCurrentNumPlays']);
   const [chartData, setChartData] = useState({});
-  const idSite = 2; // ID del sitio que estás analizando
+  const [idSite, setIdSite] = useState(1); // Valor por defecto
 
-  const fetchDataForCharts = useCallback(async () => {
+  const fetchDataForCharts = async () => {
     try {
-      const fetchedData = await Promise.all(
-        selectedCharts.map(async (chartName) => {
-          const url = mediaAnalytics[chartName].func(idSite);
+      const newChartData = {};
+      for (const chartName of selectedCharts) {
+        if (mediaAnalyticsFunctions[chartName]) {
+          const { url, title } = mediaAnalyticsFunctions[chartName](idSite);
           const response = await axios.get(url);
-          return { [chartName]: response.data };
-        })
-      );
-  
-      const mergedData = fetchedData.reduce((acc, curr) => ({ ...acc, ...curr }), {});
-      setChartData(mergedData);
+          newChartData[chartName] = { data: response.data, title };
+        }
+      }
+      setChartData(newChartData);
     } catch (error) {
       console.error('Error fetching data for charts:', error);
     }
-  }, [selectedCharts, idSite]);
-  
+  };
+
   useEffect(() => {
     fetchDataForCharts();
-  }, [fetchDataForCharts, selectedCharts]);
+  }, [selectedCharts, idSite]);
 
   const handleChartSelection = (chartName) => {
-    setSelectedCharts((prevSelectedCharts) =>
-      prevSelectedCharts.includes(chartName)
-        ? prevSelectedCharts.filter((name) => name !== chartName)
-        : [...prevSelectedCharts, chartName]
+    setSelectedCharts((prevCharts) =>
+      prevCharts.includes(chartName)
+        ? prevCharts.filter((name) => name !== chartName)
+        : [...prevCharts, chartName]
     );
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <div>
-        <h2>Select Charts to Display</h2>
-        {Object.keys(mediaAnalytics).map((chartName) => (
-          <div key={chartName}>
-            <input
-              type="checkbox"
-              checked={selectedCharts.includes(chartName)}
-              onChange={() => handleChartSelection(chartName)}
-            />
-            {mediaAnalytics[chartName].title}
+    <div className="dashboard">
+      <div className="options">
+        <div className="optionsSite">
+          <label>
+            <h3>Select idSite:</h3>
+            <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
+              {Object.entries(idSiteOptions).map(([label, value]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div className="optionsCharts">
+          <h3>Select Charts:</h3>
+          <div className="selecter">
+            {chartOptions.map((chartName) => (
+              <label key={chartName}>
+                <input
+                  type="checkbox"
+                  checked={selectedCharts.includes(chartName)}
+                  onChange={() => handleChartSelection(chartName)}
+                />
+                {mediaAnalyticsFunctions[chartName](idSite).title}
+              </label>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-      <div class="graphDashBoard">
+      <div className="graphDashBoard">
         {selectedCharts.map((chartName) => (
           <div key={chartName}>
-            <h3>{mediaAnalytics[chartName].title}</h3>
-            <ChartComponent data={chartData[chartName] || {}} />
+            <h3>{chartData[chartName]?.title}</h3>
+            <ChartComponent data={chartData[chartName]?.data || {}} />
           </div>
         ))}
       </div>

@@ -6,7 +6,6 @@ const ChartComponent = ({ data }) => {
     labels: Object.keys(data),
     datasets: [
       {
-        title: data.title,
         label: 'Metrics',
         data: Object.values(data).map(item => item.nb_plays || 0),
         fill: false,
@@ -28,11 +27,11 @@ const ChartComponent = ({ data }) => {
   };
 
   return (
-  <div class="graph">
-    <h2> </h2>
-    <Line data={chartData} options={options} />
+    <div className="graph">
+      <h2>{data.title}</h2>
+      <Line data={chartData} options={options} />
     </div>
-    );
+  );
 };
 
 export default ChartComponent;

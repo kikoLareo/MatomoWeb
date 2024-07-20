@@ -3,3 +3,19 @@ export const module = 'API';
 export const format = 'json';
 
 export const baseURL = 'https://tiivii-ott.matomo.cloud/';
+
+
+export const idSiteOptions = {
+    'tivii-pre OTT': 1,
+    'tivii pro': 9,
+    'lupus': 12,
+    'hidra': 15,
+    'gemini': 8,
+    'felis': 7,
+    'eudora': 6,
+    'draco': 5,
+    'casiopea': 3,
+    'bolerus': 4,
+    'andomeda-pre': 2,
+    'andromeda': 10,
+  };

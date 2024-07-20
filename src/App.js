@@ -9,6 +9,7 @@ import './css/App.css';
 import './css/Sidebar.css';
 import './css/Header.css';
 import './css/graph.css';
+import './css/dashboard.css';
 
 function App() {
   return (
