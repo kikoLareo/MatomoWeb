@@ -27,7 +27,7 @@ const Dashboard = () => {
         console.error('Error fetching data for charts:', error);
       }
     };
-  
+
     fetchDataForCharts();
   }, [selectedCharts, idSite]);
 
