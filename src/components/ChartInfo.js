@@ -2,20 +2,25 @@
 import React, { useState, useEffect } from 'react';
 import { fetchChartAnalysis } from '../utils/chatGptApi';
 
-const ChartInfo = ({ title, description, data, idSite }) => {
+const ChartInfo = ({ title, description, data, idSite, storedAnalysis, setStoredAnalysis, metric }) => {
   const [showMore, setShowMore] = useState(false);
-  const [analysis, setAnalysis] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchAnalysis = async () => {
-      if (showMore && !analysis) {
+      if (showMore && !storedAnalysis[idSite]?.[metric]) {
         setLoading(true);
         setError('');
         try {
           const result = await fetchChartAnalysis({ title, description, data, idSite });
-          setAnalysis(result);
+          setStoredAnalysis(prev => ({
+            ...prev,
+            [idSite]: {
+              ...prev[idSite],
+              [metric]: result
+            }
+          }));
         } catch (err) {
           setError('Error al obtener el análisis. Por favor, inténtelo de nuevo más tarde.');
         } finally {
@@ -25,11 +30,13 @@ const ChartInfo = ({ title, description, data, idSite }) => {
     };
 
     fetchAnalysis();
-  }, [showMore, analysis, data, description, title, idSite]);
+  }, [showMore, storedAnalysis, data, description, title, idSite, metric, setStoredAnalysis]);
 
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
+
+  const analysis = storedAnalysis[idSite]?.[metric] || '';
 
   return (
     <div className="chart-info">

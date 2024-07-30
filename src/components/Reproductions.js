@@ -9,6 +9,7 @@ import { metricDescriptions } from '../chartInfo.js/MediaAnalytics/get_Info';
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1);
   const [chartData, setChartData] = useState({});
+  const [storedAnalysis, setStoredAnalysis] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,13 +39,18 @@ const Reproductions = () => {
     fetchData();
   }, [idSite]);
 
+  const handleSiteChange = (newIdSite) => {
+    setIdSite(newIdSite);
+    setStoredAnalysis({});
+  };
+
   return (
     <div className="reproductions">
       <div className="options">
         <div className="optionsSite">
           <label>
             <h3>Seleccionar idSite:</h3>
-            <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
+            <select value={idSite} onChange={(e) => handleSiteChange(Number(e.target.value))}>
               {Object.entries(idSiteOptions).map(([label, value]) => (
                 <option key={value} value={value}>
                   {label}
@@ -67,7 +73,10 @@ const Reproductions = () => {
               title={chartData[metric]?.title || ''}
               description={chartData[metric]?.description || ''}
               data={chartData[metric]?.data || []}
-              idSite={chartData[metric]?.idSite} // Pasar idSite a ChartInfo
+              idSite={chartData[metric]?.idSite}
+              storedAnalysis={storedAnalysis}
+              setStoredAnalysis={setStoredAnalysis}
+              metric={metric}
             />
           </div>
         ))}
