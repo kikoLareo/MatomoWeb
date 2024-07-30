@@ -1,8 +1,77 @@
-.graphDashBoard{
-    display: grid;
-    grid-template-columns: auto auto auto;
+.graphDashBoard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.graph_component {
+    width: 100%;
+    background-color: #fff;
+    margin: 2vh 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1vh 1vw;
 }
 
-.graph{
-    width: 25vw;
+.graph_component h3 {
+  text-align: center;
+  margin-bottom: 10px;
 }
+
+.graph_component .graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.graph_component .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/* Estilos responsivos */
+@media (min-width: 600px) {
+    .options {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .optionsSite,
+    .optionsCharts {
+      margin-bottom: 0;
+    }
+  
+    .graph_component {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .graph_component .graph {
+      flex: 1;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .selecter {
+      justify-content: flex-start;
+    }
+  
+    .graph_component {
+      flex-direction: row;
+    }
+  
+    .graph_component .graph {
+      width: 50%;
+    }
+  
+    .graph_component .info {
+      width: 50%;
+      padding: 20px;
+    }
+  }

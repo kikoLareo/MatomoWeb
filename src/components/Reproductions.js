@@ -52,27 +52,36 @@ const Reproductions = () => {
 
   return (
     <div className="reproductions">
-      <div className="optionsSite">
-        <label>
-          <h3>Select idSite:</h3>
-          <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
-            {Object.entries(idSiteOptions).map(([label, value]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="options">
+        <div className="optionsSite">
+          <label>
+            <h3>Select idSite:</h3>
+            <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
+              {Object.entries(idSiteOptions).map(([label, value]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
       </div>
+
       <div className="graphDashBoard">
         {Object.keys(metrics).map((metric) => (
-          <div key={metric}>
-            <h3>{chartData[metric]?.title}</h3>
+          <div key={metric} className="graph_component">
             <ChartComponent
               data={chartData[metric]?.data || []}
               labels={chartData[metric]?.labels || []}
               label={chartData[metric]?.title || ''}
             />
+            <div className="info">
+              <h3>{metrics[metric]}</h3>
+              <p>{/* Añade aquí más información relevante sobre el gráfico */}</p>
+              <button onClick={() => {/* Manejador del botón para mostrar más información */}}>
+                Ver más información
+              </button>
+            </div>
           </div>
         ))}
       </div>
