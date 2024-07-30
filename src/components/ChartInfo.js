@@ -14,7 +14,7 @@ const ChartInfo = ({ title, description, data }) => {
         setLoading(true);
         setError('');
         try {
-          const result = await fetchChartAnalysis(data);
+          const result = await fetchChartAnalysis({ title, description, data });
           setAnalysis(result);
         } catch (err) {
           setError('Error al obtener el análisis. Por favor, inténtelo de nuevo más tarde.');
@@ -25,7 +25,7 @@ const ChartInfo = ({ title, description, data }) => {
     };
 
     fetchAnalysis();
-  }, [showMore, analysis, data]);
+}, [showMore, analysis, data, description, title]); // Agregar description y title aquí
 
   const handleShowMore = () => {
     setShowMore(!showMore);

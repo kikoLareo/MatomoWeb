@@ -5,23 +5,7 @@ import ChartComponent from './ChartComponent';
 import ChartInfo from './ChartInfo';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
-
-const metrics = {
-  nb_uniq_visitors: 'Visitantes Únicos',
-  nb_plays: 'Número de Reproducciones',
-  nb_unique_visitors_plays: 'Reproducciones por Visitantes Únicos',
-  nb_impressions: 'Número de Impresiones',
-  nb_unique_visitors_impressions: 'Impresiones por Visitantes Únicos',
-  nb_finishes: 'Número de Finalizaciones',
-  sum_total_time_watched: 'Tiempo Total Visto',
-  sum_total_audio_plays: 'Total de Reproducciones de Audio',
-  sum_total_audio_impressions: 'Total de Impresiones de Audio',
-  sum_total_video_plays: 'Total de Reproducciones de Video',
-  sum_total_video_impressions: 'Total de Impresiones de Video',
-  play_rate: 'Tasa de Reproducción',
-  finish_rate: 'Tasa de Finalización',
-  impression_rate: 'Tasa de Impresión',
-};
+import { metricDescriptions } from '../chartInfo.js/MediaAnalytics/get_Info';
 
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1);
@@ -34,11 +18,12 @@ const Reproductions = () => {
         const response = await axios.get(url);
         const data = response.data;
 
-        const newChartData = Object.keys(metrics).reduce((acc, metric) => {
+        const newChartData = Object.keys(metricDescriptions).reduce((acc, metric) => {
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
-            title: metrics[metric],
+            title: metricDescriptions[metric].shortName,
+            description: metricDescriptions[metric].description,
           };
           return acc;
         }, {});
@@ -70,7 +55,7 @@ const Reproductions = () => {
       </div>
 
       <div className="graphDashBoard">
-        {Object.keys(metrics).map((metric) => (
+        {Object.keys(metricDescriptions).map((metric) => (
           <div key={metric} className="graph_component">
             <ChartComponent
               data={chartData[metric]?.data || []}
@@ -78,8 +63,8 @@ const Reproductions = () => {
               label={chartData[metric]?.title || ''}
             />
             <ChartInfo
-              title={metrics[metric]}
-              description={`Información básica sobre ${metrics[metric]}`}
+              title={chartData[metric]?.title || ''}
+              description={chartData[metric]?.description || ''}
               data={chartData[metric]?.data || []}
             />
           </div>

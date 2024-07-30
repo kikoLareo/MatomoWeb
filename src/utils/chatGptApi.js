@@ -2,10 +2,10 @@
 import axios from 'axios';
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-export const fetchChartAnalysis = async (data) => {
-  const conversationContext = [
+export const fetchChartAnalysis = async ({ title, description, data }) => {
+    const conversationContext = [
     { role: 'system', content: 'Las respuestas deben ser en español y deben proporcionar un análisis detallado de los datos.' },
-    { role: 'user', content: `Analiza los siguientes datos y proporciona un análisis detallado: ${JSON.stringify(data)}` }
+    { role: 'user', content: `Analiza la siguiente gráfica titulada "${title}". ${description} Aquí están los datos: ${JSON.stringify(data)}` }
   ];
 
   try {
