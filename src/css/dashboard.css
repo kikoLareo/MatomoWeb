@@ -1,56 +1,46 @@
 .selecter {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .selecter label {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .selecter label:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .selecter input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  h3 {
-    margin-bottom: 10px;
-  }
-  
-  .optionsCharts {
-    margin-bottom: 20px;
-  }
-  
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding-bottom: 5vh;
-  }
-  
-  .optionsSite {
-    flex: 1 1 auto;
-  }
-  
-  .optionsCharts {
-    flex: 3 1 auto;
-  }
-  
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.selecter label {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.selecter label:hover {
+  background-color: #f1f1f1;
+}
+
+.selecter input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 5vh;
+}
+
+.optionsSite {
+  flex: 1 1 auto;
+}
+
+.optionsCharts {
+  flex: 3 1 auto;
+}

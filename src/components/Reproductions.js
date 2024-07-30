@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
+import ChartInfo from './ChartInfo';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
 
@@ -75,13 +76,11 @@ const Reproductions = () => {
               labels={chartData[metric]?.labels || []}
               label={chartData[metric]?.title || ''}
             />
-            <div className="info">
-              <h3>{metrics[metric]}</h3>
-              <p>{/* Añade aquí más información relevante sobre el gráfico */}</p>
-              <button onClick={() => {/* Manejador del botón para mostrar más información */}}>
-                Ver más información
-              </button>
-            </div>
+            <ChartInfo
+              title={metrics[metric]}
+              description={`Basic information about ${metrics[metric]}`}
+              data={chartData[metric]?.data || []}
+            />
           </div>
         ))}
       </div>

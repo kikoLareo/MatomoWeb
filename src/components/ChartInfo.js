@@ -29,7 +29,7 @@ const ChartInfo = ({ title, description, data }) => {
       {showMore && (
         <div className="detailed-info">
           <h4>Detailed Analysis</h4>
-          <p>{analysis}</p>
+          <p>{analysis || 'Loading...'}</p>
         </div>
       )}
     </div>
