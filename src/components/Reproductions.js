@@ -5,8 +5,7 @@ import ChartComponent from './ChartComponent';
 import ChartInfo from './ChartInfo';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
-import { metricDescriptions } from './chartDescriptions'; // Importar las descripciones
-
+import { metricDescriptions } from '../chartInfo.js/MediaAnalytics/get_Info';
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1);
   const [chartData, setChartData] = useState({});
