@@ -1,3 +1,4 @@
+// src/components/Reproductions.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
@@ -6,26 +7,25 @@ import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
 
 const metrics = {
-  nb_uniq_visitors: 'Unique Visitors',
-  nb_plays: 'Number of Plays',
-  nb_unique_visitors_plays: 'Unique Visitors Plays',
-  nb_impressions: 'Number of Impressions',
-  nb_unique_visitors_impressions: 'Unique Visitors Impressions',
-  nb_finishes: 'Number of Finishes',
-  sum_total_time_watched: 'Total Time Watched',
-  sum_total_audio_plays: 'Total Audio Plays',
-  sum_total_audio_impressions: 'Total Audio Impressions',
-  sum_total_video_plays: 'Total Video Plays',
-  sum_total_video_impressions: 'Total Video Impressions',
-  play_rate: 'Play Rate',
-  finish_rate: 'Finish Rate',
-  impression_rate: 'Impression Rate',
+  nb_uniq_visitors: 'Visitantes Únicos',
+  nb_plays: 'Número de Reproducciones',
+  nb_unique_visitors_plays: 'Reproducciones por Visitantes Únicos',
+  nb_impressions: 'Número de Impresiones',
+  nb_unique_visitors_impressions: 'Impresiones por Visitantes Únicos',
+  nb_finishes: 'Número de Finalizaciones',
+  sum_total_time_watched: 'Tiempo Total Visto',
+  sum_total_audio_plays: 'Total de Reproducciones de Audio',
+  sum_total_audio_impressions: 'Total de Impresiones de Audio',
+  sum_total_video_plays: 'Total de Reproducciones de Video',
+  sum_total_video_impressions: 'Total de Impresiones de Video',
+  play_rate: 'Tasa de Reproducción',
+  finish_rate: 'Tasa de Finalización',
+  impression_rate: 'Tasa de Impresión',
 };
 
 const Reproductions = () => {
-  const [idSite, setIdSite] = useState(1); // Valor por defecto
+  const [idSite, setIdSite] = useState(1);
   const [chartData, setChartData] = useState({});
-  const [selectedMetric, setSelectedMetric] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +39,6 @@ const Reproductions = () => {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             title: metrics[metric],
-            rawData: Object.keys(data).map(date => data[date]?.[metric] || 0),
           };
           return acc;
         }, {});
@@ -58,7 +57,7 @@ const Reproductions = () => {
       <div className="options">
         <div className="optionsSite">
           <label>
-            <h3>Select idSite:</h3>
+            <h3>Seleccionar idSite:</h3>
             <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
               {Object.entries(idSiteOptions).map(([label, value]) => (
                 <option key={value} value={value}>
@@ -80,10 +79,8 @@ const Reproductions = () => {
             />
             <ChartInfo
               title={metrics[metric]}
-              description={`Basic information about ${metrics[metric]}`}
-              data={chartData[metric]?.rawData || []}
-              onShowMore={() => setSelectedMetric(metric)}
-              showMore={selectedMetric === metric}
+              description={`Información básica sobre ${metrics[metric]}`}
+              data={chartData[metric]?.data || []}
             />
           </div>
         ))}
