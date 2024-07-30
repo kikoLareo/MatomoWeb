@@ -5,7 +5,7 @@ import ChartComponent from './ChartComponent';
 import ChartInfo from './ChartInfo';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
 import { idSiteOptions } from '../config';
-import { metricDescriptions } from '../chartInfo.js/MediaAnalytics/get_Info';
+import { metricDescriptions } from './chartDescriptions'; // Importar las descripciones
 
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1);
@@ -13,6 +13,7 @@ const Reproductions = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setChartData({}); // Reiniciar el estado de las gráficas
       try {
         const { url } = MediaAnalytics_get(idSite);
         const response = await axios.get(url);
@@ -24,6 +25,7 @@ const Reproductions = () => {
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             title: metricDescriptions[metric].shortName,
             description: metricDescriptions[metric].description,
+            idSite: idSite // Agregar idSite a los datos del gráfico
           };
           return acc;
         }, {});
@@ -66,6 +68,7 @@ const Reproductions = () => {
               title={chartData[metric]?.title || ''}
               description={chartData[metric]?.description || ''}
               data={chartData[metric]?.data || []}
+              idSite={chartData[metric]?.idSite} // Pasar idSite a ChartInfo
             />
           </div>
         ))}

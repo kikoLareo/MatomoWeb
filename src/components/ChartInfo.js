@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchChartAnalysis } from '../utils/chatGptApi';
 
-const ChartInfo = ({ title, description, data }) => {
+const ChartInfo = ({ title, description, data, idSite }) => {
   const [showMore, setShowMore] = useState(false);
   const [analysis, setAnalysis] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const ChartInfo = ({ title, description, data }) => {
         setLoading(true);
         setError('');
         try {
-          const result = await fetchChartAnalysis({ title, description, data });
+          const result = await fetchChartAnalysis({ title, description, data, idSite });
           setAnalysis(result);
         } catch (err) {
           setError('Error al obtener el análisis. Por favor, inténtelo de nuevo más tarde.');
@@ -25,7 +25,7 @@ const ChartInfo = ({ title, description, data }) => {
     };
 
     fetchAnalysis();
-}, [showMore, analysis, data, description, title]); // Agregar description y title aquí
+  }, [showMore, analysis, data, description, title, idSite]);
 
   const handleShowMore = () => {
     setShowMore(!showMore);
