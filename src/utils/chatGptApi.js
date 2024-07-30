@@ -1,5 +1,6 @@
 // src/utils/chatGptApi.js
 import axios from 'axios';
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 export const fetchChartAnalysis = async (data) => {
   const conversationContext = [
@@ -16,7 +17,7 @@ export const fetchChartAnalysis = async (data) => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer YOUR_API_KEY`
+        'Authorization': `Bearer ${API_KEY}`
       }
     });
 
