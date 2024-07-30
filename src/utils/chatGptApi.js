@@ -1,29 +1,44 @@
 import axios from 'axios';
 
+const API_URL = 'https://api.openai.com/v1/chat/completions';
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-if (!API_KEY) {
-  console.error('No API key found. Make sure REACT_APP_OPENAI_API_KEY is set.');
-}
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const fetchChartAnalysis = async (data) => {
-  const prompt = `Analyze the following data and provide a detailed analysis: ${JSON.stringify(data)}`;
+const fetchChartAnalysis = async (data, retryCount = 3, delayMs = 1000) => {
+  if (!data || data.length === 0) {
+    throw new Error('No data provided for analysis.');
+  }
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-      messages: [{ role: 'user', content: prompt }],
-      model: 'gpt-3.5-turbo',
-      max_tokens: 500,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      API_URL,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'user',
+            content: `Analyze the following data and provide a detailed analysis: ${JSON.stringify(data)}`,
+          },
+        ],
+        max_tokens: 500,
       },
-    });
-
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return response.data.choices[0].message.content;
   } catch (error) {
+    if (retryCount > 0 && error.response && error.response.status === 429) {
+      await delay(delayMs);
+      return fetchChartAnalysis(data, retryCount - 1, delayMs * 2);
+    }
     console.error('Error fetching analysis from OpenAI:', error);
-    throw new Error('Error fetching analysis.');
+    throw new Error('Failed to fetch analysis. Please try again later.');
   }
 };
+
+export default fetchChartAnalysis;

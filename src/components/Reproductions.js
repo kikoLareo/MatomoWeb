@@ -25,6 +25,7 @@ const metrics = {
 const Reproductions = () => {
   const [idSite, setIdSite] = useState(1); // Valor por defecto
   const [chartData, setChartData] = useState({});
+  const [selectedMetric, setSelectedMetric] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +39,7 @@ const Reproductions = () => {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             title: metrics[metric],
+            rawData: Object.keys(data).map(date => data[date]?.[metric] || 0),
           };
           return acc;
         }, {});
@@ -79,7 +81,9 @@ const Reproductions = () => {
             <ChartInfo
               title={metrics[metric]}
               description={`Basic information about ${metrics[metric]}`}
-              data={chartData[metric]?.data || []}
+              data={chartData[metric]?.rawData || []}
+              onShowMore={() => setSelectedMetric(metric)}
+              showMore={selectedMetric === metric}
             />
           </div>
         ))}

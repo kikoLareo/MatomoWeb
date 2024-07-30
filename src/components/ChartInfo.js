@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { fetchChartAnalysis } from '../utils/chatGptApi';
+import fetchChartAnalysis from '../utils/chatGptApi';
 
-const ChartInfo = ({ title, description, data }) => {
-  const [showMore, setShowMore] = useState(false);
+const ChartInfo = ({ title, description, data, onShowMore, showMore }) => {
   const [analysis, setAnalysis] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    if (showMore && !analysis) {
+    if (showMore && !analysis && data && data.length > 0) {
       const fetchAnalysis = async () => {
-        const result = await fetchChartAnalysis(data);
-        setAnalysis(result);
+        setLoading(true);
+        setError('');
+        try {
+          const result = await fetchChartAnalysis(data);
+          setAnalysis(result);
+        } catch (err) {
+          setError('Error fetching analysis. Please try again later.');
+        } finally {
+          setLoading(false);
+        }
       };
       fetchAnalysis();
     }
   }, [showMore, analysis, data]);
 
   const handleShowMore = () => {
-    setShowMore(!showMore);
+    onShowMore(title);
   };
 
   return (
@@ -29,7 +38,13 @@ const ChartInfo = ({ title, description, data }) => {
       {showMore && (
         <div className="detailed-info">
           <h4>Detailed Analysis</h4>
-          <p>{analysis || 'Loading...'}</p>
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            <p>{analysis}</p>
+          )}
         </div>
       )}
     </div>
@@ -37,3 +52,4 @@ const ChartInfo = ({ title, description, data }) => {
 };
 
 export default ChartInfo;
+    
