@@ -80,9 +80,9 @@ export const MediaAnalytics_getPlayers = (idSite, period = 'day', date = '2023-1
 
 export const mediaAnalyticsFunctions = {
   get: MediaAnalytics_get,
-    // getCurrentNumPlays: MediaAnalytics_getCurrentNumPlays,
-    // getCurrentSumTimeSpent: MediaAnalytics_getCurrentSumTimeSpent,
-    // getCurrentMostPlays: MediaAnalytics_getCurrentMostPlays,
+  getCurrentNumPlays: MediaAnalytics_getCurrentNumPlays,
+  getCurrentSumTimeSpent: MediaAnalytics_getCurrentSumTimeSpent,
+  getCurrentMostPlays: MediaAnalytics_getCurrentMostPlays,
     // getVideoResources: MediaAnalytics_getVideoResources,
     // getAudioResources: MediaAnalytics_getAudioResources,
     // getVideoTitles: MediaAnalytics_getVideoTitles,
@@ -92,5 +92,5 @@ export const mediaAnalyticsFunctions = {
     // getVideoHours: MediaAnalytics_getVideoHours,
     // getAudioHours: MediaAnalytics_getAudioHours,
     // getVideoResolutions: MediaAnalytics_getVideoResolutions,
-    // getPlayers: MediaAnalytics_getPlayers,
+  getPlayers: MediaAnalytics_getPlayers,
 };

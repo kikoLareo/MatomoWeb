@@ -7,7 +7,7 @@ import { idSiteOptions } from '../config';
 const chartOptions = Object.keys(mediaAnalyticsFunctions);
 
 const Dashboard = () => {
-  const [selectedCharts, setSelectedCharts] = useState(['get', 'getCurrentNumPlays']);
+  const [selectedCharts, setSelectedCharts] = useState([]); //useState(['get', 'getCurrentNumPlays']);
   const [chartData, setChartData] = useState({});
   const [idSite, setIdSite] = useState(1); // Valor por defecto
 
