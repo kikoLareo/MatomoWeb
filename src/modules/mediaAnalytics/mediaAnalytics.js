@@ -1,12 +1,7 @@
-import { format, module, token_auth, baseURL } from '../../config';
+import { getBaseUrl } from '../../chartInfo.js/common.js/common';
 
 const methodBase = 'MediaAnalytics';
 
-const getBaseUrl = (method, params = {}) => {
-  const baseUrl = `${baseURL}index.php?module=${module}&format=${format}&method=${method}&token_auth=${token_auth}`;
-  const queryParams = new URLSearchParams(params).toString();
-  return `${baseUrl}&${queryParams}`;
-};
 
 export const MediaAnalytics_get = (idSite, period = 'day', date = '2023-12-01,2024-07-01') => {
   const method = `${methodBase}.get`;

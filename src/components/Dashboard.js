@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+// src/components/Dashboard.js
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
-import { idSiteOptions } from '../config';
+import { IdSiteContext } from '../contexts/idSiteContext';
 
 const chartOptions = Object.keys(mediaAnalyticsFunctions);
 
 const Dashboard = () => {
-  const [selectedCharts, setSelectedCharts] = useState([]); //useState(['get', 'getCurrentNumPlays']);
+  const { idSite } = useContext(IdSiteContext);
+  const [selectedCharts, setSelectedCharts] = useState([]);
   const [chartData, setChartData] = useState({});
-  const [idSite, setIdSite] = useState(1); // Valor por defecto
 
   useEffect(() => {
     const fetchDataForCharts = async () => {
@@ -42,19 +43,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="options">
-        <div className="optionsSite">
-          <label>
-            <h3>Select idSite:</h3>
-            <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
-              {Object.entries(idSiteOptions).map(([label, value]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
         <div className="optionsCharts">
           <h3>Select Charts:</h3>
           <div className="selecter">

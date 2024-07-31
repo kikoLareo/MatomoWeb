@@ -1,13 +1,14 @@
 // src/components/Reproductions.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ChartComponent from './ChartComponent';
 import ChartInfo from './ChartInfo';
 import { MediaAnalytics_get } from '../modules/mediaAnalytics/mediaAnalytics';
-import { idSiteOptions } from '../config';
+import { IdSiteContext } from '../contexts/idSiteContext';
 import { metricDescriptions } from '../chartInfo.js/MediaAnalytics/get_Info';
+
 const Reproductions = () => {
-  const [idSite, setIdSite] = useState(1);
+  const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [storedAnalysis, setStoredAnalysis] = useState({});
 
@@ -39,28 +40,8 @@ const Reproductions = () => {
     fetchData();
   }, [idSite]);
 
-  const handleSiteChange = (newIdSite) => {
-    setIdSite(newIdSite);
-    setStoredAnalysis({});
-  };
-
   return (
     <div className="reproductions">
-      <div className="options">
-        <div className="optionsSite">
-          <label>
-            <h3>Seleccionar idSite:</h3>
-            <select value={idSite} onChange={(e) => handleSiteChange(Number(e.target.value))}>
-              {Object.entries(idSiteOptions).map(([label, value]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-      </div>
-
       <div className="graphDashBoard">
         {Object.keys(metricDescriptions).map((metric) => (
           <div key={metric} className="graph_component">

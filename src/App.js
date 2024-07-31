@@ -10,24 +10,28 @@ import './css/Sidebar.css';
 import './css/Header.css';
 import './css/graph.css';
 import './css/dashboard.css';
-
+import Filters from './components/Filters';
+import { IdSiteProvider } from './contexts/idSiteContext';
 function App() {
   return (
-    <Router>
-      <div className="app">
-        <Header />
-        <div className="main-content">
-          {/* <Sidebar /> */}
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/reproductions" element={<Reproductions/>} />
-            </Routes>
+    <IdSiteProvider>
+      <Router>
+        <div className="app">
+          <Header />
+          <Filters />
+          <div className="main-content">
+            {/* <Sidebar /> */}
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/reproductions" element={<Reproductions/>} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+      </IdSiteProvider>
   );
 }
 
