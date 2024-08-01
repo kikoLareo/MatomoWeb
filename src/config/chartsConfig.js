@@ -9,13 +9,13 @@ export const homeCharts = [
     apiFunction: "getMetadata",
     module: 'API',
   },
-  {
-    title: 'Report Metadata',
-    description: 'Get metadata for a given report.',
-    apiFunction: "getReportMetadata",
-    module: 'API',
+  // {
+  //   title: 'Report Metadata',
+  //   description: 'Get metadata for a given report.',
+  //   apiFunction: "getReportMetadata",
+  //   module: 'API',
   
-  },
+  // },
   {
     title: 'Processed Report',
     description: 'Get a processed report for a given module and action.',
@@ -33,15 +33,7 @@ export const homeCharts = [
 
 ]
 
-
-export const reproductionsCharts = [
-  {
-    title: 'Overall Metrics',
-    description: 'Get overall metrics for media analytics.',
-    apiFunction: "get",
-    fetchFunction: (idSite) => { return MediaAnalytics_getChartData(idSite)},
-    module: 'MediaAnalytics',
-  },
+export const nowInfo =[
   {
     title: 'Current Number of Plays',
     description: 'Get the current number of plays.',
@@ -66,6 +58,18 @@ export const reproductionsCharts = [
     apiFunction: "getPlayers",
     module: 'MediaAnalytics',
   }
+]
+
+
+export const reproductionsCharts = [
+  {
+    title: 'Overall Metrics',
+    description: 'Get overall metrics for media analytics.',
+    apiFunction: "get",
+    fetchFunction: (idSite) => { return MediaAnalytics_getChartData(idSite)},
+    module: 'MediaAnalytics',
+  }
+ 
   
 ];
 

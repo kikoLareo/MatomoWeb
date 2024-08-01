@@ -1,0 +1,7 @@
+.nowInfo{
+    display: flex;
+    gap: 2vw;
+    width: 100%;
+    justify-content: center;
+    padding: 2vh 0;
+}

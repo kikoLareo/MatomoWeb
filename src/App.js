@@ -9,6 +9,7 @@ import './css/Sidebar.css';
 import './css/Header.css';
 import './css/graph.css';
 import './css/dashboard.css';
+import './css/Home.css';
 import Filters from './components/Filters';
 import { IdSiteProvider } from './contexts/idSiteContext';
 function App() {
