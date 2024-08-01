@@ -11,7 +11,6 @@ const Dropdown = () => {
 
   return (
     <select onChange={handleChange}>
-      <option value="/dashboard">Dashboard</option>
       <option value="/reproductions">Reproductions</option>
     </select>
   );

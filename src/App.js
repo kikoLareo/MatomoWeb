@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
 import Reproductions from './pages/Reproductions';
 import './css/App.css';
 import './css/Sidebar.css';
@@ -24,7 +23,6 @@ function App() {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/reproductions" element={<Reproductions/>} />
               </Routes>
             </div>
