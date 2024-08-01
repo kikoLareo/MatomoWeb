@@ -2,9 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
-import Dashboard from './components/Dashboard';
-import Reproductions from './components/Reproductions';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import Reproductions from './pages/Reproductions';
 import './css/App.css';
 import './css/Sidebar.css';
 import './css/Header.css';

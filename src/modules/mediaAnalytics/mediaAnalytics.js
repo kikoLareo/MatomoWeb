@@ -1,4 +1,6 @@
-import { getBaseUrl } from '../../chartInfo.js/common.js/common';
+import { getBaseUrl } from "../../chart_config/common/common";
+import axios from 'axios';
+import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
 
 const methodBase = 'MediaAnalytics';
 
@@ -89,3 +91,27 @@ export const mediaAnalyticsFunctions = {
     // getVideoResolutions: MediaAnalytics_getVideoResolutions,
   getPlayers: MediaAnalytics_getPlayers,
 };
+
+
+export async function MediaAnalytics_getChartData(idSite) {
+  try {
+    const { url } = MediaAnalytics_get(idSite);
+    const response = await axios.get(url);
+    const data = response.data;
+
+    const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
+      acc[metric] = {
+        labels: Object.keys(data),
+        data: Object.keys(data).map(date => data[date]?.[metric] || 0),
+        title: MediaAnalytics_get_metrics[metric].shortName,
+        description: MediaAnalytics_get_metrics[metric].description,
+        idSite: idSite // Agregar idSite a los datos del gráfico
+      };
+      return acc;
+    }, {});
+
+      return newChartData;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}

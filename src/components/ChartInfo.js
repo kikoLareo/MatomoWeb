@@ -4,52 +4,44 @@ import { fetchChartAnalysis } from '../utils/chatGptApi';
 
 const ChartInfo = ({ title, description, data, idSite, storedAnalysis, setStoredAnalysis, metric }) => {
   const [showMore, setShowMore] = useState(false);
+  const [analysis, setAnalysis] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchAnalysis = async () => {
-      if (showMore && !storedAnalysis[idSite]?.[metric]) {
+    if (showMore && !storedAnalysis[metric]) {
+      const fetchAnalysis = async () => {
         setLoading(true);
         setError('');
         try {
-          const result = await fetchChartAnalysis({ title, description, data, idSite });
-          setStoredAnalysis(prev => ({
-            ...prev,
-            [idSite]: {
-              ...prev[idSite],
-              [metric]: result
-            }
-          }));
+          const result = await fetchChartAnalysis(data);
+          setAnalysis(result);
+          setStoredAnalysis((prev) => ({ ...prev, [metric]: result }));
         } catch (err) {
-          setError('Error al obtener el análisis. Por favor, inténtelo de nuevo más tarde.');
+          setError('Error fetching analysis. Please try again later.');
         } finally {
           setLoading(false);
         }
-      }
-    };
+      };
 
-    fetchAnalysis();
-  }, [showMore, storedAnalysis, data, description, title, idSite, metric, setStoredAnalysis]);
-
-  const handleShowMore = () => {
-    setShowMore(!showMore);
-  };
-
-  const analysis = storedAnalysis[idSite]?.[metric] || '';
+      fetchAnalysis();
+    } else {
+      setAnalysis(storedAnalysis[metric]);
+    }
+  }, [showMore, storedAnalysis, data, metric, setStoredAnalysis]);
 
   return (
     <div className="chart-info">
       <h3>{title}</h3>
       <p>{description}</p>
-      <button onClick={handleShowMore}>
-        {showMore ? 'Mostrar menos' : 'Mostrar más'}
+      <button onClick={() => setShowMore((prev) => !prev)}>
+        {showMore ? 'Show Less' : 'Show More'}
       </button>
       {showMore && (
         <div className="detailed-info">
-          <h4>Análisis Detallado</h4>
+          <h4>Detailed Analysis</h4>
           {loading ? (
-            <p>Cargando...</p>
+            <p>Loading...</p>
           ) : error ? (
             <p>{error}</p>
           ) : (

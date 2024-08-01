@@ -1,7 +1,7 @@
 // src/components/Dashboard.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import ChartComponent from './ChartComponent';
+import ChartComponent from '../components/ChartComponent';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="options">
+      {/* <div className="options">
         <div className="optionsCharts">
           <h3>Select Charts:</h3>
           <div className="selecter">
@@ -58,7 +58,7 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="graphDashBoard">
         {selectedCharts.map((chartName) => (
           <div key={chartName}>

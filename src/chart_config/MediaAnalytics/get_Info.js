@@ -1,6 +1,6 @@
 // src/components/chartDescriptions.js
 
-export const metricDescriptions = {
+export const MediaAnalytics_get_metrics = {
     nb_uniq_visitors: {
       shortName: 'Visitantes Únicos',
       description: 'Número de visitantes únicos en el sitio seleccionado.',

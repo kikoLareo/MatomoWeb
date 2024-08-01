@@ -1,4 +1,4 @@
-import { getBaseUrl } from "../common.js/common";
+import { getBaseUrl } from "../../chart_config/common/common";
 
 const methodBase = 'API';
 
