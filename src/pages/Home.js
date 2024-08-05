@@ -8,7 +8,6 @@ import { homeCharts, nowInfo } from '../config/chartsConfig';
 import InfoComponent from '../components/infoComponent';
 
 function Home() {
-  var aux= 0;
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [nowData, setNowData] = useState({});
