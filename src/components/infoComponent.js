@@ -1,7 +1,7 @@
 // src/components/InfoComponent.js
 import React from 'react';
 
-const InfoComponent = ({ title, description, data }) => {
+const InfoComponent = ({ title, data }) => {
   return (
     <div className="info-component">
       <h3>{title}</h3>

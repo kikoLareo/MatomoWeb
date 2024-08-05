@@ -35,24 +35,28 @@ export const homeCharts = [
 
 export const nowInfo =[
   {
+    id:0,
     title: 'Current Number of Plays',
     description: 'Get the current number of plays.',
     apiFunction: "getCurrentNumPlays",
     module: 'MediaAnalytics',
   },
   {
+    id:1,
     title: 'Current Sum of Time Spent',
     description: 'Get the current sum of time spent.',
     apiFunction: "getCurrentSumTimeSpent",
     module: 'MediaAnalytics',
   }, 
   {
+    id:2,
     title: 'Current Most Plays',
     description: 'Get the current most plays.',
     apiFunction: "getCurrentMostPlays",
     module: 'MediaAnalytics',
   },
   {
+    id:3,
     title: 'Players',
     description: 'Get player data.',
     apiFunction: "getPlayers",

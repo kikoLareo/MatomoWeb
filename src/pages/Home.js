@@ -8,6 +8,7 @@ import { homeCharts, nowInfo } from '../config/chartsConfig';
 import InfoComponent from '../components/infoComponent';
 
 function Home() {
+  var aux= 0;
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [nowData, setNowData] = useState({});
@@ -25,22 +26,21 @@ function Home() {
 
   return (
     <div>
-      <header></header>
-      <body>
+      <div>
         <div className="nowInfo">
           {nowInfo.map((info) => (
-           <InfoComponent key={info.name} title={info.title} data={nowData[info.name]} />
+           <InfoComponent key={info.id} title={info.title} data={nowData[info.name]} />
           ))}
         </div>
         <div className="graphDashBoard">
           {homeCharts.map((chart) => (
-            <div key={chart.name}>
-              <h3>{chartData[chart.name]?.title}</h3>
+            <div key={chart.title}>
+              <h3>{chartData[chart.title]}</h3>
               <ChartComponent data={chartData[chart.name]?.data || []} />
             </div>
           ))}
         </div>
-      </body>
+      </div>
     </div>
   );
 }
