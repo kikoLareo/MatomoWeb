@@ -1,4 +1,3 @@
-// src/components/MediaAnalyticsGetSection.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ChartComponent from '../../components/ChartComponent';
@@ -45,20 +44,26 @@ const MediaAnalyticsGetSection = () => {
       <div className="graphDashBoard">
         {Object.keys(metricDescriptions).map((metric) => (
           <div key={metric} className="graph_component">
-            <ChartComponent
-              data={chartData[metric]?.data || []}
-              labels={chartData[metric]?.labels || []}
-              label={chartData[metric]?.title || ''}
-            />
-            <ChartInfo
-              title={chartData[metric]?.title || ''}
-              description={chartData[metric]?.description || ''}
-              data={chartData[metric]?.data || []}
-              idSite={chartData[metric]?.idSite}
-              storedAnalysis={storedAnalysis}
-              setStoredAnalysis={setStoredAnalysis}
-              metric={metric}
-            />
+            {chartData[metric] ? (
+              <>
+                <ChartComponent
+                  data={chartData[metric].data}
+                  labels={chartData[metric].labels}
+                  label={chartData[metric].title}
+                />
+                <ChartInfo
+                  title={chartData[metric].title}
+                  description={chartData[metric].description}
+                  data={chartData[metric].data}
+                  idSite={chartData[metric].idSite}
+                  storedAnalysis={storedAnalysis}
+                  setStoredAnalysis={setStoredAnalysis}
+                  metric={metric}
+                />
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         ))}
       </div>
