@@ -1,5 +1,3 @@
-// src/components/Home.js
-
 import React, { useEffect, useState, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import ChartComponent from '../components/ChartComponent';
@@ -34,7 +32,7 @@ function Home() {
         <div className="graphDashBoard">
           {homeCharts.map((chart) => (
             <div key={chart.title}>
-              <h3>{chartData[chart.title]}</h3>
+              <h3>{chartData[chart.title]?.title}</h3>
               <ChartComponent data={chartData[chart.title]?.data || []} />
             </div>
           ))}
