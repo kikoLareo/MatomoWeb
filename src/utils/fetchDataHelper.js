@@ -21,12 +21,12 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         data = {
           labels: Object.keys(responseData),
           data: Object.values(responseData).map(item => item[chart.metric] || 0),
-          title: chart.name,
+          title: chart.title,
           description: chart.description,
         };
       }
 
-      newChartData[chart.name] = data;
+      newChartData[chart.title] = data;
     }
   } catch (error) {
     console.error('Error fetching data:', error);

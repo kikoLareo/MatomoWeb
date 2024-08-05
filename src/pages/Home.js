@@ -28,14 +28,14 @@ function Home() {
       <div>
         <div className="nowInfo">
           {nowInfo.map((info) => (
-           <InfoComponent key={info.id} title={info.title} data={nowData[info.name]} />
+           <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />
           ))}
         </div>
         <div className="graphDashBoard">
           {homeCharts.map((chart) => (
             <div key={chart.title}>
               <h3>{chartData[chart.title]}</h3>
-              <ChartComponent data={chartData[chart.name]?.data || []} />
+              <ChartComponent data={chartData[chart.title]?.data || []} />
             </div>
           ))}
         </div>

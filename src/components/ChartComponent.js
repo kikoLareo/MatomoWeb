@@ -1,13 +1,14 @@
+// src/components/ChartComponent.js
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const ChartComponent = ({ data, labels, label }) => {
   const chartData = {
-    labels: labels,
+    labels,
     datasets: [
       {
-        label: label,
-        data: data,
+        label,
+        data,
         fill: false,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',

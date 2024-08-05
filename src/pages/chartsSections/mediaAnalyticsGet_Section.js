@@ -1,3 +1,4 @@
+// src/components/MediaAnalyticsGetSection.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ChartComponent from '../../components/ChartComponent';
@@ -23,9 +24,9 @@ const MediaAnalyticsGetSection = () => {
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
+            id: metric, // Agregar id a los datos del gráfico
             title: metricDescriptions[metric].shortName,
             description: metricDescriptions[metric].description,
-            idSite: idSite // Agregar idSite a los datos del gráfico
           };
           return acc;
         }, {});
@@ -52,10 +53,10 @@ const MediaAnalyticsGetSection = () => {
                   label={chartData[metric].title}
                 />
                 <ChartInfo
+                  id={chartData[metric].id}
                   title={chartData[metric].title}
                   description={chartData[metric].description}
                   data={chartData[metric].data}
-                  idSite={chartData[metric].idSite}
                   storedAnalysis={storedAnalysis}
                   setStoredAnalysis={setStoredAnalysis}
                   metric={metric}
