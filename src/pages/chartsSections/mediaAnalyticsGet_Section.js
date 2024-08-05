@@ -46,22 +46,23 @@ const MediaAnalyticsGetSection = () => {
         {Object.keys(metricDescriptions).map((metric) => (
           <div key={metric} className="graph_component">
             {chartData[metric] ? (
-              <>
-                <ChartComponent
-                  data={chartData[metric].data}
-                  labels={chartData[metric].labels}
-                  label={chartData[metric].title}
-                />
-                <ChartInfo
-                  id={chartData[metric].id}
-                  title={chartData[metric].title}
-                  description={chartData[metric].description}
-                  data={chartData[metric].data}
-                  storedAnalysis={storedAnalysis}
-                  setStoredAnalysis={setStoredAnalysis}
-                  metric={metric}
-                />
-              </>
+                <>
+                  <ChartComponent
+                    data={chartData[metric].data}
+                    labels={chartData[metric].labels}
+                    label={chartData[metric].title}
+                  />
+                  <ChartInfo
+                    id={chartData[metric].id}
+                    title={chartData[metric].title}
+                    description={chartData[metric].description}
+                    data={chartData[metric].data}
+                    storedAnalysis={storedAnalysis}
+                    setStoredAnalysis={setStoredAnalysis}
+                    metric={metric}
+                  />
+                </>
+              
             ) : (
               <p>Loading...</p>
             )}
