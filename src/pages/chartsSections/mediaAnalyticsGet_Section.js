@@ -5,7 +5,7 @@ import ChartComponent from '../../components/ChartComponent';
 import ChartInfo from '../../components/ChartInfo';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 import { IdSiteContext } from '../../contexts/idSiteContext';
-import { MediaAnalytics_get_metrics as metricDescriptions } from '../../chart_config/MediaAnalytics/get_Info';
+import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
 
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
@@ -20,13 +20,13 @@ const MediaAnalyticsGetSection = () => {
         const response = await axios.get(url);
         const data = response.data;
 
-        const newChartData = Object.keys(metricDescriptions).reduce((acc, metric) => {
+        const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: metricDescriptions[metric].shortName,
-            description: metricDescriptions[metric].description,
+            title: MediaAnalytics_get_metrics[metric].shortName,
+            description: MediaAnalytics_get_metrics[metric].description,
           };
           return acc;
         }, {});
@@ -43,7 +43,7 @@ const MediaAnalyticsGetSection = () => {
   return (
     <div className="reproductions">
       <div className="graphDashBoard">
-        {Object.keys(metricDescriptions).map((metric) => (
+        {Object.keys(MediaAnalytics_get_metrics).map((metric) => (
           <div key={metric} className="graph_component">
             {chartData[metric] ? (
                 <>

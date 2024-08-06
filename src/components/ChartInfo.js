@@ -1,8 +1,10 @@
 // src/components/ChartInfo.js
-import React, { useState, useEffect } from 'react';
-import { fetchChartAnalysis } from '../utils/chatGptApi';
+import React, { useState, useEffect, useContext } from 'react';
+import { fetchAndSaveAnalysis } from '../utils/chatGptApi';
+import { IdSiteContext } from '../contexts/idSiteContext';
 
-const ChartInfo = ({ id, title, description, data, storedAnalysis, setStoredAnalysis, metric }) => {
+const ChartInfo = ({ title, description, data, module, action }) => {
+  const { idSite } = useContext(IdSiteContext);
   const [showMore, setShowMore] = useState(false);
   const [analysis, setAnalysis] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,9 +16,8 @@ const ChartInfo = ({ id, title, description, data, storedAnalysis, setStoredAnal
         setLoading(true);
         setError('');
         try {
-          const result = await fetchChartAnalysis(data);
+          const result = await fetchAndSaveAnalysis({ module, action, title, description, idSite, data });
           setAnalysis(result);
-          setStoredAnalysis(prev => ({ ...prev, [metric]: result }));
         } catch (err) {
           setError('Error fetching analysis. Please try again later.');
         } finally {
@@ -25,7 +26,7 @@ const ChartInfo = ({ id, title, description, data, storedAnalysis, setStoredAnal
       };
       fetchAnalysis();
     }
-  }, [showMore, analysis, data, metric, setStoredAnalysis]);
+  }, [showMore, analysis, title, description, data, idSite, module, action]);
 
   const handleShowMore = () => {
     setShowMore(!showMore);
@@ -40,8 +41,13 @@ const ChartInfo = ({ id, title, description, data, storedAnalysis, setStoredAnal
       </button>
       {showMore && (
         <div className="detailed-info">
-          <h4>Detailed Analysis</h4>
-          {loading ? <p>Loading...</p> : <p>{error || analysis}</p>}
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            <p>{analysis}</p>
+          )}
         </div>
       )}
     </div>
