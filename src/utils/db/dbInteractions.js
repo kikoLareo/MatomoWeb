@@ -20,7 +20,6 @@ export const fetchData = async (collection, query = {}) => {
     url: `${BASE_URL}/findOne`,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Request-Headers': '*',
       'api-key': API_KEY,
     },
     data: data,
