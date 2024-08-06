@@ -3,13 +3,16 @@ import axios from 'axios';
 const API_KEY = '8m9VwHl2uwQArIAyfpcrkAO3g4uHRb3KBIpWVb3EDUgEBHso8rhImdUQTQKZZwso';
 const BASE_URL = 'https://eu-west-2.aws.data.mongodb-api.com/app/data-hrcfvpe/endpoint/data/v1/action';
 
-export const fetchData = async (collection, database, query = {}, projection = {}) => {
+export const fetchData = async (collection, query = {}) => {
   const data = JSON.stringify({
     collection: collection,
-    database: database,
+    database: "kanaloa",
     dataSource: "kanaloa",
     filter: query,
-    projection: projection,
+    projection: {
+      "_id": 1
+    }
+  
   });
 
   const config = {
