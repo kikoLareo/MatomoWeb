@@ -13,9 +13,9 @@ export const API_getReportMetadata = (idSites = '', period = '', date = '', hide
     return { url: getBaseUrl(method, { idSites, period, date, hideMetricsDoc, showSubtableReports, idSite }), title: 'Report Metadata' };
     }
 
-export const API_getProcessedReport = (idSite, period, date, apiModule, apiAction, segment = '', apiParameters = '', idGoal = '', language = '', showTimer = '1', hideMetricsDoc = '', idSubtable = '', showRawMetrics = '', format_metrics = '', idDimension = '') => {
+export const API_getProcessedReport = (idSite, period, date, apiModule, apiAction,  language = 'es') => {
     const method = `${methodBase}.getProcessedReport`;
-    return { url: getBaseUrl(method, { idSite, period, date, apiModule, apiAction, segment, apiParameters, idGoal, language , showTimer , hideMetricsDoc, idSubtable, showRawMetrics, format_metrics, idDimension  }), title: 'Processed Report' };
+    return { url: getBaseUrl(method, { idSite, period, date, apiModule, apiAction,  language   }), title: 'Processed Report' };
     }
 
 export const API_get = (idSite, period, date, segment = '', columns = '') => {
