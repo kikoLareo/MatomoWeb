@@ -11,9 +11,7 @@ exports.handler = async (event, context) => {
     database: 'kanaloa',
     dataSource: 'kanaloa',
     filter: query,
-    projection: {
-      _id: 1
-    }
+  
   });
 
   const config = {
