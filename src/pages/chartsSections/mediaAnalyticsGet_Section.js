@@ -17,7 +17,7 @@ const MediaAnalyticsGetSection = () => {
     const fetchData = async () => {
       setChartData({}); // Reiniciar el estado de las gráficas
       try {
-        const dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', 'MediaAnalytics', 'get', null, null, null, 'es', null, null, null, null, null, null, null);
+        const dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', 'MediaAnalytics', 'get', "", "", "", 'es', "", "", "", "", "", "", "");
         const response = await axios.get(dataUrl.url);
         const processedData = response.data;
 
