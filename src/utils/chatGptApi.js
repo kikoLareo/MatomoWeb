@@ -34,7 +34,7 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
 
     const analysis = response.data.choices[0].message.content;
 
-    await insertData('interactions', 'moduleData', {
+    await insertData( 'moduleData', {
       idSite,
       module: module,
       action: action,
@@ -45,13 +45,13 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
 
     if (generalContext) {
       const updatedContext = `${generalContext.context} ${analysis}`;
-      await insertData('generalContext', 'idSitesData', {
+      await insertData( 'idSitesData', {
         idSite,
         context: updatedContext,
         date: new Date()
       });
     } else {
-      await insertData('generalContext', 'idSitesData', {
+      await insertData( 'idSitesData', {
         idSite,
         context: analysis,
         date: new Date()
