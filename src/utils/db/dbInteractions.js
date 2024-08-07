@@ -1,4 +1,3 @@
-var axios = require('axios');
 
 const API_KEY = 'qHRLwVS45jILrce24X7Y6U7L3v46sDBBUF7oYmtgk1NEuq7R6zrX58oREcmxoDtY';
 const BASE_URL = 'https://eu-west-2.aws.data.mongodb-api.com/app/data-hrcfvpe/endpoint/data/v1/action';
@@ -27,6 +26,8 @@ export const fetchData = async (collection, query = {}) => {
   };
 
   try {
+    var axios = require('axios');
+
     const response = await axios(config);
     return response.data.document;
   } catch (error) {
