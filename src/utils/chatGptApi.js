@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { insertData, fetchData } from './db/dbInteractions';
+import { getSiteName } from '../config';
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
@@ -15,7 +16,7 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
 
   const interactionContext = [
     { role: 'system', content: 'Las respuestas deben ser en español y deben proporcionar un análisis detallado y comprensible de los datos proporcionados. Asegúrate de considerar el contexto de la gráfica y la descripción proporcionada.' },
-    { role: 'user', content: `Analiza la siguiente gráfica titulada "${title}" para el sitio con id ${idSite}. ${description} Los datos son los siguientes: ${formattedData}. Por favor, proporciona un análisis detallado considerando tendencias, patrones y posibles implicaciones de estos datos.` }
+    { role: 'user', content: `Analiza la siguiente gráfica titulada "${title}" para el sitio con id ${idSite} y nombre ${getSiteName(idSite)}. ${description} Los datos son los siguientes: ${formattedData}. Por favor, proporciona un análisis detallado considerando tendencias, patrones y posibles implicaciones de estos datos.` }
   ];
 
   if (generalContext) {

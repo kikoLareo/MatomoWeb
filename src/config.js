@@ -19,3 +19,8 @@ export const idSiteOptions = {
     'andomeda-pre': 2,
     'andromeda': 10,
   };
+
+  export function getSiteName(idSite){
+    const site = Object.keys(idSiteOptions).find(key => idSiteOptions[key] === idSite);
+    return site;
+  }

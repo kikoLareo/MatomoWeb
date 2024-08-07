@@ -6,6 +6,7 @@ import ChartInfo from '../../components/ChartInfo';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
+import { API_getProcessedReport } from '../../modules/API/apiFunctions';
 
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
@@ -16,17 +17,21 @@ const MediaAnalyticsGetSection = () => {
     const fetchData = async () => {
       setChartData({}); // Reiniciar el estado de las gráficas
       try {
+        const dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', 'MediaAnalytics', 'get', null, null, null, 'es', null, null, null, null, null, null, null);
+        const response = await axios.get(dataUrl.url);
+        const processedData = response.data;
+
         const { url } = MediaAnalytics_get(idSite);
-        const response = await axios.get(url);
-        const data = response.data;
+        const response2 = await axios.get(url);
+        const data = response2.data;
 
         const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: MediaAnalytics_get_metrics[metric].shortName,
-            description: MediaAnalytics_get_metrics[metric].description,
+            title: processedData.metrics[MediaAnalytics_get_metrics],
+            description:processedData.metrics[MediaAnalytics_get_metrics].metricsDocumentation
           };
           return acc;
         }, {});

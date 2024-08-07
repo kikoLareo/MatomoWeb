@@ -2,6 +2,8 @@
 
 import { APIFunctions } from '../modules/API/apiFunctions';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
+import axios from 'axios';
+import { API_getProcessedReport } from '../modules/API/apiFunctions';
 
 export const fetchDataForCharts = async (idSite, chartsConfig) => {
   const newChartData = {};
@@ -13,10 +15,14 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         // Usar la función específica si está definida
         data = await chart.fetchFunction(idSite);
       } else {
+        const dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', chart.module, chart.apiFunction, null, null, null, 'es', null, null, null, null, null, null, null);
+        const response = await axios.get(dataUrl.url);
+        const processedData = response.data;
+
         const url =  getBaseUrl(chart, idSite);
         // Usar la función de API general
-        const response = await fetch(url);
-        const responseData = await response.json();
+        const response1 = await fetch(url);
+        const responseData = await response1.json();
 
         data = {
           labels: Object.keys(responseData),
