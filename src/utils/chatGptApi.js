@@ -45,7 +45,7 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
       idSite,
       module: module,
       action: action,
-      data: moduleData.data,
+      data: moduleData === null ? [] : moduleData.data,
       analysis,
       date: new Date()
     });
