@@ -19,6 +19,7 @@ const ChartInfo = ({ title, description, data, module, action }) => {
           const result = await fetchAndSaveAnalysis({ module, action, title, description, idSite, data });
           setAnalysis(result);
         } catch (err) {
+          console.error(err);
           setError('Error fetching analysis. Please try again later.');
         } finally {
           setLoading(false);

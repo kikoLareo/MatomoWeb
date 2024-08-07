@@ -8,6 +8,9 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
   const generalContext = await fetchData('idSitesData', { idSite });
   const moduleData = await fetchData('moduleData',  { idSite, module, action });
 
+  console.log('moduleData', moduleData);
+  console.log('generalContext', generalContext);
+
   const formattedData = data.join(', ');
 
   const interactionContext = [
@@ -18,6 +21,8 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
   if (generalContext) {
     interactionContext.push({ role: 'system', content: `Contexto general: ${JSON.stringify(generalContext.context)}` });
   }
+
+  console.log('interactionContext', interactionContext);
 
   try {
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
@@ -34,6 +39,8 @@ const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite
 
     const analysis = response.data.choices[0].message.content;
 
+    console.log('analysis', analysis);
+    
     await insertData( 'moduleData', {
       idSite,
       module: module,
