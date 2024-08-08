@@ -50,20 +50,24 @@ export const fetchData = async (idSite, requestData) => {
   try {
     try {
       let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, 'es');
+     console.log(dataUrl.url);
+
       let response = await axios.get(dataUrl.url);
       var processedData = response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
     }
 
+    console.log(processedData);
     const url = getBaseUrl(requestData, idSite);
     // Usar la función de API general
     const response1 = await fetch(url);
     const responseData = await response1.json();
 
+    console.log(responseData);
     const data = {
       value: responseData.value || 0,
-      title: processedData.metadata.metrics[requestData.metric] || requestData.title
+      title: processedData !=null? processedData.metadata.metrics[requestData.metric] :  requestData.title || '',
     };
 
     newChartData = data;
