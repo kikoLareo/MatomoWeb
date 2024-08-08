@@ -31,12 +31,13 @@ const MediaAnalyticsGetSection = () => {
           const description = MediaAnalytics_get_metrics[metric].description;
 
           console.log('shortName:', shortName);
+          console.log('metric', metric);
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: processedData.metadata.metrics[shortName] || shortName,
-            description:processedData.metadata.metricsDocumentation[shortName]|| description,
+            title: processedData.metadata.metrics[metric] || shortName,
+            description:processedData.metadata.metricsDocumentation[metric]|| description,
           };
           return acc;
         }, {});
