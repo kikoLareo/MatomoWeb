@@ -2,12 +2,12 @@
 import React from 'react';
 import { useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
-import { fetchDataForCharts } from '../utils/fetchDataHelper';
+import { fetchData } from '../utils/fetchDataHelper';
 
 const InfoComponent = ({ title, data }) => {
   const {idSite} = useContext(IdSiteContext);
 
-  const dataFetched= fetchDataForCharts(idSite, data);
+  const dataFetched= fetchData(idSite, data);
 
   return (
     <div className="info-component">

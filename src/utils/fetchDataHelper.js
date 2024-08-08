@@ -45,6 +45,37 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
   return newChartData;
 };
 
+export const fetchData = async (idSite, requestData) => {
+  var newChartData = null;
+  try {
+    try {
+      let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, 'es');
+      let response = await axios.get(dataUrl.url);
+      var processedData = response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+
+    const url = getBaseUrl(requestData, idSite);
+    // Usar la función de API general
+    const response1 = await fetch(url);
+    const responseData = await response1.json();
+
+    const data = {
+      value: responseData.value || 0,
+      title: processedData.metadata.metrics[requestData.metric] || requestData.title
+    };
+
+    newChartData = data;
+
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+  return newChartData;
+}
+
+
 function getBaseUrl(chart, idSite) {
 
     switch(chart.module) {
