@@ -90,6 +90,8 @@ export const devicesDetectionCharts = [
     description: 'Get the type of devices detected.',
     action: "devicesDetection_getType",
     module: 'DevicesDetection',
+    period: 'year',
+    date: 'yesterday',
   },
   {
     title: 'Devices Detection - Brand',

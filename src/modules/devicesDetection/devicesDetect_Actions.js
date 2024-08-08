@@ -2,7 +2,7 @@ import { getBaseUrl } from "../../chart_config/common/common";
 const methodBase = "DevicesDetection";
 const method = "API";
 
-export const devicesDetection_getType = (idSite, period, date, segment) => {
+export const devicesDetection_getType = (idSite, period="year", date="yesterday", segment) => {
     const action = `${methodBase}.devicesDetection_getType`;
     const params = { idSite, period, date };
 

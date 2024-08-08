@@ -91,7 +91,7 @@ function getBaseUrl(chart, idSite) {
         case 'MediaAnalytics':
             return mediaAnalyticsFunctions[chart.action](idSite).url;
         case 'DevicesDetection':
-            return devicesDetectionActions[chart.action](idSite).url;
+            return devicesDetectionActions[chart.action](idSite, chart.period, chart.date).url;
         default:
             return '';
     }
