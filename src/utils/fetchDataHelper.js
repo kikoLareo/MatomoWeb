@@ -2,6 +2,7 @@
 
 import { APIFunctions, API_getProcessedReport } from '../modules/API/Api_actions';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
+import { devicesDetectionActions } from '../modules/devicesDetection/devicesDetection';
 import axios from 'axios';
 
 export const fetchDataForCharts = async (idSite, chartsConfig) => {
@@ -24,10 +25,12 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         }
 
         const url =  getBaseUrl( chart, idSite);
+        console.log(url);
         // Usar la función de API general
         const response1 = await fetch(url);
         const responseData = await response1.json();
 
+        console.log(responseData);
         data = {
           labels: Object.keys(responseData),
           data: Object.values(responseData).map(item => item[chart.metric] || 0),
@@ -87,6 +90,8 @@ function getBaseUrl(chart, idSite) {
             return APIFunctions[chart.action](idSite).url;
         case 'MediaAnalytics':
             return mediaAnalyticsFunctions[chart.action](idSite).url;
+        case 'DevicesDetection':
+            return devicesDetectionActions[chart.action](idSite).url;
         default:
             return '';
     }
