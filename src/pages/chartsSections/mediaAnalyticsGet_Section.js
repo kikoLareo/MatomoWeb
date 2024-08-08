@@ -30,8 +30,8 @@ const MediaAnalyticsGetSection = () => {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: processedData.metrics[MediaAnalytics_get_metrics],
-            description:processedData.metrics[MediaAnalytics_get_metrics].metricsDocumentation
+            title: processedData.metadata.metrics[MediaAnalytics_get_metrics],
+            description:processedData.metadata.metricsDocumentation[MediaAnalytics_get_metrics]
           };
           return acc;
         }, {});
