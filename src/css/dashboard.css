@@ -29,18 +29,6 @@
   margin-right: 10px;
 }
 
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  padding-bottom: 5vh;
-}
-
-.optionsSite {
-  display: flex;
-  flex: 1 1 auto;
-}
 
 .optionsCharts {
   flex: 3 1 auto;

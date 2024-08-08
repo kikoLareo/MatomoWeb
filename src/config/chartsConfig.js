@@ -51,21 +51,25 @@ export const Dashboard = [
 export const nowInfo =[
   {
     id:0,
+    title: 'Reproducciones actuales',
     action: "getCurrentNumPlays",
     module: 'MediaAnalytics',
   },
   {
     id:1,
+    title: 'Tiempo total de reproducción',
     action: "getCurrentSumTimeSpent",
     module: 'MediaAnalytics',
   }, 
   {
     id:2,
+    title: 'Reproducciones más actuales',
     action: "getCurrentMostPlays",
     module: 'MediaAnalytics',
   },
   {
     id:3,
+    title: 'Usuarios actuales',
     action: "getPlayers",
     module: 'MediaAnalytics',
   }

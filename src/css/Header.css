@@ -1,10 +1,12 @@
 /* src/components/Header.css */
 .header {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
+  background: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  height: 5vh;
+  align-items: center;
   }
   
   .header nav ul {
@@ -27,3 +29,19 @@
     text-decoration: underline;
   }
   
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+select {
+  margin: 2vh 1vw;
+  border-radius: 10px;
+}
+
+.optionsSite {
+  display: flex;
+  flex: 1 1 auto;
+}

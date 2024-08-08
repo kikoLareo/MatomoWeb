@@ -24,15 +24,16 @@ function Home() {
 
   return (
     <div className="home">
-      <div className="nowInfo">
-          {nowInfo.map((info) => (
-           <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />
-          ))}
-        </div>
-
+      
       <div className="DashBoard">
-        <LiveWidget />
-
+        <div className="column">
+          <div className="nowInfo">
+            {nowInfo.map((info) => (
+            <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />
+            ))}
+          </div>
+          <LiveWidget />
+        </div>
         <div className="column">
           {homeCharts.map((chart) => (
             <ChartComponent key={chart.id} title={chart.title} data={chartData[chart.title]} />
