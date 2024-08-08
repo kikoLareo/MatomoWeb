@@ -64,7 +64,7 @@ export const fetchData = async (idSite, requestData) => {
     const response1 = await fetch(url);
     const responseData = await response1.json();
 
-    console.log(responseData);
+    console.log(requestData, responseData);
     const data = {
       value: responseData.value || 0,
       title: processedData !=null? processedData.metadata.metrics[requestData.metric] :  requestData.title || '',
