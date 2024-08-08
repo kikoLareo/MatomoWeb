@@ -25,17 +25,18 @@ const MediaAnalyticsGetSection = () => {
         const response2 = await axios.get(url);
         const data = response2.data;
 
-        console.log(processedData);
+        console.log(processedData, processedData.metadata, processedData.metadata.metrics);
         const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
           const shortName = MediaAnalytics_get_metrics[metric].shortName;
           const description = MediaAnalytics_get_metrics[metric].description;
 
+          console.log('shortName:', shortName);
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: processedData.metadata.metrics.find(m => m === shortName) || shortName,
-            description:processedData.metadata.metricsDocumentation.find(m => m === shortName) || description,
+            title: processedData.metadata.metrics[shortName] || shortName,
+            description:processedData.metadata.metricsDocumentation[shortName]|| description,
           };
           return acc;
         }, {});
