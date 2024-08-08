@@ -2,7 +2,7 @@
 
 import { APIFunctions, API_getProcessedReport } from '../modules/API/Api_actions';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
-import { devicesDetectionActions } from '../modules/devicesDetection/devicesDetection';
+import { devicesDetectionActions } from '../modules/devicesDetection/devicesDetect_Actions';
 import axios from 'axios';
 
 export const fetchDataForCharts = async (idSite, chartsConfig) => {
