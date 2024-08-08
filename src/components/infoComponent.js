@@ -1,21 +1,25 @@
-// src/components/InfoComponent.js
-import React from 'react';
-import { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchData } from '../utils/fetchDataHelper';
 
-const InfoComponent = async ({ data }) => {
-  const {idSite} = useContext(IdSiteContext);
+const InfoComponent = ({ data }) => {
+  const { idSite } = useContext(IdSiteContext);
+  const [dataFetched, setDataFetched] = useState(null);
 
-  console.log(data);
-  const dataFetched = await fetchData(idSite, data);
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      const result = await fetchData(idSite, data);
+      setDataFetched(result);
+    };
 
-  console.log(dataFetched);
+    fetchDataAsync();
+  }, [idSite, data]);
+
   return (
     <div className="info-component">
-      <h3>{dataFetched.title}</h3>
+      <h3>{dataFetched ? dataFetched.title : 'Loading...'}</h3>
       <div className="data">
-        {dataFetched !== undefined ? (
+        {dataFetched ? (
           <span>{dataFetched.value}</span>
         ) : (
           <span>Loading...</span>
