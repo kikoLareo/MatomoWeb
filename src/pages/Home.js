@@ -9,11 +9,9 @@ import LiveWidget from '../components/Live_Components/LiveWidget';
 function Home() {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
-  const [nowData, setNowData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
-      const now = await fetchDataForCharts(idSite, homeCharts);
-      setNowData(now);
+      
 
       const data = await fetchDataForCharts(idSite, homeCharts);
       setChartData(data);
