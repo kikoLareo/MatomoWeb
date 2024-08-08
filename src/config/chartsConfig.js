@@ -84,3 +84,36 @@ export const reproductionsCharts = [
   
 ];
 
+export const devicesDetectionCharts = [
+  {
+    title: 'Devices Detection - Type',
+    description: 'Get the type of devices detected.',
+    action: "devicesDetection_getType",
+    module: 'DevicesDetection',
+  },
+  {
+    title: 'Devices Detection - Brand',
+    description: 'Get the brand of devices detected.',
+    action: "devicesDetection_getBrand",
+    module: 'DevicesDetection',
+  },
+  {
+    title: 'Devices Detection - Model',
+    description: 'Get the model of devices detected.',
+    action: "devicesDetection_getModel",
+    module: 'DevicesDetection',
+  },
+  {
+    title: 'Devices Detection - OS',
+    description: 'Get the OS of devices detected.',
+    action: "devicesDetection_getOSFamilies",
+    module: 'DevicesDetection',
+  },
+  {
+    title: 'Devices Detection - Browser',
+    description: 'Get the browser of devices detected.',
+    action: "devicesDetection_getBrowsers",
+    module: 'DevicesDetection',
+  }
+];
+
