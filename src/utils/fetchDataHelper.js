@@ -67,7 +67,7 @@ export const fetchData = async (idSite, requestData) => {
     console.log(requestData, responseData);
     const data = {
       value: responseData.value || 0,
-      title: processedData !=null? processedData.metadata.metrics[requestData.metric] :  requestData.title || '',
+      title: processedData.result ==="error" ?  requestData.title || '' : processedData.metadata.metrics[requestData.metric] ,
     };
 
     newChartData = data;
