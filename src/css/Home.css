@@ -1,6 +1,7 @@
 .nowInfo{
     display: flex;
-    gap: 2vw;
+    flex-direction: column;
+    gap: 1vw;
     width: 100%;
     justify-content: center;
     padding: 2vh 0;
@@ -18,4 +19,11 @@
         align-items: center;
         gap: 2vw;
         padding: 2vh 0;
-    }
+}
+
+.info-component {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    justify-content: space-between;
+}

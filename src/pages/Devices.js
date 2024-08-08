@@ -8,7 +8,7 @@ import ScatterChartComponent from '../components/ScatterChartComponent ';
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
 
-    const data = fetchDataForCharts(idSite, devicesDetection_getType);
+    const data = fetchDataForCharts(idSite, {devicesDetection_getType});
 
   return (
     <div className="Devices">
