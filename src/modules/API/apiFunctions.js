@@ -2,30 +2,55 @@ import { getBaseUrl } from "../../chart_config/common/common";
 
 const methodBase = 'API';
 
-
 export const API_getMetadata = (idSite, apiModule, apiAction, apiParameters = 'Array', language = '', period = '', date = '', hideMetricsDoc = '', showSubtableReports = '') => {
     const method = `${methodBase}.getMetadata`;
-    return { url: getBaseUrl(method, { idSite, apiModule, apiAction, apiParameters, language, period, date, hideMetricsDoc, showSubtableReports }), title: 'Metadata' };
-    }
+    const params = { idSite, apiModule, apiAction, apiParameters };
+
+    if (language) params.language = language;
+    if (period) params.period = period;
+    if (date) params.date = date;
+    if (hideMetricsDoc) params.hideMetricsDoc = hideMetricsDoc;
+    if (showSubtableReports) params.showSubtableReports = showSubtableReports;
+
+    return { url: getBaseUrl(method, params), title: 'Metadata' };
+}
 
 export const API_getReportMetadata = (idSites = '', period = '', date = '', hideMetricsDoc = '', showSubtableReports = '', idSite = '') => {
     const method = `${methodBase}.getReportMetadata`;
-    return { url: getBaseUrl(method, { idSites, period, date, hideMetricsDoc, showSubtableReports, idSite }), title: 'Report Metadata' };
-    }
+    const params = {};
 
-export const API_getProcessedReport = (idSite, period, date, apiModule, apiAction,  language = 'es') => {
+    if (idSites) params.idSites = idSites;
+    if (period) params.period = period;
+    if (date) params.date = date;
+    if (hideMetricsDoc) params.hideMetricsDoc = hideMetricsDoc;
+    if (showSubtableReports) params.showSubtableReports = showSubtableReports;
+    if (idSite) params.idSite = idSite;
+
+    return { url: getBaseUrl(method, params), title: 'Report Metadata' };
+}
+
+export const API_getProcessedReport = (idSite, period, date, apiModule, apiAction, language = 'es') => {
     const method = `${methodBase}.getProcessedReport`;
-    return { url: getBaseUrl(method, { idSite, period, date, apiModule, apiAction,  language   }), title: 'Processed Report' };
-    }
+    const params = { idSite, period, date, apiModule, apiAction };
+
+    if (language) params.language = language;
+
+    return { url: getBaseUrl(method, params), title: 'Processed Report' };
+}
 
 export const API_get = (idSite, period, date, segment = '', columns = '') => {
     const method = `${methodBase}.get`;
-    return { url: getBaseUrl(method, { idSite, period, date, segment, columns }), title: 'API' };
-    }
+    const params = { idSite, period, date };
+
+    if (segment) params.segment = segment;
+    if (columns) params.columns = columns;
+
+    return { url: getBaseUrl(method, params), title: 'API' };
+}
 
 export const APIFunctions = {
-    getMetadata : API_getMetadata,
-    getReportMetadata : API_getReportMetadata,
-    getProcessedReport : API_getProcessedReport,
-    get : API_get
+    getMetadata: API_getMetadata,
+    getReportMetadata: API_getReportMetadata,
+    getProcessedReport: API_getProcessedReport,
+    get: API_get
 }
