@@ -2,7 +2,7 @@ import { getBaseUrl } from "../../chart_config/common/common";
 
 const methodBase = 'API';
 
-export const API_getMetadata = (idSite, apiModule, apiAction, apiParameters = 'Array', language = '', period = '', date = '', hideMetricsDoc = '', showSubtableReports = '') => {
+export const API_getMetadata = (idSite, apiModule, apiAction, apiParameters = 'Array', language , period , date , hideMetricsDoc , showSubtableReports ) => {
     const method = `${methodBase}.getMetadata`;
     const params = { idSite, apiModule, apiAction, apiParameters };
 
@@ -15,7 +15,7 @@ export const API_getMetadata = (idSite, apiModule, apiAction, apiParameters = 'A
     return { url: getBaseUrl(method, params), title: 'Metadata' };
 }
 
-export const API_getReportMetadata = (idSites = '', period = '', date = '', hideMetricsDoc = '', showSubtableReports = '', idSite = '') => {
+export const API_getReportMetadata = (idSites, period, date, hideMetricsDoc, showSubtableReports, idSite) => {
     const method = `${methodBase}.getReportMetadata`;
     const params = {};
 
@@ -38,7 +38,7 @@ export const API_getProcessedReport = (idSite, period, date, apiModule, apiActio
     return { url: getBaseUrl(method, params), title: 'Processed Report' };
 }
 
-export const API_get = (idSite, period, date, segment = '', columns = '') => {
+export const API_get = (idSite, period, date, segment, columns) => {
     const method = `${methodBase}.get`;
     const params = { idSite, period, date };
 

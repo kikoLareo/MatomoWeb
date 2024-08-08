@@ -26,12 +26,14 @@ const MediaAnalyticsGetSection = () => {
         const data = response2.data;
 
         const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
+          const shortName = MediaAnalytics_get_metrics[metric].shortName;
+
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
-            title: processedData.metadata.metrics[MediaAnalytics_get_metrics],
-            description:processedData.metadata.metricsDocumentation[MediaAnalytics_get_metrics]
+            title: processedData["metadata"]["metrics"][shortName],
+            description:processedData["metadata"]["metricsDocumentation"][shortName]
           };
           return acc;
         }, {});
