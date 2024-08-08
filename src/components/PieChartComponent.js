@@ -3,6 +3,7 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
 const PieChartComponent = ({ data }) => {
+    console.log(data);
   // Filter out items with nb_visits equal to 0
   const filteredData = data.filter(item => item.nb_visits > 0);
 

@@ -12,6 +12,7 @@ const Devices = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
+      console.log(data);
       setChartData(data);
     };
 
