@@ -9,7 +9,7 @@ const Filters = () => {
   return (
     <div className="options">
       <div className="optionsSite">
-        <label>
+        
           <h3>Seleccionar idSite:</h3>
           <select value={idSite} onChange={(e) => setIdSite(Number(e.target.value))}>
             {Object.entries(idSiteOptions).map(([label, value]) => (
@@ -18,7 +18,7 @@ const Filters = () => {
               </option>
             ))}
           </select>
-        </label>
+        
       </div>
     </div>
   );

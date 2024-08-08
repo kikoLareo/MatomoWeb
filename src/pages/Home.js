@@ -23,22 +23,22 @@ function Home() {
   }, [idSite]);
 
   return (
-    <div>
-      <div>
-        <LiveWidget />
-        <div className="nowInfo">
+    <div className="home">
+      <div className="nowInfo">
           {nowInfo.map((info) => (
            <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />
           ))}
         </div>
-        <div className="graphDashBoard">
+
+      <div className="DashBoard">
+        <LiveWidget />
+
+        <div className="column">
           {homeCharts.map((chart) => (
-            <div key={chart.title}>
-              <h3>{chartData[chart.title]?.title}</h3>
-              <ChartComponent data={chartData[chart.title]?.data || []} />
-            </div>
+            <ChartComponent key={chart.id} title={chart.title} data={chartData[chart.title]} />
           ))}
         </div>
+        
       </div>
     </div>
   );

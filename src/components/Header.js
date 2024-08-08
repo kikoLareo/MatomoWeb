@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Header.css';
+import Filters from './Filters';
 // import Dropdown from './dropdown';
 
 
@@ -16,6 +17,7 @@ const Header = () => {
         </ul>
        
       </nav>
+      <Filters />
     </header>
   );
 };

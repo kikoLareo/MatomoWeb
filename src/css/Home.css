@@ -5,3 +5,17 @@
     justify-content: center;
     padding: 2vh 0;
 }
+
+.home{
+    display: block;
+    width: 100%;
+    
+}
+
+.DashBoard{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2vw;
+        padding: 2vh 0;
+    }

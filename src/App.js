@@ -10,7 +10,6 @@ import './css/Header.css';
 import './css/graph.css';
 import './css/dashboard.css';
 import './css/Home.css';
-import Filters from './components/Filters';
 import { IdSiteProvider } from './contexts/idSiteContext';
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
       <Router>
         <div className="app">
           <Header />
-          <Filters />
+         
           <div className="main-content">
             {/* <Sidebar /> */}
             <div className="content">
