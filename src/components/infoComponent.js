@@ -7,8 +7,10 @@ import { fetchData } from '../utils/fetchDataHelper';
 const InfoComponent = ({ title, data }) => {
   const {idSite} = useContext(IdSiteContext);
 
+  console.log(data);
   const dataFetched= fetchData(idSite, data);
 
+  console.log(dataFetched);
   return (
     <div className="info-component">
       <h3>{title}</h3>

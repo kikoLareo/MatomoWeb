@@ -29,7 +29,7 @@ function Home() {
         <div className="column">
           <div className="nowInfo">
             {nowInfo.map((info) => (
-            <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />
+            <InfoComponent key={info.id} title={info.title} data={info} />
             ))}
           </div>
           <LiveWidget />
