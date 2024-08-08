@@ -45,7 +45,7 @@ export const Live_widget = (idSite, period ="day",  disableLink =0, widget=1) =>
     const method = `${methodBase}.widget`;
     const params = { idSite, period, disableLink, widget };
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Widget' };
+    return { url: getBaseUrl('API',method, params), title: 'Widget' };
 }
 
 export const LiveActions = {
