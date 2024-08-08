@@ -23,7 +23,7 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
           console.error('Error fetching data:', error);
         }
 
-        const url =  getBaseUrl(chart, idSite);
+        const url =  getBaseUrl( chart, idSite);
         // Usar la función de API general
         const response1 = await fetch(url);
         const responseData = await response1.json();

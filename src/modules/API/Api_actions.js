@@ -12,7 +12,7 @@ export const API_getMetadata = (idSite, apiModule, apiAction, apiParameters = 'A
     if (hideMetricsDoc) params.hideMetricsDoc = hideMetricsDoc;
     if (showSubtableReports) params.showSubtableReports = showSubtableReports;
 
-    return { url: getBaseUrl(method, params), title: 'Metadata' };
+    return { url: getBaseUrl(methodBase, method, params), title: 'Metadata' };
 }
 
 export const API_getReportMetadata = (idSites, period, date, hideMetricsDoc, showSubtableReports, idSite) => {
@@ -26,7 +26,7 @@ export const API_getReportMetadata = (idSites, period, date, hideMetricsDoc, sho
     if (showSubtableReports) params.showSubtableReports = showSubtableReports;
     if (idSite) params.idSite = idSite;
 
-    return { url: getBaseUrl(method, params), title: 'Report Metadata' };
+    return { url: getBaseUrl(methodBase, method, params), title: 'Report Metadata' };
 }
 
 export const API_getProcessedReport = (idSite, period, date, apiModule, apiAction, language = 'es') => {
@@ -35,7 +35,7 @@ export const API_getProcessedReport = (idSite, period, date, apiModule, apiActio
 
     if (language) params.language = language;
 
-    return { url: getBaseUrl(method, params), title: 'Processed Report' };
+    return { url: getBaseUrl(methodBase, method, params), title: 'Processed Report' };
 }
 
 export const API_get = (idSite, period, date, segment, columns) => {
@@ -45,7 +45,7 @@ export const API_get = (idSite, period, date, segment, columns) => {
     if (segment) params.segment = segment;
     if (columns) params.columns = columns;
 
-    return { url: getBaseUrl(method, params), title: 'API' };
+    return { url: getBaseUrl(methodBase, method, params), title: 'API' };
 }
 
 export const APIFunctions = {
