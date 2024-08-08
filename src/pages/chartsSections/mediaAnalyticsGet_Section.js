@@ -25,6 +25,7 @@ const MediaAnalyticsGetSection = () => {
         const response2 = await axios.get(url);
         const data = response2.data;
 
+        console.log(processedData);
         const newChartData = Object.keys(MediaAnalytics_get_metrics).reduce((acc, metric) => {
           const shortName = MediaAnalytics_get_metrics[metric].shortName;
 
