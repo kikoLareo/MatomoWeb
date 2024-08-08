@@ -1,9 +1,8 @@
 // src/utils/fetchDataHelper.js
 
-import { APIFunctions } from '../modules/API/apiFunctions';
+import { APIFunctions, API_getProcessedReport } from '../modules/API/Api_actions';
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
-// import axios from 'axios';
-// import { API_getProcessedReport } from '../modules/API/apiFunctions';
+import axios from 'axios';
 
 export const fetchDataForCharts = async (idSite, chartsConfig) => {
   const newChartData = {};
@@ -15,9 +14,14 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         // Usar la función específica si está definida
         data = await chart.fetchFunction(idSite);
       } else {
-        // const dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', chart.module, chart.apiFunction, null, null, null, 'es', null, null, null, null, null, null, null);
-        // const response = await axios.get(dataUrl.url);
-        // const processedData = response.data;
+       
+        try{
+          let dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', chart.module, chart.action, 'es' );
+          let response = await axios.get(dataUrl.url);
+          var processedData = response.data;
+        }catch (error) {
+          console.error('Error fetching data:', error);
+        }
 
         const url =  getBaseUrl(chart, idSite);
         // Usar la función de API general
@@ -27,8 +31,8 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         data = {
           labels: Object.keys(responseData),
           data: Object.values(responseData).map(item => item[chart.metric] || 0),
-          title: chart.title,
-          description: chart.description,
+          title: processedData.metadata.metrics[chart.metric] || chart.title,
+          description: processedData.metadata.metricsDocumentation[chart.metric] || chart.description
         };
       }
 
@@ -45,9 +49,9 @@ function getBaseUrl(chart, idSite) {
 
     switch(chart.module) {
         case 'API':
-            return APIFunctions[chart.apiFunction](idSite).url;
+            return APIFunctions[chart.action](idSite).url;
         case 'MediaAnalytics':
-            return mediaAnalyticsFunctions[chart.apiFunction](idSite).url;
+            return mediaAnalyticsFunctions[chart.action](idSite).url;
         default:
             return '';
     }

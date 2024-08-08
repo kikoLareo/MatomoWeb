@@ -6,32 +6,67 @@ export const homeCharts = [
   {
     title: 'API',
     description: 'Get data from the API.',
-    apiFunction: "get",
+    action: "get",
     module: 'API',
 
   }
 
 ]
 
+export const Dashboard = [
+  {
+    module: "UserCountry",
+    action: "getCity"
+  },
+  {
+    module: "UserCountry",
+    action: "getContinent"
+  },
+  {
+    module: "Live",
+    action: "widget"
+  },
+  {
+    module: "VisitsSummary",
+    action: "getEvolutionGraph"
+  },
+  {
+    module: "VisitsSummary",
+    action: "get"
+  },
+  {
+    module: "UserCountryMap",
+    action: "visitorMap"
+  },
+  {
+    module: "Referrers",
+    action: "getReferrerType"
+  },
+  {
+    module: "Insights",
+    action: "getOverallMoversAndShakers"
+  }
+]
+
 export const nowInfo =[
   {
     id:0,
-    apiFunction: "getCurrentNumPlays",
+    action: "getCurrentNumPlays",
     module: 'MediaAnalytics',
   },
   {
     id:1,
-    apiFunction: "getCurrentSumTimeSpent",
+    action: "getCurrentSumTimeSpent",
     module: 'MediaAnalytics',
   }, 
   {
     id:2,
-    apiFunction: "getCurrentMostPlays",
+    action: "getCurrentMostPlays",
     module: 'MediaAnalytics',
   },
   {
     id:3,
-    apiFunction: "getPlayers",
+    action: "getPlayers",
     module: 'MediaAnalytics',
   }
 ]
@@ -41,7 +76,7 @@ export const reproductionsCharts = [
   {
     title: 'Overall Metrics',
     description: 'Get overall metrics for media analytics.',
-    apiFunction: "get",
+    action: "get",
     fetchFunction: (idSite) => { return MediaAnalytics_getChartData(idSite)},
     module: 'MediaAnalytics',
   }

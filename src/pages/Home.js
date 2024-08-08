@@ -4,6 +4,7 @@ import ChartComponent from '../components/ChartComponent';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
 import { homeCharts, nowInfo } from '../config/chartsConfig';
 import InfoComponent from '../components/infoComponent';
+import LiveWidget from '../components/Live_Components/LiveWidget';
 
 function Home() {
   const { idSite } = useContext(IdSiteContext);
@@ -24,6 +25,7 @@ function Home() {
   return (
     <div>
       <div>
+        <LiveWidget />
         <div className="nowInfo">
           {nowInfo.map((info) => (
            <InfoComponent key={info.id} title={info.title} data={nowData[info.title]} />

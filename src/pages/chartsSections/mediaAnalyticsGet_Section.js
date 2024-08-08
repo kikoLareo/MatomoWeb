@@ -6,7 +6,7 @@ import ChartInfo from '../../components/ChartInfo';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
-import { API_getProcessedReport } from '../../modules/API/apiFunctions';
+import { API_getProcessedReport } from '../../modules/API/Api_actions';
 
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
