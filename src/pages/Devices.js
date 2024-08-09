@@ -35,7 +35,6 @@ const Devices = () => {
       }
     };
 
-    console.log('fetchData:');
     fetchData();
     
   }, [idSite]);

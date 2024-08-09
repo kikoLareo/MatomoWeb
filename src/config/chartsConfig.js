@@ -92,30 +92,39 @@ export const devicesDetectionCharts = [
     module: 'DevicesDetection',
     period: 'year',
     date: 'yesterday',
+    metric: 'nb_visits',
   },
   {
     title: 'Devices Detection - Brand',
     description: 'Get the brand of devices detected.',
     action: "getBrand",
     module: 'DevicesDetection',
+    metric: 'nb_visits',
+
   },
   {
     title: 'Devices Detection - Model',
     description: 'Get the model of devices detected.',
     action: "getModel",
     module: 'DevicesDetection',
+    metric: 'nb_visits',
+
   },
   {
     title: 'Devices Detection - OS',
     description: 'Get the OS of devices detected.',
     action: "getOsFamilies",
     module: 'DevicesDetection',
+    metric: 'nb_visits',
+
   },
   {
     title: 'Devices Detection - Browser',
     description: 'Get the browser of devices detected.',
     action: "getBrowsers",
     module: 'DevicesDetection',
+    metric: 'nb_visits',
+
   }
 ];
 
