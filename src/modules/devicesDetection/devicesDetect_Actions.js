@@ -51,6 +51,6 @@ export const devicesDetectionActions = {
     getType: devicesDetection_getType,
     getBrand: devicesDetection_getBrand,
     getModel: devicesDetection_getModel,
-    getOSFamilies: devicesDetection_getOSFamilies,
+    getOsFamilies: devicesDetection_getOSFamilies,
     getBrowsers: devicesDetection_getBrowsers
 }
