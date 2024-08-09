@@ -31,7 +31,7 @@ const Devices = () => {
    console.log('fetchData:');
     fetchData();
     
-  }, [idSite]);
+  }, []);
 
   return (
     <div className="Devices">
