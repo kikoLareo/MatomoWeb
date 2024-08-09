@@ -88,7 +88,7 @@ export const devicesDetectionCharts = [
   {
     title: 'Devices Detection - Type',
     description: 'Get the type of devices detected.',
-    action: "devicesDetection_getType",
+    action: "getType",
     module: 'DevicesDetection',
     period: 'year',
     date: 'yesterday',
@@ -96,25 +96,25 @@ export const devicesDetectionCharts = [
   {
     title: 'Devices Detection - Brand',
     description: 'Get the brand of devices detected.',
-    action: "devicesDetection_getBrand",
+    action: "getBrand",
     module: 'DevicesDetection',
   },
   {
     title: 'Devices Detection - Model',
     description: 'Get the model of devices detected.',
-    action: "devicesDetection_getModel",
+    action: "getModel",
     module: 'DevicesDetection',
   },
   {
     title: 'Devices Detection - OS',
     description: 'Get the OS of devices detected.',
-    action: "devicesDetection_getOSFamilies",
+    action: "getOsFamilies",
     module: 'DevicesDetection',
   },
   {
     title: 'Devices Detection - Browser',
     description: 'Get the browser of devices detected.',
-    action: "devicesDetection_getBrowsers",
+    action: "getBrowsers",
     module: 'DevicesDetection',
   }
 ];
