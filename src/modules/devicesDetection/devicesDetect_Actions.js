@@ -3,7 +3,7 @@ const methodBase = "DevicesDetection";
 const method = "API";
 
 export const devicesDetection_getType = (idSite, period="year", date="yesterday", segment) => {
-    const action = `${methodBase}.devicesDetection_getType`;
+    const action = `${methodBase}.getType`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
@@ -12,7 +12,7 @@ export const devicesDetection_getType = (idSite, period="year", date="yesterday"
 }
 
 export const devicesDetection_getBrand = (idSite, period, date, segment) => {
-    const action = `${methodBase}.devicesDetection_getBrand`;
+    const action = `${methodBase}.getBrand`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
@@ -21,7 +21,7 @@ export const devicesDetection_getBrand = (idSite, period, date, segment) => {
 }
 
 export const devicesDetection_getModel = (idSite, period, date, segment) => {
-    const action = `${methodBase}.devicesDetection_getModel`;
+    const action = `${methodBase}.getModel`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
@@ -30,7 +30,7 @@ export const devicesDetection_getModel = (idSite, period, date, segment) => {
 }
 
 export const devicesDetection_getOSFamilies = (idSite, period, date, segment) => {
-    const action = `${methodBase}.devicesDetection_getOsFamilies`;
+    const action = `${methodBase}.getOsFamilies`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
@@ -39,7 +39,7 @@ export const devicesDetection_getOSFamilies = (idSite, period, date, segment) =>
 }
 
 export const devicesDetection_getBrowsers = (idSite, period, date, segment) => {
-    const action = `${methodBase}.devicesDetection_getBrowsers`;
+    const action = `${methodBase}.getBrowsers`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
