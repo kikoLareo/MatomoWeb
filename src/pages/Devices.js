@@ -22,7 +22,16 @@ const Devices = () => {
         console.log('devicesDetectionCharts:', devicesDetectionCharts);
         const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
         console.log('Fetched data:', data);
-        setChartData(data);
+        const filteredData = {};
+        for (const [key, value] of Object.entries(data)) {
+          filteredData[key] = {
+            ...value,
+            labels: value.labels.filter((_, index) => value.data[index] !== 0),
+            data: value.data.filter((item) => item !== 0),
+          };
+        }
+  
+        setChartData(filteredData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -36,13 +45,15 @@ const Devices = () => {
     <div className="Devices">
       <div className="graphDashBoard">
         {devicesDetectionCharts.map((chart) => (
-          <PieChartComponent 
-            key={chart.title}
-            labels={chartData[chart.title]?.labels || []}
-            data={chartData[chart.title]?.data || []}
-            title={chartData[chart.title]?.title || ''}
-            description={chartData[chart.title]?.description || ''}
-          />
+          <div style={{width: '50%', height: '30vh', margin: 'auto'}}>
+            <PieChartComponent 
+              key={chart.title}
+              labels={chartData[chart.title]?.labels || []}
+              data={chartData[chart.title]?.data || []}
+              title={chartData[chart.title]?.title || ''}
+              description={chartData[chart.title]?.description || ''}
+            />
+          </div>
         ))}
       </div>
     </div>
