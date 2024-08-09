@@ -11,7 +11,7 @@ const Devices = () => {
 
   console.log('Devices component is running');
   console.log('idSite:', idSite);
-  
+
   useEffect(() => {
     console.log('useEffect is running');
     console.log('idSite:', idSite);
@@ -28,9 +28,9 @@ const Devices = () => {
       }
     };
 
-    if (idSite) {
-      fetchData();
-    }
+   console.log('fetchData:', fetchData);
+    fetchData();
+    
   }, [idSite]);
 
   return (
