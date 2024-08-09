@@ -38,7 +38,9 @@ const Devices = () => {
   return (
     <div className="Devices">
       <div className="graphDashBoard">
-        <PieChartComponent data={chartData} />
+        {chartData.map((chart, index) => (
+          <PieChartComponent key={index} data={chart} />
+        ))}
       </div>
     </div>
   );
