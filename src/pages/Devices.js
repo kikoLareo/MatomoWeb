@@ -7,7 +7,7 @@ import { devicesDetectionCharts } from '../config/chartsConfig';
 
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState({});
 
   console.log('Devices component is running');
   console.log('idSite:', idSite);
@@ -22,9 +22,6 @@ const Devices = () => {
         console.log('devicesDetectionCharts:', devicesDetectionCharts);
         const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
         console.log('Fetched data:', data);
-
-        // Convert the fetched data to an array format expected by PieChartComponent
-      
         setChartData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -39,7 +36,13 @@ const Devices = () => {
     <div className="Devices">
       <div className="graphDashBoard">
         {devicesDetectionCharts.map((chart) => (
-          <PieChartComponent  data={chartData[chart.title]} />
+          <PieChartComponent 
+            key={chart.title}
+            labels={chartData[chart.title]?.labels || []}
+            data={chartData[chart.title]?.data || []}
+            title={chartData[chart.title]?.title || ''}
+            description={chartData[chart.title]?.description || ''}
+          />
         ))}
       </div>
     </div>

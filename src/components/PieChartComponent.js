@@ -2,20 +2,12 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
-const PieChartComponent = ({ data }) => {
-    console.log(data);
-  // Filter out items with nb_visits equal to 0
-  const filteredData = data.filter(item => item.nb_visits > 0);
-
-  // Extract labels and values
-  const labels = filteredData.map(item => item.label);
-  const values = filteredData.map(item => item.nb_visits);
-
+const PieChartComponent = ({ labels, data, title, description }) => {
   // Calculate total visits
-  const totalVisits = values.reduce((acc, value) => acc + value, 0);
+  const totalVisits = data.reduce((acc, value) => acc + value, 0);
 
   // Calculate percentages
-  const percentages = values.map(value => ((value / totalVisits) * 100).toFixed(2));
+  const percentages = data.map(value => ((value / totalVisits) * 100).toFixed(2));
 
   const chartData = {
     labels: labels,
@@ -58,7 +50,8 @@ const PieChartComponent = ({ data }) => {
 
   return (
     <div className="pie-chart">
-      <h2>Pie Chart</h2>
+      <h2>{title}</h2>
+      <p>{description}</p>
       <Pie data={chartData} options={options} />
     </div>
   );
