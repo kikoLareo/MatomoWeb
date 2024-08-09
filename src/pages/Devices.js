@@ -1,13 +1,13 @@
 // src/pages/Devices.js
-import { useContext, useState, useEffect } from 'react';
+import { useContext, /*useState,*/ useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
-import { fetchDataForCharts } from '../utils/fetchDataHelper';
-import PieChartComponent from '../components/PieChartComponent';
+// import { fetchDataForCharts } from '../utils/fetchDataHelper';
+// import PieChartComponent from '../components/PieChartComponent';
 import { devicesDetectionCharts } from '../config/chartsConfig';
 
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
-  const [chartData, setChartData] = useState({});
+  // const [chartData, setChartData] = useState({});
 
   console.log('Devices component is running');
   console.log('idSite:', idSite);
@@ -36,7 +36,7 @@ const Devices = () => {
   return (
     <div className="Devices">
       <div className="graphDashBoard">
-        <PieChartComponent data={chartData} />
+        {/* <PieChartComponent data={chartData} /> */}
       </div>
     </div>
   );
