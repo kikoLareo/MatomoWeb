@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import ChartComponent from '../components/ChartComponent';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
 import { homeCharts, nowInfo } from '../config/chartsConfig';

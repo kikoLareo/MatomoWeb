@@ -1,5 +1,5 @@
 // src/pages/Devices.js
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
 import PieChartComponent from '../components/PieChartComponent';
@@ -28,7 +28,7 @@ const Devices = () => {
       }
     };
 
-   console.log('fetchData:', fetchData);
+   console.log('fetchData:');
     fetchData();
     
   }, [idSite]);
