@@ -24,9 +24,9 @@ const Devices = () => {
         console.log('Fetched data:', data);
 
         // Convert the fetched data to an array format expected by PieChartComponent
-        const formattedData = Object.keys(data).map(key => ({
-          label: key,
-          nb_visits: data[key].data.reduce((acc, val) => acc + val, 0) // Assuming data is an array of numbers
+        const formattedData = data.map(item => ({
+          label: item.label,
+          nb_visits: item.nb_visits
         }));
 
         setChartData(formattedData);
