@@ -32,8 +32,8 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
 
         console.log(responseData);
         data = {
-          labels: Object.keys(responseData),
-          data: Object.values(responseData).map(item => item[chart.metric] || 0),
+          labels: Object.values(responseData).map(item => item.label ||  Object.keys(responseData)),
+          data: Object.values(responseData).map(item => item[chart.metric] || 0),  
           title: processedData.metadata.metrics[chart.metric] || chart.title,
           description: processedData.metadata.metricsDocumentation[chart.metric] || chart.description
         };
