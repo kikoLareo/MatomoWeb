@@ -1,42 +1,49 @@
 // src/pages/Devices.js
-import { useContext, /*useState,*/ useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
-// import { fetchDataForCharts } from '../utils/fetchDataHelper';
-// import PieChartComponent from '../components/PieChartComponent';
+import { fetchDataForCharts } from '../utils/fetchDataHelper';
+import PieChartComponent from '../components/PieChartComponent';
 import { devicesDetectionCharts } from '../config/chartsConfig';
 
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
-  // const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState([]);
 
   console.log('Devices component is running');
   console.log('idSite:', idSite);
 
   useEffect(() => {
     console.log('useEffect is running');
-    // console.log('idSite:', idSite);
+    console.log('idSite:', idSite);
 
     const fetchData = async () => {
       try {
         console.log('Fetching data for charts');
         console.log('devicesDetectionCharts:', devicesDetectionCharts);
-        // const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
-        // console.log('Fetched data:', data);
-        // setChartData(data);
+        const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
+        console.log('Fetched data:', data);
+
+        // Convert the fetched data to an array format expected by PieChartComponent
+        const formattedData = Object.keys(data).map(key => ({
+          label: key,
+          nb_visits: data[key].data.reduce((acc, val) => acc + val, 0) // Assuming data is an array of numbers
+        }));
+
+        setChartData(formattedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-   console.log('fetchData:');
+    console.log('fetchData:');
     fetchData();
     
-  }, []);
+  }, [idSite]);
 
   return (
     <div className="Devices">
       <div className="graphDashBoard">
-        {/* <PieChartComponent data={chartData} /> */}
+        <PieChartComponent data={chartData} />
       </div>
     </div>
   );
