@@ -14,15 +14,15 @@ const Devices = () => {
 
   useEffect(() => {
     console.log('useEffect is running');
-    console.log('idSite:', idSite);
+    // console.log('idSite:', idSite);
 
     const fetchData = async () => {
       try {
         console.log('Fetching data for charts');
         console.log('devicesDetectionCharts:', devicesDetectionCharts);
-        const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
-        console.log('Fetched data:', data);
-        setChartData(data);
+        // const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
+        // console.log('Fetched data:', data);
+        // setChartData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
