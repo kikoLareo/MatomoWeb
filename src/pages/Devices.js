@@ -45,7 +45,6 @@ const Devices = () => {
     <div className="Devices">
       <div className="graphDashBoard">
         {devicesDetectionCharts.map((chart) => (
-          <div style={{width: '50%', height: '30vh', margin: 'auto'}}>
             <PieChartComponent 
               key={chart.title}
               labels={chartData[chart.title]?.labels || []}
@@ -53,7 +52,6 @@ const Devices = () => {
               title={chartData[chart.title]?.title || ''}
               description={chartData[chart.title]?.description || ''}
             />
-          </div>
         ))}
       </div>
     </div>

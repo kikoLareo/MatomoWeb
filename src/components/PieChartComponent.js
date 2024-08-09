@@ -52,7 +52,9 @@ const PieChartComponent = ({ labels, data, title, description }) => {
     <div className="pie-chart">
       <h2>{title}</h2>
       <p>{description}</p>
-      <Pie data={chartData} options={options} />
+      <div style={{width: '50%', height: '40vh', margin: 'auto'}}>
+        <Pie data={chartData} options={options} />
+      </div>
     </div>
   );
 };
