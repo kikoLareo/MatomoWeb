@@ -11,7 +11,7 @@ export const devicesDetection_getType = (idSite, period="year", date="yesterday"
     return { url: getBaseUrl(method,action, params), title: 'Devices Detection - Type' };
 }
 
-export const devicesDetection_getBrand = (idSite, period, date, segment) => {
+export const devicesDetection_getBrand = (idSite, period="year", date="yesterday", segment) => {
     const action = `${methodBase}.getBrand`;
     const params = { idSite, period, date };
 
@@ -20,7 +20,7 @@ export const devicesDetection_getBrand = (idSite, period, date, segment) => {
     return { url: getBaseUrl(method,action, params), title: 'Devices Detection - Brand' };
 }
 
-export const devicesDetection_getModel = (idSite, period, date, segment) => {
+export const devicesDetection_getModel = (idSite, period="year", date="yesterday", segment) => {
     const action = `${methodBase}.getModel`;
     const params = { idSite, period, date };
 
@@ -29,7 +29,7 @@ export const devicesDetection_getModel = (idSite, period, date, segment) => {
     return { url: getBaseUrl(method,action, params), title: 'Devices Detection - Model' };
 }
 
-export const devicesDetection_getOSFamilies = (idSite, period, date, segment) => {
+export const devicesDetection_getOSFamilies = (idSite,period="year", date="yesterday", segment) => {
     const action = `${methodBase}.getOsFamilies`;
     const params = { idSite, period, date };
 
@@ -38,7 +38,7 @@ export const devicesDetection_getOSFamilies = (idSite, period, date, segment) =>
     return { url: getBaseUrl(method,action, params), title: 'Devices Detection - OS' };
 }
 
-export const devicesDetection_getBrowsers = (idSite, period, date, segment) => {
+export const devicesDetection_getBrowsers = (idSite, period="year", date="yesterday", segment) => {
     const action = `${methodBase}.getBrowsers`;
     const params = { idSite, period, date };
 
