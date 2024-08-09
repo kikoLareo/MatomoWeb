@@ -24,12 +24,8 @@ const Devices = () => {
         console.log('Fetched data:', data);
 
         // Convert the fetched data to an array format expected by PieChartComponent
-        const formattedData = data.map(item => ({
-          label: item.label,
-          nb_visits: item.nb_visits
-        }));
-
-        setChartData(formattedData);
+      
+        setChartData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
