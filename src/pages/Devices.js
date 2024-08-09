@@ -9,6 +9,9 @@ const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
 
+  console.log('Devices component is running');
+  console.log('idSite:', idSite);
+  
   useEffect(() => {
     console.log('useEffect is running');
     console.log('idSite:', idSite);
