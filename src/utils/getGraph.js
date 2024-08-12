@@ -19,16 +19,16 @@ function getGraph(chart) {
             return result;
         });
 
-      
+        console.log('getGraph:', preparedData);
 
         switch (type) {
             case 'lineal':
                 return (
-                    preparedData.map((item) => {
+                    preparedData.map((item, index) => {
                         return (
-                            <div className="graph_component">
+                            <div className="graph_component" key={index}>
                                 <ChartComponent
-                                    data={{ labels: Object.keys(item), data: Object.values(item), title: title  }}
+                                    data={{ labels: Object.keys(item), data: Object.values(item), title: title }}
                                     title={title}
                                 />
                                 <ChartInfo
@@ -40,24 +40,23 @@ function getGraph(chart) {
                                 />
                             </div>
                         );
-                    }
-                ));
+                    })
+                );
                 
             case 'pie':
-               return(
-                    preparedData.map((item) => {
+                return (
+                    preparedData.map((item, index) => {
                         return (
-                            <div className="graph_component">
+                            <div className="graph_component" key={index}>
                                 <PieChartComponent
-                                    key={title}
                                     labels={Object.keys(item)}
                                     data={Object.values(item)}
                                     title={title}
                                 />
                             </div>
-                        )
-                    }
-                ));
+                        );
+                    })
+                );
                
             default:
                 return <p>Unsupported chart type</p>;
