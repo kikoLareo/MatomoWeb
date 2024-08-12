@@ -14,7 +14,7 @@ const Devices = () => {
   
     const fetchData = async () => {
       try {
-         const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
+        const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
         console.log('Fetched data:', data);
         const filteredData = {};
         for (const [key, value] of Object.entries(data)) {
@@ -48,7 +48,7 @@ const Devices = () => {
               key={chart.title}
               labels={chartData[chart.title]?.labels || []}
               data={chartData[chart.title]?.data || []}
-              title={chartData[chart.title]?.title || ''}
+              title={chartData[chart.title]?.chartTitle + "-" + chartData[chart.title]?.title || ''}
               description={chartData[chart.title]?.description || ''}
             />
         ))}

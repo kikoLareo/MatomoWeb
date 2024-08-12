@@ -27,6 +27,8 @@ const PieChartComponent = ({ labels, data, title, description }) => {
     labels.push(others.label + " Otros");
   }
 
+  console.log(data, percentages, others);
+
   const chartData = {
     labels: labels,
     datasets: [
@@ -54,6 +56,8 @@ const PieChartComponent = ({ labels, data, title, description }) => {
   };
 
   const options = {
+    hoverOffset: 100,
+    responsive: true,
     plugins: {
       tooltip: {
         callbacks: {
@@ -63,6 +67,9 @@ const PieChartComponent = ({ labels, data, title, description }) => {
           },
         },
       },
+    },
+    animation:{
+      animateScale: true,
     },
   };
 
