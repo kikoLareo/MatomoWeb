@@ -4,7 +4,7 @@ import useGraph from '../utils/getGraph';
 import { IdSiteContext } from '../contexts/idSiteContext'; // Importa el contexto
 
 const Visits = () => {
-  const idSite = useContext(IdSiteContext); 
+  const { idSite } = useContext(IdSiteContext);
 
   return (
     <div className="Visits">
