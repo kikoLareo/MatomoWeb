@@ -77,13 +77,14 @@ const Devices = () => {
     const interval = setInterval(() => {
       if (isLoading) {
         setLoadingDots((prev) => (prev + 1) % 4);
+        setDeviceSummary("Analizando datos" + ".".repeat(loadingDots));
       } else {
         clearInterval(interval);
       }
     }, 500);
 
     return () => clearInterval(interval);
-  }, [isLoading]);
+  }, [isLoading, loadingDots]);
 
   if (isLoading) {
     return <div className="loading">Cargando datos{".".repeat(loadingDots)}</div>;
@@ -92,7 +93,7 @@ const Devices = () => {
   return (
     <div className="Devices">
       <h1>Dispositivos</h1>
-      <p>{deviceSummary}</p>
+      <p dangerouslySetInnerHTML={{ __html: deviceSummary.replace(/\n/g, '<br/>') }}></p>
       <div className="devicesGraphs">
         {devicesDetectionCharts.map((chart) => (
           <PieChartComponent
