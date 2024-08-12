@@ -19,43 +19,43 @@ function getGraph(chart) {
             return result;
         });
 
-        const labels = Object.keys(data);
-        const datasets = metrics.map((metric, index) => ({
-            label: metric,
-            data: preparedData.map(item => item[metric]),
-            fill: false,
-            backgroundColor: `rgba(75, 192, 192, ${0.6 + index * 0.1})`,
-            borderColor: `rgba(75, 192, 192, ${1 - index * 0.1})`,
-        }));
+      
 
         switch (type) {
             case 'lineal':
                 return (
-                    <div className="graph_component">
-                        <ChartComponent
-                            data={{ labels, datasets }}
-                            title={title}
-                        />
-                        <ChartInfo
-                            title={title}
-                            description={description}
-                            data={data}
-                            module={module}
-                            action={action}
-                        />
-                    </div>
-                );
+                    preparedData.map((item) => {
+                        return (
+                            <div className="graph_component">
+                                <ChartComponent
+                                    data={{ labels: Object.keys(item), data: Object.values(item), title: title  }}
+                                    title={title}
+                                />
+                                <ChartInfo
+                                    title={title}
+                                    description={description}
+                                    data={item}
+                                    module={module}
+                                    action={action}
+                                />
+                            </div>
+                        );
+                    }
+                    ));
+                
             case 'pie':
                 return (
-                    <div className="graph_component">
-                        <PieChartComponent
-                            key={title}
-                            labels={labels}
-                            data={Object.values(data).map(item => item.nb_visits_new)}
-                            title={title}
-                        />
-                    </div>
-                );
+                    preparedData.map((item) => {
+                        <div className="graph_component">
+                            <PieChartComponent
+                                key={title}
+                                labels={Object.keys(item)}
+                                data={Object.values(item)}
+                                title={title}
+                            />
+                        </div>
+                    }));
+               
             default:
                 return <p>Unsupported chart type</p>;
         }
