@@ -8,8 +8,8 @@ const Visits = () => {
 
   useEffect(() => {
 
-    visitsCharts.forEach((chart) => {
-      chart.getData(idSite); // Llama a getData cuando idSite cambia
+    visitsCharts.forEach(async (chart) => {
+      await chart.getData(idSite); // Llama a getData cuando idSite cambia
       console.log(chart);
     });
   }, [idSite]);

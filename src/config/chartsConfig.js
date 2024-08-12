@@ -141,8 +141,8 @@ export const visitsCharts = [
     type: 'lineal',
     metrics: ["nb_users_new", "nb_users_returning"],
     data : [],
-    getData(idSite){
-      this.data = visitFrequencyActions["get"](idSite, this.period, this.date)
+    async getData(idSite){
+      this.data = await visitFrequencyActions["get"](idSite, this.period, this.date)
     }
     
   }

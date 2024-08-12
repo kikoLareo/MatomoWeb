@@ -3,12 +3,12 @@ import { getBaseUrl } from "../common/common";
 
 const method = "API";
 
-export const visitFrequency_get = (idSite, period, date, segment) => {
+export const visitFrequency_get = async (idSite, period, date, segment) => {
     const action = `VisitFrequency.get`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
-    return fetchData(idSite, { module: method, action, url: getBaseUrl(method,action, params)});
+    return await fetchData(idSite, { module: method, action, url: getBaseUrl(method,action, params)});
         
 }
 
