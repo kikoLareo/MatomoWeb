@@ -53,7 +53,6 @@ const PieChartComponent = ({ labels, data, title, description }) => {
 
   const options = {
     hoverOffset: 100,
-    responsive: true,
     plugins: {
       tooltip: {
         callbacks: {
