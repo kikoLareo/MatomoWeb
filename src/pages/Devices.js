@@ -54,9 +54,11 @@ const Devices = async () => {
     return <div className="loading">Cargando datos...</div>;
   }
 
-  setDeviceSummary(await chatGpt(GetDevicesPromt(chartData)))
-  setIsLoadingSummary(false);
 
+  const result = await chatGpt(GetDevicesPromt(chartData, idSite));
+  setDeviceSummary(result);
+  setIsLoadingSummary(false);
+  
   return (
     <div className="Devices">
       <h1>Dispositivos</h1>
