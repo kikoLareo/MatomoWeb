@@ -1,4 +1,3 @@
-// src/pages/Devices.js
 import { useContext, useState, useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
@@ -7,7 +6,7 @@ import { devicesDetectionCharts } from '../config/chartsConfig';
 import { GetDevicesPromt } from '../utils/gptPromts/devicesPromt';
 import { chatGpt } from '../utils/chatGptCall';
 
-const Devices = async () => {
+const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -15,16 +14,20 @@ const Devices = async () => {
   const [deviceSummary, setDeviceSummary] = useState('Analizando datos');
 
   useEffect(() => {
-    let dots=0;
+    let dots = 0;
     const interval = setInterval(() => {
-      if(isLoadingSummary) {
+      if (!isLoadingSummary) {
         clearInterval(interval);
         return;
       }
       dots = (dots + 1) % 4;
       setDeviceSummary("Analizando datos" + ".".repeat(dots));
     }, 500);
-  
+
+    return () => clearInterval(interval);
+  }, [isLoadingSummary]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
@@ -37,41 +40,52 @@ const Devices = async () => {
             data: value.data.filter((item) => item !== 0),
           };
         }
-  
+
         setChartData(filteredData);
       } catch (error) {
         console.error('Error fetching data:', error);
-      } finally{
+      } finally {
         setIsLoading(false);
       }
     };
-  
+
     fetchData();
-    
-  }, [idSite, isLoadingSummary]);
+  }, [idSite]);
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      try {
+        const result = await chatGpt(GetDevicesPromt(chartData, idSite));
+        setDeviceSummary(result);
+      } catch (error) {
+        console.error('Error fetching summary:', error);
+      } finally {
+        setIsLoadingSummary(false);
+      }
+    };
+
+    if (!isLoading) {
+      fetchSummary();
+    }
+  }, [chartData, idSite, isLoading]);
 
   if (isLoading) {
     return <div className="loading">Cargando datos...</div>;
   }
 
-
-  const result = await chatGpt(GetDevicesPromt(chartData, idSite));
-  setDeviceSummary(result);
-  setIsLoadingSummary(false);
-  
   return (
     <div className="Devices">
       <h1>Dispositivos</h1>
       <p>{deviceSummary}</p>
       <div className="devicesGraphs">
         {devicesDetectionCharts.map((chart) => (
-            <PieChartComponent 
-              key={chart.title}
-              labels={chartData[chart.title]?.labels || []}
-              data={chartData[chart.title]?.data || []}
-              title={chartData[chart.title]?.chartTitle + "-" + chartData[chart.title]?.title || ''}
-              description={chartData[chart.title]?.description || ''}
-            />
+          <PieChartComponent
+            key={chart.title}
+            labels={chartData[chart.title]?.labels || []}
+            data={chartData[chart.title]?.data || []}
+            title={chartData[chart.title]?.chartTitle + "-" + chartData[chart.title]?.title || ''}
+            description={chartData[chart.title]?.description || ''}
+          />
         ))}
       </div>
     </div>
