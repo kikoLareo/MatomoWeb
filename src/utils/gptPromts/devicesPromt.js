@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import { IdSiteContext } from '../../contexts/idSiteContext';
+
 import { getSiteName } from "../../config";
 
-export function GetDevicesPromt({ chartData }) {
-    const idSite = useContext(IdSiteContext);
+export function GetDevicesPromt({ chartData, idSite }) {
 
     const interactionContext = [
         { role: 'system', content: 'Las respuestas deben ser en español y deben proporcionar un análisis detallado y comprensible de los datos proporcionados. Asegúrate de considerar el contexto de la gráfica y la descripción proporcionada.' },
