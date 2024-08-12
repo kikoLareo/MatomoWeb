@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { insertData, fetchData } from '../../db/dbInteractions';
+import { insertData, fetchData } from '../db/dbInteractions';
 import { getSiteName } from '../../config';
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
