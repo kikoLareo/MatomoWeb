@@ -13,19 +13,6 @@ const Devices = () => {
   const [isLoadingSummary, setIsLoadingSummary] = useState(true);
   const [deviceSummary, setDeviceSummary] = useState('Analizando datos');
 
-  useEffect(() => {
-    let dots = 0;
-    const interval = setInterval(() => {
-      if (!isLoadingSummary) {
-        clearInterval(interval);
-        return;
-      }
-      dots = (dots + 1) % 4;
-      setDeviceSummary("Analizando datos" + ".".repeat(dots));
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, [isLoadingSummary]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +40,19 @@ const Devices = () => {
   }, [idSite]);
 
   useEffect(() => {
+ 
+  
     const fetchSummary = async () => {
+      let dots = 0;
+      const interval = setInterval(() => {
+        if (!isLoadingSummary) {
+          clearInterval(interval);
+          return;
+        }
+        dots = (dots + 1) % 4;
+        setDeviceSummary("Analizando datos" + ".".repeat(dots));
+      }, 500);
+
       try {
         const result = await chatGpt(GetDevicesPromt(chartData, idSite));
         setDeviceSummary(result);
@@ -63,11 +62,11 @@ const Devices = () => {
         setIsLoadingSummary(false);
       }
     };
-
+  
     if (!isLoading) {
       fetchSummary();
     }
-  }, [chartData, idSite, isLoading]);
+  }, [chartData, idSite, isLoadingSummary, isLoading]);
 
   if (isLoading) {
     return <div className="loading">Cargando datos...</div>;
