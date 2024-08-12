@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IdSiteContext } from '../contexts/idSiteContext';
+import { IdSiteContext } from '../../contexts/idSiteContext';
 import { getSiteName } from "../../config";
 
 export function GetDevicesPromt({ chartData }) {
