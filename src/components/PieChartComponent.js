@@ -55,7 +55,7 @@ const PieChartComponent = ({ labels, data, title, description }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'left',
+        position: 'bottom',
       },
       tooltip: {
         callbacks: {

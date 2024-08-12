@@ -65,6 +65,7 @@ const Devices = () => {
         }, 5000);
 
       } finally {
+        clearInterval(interval);
         setIsLoadingSummary(false);
       }
     };
