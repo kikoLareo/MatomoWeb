@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
 import PieChartComponent from '../components/PieChartComponent';
@@ -12,6 +12,14 @@ const Devices = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [deviceSummary, setDeviceSummary] = useState('Analizando datos');
   const [loadingDots, setLoadingDots] = useState(0);
+
+  const chartDataRef = useRef(chartData);
+  const isLoadingRef = useRef(isLoading);
+
+  useEffect(() => {
+    chartDataRef.current = chartData;
+    isLoadingRef.current = isLoading;
+  }, [chartData, isLoading]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +46,7 @@ const Devices = () => {
     const fetchSummary = async () => {
       let dots = 0;
       const interval = setInterval(() => {
-        if (!isLoading) {
+        if (!isLoadingRef.current) {
           clearInterval(interval);
           return;
         }
@@ -48,8 +56,8 @@ const Devices = () => {
       }, 500);
 
       try {
-        console.log('Chart Data before sending to GetDevicesPromt:', chartData);
-        const result = await chatGpt(GetDevicesPromt({ chartData, idSite }));
+        console.log('Chart Data before sending to GetDevicesPromt:', chartDataRef.current);
+        const result = await chatGpt(GetDevicesPromt({ chartData: chartDataRef.current, idSite }));
         setDeviceSummary(result);
       } catch (error) {
         console.error('Error fetching summary:', error);
@@ -63,7 +71,7 @@ const Devices = () => {
     };
 
     fetchData().then(fetchSummary);
-  }, [idSite, chartData, isLoading]);
+  }, [idSite]);
 
   useEffect(() => {
     const interval = setInterval(() => {
