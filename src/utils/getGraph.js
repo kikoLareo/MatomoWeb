@@ -26,10 +26,10 @@ function useGraph(chart, idSite) { // Acepta idSite como argumento
 
     console.log('getGraph:', chart);
     if (metrics) {
-        const preparedData = data.value.map(item => {
+        const preparedData = Object.keys(data.value).map(item => {
             let result = {};
             metrics.forEach(metric => {
-                result[metric] = item[metric] || 0;
+                result[metric] = data.value[item][metric] || 0;
             });
             return result;
         });
