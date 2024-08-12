@@ -41,20 +41,23 @@ function getGraph(chart) {
                             </div>
                         );
                     }
-                    ));
+                ));
                 
             case 'pie':
-                return (
+               return(
                     preparedData.map((item) => {
-                        <div className="graph_component">
-                            <PieChartComponent
-                                key={title}
-                                labels={Object.keys(item)}
-                                data={Object.values(item)}
-                                title={title}
-                            />
-                        </div>
-                    }));
+                        return (
+                            <div className="graph_component">
+                                <PieChartComponent
+                                    key={title}
+                                    labels={Object.keys(item)}
+                                    data={Object.values(item)}
+                                    title={title}
+                                />
+                            </div>
+                        )
+                    }
+                ));
                
             default:
                 return <p>Unsupported chart type</p>;
