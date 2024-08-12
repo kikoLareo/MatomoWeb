@@ -1,3 +1,4 @@
+// devices.js
 import { useContext, useState, useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
@@ -12,7 +13,6 @@ const Devices = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingSummary, setIsLoadingSummary] = useState(true);
   const [deviceSummary, setDeviceSummary] = useState('Analizando datos');
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +40,6 @@ const Devices = () => {
   }, [idSite]);
 
   useEffect(() => {
- 
-  
     const fetchSummary = async () => {
       let dots = 0;
       const interval = setInterval(() => {
@@ -54,7 +52,8 @@ const Devices = () => {
       }, 500);
 
       try {
-        const result = await chatGpt(GetDevicesPromt(chartData, idSite));
+        console.log('Chart Data before sending to GetDevicesPromt:', chartData);
+        const result = await chatGpt(GetDevicesPromt({ chartData, idSite }));
         setDeviceSummary(result);
       } catch (error) {
         console.error('Error fetching summary:', error);
@@ -69,7 +68,7 @@ const Devices = () => {
         setIsLoadingSummary(false);
       }
     };
-  
+
     if (!isLoading) {
       fetchSummary();
     }
