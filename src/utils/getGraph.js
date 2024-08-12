@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ChartComponent from "../components/ChartComponent";
 import ChartInfo from "../components/ChartInfo";
 import PieChartComponent from "../components/PieChartComponent";
 
-function getGraph(charts) {
-    if (!charts || charts.length === 0) {
-        return <p>Loading...</p>;
-    }
+function useGraph(charts, idSite) { // Acepta idSite como argumento
 
-    const chartElements = charts.map((chart, chartIndex) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            await Promise.all(
+                charts.map(async (chartItem) => {
+                    console.log('Fetching data for chart:', chartItem, idSite);
+                    await chartItem.getData(idSite);
+                    console.log('Fetched data for chart:', chartItem);
+                })
+            );
+        };
+        fetchData();
+    }, [idSite, charts]);
+    
+  const chartElements = charts.map((chart, chartIndex) => {
         var { type, data, title, description, module, action, metrics } = chart;
 
         console.log('getGraph:', chart);
@@ -64,5 +74,4 @@ function getGraph(charts) {
 
     return <div>{chartElements}</div>;
 }
-
-export default getGraph;
+export default useGraph;
