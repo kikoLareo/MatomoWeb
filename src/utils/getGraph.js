@@ -9,7 +9,7 @@ function useGraph(chart, idSite) { // Acepta idSite como argumento
         const fetchData = async () => {
             await Promise.all(
                 chart.map(async (chartItem) => {
-                    console.log('Fetching data for chart:', chartItem.title);
+                    console.log('Fetching data for chart:', chartItem, idSite);
                     await chartItem.getData(idSite);
                     console.log('Fetched data for chart:', chartItem);
                 })
