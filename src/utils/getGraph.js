@@ -17,11 +17,15 @@ function useGraph(charts, idSite) { // Acepta idSite como argumento
         };
         fetchData();
     }, [idSite, charts]);
+
     
-  const chartElements = charts.map((chart, chartIndex) => {
+    return charts.map((chart, chartIndex) => {
         var { type, data, title, description, module, action, metrics } = chart;
 
         console.log('getGraph:', chart);
+        if (data.info.result === 'error') {
+            return <p key={chartIndex}>Error: {data.info.message}</p>;
+        }
 
         if (metrics) {
             const preparedData = Object.keys(data.value).map(item => {
@@ -66,12 +70,10 @@ function useGraph(charts, idSite) { // Acepta idSite como argumento
                 default:
                     return <p key={chartIndex}>Unsupported chart type</p>;
             }
+        }else{
+            return <p key={chartIndex}>No metrics to display</p>;
         }
-
-        // Return null if no metrics are present
-        return null;
     });
-
-    return <div>{chartElements}</div>;
 }
+
 export default useGraph;
