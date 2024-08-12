@@ -1,28 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ChartComponent from "../components/ChartComponent";
 import ChartInfo from "../components/ChartInfo";
 import PieChartComponent from "../components/PieChartComponent";
 
-function useGraph(charts, idSite) { // Acepta idSite como argumento
-
-    useEffect(() => {
-        const fetchData = async () => {
-            await Promise.all(
-                charts.map(async (chartItem) => {
-                    console.log('Fetching data for chart:', chartItem, idSite);
-                    await chartItem.getData(idSite);
-                    console.log('Fetched data for chart:', chartItem);
-                })
-            );
-        };
-        fetchData();
-    }, [idSite, charts]);
-
+function getGraph(charts) {
     if (!charts || charts.length === 0) {
         return <p>Loading...</p>;
     }
 
-    return charts.map((chart, chartIndex) => {
+    const chartElements = charts.map((chart, chartIndex) => {
         var { type, data, title, description, module, action, metrics } = chart;
 
         console.log('getGraph:', chart);
@@ -74,7 +60,12 @@ function useGraph(charts, idSite) { // Acepta idSite como argumento
                     return <p key={chartIndex}>Unsupported chart type</p>;
             }
         }
+
+        // Return null if no metrics are present
+        return null;
     });
+
+    return <div>{chartElements}</div>;
 }
 
-export default useGraph;
+export default getGraph;
