@@ -10,6 +10,7 @@ const Visits = () => {
 
     visitsCharts.forEach((chart) => {
       chart.getData(idSite); // Llama a getData cuando idSite cambia
+      console.log(chart);
     });
   }, [idSite]);
 

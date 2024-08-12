@@ -9,6 +9,7 @@ function getGraph(chart) {
 
     var { type, data, title, description, module, action, metrics } = chart;
 
+    console.log('getGraph:', chart);
     if (metrics) {
         const preparedData = data.map(item => {
             let result = {};
