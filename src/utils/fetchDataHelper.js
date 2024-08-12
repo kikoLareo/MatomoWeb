@@ -37,6 +37,7 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
           title: processedData.metadata.metrics[chart.metric] || chart.title,
           description: processedData.metadata.metricsDocumentation[chart.metric] || chart.description,
           chartTitle: processedData.metadata.name,
+          info: processedData.metadata
         };
       }
 
