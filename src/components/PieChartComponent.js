@@ -23,7 +23,6 @@ const PieChartComponent = ({ labels, data, title, description }) => {
     labels.push("Otros");
   }
 
-  console.log(data, percentages, others);
 
   const chartData = {
     labels: labels,
@@ -77,7 +76,7 @@ const PieChartComponent = ({ labels, data, title, description }) => {
       <div className='chart-description'>
         <h2>{title}</h2>
       </div>
-      <div style={{width: '50%', height: '40vh', margin: 'auto'}}>
+      <div style={{width: '100%', height: '40vh', margin: 'auto'}}>
         <Pie data={chartData} options={options} />
       </div>
     

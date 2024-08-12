@@ -7,6 +7,8 @@ const chatGpt = async ({interactionContext }) => {
  
 
   try {
+    console.log('Fetching analysis...');
+    console.log('Context:', interactionContext);
     const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       model: 'gpt-3.5-turbo',
       messages: interactionContext,
@@ -20,7 +22,7 @@ const chatGpt = async ({interactionContext }) => {
     });
 
     const analysis = response.data.choices[0].message.content;
-
+    console.log('Analysis:', analysis);
 
     return analysis;
 
