@@ -4,6 +4,7 @@
     align-items: center;
   }
   
+
   .graph_component {
     width: 100%;
     background-color: #fff;
@@ -99,7 +100,20 @@
 
 /*        Pie Chart        */
 
+
+.devicesGraphs{
+  display: grid;
+  grid-template-columns: auto auto;
+}
 .pie-chart {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chart-description{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

@@ -53,7 +53,11 @@ const PieChartComponent = ({ labels, data, title, description }) => {
 
   const options = {
     hoverOffset: 100,
+    responsive: true,
     plugins: {
+      legend: {
+        position: 'left',
+      },
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
@@ -70,13 +74,13 @@ const PieChartComponent = ({ labels, data, title, description }) => {
 
   return (
     <div className="pie-chart">
-      
-      <div style={{width: '50%', height: '40vh', margin: 'auto'}}>
-        <Pie data={chartData} options={options} />
-      </div>
       <div className='chart-description'>
         <h2>{title}</h2>
       </div>
+      <div style={{width: '50%', height: '40vh', margin: 'auto'}}>
+        <Pie data={chartData} options={options} />
+      </div>
+    
     </div>
   );
 };
