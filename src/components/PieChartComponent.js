@@ -3,17 +3,35 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
 const PieChartComponent = ({ labels, data, title, description }) => {
+  var others = {
+    label: "",
+    value: 0
+  };
   // Calculate total visits
   const totalVisits = data.reduce((acc, value) => acc + value, 0);
 
   // Calculate percentages
-  const percentages = data.map(value => ((value / totalVisits) * 100).toFixed(2));
+  const percentages = data.map(value => {
+    var per = ((value / totalVisits) * 100).toFixed(2);
+    if(per < 1){
+      others.value += per;
+      others.label+= value + " ";
+      data = data.filter(item => item !== value);
+      return 0;
+    }else{
+      return per;
+    }
+  });
+  
+  if(others.value > 0){
+    labels.push(others.label + " Otros");
+  }
 
   const chartData = {
     labels: labels,
     datasets: [
       {
-        data: percentages,
+        data: percentages.filter(item => item !== 0).concat(others.value),
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)',
           'rgba(54, 162, 235, 0.6)',
@@ -50,10 +68,13 @@ const PieChartComponent = ({ labels, data, title, description }) => {
 
   return (
     <div className="pie-chart">
-      <h2>{title}</h2>
-      <p>{description}</p>
+      
       <div style={{width: '50%', height: '40vh', margin: 'auto'}}>
         <Pie data={chartData} options={options} />
+      </div>
+      <div className='chart-description'>
+        <h2>{title}</h2>
+        <p>{description}</p>
       </div>
     </div>
   );

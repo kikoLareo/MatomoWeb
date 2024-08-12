@@ -95,3 +95,11 @@
     margin-top: 10px;
   }
   
+
+
+/*        Pie Chart        */
+
+.pie-chart {
+  display: flex;
+  flex-direction: row;
+}

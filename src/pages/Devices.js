@@ -8,19 +8,13 @@ import { devicesDetectionCharts } from '../config/chartsConfig';
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
-
-  console.log('Devices component is running');
-  console.log('idSite:', idSite);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('useEffect is running');
-    console.log('idSite:', idSite);
-
+  
     const fetchData = async () => {
       try {
-        console.log('Fetching data for charts');
-        console.log('devicesDetectionCharts:', devicesDetectionCharts);
-        const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
+         const data = await fetchDataForCharts(idSite, devicesDetectionCharts);
         console.log('Fetched data:', data);
         const filteredData = {};
         for (const [key, value] of Object.entries(data)) {
@@ -34,6 +28,8 @@ const Devices = () => {
         setChartData(filteredData);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally{
+        setIsLoading(false);
       }
     };
 
@@ -41,6 +37,9 @@ const Devices = () => {
     
   }, [idSite]);
 
+  if (isLoading) {
+    return <div className="loading">Cargando datos...</div>;
+  }
   return (
     <div className="Devices">
       <div className="graphDashBoard">
