@@ -3,7 +3,6 @@ import { MediaAnalytics_getChartData } from "../modules/mediaAnalytics/mediaAnal
 import { visitFrequencyActions } from "../modules/Visits/visits_actions";
 
 
-
 export const homeCharts = [
   {
     title: 'API',
@@ -141,7 +140,11 @@ export const visitsCharts = [
     date: '2024-03-01,yesterday',
     type: 'lineal',
     metrics: ["nb_users_new", "nb_users_returning"],
-    data: (idSite, period, date) => visitFrequencyActions["get"](idSite, period, date)
+    data : [],
+    getData(idSite){
+      this.data = visitFrequencyActions["get"](idSite, this.period, this.date)
+    }
+    
   }
 ];
 

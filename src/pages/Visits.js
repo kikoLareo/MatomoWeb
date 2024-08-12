@@ -1,20 +1,16 @@
-import { useContext, useState, useEffect } from 'react';
-import { IdSiteContext } from '../contexts/idSiteContext';
-import { fetchDataForCharts } from '../utils/fetchDataHelper';
+import React, { useContext, useEffect } from 'react';
 import { visitsCharts } from '../config/chartsConfig';
 import getGraph from '../utils/getGraph';
+import { IdSiteContext } from '../contexts/idSiteContext';
 
 const Visits = () => {
   const { idSite } = useContext(IdSiteContext);
-  const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchDataForCharts(idSite, visitsCharts);
-      setChartData(data);
-    };
 
-    fetchData();
+    visitsCharts.forEach((chart) => {
+      chart.getData(idSite); // Llama a getData cuando idSite cambia
+    });
   }, [idSite]);
 
   return (
@@ -24,9 +20,7 @@ const Visits = () => {
         {visitsCharts.map((chart) => (
           <div key={chart.title}>
             {getGraph({
-              ...chart,
-              data: chartData[chart.title]?.data || [],
-              metrics: chart.metrics,
+              ...chart
             })}
           </div>
         ))}
