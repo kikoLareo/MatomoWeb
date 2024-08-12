@@ -1,11 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import ChartComponent from "../components/ChartComponent";
 import ChartInfo from "../components/ChartInfo";
 import PieChartComponent from "../components/PieChartComponent";
-import { IdSiteContext } from '../contexts/idSiteContext'; // Asegúrate de importar el contexto correctamente
 
-function useGraph(chart) {
-    const idSite = useContext(IdSiteContext);
+function useGraph(chart, idSite) { // Acepta idSite como argumento
 
     useEffect(() => {
         const fetchData = async () => {
