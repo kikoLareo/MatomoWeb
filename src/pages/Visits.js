@@ -1,28 +1,33 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { visitsCharts } from '../config/chartsConfig';
 import getGraph from '../utils/getGraph';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const Visits = () => {
   const { idSite } = useContext(IdSiteContext);
+  const [chartsData, setChartsData] = useState([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const updatedCharts = await Promise.all(
+        visitsCharts.map(async (chart) => {
+          const data = await chart.getData(idSite);
+          return { ...chart, data };
+        })
+      );
+      setChartsData(updatedCharts);
+    };
 
-    visitsCharts.forEach(async (chart) => {
-      await chart.getData(idSite); // Llama a getData cuando idSite cambia
-      console.log(chart);
-    });
+    fetchData();
   }, [idSite]);
 
   return (
     <div className="Visits">
       <h1>Visitas</h1>
       <div className="visitsGraphs">
-        {visitsCharts.map((chart) => (
+        {chartsData.map((chart) => (
           <div key={chart.title}>
-            {getGraph({
-              ...chart
-            })}
+            {getGraph(chart)}
           </div>
         ))}
       </div>
