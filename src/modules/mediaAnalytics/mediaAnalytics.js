@@ -1,4 +1,4 @@
-import { getBaseUrl } from "../../chart_config/common/common";
+import { getBaseUrl } from "../common/common";
 import axios from 'axios';
 import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
 

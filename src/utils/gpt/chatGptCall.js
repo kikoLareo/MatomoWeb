@@ -2,10 +2,7 @@ import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
-const chatGpt = async (interactionContext ) => {
-  // Fetch the context from the database
- 
-
+const chatGpt = async (interactionContext ) =>  { 
   try {
     console.log('Fetching analysis...');
     console.log('Context:', interactionContext);

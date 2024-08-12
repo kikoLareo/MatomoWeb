@@ -16,28 +16,25 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
         data = await chart.fetchFunction(idSite);
       } else {
        
-        try{
-          let dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', chart.module, chart.action, 'es' );
-          let response = await axios.get(dataUrl.url);
-          var processedData = response.data;
-        }catch (error) {
-          console.error('Error fetching data:', error);
-        }
+          try{
+            let dataUrl = API_getProcessedReport(idSite,'year', 'yesterday', chart.module, chart.action, 'es' );
+            let response = await axios.get(dataUrl.url);
+            var processedData = response.data;
+          }catch (error) {
+            console.error('Error fetching data:', error);
+          }
 
-        const url =  getBaseUrl( chart, idSite);
-        console.log(url);
-        // Usar la función de API general
-        const response1 = await fetch(url);
-        const responseData = await response1.json();
+          const url =  getBaseUrl( chart, idSite);
+          const response1 = await fetch(url);
+          const responseData = await response1.json();
 
-        console.log(responseData);
-        data = {
-          labels: Object.values(responseData).map(item => item.label ||  Object.keys(responseData)),
-          data: Object.values(responseData).map(item => item[chart.metric] || 0),  
-          title: processedData.metadata.metrics[chart.metric] || chart.title,
-          description: processedData.metadata.metricsDocumentation[chart.metric] || chart.description,
-          chartTitle: processedData.metadata.name,
-          info: processedData.metadata
+          data = {
+            labels: Object.values(responseData).map(item => item.label ||  Object.keys(responseData)),
+            data: Object.values(responseData).map(item => item[chart.metric] || 0),  
+            title: processedData.metadata.metrics[chart.metric] || chart.title,
+            description: processedData.metadata.metricsDocumentation[chart.metric] || chart.description,
+            chartTitle: processedData.metadata.name,
+            info: processedData.metadata
         };
       }
 
@@ -55,24 +52,19 @@ export const fetchData = async (idSite, requestData) => {
   try {
     try {
       let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, 'es');
-     console.log(dataUrl.url);
-
       let response = await axios.get(dataUrl.url);
       var processedData = response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
     }
 
-    console.log(processedData);
-    const url = getBaseUrl(requestData, idSite);
     // Usar la función de API general
-    const response1 = await fetch(url);
+    const response1 = await fetch(requestData.url);
     const responseData = await response1.json();
 
-    console.log(requestData, responseData);
     const data = {
       value: responseData.value || 0,
-      title: processedData.result ==="error" ?  requestData.title || '' : processedData.metadata.metrics[requestData.metric] ,
+      info: processedData ? processedData : {}
     };
 
     newChartData = data;

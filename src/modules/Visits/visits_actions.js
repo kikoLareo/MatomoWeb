@@ -1,4 +1,5 @@
-import { getBaseUrl } from "../../chart_config/common/common";
+import { fetchData } from "../../utils/fetchDataHelper";
+import { getBaseUrl } from "../common/common";
 
 const method = "API";
 
@@ -7,8 +8,8 @@ export const visitFrequency_get = (idSite, period, date, segment) => {
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
-
-    return { url: getBaseUrl(method,action, params), title: 'Visit Frequency' };
+    return fetchData(idSite, { module: method, action, url: getBaseUrl(method,action, params)});
+        
 }
 
 export const visitFrequencyActions = {

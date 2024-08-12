@@ -1,11 +1,12 @@
 // src/config/chartConfig.js
 import { MediaAnalytics_getChartData } from "../modules/mediaAnalytics/mediaAnalytics";
+import { visitFrequencyActions } from "../modules/Visits/visits_actions";
+
 
 
 export const homeCharts = [
   {
     title: 'API',
-    description: 'Get data from the API.',
     action: "get",
     module: 'API',
 
@@ -125,6 +126,22 @@ export const devicesDetectionCharts = [
     module: 'DevicesDetection',
     metric: 'nb_visits',
 
+  }
+];
+
+
+
+export const visitsCharts = [
+  {
+    title: 'Visits - Frequency',
+    description: 'Get the frequency of visits.',
+    action: "get",
+    module: 'Visits',
+    period: 'day',
+    date: '2024-03-01,yesterday',
+    type: 'lineal',
+    metrics: ["nb_users_new", "nb_users_returning"],
+    data: (idSite, period, date) => visitFrequencyActions["get"](idSite, period, date)
   }
 ];
 

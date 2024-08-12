@@ -1,6 +1,6 @@
 // src/components/ChartInfo.js
 import React, { useState, useEffect, useContext } from 'react';
-import { fetchAndSaveAnalysis } from '../utils/chatGptApi';
+import { fetchAndSaveAnalysis } from '../utils/gpt/fetchAndSave';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartInfo = ({ title, description, data, module, action }) => {

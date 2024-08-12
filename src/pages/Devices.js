@@ -3,8 +3,8 @@ import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
 import PieChartComponent from '../components/PieChartComponent';
 import { devicesDetectionCharts } from '../config/chartsConfig';
-import { GetDevicesPromt } from '../utils/gptPromts/devicesPromt';
-import { chatGpt } from '../utils/chatGptCall';
+import { GetDevicesPromt } from '../utils/gpt/gptPromts/devicesPromt';
+import { chatGpt } from '../utils/gpt/chatGptCall';
 
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);

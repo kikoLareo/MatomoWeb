@@ -11,7 +11,6 @@ import { API_getProcessedReport } from '../../modules/API/Api_actions';
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
-  const [storedAnalysis, setStoredAnalysis] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,14 +29,14 @@ const MediaAnalyticsGetSection = () => {
           const shortName = MediaAnalytics_get_metrics[metric].shortName;
           const description = MediaAnalytics_get_metrics[metric].description;
 
-          console.log('shortName:', shortName);
-          console.log('metric', metric);
           acc[metric] = {
             labels: Object.keys(data),
             data: Object.keys(data).map(date => data[date]?.[metric] || 0),
             id: metric, // Agregar id a los datos del gráfico
             title: processedData.metadata.metrics[metric] || shortName,
             description:processedData.metadata.metricsDocumentation[metric]|| description,
+            module: processedData.metadata.module,
+            action: processedData.metadata.action,
           };
           return acc;
         }, {});
@@ -64,13 +63,11 @@ const MediaAnalyticsGetSection = () => {
                     label={chartData[metric].title}
                   />
                   <ChartInfo
-                    id={chartData[metric].id}
                     title={chartData[metric].title}
                     description={chartData[metric].description}
                     data={chartData[metric].data}
-                    storedAnalysis={storedAnalysis}
-                    setStoredAnalysis={setStoredAnalysis}
-                    metric={metric}
+                    module={chartData[metric].module}
+                    action={chartData[metric].action}
                   />
                 </>
               

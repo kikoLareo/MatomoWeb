@@ -14,6 +14,7 @@ const Header = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/reproductions">Reproductions</Link></li> 
           <li><Link to="/devices">Devices</Link></li>
+          <li><Link to="/visits">Visits</Link></li>
           {/* <Dropdown /> */}
         </ul>
        
