@@ -11,10 +11,13 @@ const Visits = () => {
     const fetchData = async () => {
       const updatedCharts = await Promise.all(
         visitsCharts.map(async (chart) => {
-          const data = await chart.getData(idSite);
-          return { ...chart, data };
+          console.log('Fetching data for chart:', chart.title);
+          await chart.getData(idSite);
+          console.log('Fetched data for chart:', chart);
+          return chart;
         })
       );
+      console.log('Updated charts:', updatedCharts);
       setChartsData(updatedCharts);
     };
 
