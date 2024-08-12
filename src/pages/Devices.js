@@ -1,4 +1,3 @@
-// devices.js
 import { useContext, useState, useEffect } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import { fetchDataForCharts } from '../utils/fetchDataHelper';
@@ -11,8 +10,8 @@ const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingSummary, setIsLoadingSummary] = useState(true);
   const [deviceSummary, setDeviceSummary] = useState('Analizando datos');
+  const [loadingDots, setLoadingDots] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,18 +35,15 @@ const Devices = () => {
       }
     };
 
-    fetchData();
-  }, [idSite]);
-
-  useEffect(() => {
     const fetchSummary = async () => {
       let dots = 0;
       const interval = setInterval(() => {
-        if (!isLoadingSummary) {
+        if (!isLoading) {
           clearInterval(interval);
           return;
         }
         dots = (dots + 1) % 4;
+        setLoadingDots(dots);
         setDeviceSummary("Analizando datos" + ".".repeat(dots));
       }, 500);
 
@@ -58,25 +54,31 @@ const Devices = () => {
       } catch (error) {
         console.error('Error fetching summary:', error);
         setDeviceSummary('Error obteniendo resumen');
-        setIsLoadingSummary(false);
-
         setTimeout(() => {
           setDeviceSummary('');
         }, 5000);
-
       } finally {
         clearInterval(interval);
-        setIsLoadingSummary(false);
       }
     };
 
-    if (!isLoading) {
-      fetchSummary();
-    }
-  }, [chartData, idSite, isLoadingSummary, isLoading]);
+    fetchData().then(fetchSummary);
+  }, [idSite, chartData, isLoading]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isLoading) {
+        setLoadingDots((prev) => (prev + 1) % 4);
+      } else {
+        clearInterval(interval);
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   if (isLoading) {
-    return <div className="loading">Cargando datos...</div>;
+    return <div className="loading">Cargando datos{".".repeat(loadingDots)}</div>;
   }
 
   return (
