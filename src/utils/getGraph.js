@@ -12,9 +12,6 @@ function getGraph(charts) {
         var { type, data, title, description, module, action, metrics } = chart;
 
         console.log('getGraph:', chart);
-        if (data.info.result === 'error') {
-            return <p key={chartIndex}>Error: {data.info.message}</p>;
-        }
 
         if (metrics) {
             const preparedData = Object.keys(data.value).map(item => {
