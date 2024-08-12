@@ -58,6 +58,13 @@ const Devices = () => {
         setDeviceSummary(result);
       } catch (error) {
         console.error('Error fetching summary:', error);
+        setDeviceSummary('Error obteniendo resumen');
+        setIsLoadingSummary(false);
+
+        setTimeout(() => {
+          setDeviceSummary('');
+        }, 5000);
+
       } finally {
         setIsLoadingSummary(false);
       }
