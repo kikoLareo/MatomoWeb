@@ -7,7 +7,7 @@ const Visits = () => {
   const { idSite } = useContext(IdSiteContext);
 
   return (
-    <div className="Visits">
+    <div className="page">
       <h1>Visitas</h1>
       <div className="visitsGraphs">
         <div>

@@ -46,33 +46,35 @@ function useGraph(charts, idSite) {
     // const formatedData = transformData(data.value, metrics);
 
     return (
-      <div key={chartIndex}>
+      <div key={chartIndex} className="graphGroup">
         <h3>{title}</h3>
         <p>{description}</p>
-        {metrics ? (
-          metrics.map((metric, metricIndex) => (
-          
-            <GraphRenderer
-              key={`${chartIndex}-${metricIndex}`}
-              chart={{
-                type,
-                labels: Object.keys(data.value),
-                data: Object.keys(data.value).map(date => data.value[date]?.[metric] || 0),
-                title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
-                
-              }}
-              chartIndex={`${chartIndex}-${metricIndex}`}
-            />
-          ))
-        ) : (
-          Object.keys(data.value).map((date, dateIndex) => (
-            <GraphRenderer
-              key={`${chartIndex}-${dateIndex}`}
-              chart={{ ...chart, date }}
-              chartIndex={`${chartIndex}-${dateIndex}`}
-            />
-          ))
-        )}
+        <div className="graphDashBoard">
+            {metrics ? (
+              metrics.map((metric, metricIndex) => (
+              
+                <GraphRenderer
+                  key={`${chartIndex}-${metricIndex}`}
+                  chart={{
+                    type,
+                    labels: Object.keys(data.value),
+                    data: Object.keys(data.value).map(date => data.value[date]?.[metric] || 0),
+                    title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
+                    
+                  }}
+                  chartIndex={`${chartIndex}-${metricIndex}`}
+                />
+              ))
+            ) : (
+              Object.keys(data.value).map((date, dateIndex) => (
+                <GraphRenderer
+                  key={`${chartIndex}-${dateIndex}`}
+                  chart={{ ...chart, date }}
+                  chartIndex={`${chartIndex}-${dateIndex}`}
+                />
+              ))
+            )}
+        </div>
       </div>
     );
   });
