@@ -6,10 +6,29 @@
   padding: 0 2vw;
 }
 
-.graphGroup {
+.graphGrid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2vw;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .graphGrid {
+      grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .graphGrid {
+      grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+
+.graphGroup {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 

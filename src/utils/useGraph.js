@@ -49,7 +49,7 @@ function useGraph(charts, idSite) {
       <div key={chartIndex} className="graphGroup">
         <h3>{title}</h3>
         <p>{description}</p>
-        <div className="graphDashBoard">
+        <div class="graphGrid">
             {metrics ? (
               metrics.map((metric, metricIndex) => (
               
