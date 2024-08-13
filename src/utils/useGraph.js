@@ -7,16 +7,13 @@ import { titles } from './dictionaryMetrics/metricsTitles';
 function transformData(data, metrics) {
   const result = [];
 
-  for (const [date, values] of Object.entries(data)) {
-      if (Array.isArray(values) && values.length === 0) continue; // Skip empty arrays
+  metrics.forEach((metric) => {
+    const metricData = data.map((item) => {
+      return item[metric];
+    });
+    result.push(metricData);
+});
 
-      const entry = { fecha: date };
-      metrics.forEach(metric => {
-          entry[metric] = values[metric] || 0; // Default to 0 if metric is not present
-      });
-
-      result.push(entry);
-  }
 
   return result;
 }
@@ -51,7 +48,7 @@ function useGraph(charts, idSite) {
               key={`${chartIndex}-${metricIndex}`}
               chart={{
                 type,
-                data: formatedData,
+                data: formatedData[metric],
                 title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
                 
               }}
