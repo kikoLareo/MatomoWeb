@@ -5,21 +5,19 @@ import ChartInfo from "../components/ChartInfo";
 import PieChartComponent from "../components/PieChartComponent";
 
 const GraphRenderer = ({ chart, chartIndex }) => {
-  const { type, data, title, description, module, action, metrics } = chart;
+  const { type, data, title, description, module, action, metric, item } = chart;
   let preparedData = null;
 
-  if (metrics) {
-    preparedData = Object.keys(data.value).map(item => {
-      let result = {};
-      metrics.forEach(metric => {
-        result[metric] = data.value[item][metric] || 0;
-      });
-      return result;
-    });
+  if (metric) {
+    preparedData = Object.keys(data.value).map(key => ({
+      [metric]: data.value[key][metric] || 0
+    }));
+  } else if (item) {
+    preparedData = [{ [item]: data.value[item] }];
   } else {
-    preparedData = Object.keys(data.value).map(item => {
-      return { [item]: data.value[item] };
-    });
+    preparedData = Object.keys(data.value).map(key => ({
+      ...data.value[key]
+    }));
   }
 
   switch (type) {
@@ -27,7 +25,9 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <ChartComponent
-            labels={Object.keys(preparedData[0])} data={preparedData.map(d => Object.values(d))} title={title}
+            labels={Object.keys(preparedData[0])}
+            data={preparedData.map(d => Object.values(d))}
+            title={title}
           />
           <ChartInfo
             title={title}

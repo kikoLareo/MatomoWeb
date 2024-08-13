@@ -8,6 +8,8 @@
 .main-content {
   display: flex;
   flex: 1;
+  top: 6vh;
+  position: relative;
 }
 
 .content {

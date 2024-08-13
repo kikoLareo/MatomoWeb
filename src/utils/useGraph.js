@@ -18,9 +18,26 @@ function useGraph(charts, idSite) {
     return <p>Loading...</p>;
   }
 
-  return chartData.map((chart, chartIndex) => (
-    <GraphRenderer key={chartIndex} chart={chart} chartIndex={chartIndex} />
-  ));
+  return chartData.flatMap((chart, chartIndex) => {
+    const { metrics, data } = chart;
+    if (metrics) {
+      return metrics.map((metric, metricIndex) => (
+        <GraphRenderer
+          key={`${chartIndex}-${metricIndex}`}
+          chart={{ ...chart, metric }}
+          chartIndex={`${chartIndex}-${metricIndex}`}
+        />
+      ));
+    } else {
+      return Object.keys(data.value).map((item, itemIndex) => (
+        <GraphRenderer
+          key={`${chartIndex}-${itemIndex}`}
+          chart={{ ...chart, item }}
+          chartIndex={`${chartIndex}-${itemIndex}`}
+        />
+      ));
+    }
+  });
 }
 
 export default useGraph;
