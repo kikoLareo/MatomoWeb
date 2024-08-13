@@ -17,26 +17,39 @@ function useGraph(charts, idSite) {
   if (!chartData || chartData.length === 0) {
     return <p>Loading...</p>;
   }
-
-  return chartData.flatMap((chart, chartIndex) => {
-    const { metrics, data } = chart;
-    if (metrics) {
-      return metrics.map((metric, metricIndex) => (
-        <GraphRenderer
-          key={`${chartIndex}-${metricIndex}`}
-          chart={{ ...chart, metric }}
-          chartIndex={`${chartIndex}-${metricIndex}`}
-        />
-      ));
-    } else {
-      return Object.keys(data.value).map((item, itemIndex) => (
-        <GraphRenderer
-          key={`${chartIndex}-${itemIndex}`}
-          chart={{ ...chart, item }}
-          chartIndex={`${chartIndex}-${itemIndex}`}
-        />
-      ));
-    }
+  return charts.map((chart, chartIndex) => {
+    const { metrics, data, description, title, type } = chart;
+    return (
+      <div key={chartIndex}>
+        <h3>{title}</h3>
+        <p>{description}</p>
+        {metrics ? (
+          metrics.map((metric, metricIndex) => (
+          
+            <GraphRenderer
+              key={`${chartIndex}-${metricIndex}`}
+              chart={{
+                type,
+                data: Object.keys(data).map(key => ({
+                  [metric]: data[key][metric] || 0
+                })),
+                title
+                
+              }}
+              chartIndex={`${chartIndex}-${metricIndex}`}
+            />
+          ))
+        ) : (
+          Object.keys(data).map((date, dateIndex) => (
+            <GraphRenderer
+              key={`${chartIndex}-${dateIndex}`}
+              chart={{ ...chart, date }}
+              chartIndex={`${chartIndex}-${dateIndex}`}
+            />
+          ))
+        )}
+      </div>
+    );
   });
 }
 

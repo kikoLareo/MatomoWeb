@@ -1,14 +1,16 @@
 import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
 
-const method = "API";
+const module = "API";
+
 
 export const visitFrequency_get = async (idSite, period, date, segment) => {
-    const action = `VisitFrequency.get`;
+    const action = `get`;
+    const method = "VisitFrequency.get";
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
-    return await fetchData(idSite, { module: method, action, url: getBaseUrl(method,action, params)});
+    return await fetchData(idSite, { module: "VisitFrequency", action, url: getBaseUrl(module,method, params)});
         
 }
 
@@ -22,7 +24,7 @@ export const visitTime_getVisitInformationPerLocalTime = (idSite, period, date, 
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visit Time - Local Time' };
+    return { url: getBaseUrl(module,action, params), title: 'Visit Time - Local Time' };
 }
 
 export const visitTime_getByDayOfWeek = (idSite, period, date, segment) => {
@@ -31,7 +33,7 @@ export const visitTime_getByDayOfWeek = (idSite, period, date, segment) => {
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visit Time - Day of Week' };
+    return { url: getBaseUrl(module,action, params), title: 'Visit Time - Day of Week' };
 }
 
 export const visitTimeActions = {
@@ -46,7 +48,7 @@ export const visitorInterest_getNumberOfVisitsPerVisitDuration = (idSite, period
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visitor Interest - Visit Duration' };
+    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Visit Duration' };
 }
 
 export const visitorInterest_getNumberOfVisitsPerPage = (idSite, period, date, segment) => {
@@ -55,7 +57,7 @@ export const visitorInterest_getNumberOfVisitsPerPage = (idSite, period, date, s
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visitor Interest - Pages per Visit' };
+    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Pages per Visit' };
 }
 
 
@@ -65,7 +67,7 @@ export const visitorInterest_getNumberOfVisitsByDaysSinceLast = (idSite, period,
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visitor Interest - Days Since Last Visit' };
+    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Days Since Last Visit' };
 }
 
 export const visitorInterestActions = {
@@ -81,7 +83,7 @@ export const visitsSummary_get = (idSite, period, date, segment) => {
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(method,action, params), title: 'Visits Summary' };
+    return { url: getBaseUrl(module,action, params), title: 'Visits Summary' };
 }
 
 export const visitsSummaryActions = {
