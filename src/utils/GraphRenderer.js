@@ -15,6 +15,7 @@ const GraphRenderer = ({ chart, chartIndex }) => {
           <ChartComponent
             labels={labels}
             data={data}
+            label={title}
             title={title}
           />
         </div>

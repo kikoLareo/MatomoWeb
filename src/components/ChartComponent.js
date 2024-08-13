@@ -2,12 +2,12 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const ChartComponent = ({ data, labels, title }) => {
+const ChartComponent = ({ data, labels, label,  title }) => {
   const chartData = {
     labels,
     datasets: [
       {
-        title,
+        label,
         data,
         fill: false,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
