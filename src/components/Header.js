@@ -9,17 +9,19 @@ import Filters from './Filters';
 const Header = () => {
   return (
     <header className="header">
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/reproductions">Reproductions</Link></li> 
-          <li><Link to="/devices">Devices</Link></li>
-          <li><Link to="/visits">Visits</Link></li>
-          {/* <Dropdown /> */}
-        </ul>
-       
-      </nav>
-      <Filters />
+      <div className="headerMenu">
+        <nav>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/reproductions">Reproductions</Link></li> 
+            <li><Link to="/devices">Devices</Link></li>
+            <li><Link to="/visits">Visits</Link></li>
+            {/* <Dropdown /> */}
+          </ul>
+        
+        </nav>
+        <Filters />
+      </div>
     </header>
   );
 };

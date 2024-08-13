@@ -2,11 +2,18 @@
 .header {
   background: #333;
   color: #fff;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  height: 5vh;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  }
+
+  .headerMenu{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2vh 5vw;
+    height: 5vh;
+    align-items: center;
   }
   
   .header nav ul {

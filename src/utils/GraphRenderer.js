@@ -27,8 +27,7 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <ChartComponent
-            data={{ labels: Object.keys(preparedData[0]), data: preparedData.map(d => Object.values(d)), title: title }}
-            title={title}
+            labels={Object.keys(preparedData[0])} data={preparedData.map(d => Object.values(d))} title={title}
           />
           <ChartInfo
             title={title}
