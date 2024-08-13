@@ -5,18 +5,27 @@ import GraphRenderer from './GraphRenderer';
 import { titles } from './dictionaryMetrics/metricsTitles';
 
 function transformData(data, metrics) {
-  const result = [];
+  const result = {};
 
-  metrics.forEach((metric) => {
-    const metricData = data.map((item) => {
-      return item[metric];
+    Object.keys(data).forEach(date => {
+        if (Array.isArray(data[date])) {
+            // If the data for a date is an empty array, keep it as is
+            result[date] = [];
+        } else {
+            // Extract only the desired metrics for the given date
+            result[date] = {};
+            metrics.forEach(metric => {
+                if (data[date].hasOwnProperty(metric)) {
+                    result[date][metric] = data[date][metric];
+                }
+            });
+        }
     });
-    result.push(metricData);
-});
+
+    return result;
+};
 
 
-  return result;
-}
 
 
 function useGraph(charts, idSite) {
