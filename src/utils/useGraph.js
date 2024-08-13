@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchChartData } from './fetchChartData';
 import GraphRenderer from './GraphRenderer';
+import { titles } from './dictionaryMetrics/metricsTitles';
 
 function useGraph(charts, idSite) {
   const [chartData, setChartData] = useState([]);
@@ -33,7 +34,7 @@ function useGraph(charts, idSite) {
                 data: Object.keys(data).map(key => ({
                   [metric]: data[key][metric] || 0
                 })),
-                title
+                title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
                 
               }}
               chartIndex={`${chartIndex}-${metricIndex}`}

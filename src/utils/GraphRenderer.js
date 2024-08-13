@@ -6,6 +6,8 @@ import PieChartComponent from "../components/PieChartComponent";
 const GraphRenderer = ({ chart, chartIndex }) => {
   const { type, data, title } = chart;
 
+  console.log('Rendering chart:', chart);
+
   switch (type) {
     case 'lineal':
       return (

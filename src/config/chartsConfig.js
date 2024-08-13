@@ -143,6 +143,9 @@ export const visitsCharts = [
     async getData(idSite){
       console.log('Fetching data for chart:', this, idSite);
       this.data = await visitFrequency_get(idSite, this.period, this.date)
+      if(this.data.info.metadata){
+        this.description = this.data.info.metadata.documentation;
+      }
       console.log('Fetched data for chart:', this, this.data);
     }
     
