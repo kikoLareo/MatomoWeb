@@ -7,20 +7,19 @@ import { titles } from './dictionaryMetrics/metricsTitles';
 function transformData(data, metrics) {
   const result = {};
 
-    Object.keys(data).forEach(date => {
-        if (Array.isArray(data[date])) {
-            // If the data for a date is an empty array, keep it as is
-            result[date] = [];
-        } else {
-            // Extract only the desired metrics for the given date
-            result[date] = {};
-            metrics.forEach(metric => {
-                if (data[date].hasOwnProperty(metric)) {
-                    result[date][metric] = data[date][metric];
-                }
-            });
-        }
-    });
+  metrics.forEach(metric => {
+      result[metric] = {}; // Inicializa un objeto para cada métrica
+
+      Object.keys(data).forEach(date => {
+          if (Array.isArray(data[date])) {
+              // Si no hay datos para la fecha, agrega fecha: null
+              result[metric][date] = null;
+          } else {
+              // Si la métrica existe en la fecha, agrega fecha: valor, si no, fecha: null
+              result[metric][date] = data[date].hasOwnProperty(metric) ? data[date][metric] : null;
+          }
+      });
+  });
 
     return result;
 };
