@@ -35,7 +35,7 @@ function useGraph(charts, idSite) {
   }
   return charts.map((chart, chartIndex) => {
     const { metrics, data, description, title, type } = chart;
-    const formatedData = transformData(data, metrics);
+    const formatedData = transformData(data.value, metrics);
 
     return (
       <div key={chartIndex}>
