@@ -1,6 +1,5 @@
 // src/utils/useGraph.js
-import React, { useEffect, useState } from 'react';
-import { fetchChartData } from './fetchChartData';
+import React from 'react';
 import GraphRenderer from './GraphRenderer';
 import { titles } from './dictionaryMetrics/metricsTitles';
 
@@ -24,34 +23,41 @@ import { titles } from './dictionaryMetrics/metricsTitles';
 //     return result;
 // };
 
-
-
-
 function useGraph(charts, idSite) {
-  const [chartData, setChartData] = useState([]);
+  // const [chartData, setChartData] = useState([]);
+  console.log('useGraph', charts, idSite);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchChartData(charts, idSite);
-      setChartData(data);
-    };
-    fetchData();
-  }, [idSite, charts]);
-
-  if (!chartData || chartData.length === 0) {
-    return <p>Loading...</p>;
+  if (
+    !charts || 
+    (Array.isArray(charts) && charts.length === 0) || 
+    (typeof charts === 'object' && !Array.isArray(charts) && Object.keys(charts).length === 0)
+  ) {
+    return <p>No charts to render</p>;
   }
-  return charts.map((chart, chartIndex) => {
-    const { metrics, data, description, title, type } = chart;
-    // const formatedData = transformData(data.value, metrics);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await fetchChartData(charts, idSite);
+  //     setChartData(data);
+  //   };
+  //   fetchData();
+  // }, [idSite, charts]);
 
+  // if (!chartData || chartData.length === 0) {
+  //   return <p>Loading...</p>;
+  // }
+
+  return Object.entries(charts).map(([chartName, chartData]) => {
+    const { chart } = chartData;
+    console.log('chart', chart);
+    const { selectedMetrics, data, description, title, type } = chart;
+    // const formatedData = transformData(data.value, metrics);
     return (
-      <div key={chartIndex} className="graphGroup">
+      <div className="graphGroup">
         <h3>{title}</h3>
         <p>{description}</p>
-        <div class="graphGrid">
-            {metrics ? (
-              metrics.map((metric, metricIndex) => (
+        <div className="graphGrid">
+            {selectedMetrics ? (
+              selectedMetrics.map((metric, metricIndex) => (
               
                 <GraphRenderer
                   chart={{
@@ -61,15 +67,12 @@ function useGraph(charts, idSite) {
                     title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
                     
                   }}
-                  chartIndex={`${chartIndex}-${metricIndex}`}
                 />
               ))
             ) : (
               Object.keys(data.value).map((date, dateIndex) => (
                 <GraphRenderer
-                  key={`${chartIndex}-${dateIndex}`}
                   chart={{ ...chart, date }}
-                  chartIndex={`${chartIndex}-${dateIndex}`}
                 />
               ))
             )}

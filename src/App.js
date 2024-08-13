@@ -12,6 +12,7 @@ import './css/Header.css';
 import './css/graph.css';
 import './css/dashboard.css';
 import './css/Home.css';
+import './css/Visits.css';
 import { IdSiteProvider } from './contexts/idSiteContext';
 function App() {
   return (

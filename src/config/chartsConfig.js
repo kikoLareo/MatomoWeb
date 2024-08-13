@@ -157,3 +157,89 @@ export const visitsCharts_frequency = [
   }
 ];
 
+export var exampleCharts = [ 
+  { title: 'Example Chart 1', 
+    description: 'This is an example chart.', 
+    action: "get", module: 'ExampleModule', 
+    data:{
+      info: {
+        columns: {
+          metric1: 'Metric 1',
+          metric2: 'Metric 2',
+        },
+        metadata: {
+          metrics: {
+            metric1: 'Metric 1',
+            metric2: 'Metric 2',
+          }
+        }},
+        value: {
+          "2023-01-01": { metric1: 10, metric2: 20 },
+          "2023-01-02": { metric1: 20, metric2: 40 },
+          "2023-01-03": { metric1: 30, metric2: 60 },
+          "2023-01-04": { metric1: 40, metric2: 80 },
+          "2023-01-05": { metric1: 50, metric2: 100 }
+        },
+    },
+    metrics: ["metric1", "metric2"],
+    type: 'lineal',
+    selectedMetrics: [],
+
+  }, 
+    { title: 'Example Chart 2', 
+      description: 'This is another example chart.', 
+      action: "get", 
+      module: 'ExampleModule', 
+      data:{
+        info: {
+          columns: {
+            metric1: 'Metric 1',
+            metric2: 'Metric 2',
+          },
+          metadata: {
+            metrics: {
+              metric1: 'Metric 1',
+              metric2: 'Metric 2',
+            }
+          }},
+          value: {
+            "2023-01-01": { metric1: 10, metric2: 20 },
+            "2023-01-02": { metric1: 20, metric2: 40 },
+            "2023-01-03": { metric1: 30, metric2: 60 },
+            "2023-01-04": { metric1: 40, metric2: 80 },
+            "2023-01-05": { metric1: 50, metric2: 100 }
+          },
+      },
+      metrics: ["metric1", "metric2"],
+      type: 'lineal',
+      selectedMetrics: [],
+ 
+    }, 
+    { title: 'Example Chart 3', 
+      description: 'Yet another example chart.', 
+      action: "get", module: 'ExampleModule', 
+      data:{
+        info: {
+          columns: {
+            metric1: 'Metric 1',
+            metric2: 'Metric 2',
+          },
+          metadata: {
+            metrics: {
+              metric1: 'Metric 1',
+              metric2: 'Metric 2',
+            }
+          }},
+          value: {
+            "2023-01-01": { metric1: 10, metric2: 20 },
+            "2023-01-02": { metric1: 20, metric2: 40 },
+            "2023-01-03": { metric1: 30, metric2: 60 },
+            "2023-01-04": { metric1: 40, metric2: 80 },
+            "2023-01-05": { metric1: 50, metric2: 100 }
+          },
+      },
+      metrics: ["metric1", "metric2"],
+      type: 'lineal',
+      selectedMetrics: [],
+    },
+  ];

@@ -1,26 +1,61 @@
-/* src/components/Sidebar.css */
-.sidebar {
-  background: #f4f4f4;
-  padding: 1vh 1vw;
-  width: 5vw;
-  height: 100vh
+/* src/ChartOptions.css */
+.chart-options {
+  background-color: #ffffff; /* Fondo blanco para contraste */
+  padding: 0 2vw ;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30%; 
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.chart-block {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.metrics-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+}
+
+.metrics-item {
+  margin-bottom: 8px;
+}
+
+.metrics input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.metrics label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chart-options {
+    padding: 10px;
   }
-  
-  .sidebar nav ul {
-    list-style: none;
-    padding: 0;
+
+  .chart-title {
+    font-size: 1.25rem;
   }
-  
-  .sidebar nav ul li {
-    margin-bottom: 10px;
+
+  .metrics-item {
+    font-size: 0.875rem;
   }
-  
-  .sidebar nav ul li a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .sidebar nav ul li a:hover {
-    text-decoration: underline;
-  }
-  
+}
