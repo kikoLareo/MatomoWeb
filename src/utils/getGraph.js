@@ -3,7 +3,7 @@ import ChartComponent from "../components/ChartComponent";
 import ChartInfo from "../components/ChartInfo";
 import PieChartComponent from "../components/PieChartComponent";
 
-function useGraph(charts, idSite) { // Acepta idSite como argumento
+function useGraph(charts, idSite) {
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,23 +18,31 @@ function useGraph(charts, idSite) { // Acepta idSite como argumento
         fetchData();
     }, [idSite, charts]);
 
-    
+    if (!charts || charts.length === 0) {
+        return <p>Loading...</p>;
+    }
+
     return charts.map((chart, chartIndex) => {
         var { type, data, title, description, module, action, metrics } = chart;
-
+        var preparedData = null;
         console.log('getGraph:', chart);
-        if (data.info.result === 'error') {
-            return <p key={chartIndex}>Error: {data.info.message}</p>;
-        }
+        // if (data.info.result === 'error') {
+        //     return <p key={chartIndex}>Error: {data.info.message}</p>;
+        // }
 
         if (metrics) {
-            const preparedData = Object.keys(data.value).map(item => {
+             preparedData = Object.keys(data.value).map(item => {
                 let result = {};
                 metrics.forEach(metric => {
                     result[metric] = data.value[item][metric] || 0;
                 });
                 return result;
             });
+        } else {
+             preparedData = Object.keys(data.value).map(item => {
+                return { [item]: data.value[item] };
+            });
+        }
 
             console.log('getGraph:', preparedData);
 
@@ -70,9 +78,7 @@ function useGraph(charts, idSite) { // Acepta idSite como argumento
                 default:
                     return <p key={chartIndex}>Unsupported chart type</p>;
             }
-        }else{
-            return <p key={chartIndex}>No metrics to display</p>;
-        }
+        
     });
 }
 

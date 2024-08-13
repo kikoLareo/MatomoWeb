@@ -1,7 +1,6 @@
 // src/config/chartConfig.js
 import { MediaAnalytics_getChartData } from "../modules/mediaAnalytics/mediaAnalytics";
-import { visitFrequencyActions } from "../modules/Visits/visits_actions";
-
+import {visitFrequency_get} from "../modules/Visits/visits_actions";
 
 export const homeCharts = [
   {
@@ -142,7 +141,9 @@ export const visitsCharts = [
     metrics: ["nb_users_new", "nb_users_returning"],
     data : [],
     async getData(idSite){
-      this.data = await visitFrequencyActions["get"](idSite, this.period, this.date)
+      console.log('Fetching data for chart:', this, idSite);
+      this.data = await visitFrequency_get(idSite, this.period, this.date)
+      console.log('Fetched data for chart:', this, this.data);
     }
     
   }
