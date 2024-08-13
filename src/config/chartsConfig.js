@@ -138,7 +138,7 @@ export const visitsCharts = [
     period: 'day',
     date: '2024-03-01,yesterday',
     type: 'lineal',
-    metrics: ["nb_users_new", "nb_users_returning"],
+    metrics: ["nb_visits_new", "nb_visits_returning"],
     data : [],
     async getData(idSite){
       console.log('Fetching data for chart:', this, idSite);

@@ -13,10 +13,10 @@ function transformData(data, metrics) {
       Object.keys(data).forEach(date => {
           if (Array.isArray(data[date])) {
               // Si no hay datos para la fecha, agrega fecha: null
-              result[metric][date] = null;
+              result[metric][date] = 0;
           } else {
               // Si la métrica existe en la fecha, agrega fecha: valor, si no, fecha: null
-              result[metric][date] = data[date].hasOwnProperty(metric) ? data[date][metric] : null;
+              result[metric][date] = data[date].hasOwnProperty(metric) ? data[date][metric] : 0;
           }
       });
   });

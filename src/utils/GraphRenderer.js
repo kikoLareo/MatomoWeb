@@ -13,7 +13,7 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <ChartComponent
-            labels={Object.keys(data[0])}
+            labels={Object.keys(data)}
             data={data.map(d => Object.values(d))}
             title={title}
           />
@@ -24,7 +24,7 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <PieChartComponent
-            labels={Object.keys(data[0])}
+            labels={Object.keys(data)}
             data={data.map(d => Object.values(d))}
             title={title}
           />
