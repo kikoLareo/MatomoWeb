@@ -56,6 +56,7 @@ function useGraph(charts, idSite) {
               key={`${chartIndex}-${metricIndex}`}
               chart={{
                 type,
+                labels: Object.keys(data),
                 data: Object.keys(data).map(date => data[date]?.[metric] || 0),
                 title: data.info.columns? data.info.columns[metric] : data.info.metadata? data.info.metadata.metrics[metric]: titles[metric]
                 

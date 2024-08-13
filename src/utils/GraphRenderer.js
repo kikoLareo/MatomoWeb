@@ -4,7 +4,7 @@ import ChartComponent from "../components/ChartComponent";
 import PieChartComponent from "../components/PieChartComponent";
 
 const GraphRenderer = ({ chart, chartIndex }) => {
-  const { type, data, title } = chart;
+  const { type, labels, data, title } = chart;
 
   console.log('Rendering chart:', chart);
 
@@ -13,8 +13,8 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <ChartComponent
-            labels={Object.keys(data)}
-            data={Object.keys(data).map(date => data[date] || 0)}
+            labels={labels}
+            data={data}
             title={title}
           />
         </div>
