@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { visitsCharts } from '../config/chartsConfig';
-import useGraph from '../utils/getGraph';
+import useGraph from '../utils/useGraph';
 import { IdSiteContext } from '../contexts/idSiteContext'; // Importa el contexto
 
 const Visits = () => {
