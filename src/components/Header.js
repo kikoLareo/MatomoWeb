@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Header.css';
 import Filters from './Filters';
+import VisitDropDown from '../pages/Visits/visitsDropDown';
 // import Dropdown from './dropdown';
 
 
@@ -12,10 +13,10 @@ const Header = () => {
       <div className="headerMenu">
         <nav>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/reproductions">Reproductions</Link></li> 
-            <li><Link to="/devices">Devices</Link></li>
-            <li><Link to="/visits">Visits</Link></li>
+            <li className="menu-item" ><Link to="/">Home</Link></li>
+            <li className="menu-item" ><Link to="/reproductions">Reproductions</Link></li> 
+            <li className="menu-item" ><Link to="/devices">Devices</Link></li>
+            <li className="menu-item" ><VisitDropDown/></li>
             {/* <Dropdown /> */}
           </ul>
         

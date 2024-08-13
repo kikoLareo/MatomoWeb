@@ -2,6 +2,9 @@
 import { MediaAnalytics_getChartData } from "../modules/mediaAnalytics/mediaAnalytics";
 import {visitFrequency_get} from "../modules/Visits/visits_actions";
 
+export const language = 'es';
+
+
 export const homeCharts = [
   {
     title: 'API',
@@ -129,7 +132,7 @@ export const devicesDetectionCharts = [
 
 
 
-export const visitsCharts = [
+export const visitsCharts_frequency = [
   {
     title: 'Visits - Frequency',
     description: 'Get the frequency of visits.',
@@ -145,6 +148,8 @@ export const visitsCharts = [
       this.data = await visitFrequency_get(idSite, this.period, this.date)
       if(this.data.info.metadata){
         this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.metrics = this.data.info.metadata.metrics;
       }
       console.log('Fetched data for chart:', this, this.data);
     }

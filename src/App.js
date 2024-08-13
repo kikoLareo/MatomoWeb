@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Devices from './pages/Devices';
 import Reproductions from './pages/Reproductions';
-import Visits from './pages/Visits';
+import VisitFrequency from './pages/Visits/visitPages.js/visit-frequency';
 import './css/App.css';
 import './css/Sidebar.css';
 import './css/Header.css';
@@ -27,7 +27,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/reproductions" element={<Reproductions/>} />
                 <Route path="/devices" element={<Devices />} />
-                <Route path="/visits" element={<Visits />} />
+                <Route path="/visitFrequency" element={<VisitFrequency />} />
               </Routes>
             </div>
           </div>

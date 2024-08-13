@@ -54,7 +54,6 @@ function useGraph(charts, idSite) {
               metrics.map((metric, metricIndex) => (
               
                 <GraphRenderer
-                  key={`${chartIndex}-${metricIndex}`}
                   chart={{
                     type,
                     labels: Object.keys(data.value),

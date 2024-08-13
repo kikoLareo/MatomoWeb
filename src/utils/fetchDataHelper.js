@@ -4,6 +4,7 @@ import { APIFunctions, API_getProcessedReport } from '../modules/API/Api_actions
 import { mediaAnalyticsFunctions } from '../modules/mediaAnalytics/mediaAnalytics';
 import { devicesDetectionActions } from '../modules/devicesDetection/devicesDetect_Actions';
 import axios from 'axios';
+import { language } from '../config/chartsConfig';
 
 export const fetchDataForCharts = async (idSite, chartsConfig) => {
   const newChartData = {};
@@ -52,7 +53,7 @@ export const fetchData = async (idSite, requestData) => {
   console.log('fetchData:', requestData);
   try {
     try {
-      let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, 'es');
+      let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, language);
       let response = await axios.get(dataUrl.url);
       var processedData = response.data;
     } catch (error) {
