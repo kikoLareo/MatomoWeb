@@ -103,13 +103,13 @@ export const visitCharts_time = [
       description: 'Get the number of visits per page views.',
       action: "getNumberOfVisitsPerPage",
       module: 'VisitorInterest',
-      period: 'month',
+      period: 'year',
       date: '2024-03-01,yesterday',
-      type: 'lineal',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      type: 'bubble',
+      metrics: ["nb_visits"],
       data : [],
       async getData(idSite){
-        this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)
+        this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)[0]
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
@@ -125,13 +125,13 @@ export const visitCharts_time = [
       description: 'Get the number of visits by days since last visit.',
       action: "getNumberOfVisitsByDaysSinceLast",
       module: 'VisitorInterest',
-      period: 'month',
+      period: 'year',
       date: '2024-03-01,yesterday',
-      type: 'lineal',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      type: 'bubble',
+      metrics: ["nb_visits"],
       data : [],
       async getData(idSite){
-        this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)
+        this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)[0]
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
@@ -157,7 +157,7 @@ export const visitCharts_time = [
       metrics: ["nb_visits", "nb_uniq_visitors"],
       data : [],
       async getData(idSite){
-        this.data = await visitsSummary_get(idSite, this.period, this.date)
+        this.data = await visitsSummary_get(idSite, this.period, this.date)[0]
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
