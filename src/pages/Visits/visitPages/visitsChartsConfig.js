@@ -84,7 +84,7 @@ export const visitCharts_time = [
       period: 'year',
       date: '2024-03-01,yesterday',
       type: 'bubble',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      metrics: ["nb_visits"],
       data : [],
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, this.period, this.date)

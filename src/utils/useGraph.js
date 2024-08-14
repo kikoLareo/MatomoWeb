@@ -28,8 +28,8 @@ function useGraph(chartConfig, selectedMetrics) {
                 key={metric}
                 chart={{
                   type,
-                  labels: Object.keys(data.value),
-                  data: Object.keys(data.value).map(date => data.value[date]?.[metric] || 0),
+                  labels:  data.value.labels ? data.value.labels : Object.keys(data.value), 
+                  data: Object.keys(data.value).map(label => data.value[label]?.[metric] || 0),
                   title: data.info.columns ? data.info.columns[metric] : data.info.metadata ? data.info.metadata.metrics[metric] : titles[metric]
                 }}
               />
