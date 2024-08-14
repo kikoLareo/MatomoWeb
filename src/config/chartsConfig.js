@@ -130,6 +130,9 @@ export const devicesDetectionCharts = [
   }
 ];
 
+/*                VISITS CHARTS                */
+
+
 
 
 export const visitsCharts_frequency = [
@@ -157,6 +160,11 @@ export const visitsCharts_frequency = [
     
   }
 ];
+
+
+
+
+
 
 export var exampleCharts = [ 
   { title: 'Example Chart 1', 

@@ -5,7 +5,8 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Devices from './pages/Devices';
 import Reproductions from './pages/Reproductions';
-import VisitFrequency from './pages/Visits/visitPages.js/visit-frequency';
+import VisitPage from './pages/Visits/visitPages/VisitsPages';
+import { pagesConfig } from './pages/Visits/visitPages/visitPagesConfig';
 import './css/App.css';
 import './css/Sidebar.css';
 import './css/Header.css';
@@ -14,27 +15,32 @@ import './css/dashboard.css';
 import './css/Home.css';
 import './css/Visits.css';
 import { IdSiteProvider } from './contexts/idSiteContext';
+
 function App() {
   return (
     <IdSiteProvider>
       <Router>
         <div className="app">
           <Header />
-         
           <div className="main-content">
-            {/* <Sidebar /> */}
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/reproductions" element={<Reproductions/>} />
+                <Route path="/reproductions" element={<Reproductions />} />
                 <Route path="/devices" element={<Devices />} />
-                <Route path="/visitFrequency" element={<VisitFrequency />} />
+                {pagesConfig.map((page) => (
+                  <Route
+                    key={page.path}
+                    path={page.path}
+                    element={<VisitPage pageConfig={page} />}
+                  />
+                ))}
               </Routes>
             </div>
           </div>
         </div>
       </Router>
-      </IdSiteProvider>
+    </IdSiteProvider>
   );
 }
 

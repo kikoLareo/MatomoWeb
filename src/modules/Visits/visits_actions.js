@@ -18,22 +18,23 @@ export const visitFrequencyActions = {
     get: visitFrequency_get
 }
 
-export const visitTime_getVisitInformationPerLocalTime = (idSite, period, date, segment) => {
-    const action = `VisitTime.getVisitInformationPerLocalTime`;
+export const visitTime_getVisitInformationPerLocalTime = async (idSite, period, date, segment) => {
+    const action = `getVisitInformationPerLocalTime`;
+    const method = "VisitTime.getVisitInformationPerLocalTime";
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
-
-    return { url: getBaseUrl(module,action, params), title: 'Visit Time - Local Time' };
+    return await fetchData(idSite, { module: "VisitTime", action, url: getBaseUrl(module,method, params)});
 }
 
-export const visitTime_getByDayOfWeek = (idSite, period, date, segment) => {
-    const action = `VisitTime.getByDayOfWeek`;
+export const visitTime_getByDayOfWeek = async (idSite, period, date, segment) => {
+    const action = `getByDayOfWeek`;
+    const method = "VisitTime.getByDayOfWeek";
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(module,action, params), title: 'Visit Time - Day of Week' };
+    return await fetchData(idSite, { module: "VisitTime", action, url: getBaseUrl(module,method, params)});
 }
 
 export const visitTimeActions = {
@@ -42,32 +43,35 @@ export const visitTimeActions = {
 }
 
 
-export const visitorInterest_getNumberOfVisitsPerVisitDuration = (idSite, period, date, segment) => {
-    const action = `VisitorInterest.getNumberOfVisitsPerVisitDuration`;
+export const visitorInterest_getNumberOfVisitsPerVisitDuration = async (idSite, period, date, segment) => {
+    const action = `getNumberOfVisitsPerVisitDuration`;
+    const method = `VisitorInterest.getNumberOfVisitsPerVisitDuration`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Visit Duration' };
+    return await fetchData(idSite, { module: "VisitorInterest", action, url: getBaseUrl(module,method, params)});
 }
 
-export const visitorInterest_getNumberOfVisitsPerPage = (idSite, period, date, segment) => {
-    const action = `VisitorInterest.getNumberOfVisitsPerPage`;
+export const visitorInterest_getNumberOfVisitsPerPage = async (idSite, period, date, segment) => {
+    const action = `getNumberOfVisitsPerPage`;
+    const method = `VisitorInterest.getNumberOfVisitsPerPage`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Pages per Visit' };
+    return await fetchData(idSite, { module: "VisitorInterest", action, url: getBaseUrl(module,method, params)});
 }
 
 
-export const visitorInterest_getNumberOfVisitsByDaysSinceLast = (idSite, period, date, segment) => {
-    const action = `VisitorInterest.getNumberOfVisitsByDaysSinceLast`;
+export const visitorInterest_getNumberOfVisitsByDaysSinceLast = async  (idSite, period, date, segment) => {
+    const action = `getNumberOfVisitsByDaysSinceLast`;
+    const method = `VisitorInterest.getNumberOfVisitsByDaysSinceLast`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(module,action, params), title: 'Visitor Interest - Days Since Last Visit' };
+    return await fetchData(idSite, { module: "VisitorInterest", action, url: getBaseUrl(module,method, params)});
 }
 
 export const visitorInterestActions = {
@@ -77,13 +81,14 @@ export const visitorInterestActions = {
 }
 
 
-export const visitsSummary_get = (idSite, period, date, segment) => {
-    const action = `VisitsSummary.get`;
+export const visitsSummary_get = async (idSite, period, date, segment) => {
+    const action = `get`;
+    const method = `VisitsSummary.get`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(module,action, params), title: 'Visits Summary' };
+    return await fetchData(idSite, { module: "VisitsSummary", action, url: getBaseUrl(module,method, params)});
 }
 
 export const visitsSummaryActions = {
