@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
-    const [selectedMetrics, setSelectedMetrics] = useState(localStorage.getItem('selectedMetrics'));
+    const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
     const { idSite } = useContext(IdSiteContext);
 
@@ -22,31 +22,30 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
         fetchData();
     }, [idSite, chartConfig]);
 
-    // Load saved metrics from localStorage
+    // Load saved metrics from sessionStorage
     useEffect(() => {
-        const savedMetrics = localStorage.getItem('selectedMetrics');
-        console.log('savedMetrics', savedMetrics);
+        const savedMetrics = sessionStorage.getItem('selectedMetrics');
         if (savedMetrics) {
             setSelectedMetrics(JSON.parse(savedMetrics));
         }
     }, []);
 
-    // Update localStorage when selectedMetrics changes
+    // Update sessionStorage when selectedMetrics changes
     useEffect(() => {
-        localStorage.setItem('selectedMetrics', JSON.stringify(selectedMetrics));
+        sessionStorage.setItem('selectedMetrics', JSON.stringify(selectedMetrics));
     }, [selectedMetrics]);
 
     // Handle metric selection
     const handleMetricSelect = (chart, metric) => {
         const chartTitle = chart.title;
         setSelectedMetrics((prevSelectedMetrics) => {
-            const chartInfo = prevSelectedMetrics[chartTitle] || { chart, metrics: [] };
-            const metrics = chartInfo.metrics.includes(metric)
-                ? chartInfo.metrics.filter(m => m !== metric)
-                : [...chartInfo.metrics, metric];
+            const chartInfo = prevSelectedMetrics[chartTitle] || [];
+            const metrics = chartInfo.includes(metric)
+                ? chartInfo.filter(m => m !== metric)
+                : [...chartInfo, metric];
             return {
                 ...prevSelectedMetrics,
-                [chartTitle]: { ...chartInfo, metrics },
+                [chartTitle]: metrics,
             };
         });
         onMetricSelect(chart, metric);  // Call the prop function if needed
@@ -63,7 +62,7 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
                                 <label>
                                     <input
                                         type="checkbox"
-                                        checked={selectedMetrics[chart.title]?.metrics.includes(metric) || false}
+                                        checked={selectedMetrics[chart.title]?.includes(metric) || false}
                                         onChange={() => handleMetricSelect(chart, metric)}
                                     />
                                     {value}
