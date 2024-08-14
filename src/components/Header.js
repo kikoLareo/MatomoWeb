@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import '../css/Header.css';
 import Filters from './Filters';
 import VisitDropDown from '../pages/Visits/visitsDropDown';
-// import Dropdown from './dropdown';
 
+export function setTitle(title) {
+  const titleDiv = document.querySelector('.pageTitle');
+  titleDiv.innerHTML = title;
+}
 
 const Header = () => {
   return (
@@ -17,10 +20,9 @@ const Header = () => {
             <li className="menu-item" ><Link to="/reproductions">Reproductions</Link></li> 
             <li className="menu-item" ><Link to="/devices">Devices</Link></li>
             <li className="menu-item" ><VisitDropDown/></li>
-            {/* <Dropdown /> */}
           </ul>
-        
         </nav>
+        <div className="pageTitle"></div>
         <Filters />
       </div>
     </header>

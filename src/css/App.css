@@ -14,11 +14,17 @@
 
 .content {
   flex: 1;
-  padding: 1vh 1vw;
-  width: 98vw;
+  
+  width: 100vw;
 }
 
 .page{
     width: 100%;
+    padding: 3vh 0 0 0;
+}
 
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

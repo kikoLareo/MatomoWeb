@@ -1,12 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { exampleCharts } from '../../../config/chartsConfig';
+import React, { useContext, useState, useEffect } from 'react';
+import { visitsCharts_frequency } from '../../../config/chartsConfig';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 import ChartOptions from '../../../components/chartOptions';
 import useGraph from '../../../utils/useGraph';
+import { setTitle } from '../../../components/Header';
 
 const VisitFrequency = () => {
   const { idSite } = useContext(IdSiteContext);
   const [selectedMetrics, setSelectedMetrics] = useState({});
+
+  useEffect(() => {
+    const fetchDataForCharts = async () => {
+      for (const chart of visitsCharts_frequency) {
+        await chart.getData(idSite);
+      }
+    };
+
+    fetchDataForCharts();
+  }, [idSite]);
 
   const handleMetricSelect = (chart, metric) => {
     const chartTitle = chart.title;
@@ -24,11 +35,13 @@ const VisitFrequency = () => {
 
   const chartsToRender = useGraph(selectedMetrics, idSite);
 
+  setTitle('Visitas - Frecuencia de visitas');
   return (
     <div className="page">
-      <h1>Visitas</h1>
+      <div className="title">
+      </div>
       <div className="visitsGraphs">
-        <ChartOptions chartConfig={exampleCharts} onMetricSelect={handleMetricSelect} />
+        <ChartOptions chartConfig={visitsCharts_frequency} onMetricSelect={handleMetricSelect} />
         <div>
           {chartsToRender}
         </div>
