@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
-
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
     const { idSite } = useContext(IdSiteContext);
 
+    // Fetch metrics data when chartConfig or idSite changes
     useEffect(() => {
         const fetchData = async () => {
             const data = {};
@@ -21,49 +21,35 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     
         fetchData();
     }, [idSite, chartConfig]);
-    
+
+    // Load saved metrics from localStorage
     useEffect(() => {
         const savedMetrics = localStorage.getItem('selectedMetrics');
         if (savedMetrics) {
             setSelectedMetrics(JSON.parse(savedMetrics));
         }
     }, []);
-    
+
+    // Update localStorage when selectedMetrics changes
     useEffect(() => {
-        const updateSelectedMetrics = async () => {
-            const data = {};
-            for (const chart of chartConfig) {
-                if (chart.getData) {
-                    const chartData = await chart.getData(idSite);
-                    data[chart.title] = chartData.metrics;
-                }
-            }
-            setSelectedMetrics(data);
-        };
-    
-        updateSelectedMetrics();
-    }, [idSite, chartConfig]);
-    
+        localStorage.setItem('selectedMetrics', JSON.stringify(selectedMetrics));
+    }, [selectedMetrics]);
+
+    // Handle metric selection
     const handleMetricSelect = (chart, metric) => {
-        console.log('handleMetricSelect', chart, metric);
         const chartTitle = chart.title;
         setSelectedMetrics((prevSelectedMetrics) => {
             const metrics = prevSelectedMetrics[chartTitle] || [];
             const updatedMetrics = metrics.includes(metric)
                 ? metrics.filter(m => m !== metric)
                 : [...metrics, metric];
-    
-            const newSelectedMetrics = {
+
+            return {
                 ...prevSelectedMetrics,
                 [chartTitle]: updatedMetrics,
             };
-    
-            // Guardar en localStorage
-            localStorage.setItem('selectedMetrics', JSON.stringify(newSelectedMetrics));
-            return newSelectedMetrics;
         });
     };
-    
 
     return (
         <div className="chart-options">
