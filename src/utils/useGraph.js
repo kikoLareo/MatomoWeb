@@ -8,11 +8,7 @@ function useGraph(selectedMetrics) {
   const [charts, setCharts] = useState([]);
 
   useEffect(() => {
-    if (
-      !selectedMetrics || 
-      (Array.isArray(selectedMetrics) && selectedMetrics.length === 0) || 
-      (typeof selectedMetrics === 'object' && !Array.isArray(selectedMetrics) && Object.keys(selectedMetrics).length === 0)
-    ) {
+    if (!selectedMetrics || Object.keys(selectedMetrics).length === 0) {
       setCharts(<p>No charts to render</p>);
       return;
     }

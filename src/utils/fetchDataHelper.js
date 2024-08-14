@@ -50,7 +50,6 @@ export const fetchDataForCharts = async (idSite, chartsConfig) => {
 
 export const fetchData = async (idSite, requestData) => {
   var newChartData = null;
-  console.log('fetchData:', requestData);
   try {
     try {
       let dataUrl = API_getProcessedReport(idSite, 'year', 'yesterday', requestData.module, requestData.action, language);
@@ -64,7 +63,6 @@ export const fetchData = async (idSite, requestData) => {
     const response1 = await fetch(requestData.url);
     const responseData = await response1.json();
 
-    console.log('fetchData:', responseData);
     
     const data = {
       value: responseData ,

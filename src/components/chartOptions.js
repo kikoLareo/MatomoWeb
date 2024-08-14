@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
-    const [selectedMetrics, setSelectedMetrics] = useState({});
+    const [selectedMetrics, setSelectedMetrics] = useState(localStorage.getItem('selectedMetrics'));
     const [metricsData, setMetricsData] = useState({});
     const { idSite } = useContext(IdSiteContext);
 
@@ -25,6 +25,7 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     // Load saved metrics from localStorage
     useEffect(() => {
         const savedMetrics = localStorage.getItem('selectedMetrics');
+        console.log('savedMetrics', savedMetrics);
         if (savedMetrics) {
             setSelectedMetrics(JSON.parse(savedMetrics));
         }
