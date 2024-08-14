@@ -81,9 +81,9 @@ export const visitCharts_time = [
       description: 'Get the number of visits per visit duration.',
       action: "getNumberOfVisitsPerVisitDuration",
       module: 'VisitorInterest',
-      period: 'month',
+      period: 'year',
       date: '2024-03-01,yesterday',
-      type: 'lineal',
+      type: 'buble',
       metrics: ["nb_visits", "nb_uniq_visitors"],
       data : [],
       async getData(idSite){
