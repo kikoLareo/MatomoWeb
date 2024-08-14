@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
+
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
     const { idSite } = useContext(IdSiteContext);
@@ -20,10 +21,7 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
 
         fetchData();
 
-            const savedMetrics = localStorage.getItem('selectedMetrics');
-        if (savedMetrics) {
-            setSelectedMetrics(JSON.parse(savedMetrics));
-        }
+           
 
     }, [idSite, chartConfig]);
 
@@ -48,6 +46,13 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
         });
         onMetricSelect(chart, metric);
     };
+
+    const savedMetrics = localStorage.getItem('selectedMetrics');
+    if (savedMetrics) {
+        setSelectedMetrics(JSON.parse(savedMetrics));
+    }
+
+    
     return (
         <div className="chart-options">
             {chartConfig.map((chart) => (
