@@ -3,7 +3,7 @@ import { IdSiteContext } from '../contexts/idSiteContext';
 import GraphRenderer from './GraphRenderer';
 import { titles } from './dictionaryMetrics/metricsTitles';
 
-function useGraph(selectedMetrics) {
+function useGraph(chartConfig, selectedMetrics) {
   const { idSite } = useContext(IdSiteContext);
   const [charts, setCharts] = useState([]);
 
@@ -13,11 +13,13 @@ function useGraph(selectedMetrics) {
       return;
     }
 
-    const renderedCharts = Object.entries(selectedMetrics).map(([chartTitle, chartInfo]) => {
-      const { chart, metrics } = chartInfo;
+    const renderedCharts = chartConfig.map((chart) => {
+      const metrics = selectedMetrics[chart.title] || [];
+      if (metrics.length === 0) return null;
+
       const { data, description, title, type } = chart;
       return (
-        <div className="graphGroup" key={chartTitle}>
+        <div className="graphGroup" key={chart.title}>
           <h3>{title}</h3>
           <p>{description}</p>
           <div className="graphGrid">
@@ -35,10 +37,10 @@ function useGraph(selectedMetrics) {
           </div>
         </div>
       );
-    });
+    }).filter(Boolean);
 
     setCharts(renderedCharts);
-  }, [selectedMetrics, idSite]);
+  }, [selectedMetrics, idSite, chartConfig]);
 
   return charts;
 }
