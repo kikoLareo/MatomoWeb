@@ -1,7 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     const [selectedMetrics, setSelectedMetrics] = useState({});
+    const [metricsData, setMetricsData] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = {};
+            for (const chart of chartConfig) {
+                if (chart.getData) {
+                    await chart.getData(); 
+                    data[chart.title] = chart.data.info.metadata.metrics;
+                }
+            }
+            setMetricsData(data);
+        };
+
+        fetchData();
+    }, [chartConfig]);
 
     const handleMetricSelect = (chart, metric) => {
         console.log('handleMetricSelect', chart, metric);
@@ -31,7 +47,7 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
                 <div key={chart.title} className="chart-block">
                     <h3 className="chart-title">{chart.title}</h3>
                     <ul className="metrics-list">
-                        {chart.metrics.map((metric) => (
+                        {metricsData[chart.title] && Object.entries(metricsData[chart.title]).map(([metric, value]) => (
                             <li key={metric} className="metrics-item">
                                 <label>
                                     <input
@@ -39,7 +55,7 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
                                         checked={selectedMetrics[chart.title]?.includes(metric) || false}
                                         onChange={() => handleMetricSelect(chart, metric)}
                                     />
-                                    {metric}
+                                    {value}
                                 </label>
                             </li>
                         ))}

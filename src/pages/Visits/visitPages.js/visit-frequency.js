@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { visitsCharts_frequency } from '../../../config/chartsConfig';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 import ChartOptions from '../../../components/chartOptions';
@@ -9,15 +9,7 @@ const VisitFrequency = () => {
   const { idSite } = useContext(IdSiteContext);
   const [selectedMetrics, setSelectedMetrics] = useState({});
 
-  useEffect(() => {
-    const fetchDataForCharts = async () => {
-      for (const chart of visitsCharts_frequency) {
-        await chart.getData(idSite);
-      }
-    };
-
-    fetchDataForCharts();
-  }, [idSite]);
+ 
 
   const handleMetricSelect = (chart, metric) => {
     const chartTitle = chart.title;
