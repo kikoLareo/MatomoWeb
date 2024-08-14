@@ -1,24 +1,25 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
-    const {idSite} = useContext(IdSiteContext);
+    const { idSite } = useContext(IdSiteContext);
+
     useEffect(() => {
         const fetchData = async () => {
             const data = {};
             for (const chart of chartConfig) {
                 if (chart.getData) {
-                    await chart.getData(idSite); 
-                    data[chart.title] = chart.metrics;
+                    const chartData = await chart.getData(idSite); 
+                    data[chart.title] = chartData.metrics;
                 }
             }
             setMetricsData(data);
         };
 
         fetchData();
-    }, [idSite,chartConfig]);
+    }, [idSite, chartConfig]);
 
     const handleMetricSelect = (chart, metric) => {
         console.log('handleMetricSelect', chart, metric);
@@ -26,13 +27,11 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
         setSelectedMetrics((prevSelectedMetrics) => {
             const metrics = prevSelectedMetrics[chartTitle] || [];
             if (metrics.includes(metric)) {
-                chart.selectedMetrics = metrics.filter(m => m !== metric);
                 return {
                     ...prevSelectedMetrics,
                     [chartTitle]: metrics.filter(m => m !== metric),
                 };
             } else {
-                chart.selectedMetrics = [...metrics, metric];
                 return {
                     ...prevSelectedMetrics,
                     [chartTitle]: [...metrics, metric],
