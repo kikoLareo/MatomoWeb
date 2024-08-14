@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
+import { IdSiteContext } from '../contexts/idSiteContext';
 
 const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
-
+    const {idSite} = useContext(IdSiteContext);
     useEffect(() => {
         const fetchData = async () => {
             const data = {};
             for (const chart of chartConfig) {
                 if (chart.getData) {
-                    await chart.getData(); 
-                    data[chart.title] = chart.data.info.metadata.metrics;
+                    await chart.getData(idSite); 
+                    data[chart.title] = chart.metrics;
                 }
             }
             setMetricsData(data);
         };
 
         fetchData();
-    }, [chartConfig]);
+    }, [idSite,chartConfig]);
 
     const handleMetricSelect = (chart, metric) => {
         console.log('handleMetricSelect', chart, metric);
