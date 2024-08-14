@@ -152,6 +152,8 @@ export const visitsCharts_frequency = [
         this.metrics = this.data.info.metadata.metrics;
       }
       console.log('Fetched data for chart:', this, this.data);
+
+      return this;
     }
     
   }
