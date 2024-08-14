@@ -104,12 +104,12 @@ export const visitCharts_time = [
       action: "getNumberOfVisitsPerPage",
       module: 'VisitorInterest',
       period: 'year',
-      date: '2024-03-01,yesterday',
+      date: 'yesterday',
       type: 'bubble',
       metrics: ["nb_visits"],
       data : [],
       async getData(idSite){
-        this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)[0]
+        this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
@@ -126,12 +126,12 @@ export const visitCharts_time = [
       action: "getNumberOfVisitsByDaysSinceLast",
       module: 'VisitorInterest',
       period: 'year',
-      date: '2024-03-01,yesterday',
+      date: 'yesterday',
       type: 'bubble',
       metrics: ["nb_visits"],
       data : [],
       async getData(idSite){
-        this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)[0]
+        this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
@@ -152,12 +152,12 @@ export const visitCharts_time = [
       action: "get",
       module: 'Visits',
       period: 'month',
-      date: '2024-03-01,yesterday',
+      date: 'yesterday',
       type: 'lineal',
       metrics: ["nb_visits", "nb_uniq_visitors"],
       data : [],
       async getData(idSite){
-        this.data = await visitsSummary_get(idSite, this.period, this.date)[0]
+        this.data = await visitsSummary_get(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
