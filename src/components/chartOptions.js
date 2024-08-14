@@ -1,26 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { IdSiteContext } from '../contexts/idSiteContext';
+import React from 'react';
 
-const ChartOptions = ({ chartConfig, selectedMetrics, onMetricSelect }) => {
-    const [metricsData, setMetricsData] = useState({});
-    const { idSite } = useContext(IdSiteContext);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = {};
-            for (const chart of chartConfig) {
-                if (chart.getData) {
-                    var chartData = await chart.getData(idSite);
-                    data[chart.title] = chartData.metrics;
-                } else {
-                    data[chart.title] = chart.metrics;
-                }
-            }
-            setMetricsData(data);
-        };
-        fetchData();
-    }, [idSite, chartConfig]);
-
+const ChartOptions = ({ chartConfig, selectedMetrics, onMetricSelect, metricsData }) => {
     return (
         <div className="chart-options">
             {chartConfig.map((chart) => (
