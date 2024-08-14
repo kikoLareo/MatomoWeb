@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import GraphRenderer from './GraphRenderer';
 import { titles } from './dictionaryMetrics/metricsTitles';
 
 function useGraph(selectedMetrics) {
-  const {idSite} = useContext(IdSiteContext);
-  console.log('useGraph', selectedMetrics, idSite);
+  const { idSite } = useContext(IdSiteContext);
+  const [charts, setCharts] = useState([]);
 
   useEffect(() => {
     if (
@@ -13,12 +13,12 @@ function useGraph(selectedMetrics) {
       (Array.isArray(selectedMetrics) && selectedMetrics.length === 0) || 
       (typeof selectedMetrics === 'object' && !Array.isArray(selectedMetrics) && Object.keys(selectedMetrics).length === 0)
     ) {
-      return <p>No charts to render</p>;
+      setCharts(<p>No charts to render</p>);
+      return;
     }
 
-    return Object.entries(selectedMetrics).map(([chartTitle, chartInfo]) => {
+    const renderedCharts = Object.entries(selectedMetrics).map(([chartTitle, chartInfo]) => {
       const { chart, metrics } = chartInfo;
-      console.log('chart', chart);
       const { data, description, title, type } = chart;
       return (
         <div className="graphGroup" key={chartTitle}>
@@ -40,7 +40,11 @@ function useGraph(selectedMetrics) {
         </div>
       );
     });
+
+    setCharts(renderedCharts);
   }, [selectedMetrics, idSite]);
+
+  return charts;
 }
 
 export default useGraph;
