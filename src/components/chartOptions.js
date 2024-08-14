@@ -19,6 +19,12 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
         };
 
         fetchData();
+
+            const savedMetrics = localStorage.getItem('selectedMetrics');
+        if (savedMetrics) {
+            setSelectedMetrics(JSON.parse(savedMetrics));
+        }
+
     }, [idSite, chartConfig]);
 
     const handleMetricSelect = (chart, metric) => {
@@ -26,21 +32,22 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
         const chartTitle = chart.title;
         setSelectedMetrics((prevSelectedMetrics) => {
             const metrics = prevSelectedMetrics[chartTitle] || [];
-            if (metrics.includes(metric)) {
-                return {
-                    ...prevSelectedMetrics,
-                    [chartTitle]: metrics.filter(m => m !== metric),
-                };
-            } else {
-                return {
-                    ...prevSelectedMetrics,
-                    [chartTitle]: [...metrics, metric],
-                };
-            }
+            const updatedMetrics = metrics.includes(metric)
+                ? metrics.filter(m => m !== metric)
+                : [...metrics, metric];
+    
+            const newSelectedMetrics = {
+                ...prevSelectedMetrics,
+                [chartTitle]: updatedMetrics,
+            };
+    
+            // Guardar en localStorage
+            localStorage.setItem('selectedMetrics', JSON.stringify(newSelectedMetrics));
+    
+            return newSelectedMetrics;
         });
         onMetricSelect(chart, metric);
     };
-
     return (
         <div className="chart-options">
             {chartConfig.map((chart) => (

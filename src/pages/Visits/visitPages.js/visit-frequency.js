@@ -1,12 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {useState } from 'react';
 import { visitsCharts_frequency } from '../../../config/chartsConfig';
-import { IdSiteContext } from '../../../contexts/idSiteContext';
 import ChartOptions from '../../../components/chartOptions';
 import useGraph from '../../../utils/useGraph';
 import { setTitle } from '../../../components/Header';
 
 const VisitFrequency = () => {
-  const { idSite } = useContext(IdSiteContext);
   const [selectedMetrics, setSelectedMetrics] = useState({});
 
   const handleMetricSelect = (chart, metric) => {
@@ -23,11 +21,12 @@ const VisitFrequency = () => {
     });
   };
 
-  useEffect(() => {
-    setTitle('Visitas - Frecuencia de visitas');
-  }, []);
+  
+  setTitle('Visitas - Frecuencia de visitas');
+    
+  
 
-  const chartsToRender = useGraph(selectedMetrics, idSite);
+  const chartsToRender = useGraph(selectedMetrics);
 
   return (
     <div className="page">
