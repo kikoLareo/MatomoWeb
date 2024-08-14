@@ -6,6 +6,8 @@ import { setTitle } from '../../../components/Header';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 
 const VisitFrequency = () => {
+  const chartsConfig = visitsCharts_frequency;
+
   const [selectedMetrics, setSelectedMetrics] = useState(() => {
     const savedMetrics = localStorage.getItem('selectedMetrics');
     return savedMetrics ? JSON.parse(savedMetrics) : {};
@@ -39,7 +41,7 @@ const VisitFrequency = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = {};
-      for (const chart of visitsCharts_frequency) {
+      for (const chart of chartsConfig) {
         if (chart.getData) {
           var chartData = await chart.getData(idSite);
           data[chart.title] = chartData.metrics;
@@ -50,9 +52,9 @@ const VisitFrequency = () => {
       setMetricsData(data);
     };
     fetchData();
-  }, [idSite]);
+  }, [idSite,chartsConfig]);
 
-  const chartsToRender = useGraph(visitsCharts_frequency, selectedMetrics);
+  const chartsToRender = useGraph(chartsConfig, selectedMetrics);
 
   return (
     <div className="page">
@@ -60,7 +62,7 @@ const VisitFrequency = () => {
       </div>
       <div className="visitsGraphs">
         <ChartOptions 
-          chartConfig={visitsCharts_frequency} 
+          chartConfig={chartsConfig} 
           selectedMetrics={selectedMetrics} 
           onMetricSelect={handleMetricSelect} 
           metricsData={metricsData}
