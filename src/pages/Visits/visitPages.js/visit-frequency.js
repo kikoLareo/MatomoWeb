@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import { visitsCharts_frequency } from '../../../config/chartsConfig';
 import ChartOptions from '../../../components/chartOptions';
 import useGraph from '../../../utils/useGraph';
@@ -22,8 +22,10 @@ const VisitFrequency = () => {
   };
 
   
-  setTitle('Visitas - Frecuencia de visitas');
-    
+  useEffect(() => {
+    setTitle('Visitas - Frecuencia de visitas');
+  }, []);
+
   
 
   const chartsToRender = useGraph(selectedMetrics);

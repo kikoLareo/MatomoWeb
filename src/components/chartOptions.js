@@ -12,19 +12,38 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
             const data = {};
             for (const chart of chartConfig) {
                 if (chart.getData) {
-                    const chartData = await chart.getData(idSite); 
+                    const chartData = await chart.getData(idSite);
                     data[chart.title] = chartData.metrics;
                 }
             }
             setMetricsData(data);
         };
-
+    
         fetchData();
-
-           
-
     }, [idSite, chartConfig]);
-
+    
+    useEffect(() => {
+        const savedMetrics = localStorage.getItem('selectedMetrics');
+        if (savedMetrics) {
+            setSelectedMetrics(JSON.parse(savedMetrics));
+        }
+    }, []);
+    
+    useEffect(() => {
+        const updateSelectedMetrics = async () => {
+            const data = {};
+            for (const chart of chartConfig) {
+                if (chart.getData) {
+                    const chartData = await chart.getData(idSite);
+                    data[chart.title] = chartData.metrics;
+                }
+            }
+            setSelectedMetrics(data);
+        };
+    
+        updateSelectedMetrics();
+    }, [idSite, chartConfig]);
+    
     const handleMetricSelect = (chart, metric) => {
         console.log('handleMetricSelect', chart, metric);
         const chartTitle = chart.title;
@@ -41,18 +60,11 @@ const ChartOptions = ({ chartConfig, onMetricSelect }) => {
     
             // Guardar en localStorage
             localStorage.setItem('selectedMetrics', JSON.stringify(newSelectedMetrics));
-    
             return newSelectedMetrics;
         });
-        onMetricSelect(chart, metric);
     };
-
-    const savedMetrics = localStorage.getItem('selectedMetrics');
-    if (savedMetrics) {
-        setSelectedMetrics(JSON.parse(savedMetrics));
-    }
-
     
+
     return (
         <div className="chart-options">
             {chartConfig.map((chart) => (
