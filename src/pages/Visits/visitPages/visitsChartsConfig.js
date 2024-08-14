@@ -83,7 +83,7 @@ export const visitCharts_time = [
       module: 'VisitorInterest',
       period: 'year',
       date: '2024-03-01,yesterday',
-      type: 'buble',
+      type: 'bubble',
       metrics: ["nb_visits", "nb_uniq_visitors"],
       data : [],
       async getData(idSite){
