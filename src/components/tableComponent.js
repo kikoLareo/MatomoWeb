@@ -12,7 +12,7 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
         const fetchData = async () => {
             try {
                 if(!period)
-                    setPeriod('day');
+                    setPeriod('year');
                 if(!date)
                     setDate('yesterday');
 

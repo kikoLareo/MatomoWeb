@@ -75,12 +75,24 @@ const VisitPage = ({ pageConfig }) => {
 
   const renderCharts = () => {
     return chartsConfig.map((chartConfig, index) => {
-    
       const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
       console.log('Selected metrics:', metrics);
-
+  
       if (metrics.length === 0) return null;
-      console.log('Rendering chart:', chartConfig);
+  
+      const labels = chartConfig.labels && chartConfig.labels.length > 0
+        ? chartConfig.labels
+        : (chartConfig.data && chartConfig.data.value && chartConfig.data.value.labels)
+          ? chartConfig.data.value.labels
+          : (chartConfig.data && chartConfig.data.value)
+            ? Object.keys(chartConfig.data.value)
+            : [];
+  
+      if (labels.length === 0) {
+        console.warn(`No labels available for chart: ${chartConfig.title}`);
+        return null;
+      }
+  
       return (
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
@@ -90,8 +102,8 @@ const VisitPage = ({ pageConfig }) => {
                 key={metricIndex}
                 chart={{
                   type: chartConfig.type,
-                  labels: chartConfig.labels ? chartConfig.labels : chartConfig.data.value.labels || Object.keys(chartConfig.data.value),
-                  data: Object.keys(chartConfig.data.value).map(label => chartConfig.data.value[label]?.[metric] || 0),
+                  labels: labels,
+                  data: labels.map(label => chartConfig.data.value[label]?.[metric] || 0),
                   title: chartConfig.metrics[metric],
                 }}
               />
@@ -101,48 +113,6 @@ const VisitPage = ({ pageConfig }) => {
       );
     });
   };
-
-  return (
-    <div className="page">
-      <div className="pageBody">
-        <div className="visitsGraphs">
-          {loading ? (
-            <div>Loading data...</div>
-          ) : (
-            <>
-              {pageConfig.components.includes("chartOptions") && (
-                <ChartOptions 
-                  chartConfig={chartsConfig} 
-                  selectedMetrics={selectedMetrics} 
-                  onMetricSelect={handleMetricSelect} 
-                  metricsData={metricsData}
-                />
-              )}
-              <div className="chartsInfo">
-                <div className="filter-options" style={{ display: 'flex' }}>
-                  {pageConfig.components.includes("periodSelecter") && (
-                    <FilterPeriod onPeriodChange={handlePeriodChange} />
-                  )}
-                  {pageConfig.components.includes("dateSelecter") && (
-                    <FilterPeriod onPeriodChange={handleDateChange} />
-                  )}
-                  </div>
-                {pageConfig.components.includes("DataOverviewTable") &&
-                  chartsConfig.map((chartConfig, index) => (
-                    <div key={index} className="data-overview-section">
-                      <DataOverviewTable 
-                        fetchDataFunction={chartConfig.function} 
-                      />
-                    </div>
-                  ))}
-                {pageConfig.components.includes("GraphRenderer") && renderCharts()}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+}
 
 export default VisitPage;

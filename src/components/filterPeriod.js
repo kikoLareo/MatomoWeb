@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export const FilterPeriod = ({ onPeriodChange }) => {
-    const [period, setPeriod] = useState('year');
+    const [period, setPeriod] = useState({});
 
 
     const handlePeriodChange = (e) => {
