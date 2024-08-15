@@ -3,6 +3,7 @@ import React from 'react';
 import ChartComponent from "../components/ChartComponent";
 import PieChartComponent from "../components/PieChartComponent";
 import BubbleChartComponent from '../components/BubbleChartComponent';
+import BarChartComponent from '../components/BarChartComponent';
 
 const GraphRenderer = ({ chart, chartIndex }) => {
   const { type, labels, data, title } = chart;
@@ -26,9 +27,9 @@ const GraphRenderer = ({ chart, chartIndex }) => {
       return (
         <div className="graph_component" key={chartIndex}>
           <PieChartComponent
-            labels={Object.keys(data)}
-            data={Object.keys(data).map(date => data[date] || 0)}
-            title={title}
+             labels={labels}
+             data={data}
+             title={title}
           />
         </div>
       );
@@ -36,6 +37,16 @@ const GraphRenderer = ({ chart, chartIndex }) => {
         return (
           <div className="graph_component" key={chartIndex}>
             <BubbleChartComponent
+              labels={labels}
+              data={data}
+              title={title}
+            />
+          </div>
+        );
+      case 'bar':
+        return (
+          <div className="graph_component" key={chartIndex}>
+            <BarChartComponent
               labels={labels}
               data={data}
               title={title}

@@ -35,10 +35,10 @@ export const visitCharts_time = [
       description: 'Get the visits information over time.',
       action: "getVisitInformationPerLocalTime",
       module: 'VisitsTime',
-      period: 'month',
-      date: '2024-03-01,yesterday',
-      type: 'lineal',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      period: 'year',
+      date: 'yesterday',
+      type: 'bar',
+      metrics: [],
       data : [],
       function: visitTime_getVisitInformationPerLocalTime,
       async getData(idSite){
@@ -51,17 +51,18 @@ export const visitCharts_time = [
         console.log('Fetched data for chart:', this, this.data);
 
         return this;
-      }
+      },
+      
     },
     {
       title: 'Visits - Day of Week',
       description: 'Get the visits information by day of week.',
       action: "getByDayOfWeek",
       module: 'VisitsTime',
-      period: 'month',
-      date: '2024-03-01,yesterday',
-      type: 'lineal',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      period: 'year',
+      date: 'yesterday',
+      type: 'bar',
+      metrics: [],
       data : [],
       function: visitTime_getByDayOfWeek,
       async getData(idSite){

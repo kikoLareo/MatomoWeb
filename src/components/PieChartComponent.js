@@ -2,7 +2,7 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
-const PieChartComponent = ({ labels, data, title, description }) => {
+const PieChartComponent = ({ labels, data, title }) => {
   let others = 0;
   const totalVisits = data.reduce((acc, value) => acc + value, 0);
 
