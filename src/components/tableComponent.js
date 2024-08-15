@@ -17,9 +17,10 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
                     setDate('yesterday');
 
                 const result = await fetchDataFunction(idSite, period, date);
-                console.log(result, fetchDataFunction, idSite, period, date);
+                
                 setData(result.value);
                 setMetadata(result.info.metadata.columns);
+                console.log(result, fetchDataFunction, idSite, period, date);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -27,6 +28,8 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
 
         fetchData();
     }, [fetchDataFunction, idSite, period, date]);
+
+    console.log(data, metadata);
 
     const handlePeriodChange = (e) => {
         setPeriod(e.target.value);
@@ -36,7 +39,7 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
         setDate(e.target.value);
     };
 
-    if (!data || !Object.keys(metadata).length) {
+    if (!data || !metadata) {
         return <div>Loading...</div>;
     }
 
