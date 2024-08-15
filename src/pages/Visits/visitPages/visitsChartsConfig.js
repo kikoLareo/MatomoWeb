@@ -40,6 +40,7 @@ export const visitCharts_time = [
       type: 'bar',
       metrics: [],
       data : [],
+      labels: [],
       function: visitTime_getVisitInformationPerLocalTime,
       async getData(idSite){
         this.data = await visitTime_getVisitInformationPerLocalTime(idSite, this.period, this.date)
@@ -47,6 +48,11 @@ export const visitCharts_time = [
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
           this.metrics = this.data.info.metadata.metrics;
+          this.data.value.forEach((value) => {
+            if (value.hasOwnProperty('label')) {
+              this.labels.push(value.label);
+            }
+          });
         }
         console.log('Fetched data for chart:', this, this.data);
 

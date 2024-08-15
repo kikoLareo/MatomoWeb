@@ -64,7 +64,12 @@ const VisitPage = ({ pageConfig }) => {
 
   const renderCharts = () => {
     return chartsConfig.map((chartConfig, index) => {
-      const metrics = selectedMetrics[chartConfig.title] || [];
+      let metrics;
+      if(!pageConfig.components.includes("chartOptions")){
+        metrics = chartConfig.data.info.metadata.metrics;
+      }else{
+        metrics = selectedMetrics[chartConfig.title] || [];
+      }
       if (metrics.length === 0) return null;
       console.log('Rendering chart:', chartConfig);
       return (
@@ -76,7 +81,7 @@ const VisitPage = ({ pageConfig }) => {
                 key={metricIndex}
                 chart={{
                   type: chartConfig.type,
-                  labels: chartConfig.data.value.labels || Object.keys(chartConfig.data.value),
+                  labels: chartConfig.labels ? chartConfig.labels : chartConfig.data.value.labels || Object.keys(chartConfig.data.value),
                   data: Object.keys(chartConfig.data.value).map(label => chartConfig.data.value[label]?.[metric] || 0),
                   title: chartConfig.metrics[metric],
                 }}
@@ -96,16 +101,16 @@ const VisitPage = ({ pageConfig }) => {
             <div>Loading data...</div>
           ) : (
             <>
-              {pageConfig.components.includes("chartOptions")? (
+              {pageConfig.components.includes("chartOptions") && (
                 <ChartOptions 
                   chartConfig={chartsConfig} 
                   selectedMetrics={selectedMetrics} 
                   onMetricSelect={handleMetricSelect} 
                   metricsData={metricsData}
                 />
-              ) : null}
+              )}
               <div className="chartsInfo">
-                {pageConfig.components.includes("DataOverviewTable")?
+                {pageConfig.components.includes("DataOverviewTable") &&
                   chartsConfig.map((chartConfig, index) => (
                     <div key={index} className="data-table-section">
                       <h2>{chartConfig.title}</h2>
@@ -113,8 +118,8 @@ const VisitPage = ({ pageConfig }) => {
                         fetchDataFunction={chartConfig.function} 
                       />
                     </div>
-                  )) : null}
-                {pageConfig.components.includes("GraphRenderer")? renderCharts() : null}
+                  ))}
+                {pageConfig.components.includes("GraphRenderer") && renderCharts()}
               </div>
             </>
           )}
