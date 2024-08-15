@@ -3,7 +3,6 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const ChartComponent = ({ data, labels, title }) => {
-  console.log('ChartComponent', data, labels, title);
   const chartData = {
     labels,
     datasets: [

@@ -77,13 +77,13 @@ const VisitPage = ({ pageConfig }) => {
     return chartsConfig.map((chartConfig, index) => {
     
       const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
+      console.log('Selected metrics:', metrics);
 
       if (metrics.length === 0) return null;
       console.log('Rendering chart:', chartConfig);
       return (
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
-          
           <div className="chart-group">
             {metrics.map((metric, metricIndex) => (
               <GraphRenderer

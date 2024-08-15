@@ -1,4 +1,4 @@
-import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time } from './visitsChartsConfig';
+import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time, exampleCharts } from './visitsChartsConfig';
 
 export const pagesConfig = [
   {
@@ -26,6 +26,12 @@ export const pagesConfig = [
     chartsConfig: visitCharts_interest,
     components: [ "GraphRenderer"],
 
-  }
+  },
+  {
+    path: '/example',
+    title: 'Example',
+    chartsConfig: exampleCharts,
+    components: ["chartOptions", "DataOverviewTable", "GraphRenderer", "periodSelecter", "dateSelecter"],
+  },
  
 ];

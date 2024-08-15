@@ -27,8 +27,6 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
         fetchData();
     }, [fetchDataFunction, idSite, period, date]);
 
-    console.log(data, metadata);
-
     const handlePeriodChange = (e) => {
         setPeriod(e.target.value);
     };
