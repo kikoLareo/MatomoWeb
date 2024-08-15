@@ -48,10 +48,13 @@ export const visitCharts_time = [
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
           this.data.value.forEach((value) => {
+            console.log('Value:', value);
             if (value.hasOwnProperty('label')) {
               this.labels.push(value.label);
+            }else{
+              this.labels.push(value);
             }
-          });
+          }); 
         }
         console.log('Fetched data for chart:', this, this.data);
 
