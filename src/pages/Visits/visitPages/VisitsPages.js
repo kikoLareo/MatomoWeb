@@ -61,6 +61,13 @@ const VisitPage = ({ pageConfig }) => {
     fetchData();
   }, [idSite, chartsConfig]);
 
+  // Force the initial rendering of charts based on selectedMetrics
+  useEffect(() => {
+    if (Object.keys(selectedMetrics).length > 0) {
+      setLoading(false); // Stop loading once selectedMetrics is loaded
+    }
+  }, [selectedMetrics]);
+
   const chartsToRender = useGraph(chartsConfig, selectedMetrics, loading);
 
   return (
