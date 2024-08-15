@@ -10,7 +10,11 @@ function useGraph(chartConfig, selectedMetrics) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await chartConfig.getData(idSite);
+        chartConfig.forEach(async (chart) => {
+          if (chart.getData) {
+            await chart.getData(idSite);
+          }
+        });
           
       } catch (error) {
           console.error("Error fetching data:", error);
