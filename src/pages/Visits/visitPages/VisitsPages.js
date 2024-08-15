@@ -72,7 +72,6 @@ const VisitPage = ({ pageConfig }) => {
   const handleDateChange = (newDate) => {
     setDate(newDate); // Update the date state
   };
-
   const renderCharts = () => {
     return chartsConfig.map((chartConfig, index) => {
       const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
@@ -113,6 +112,49 @@ const VisitPage = ({ pageConfig }) => {
       );
     });
   };
-}
+  
+
+  return (
+    <div className="page">
+      <div className="pageBody">
+        <div className="visitsGraphs">
+          {loading ? (
+            <div>Loading data...</div>
+          ) : (
+            <>
+              {pageConfig.components.includes("chartOptions") && (
+                <ChartOptions 
+                  chartConfig={chartsConfig} 
+                  selectedMetrics={selectedMetrics} 
+                  onMetricSelect={handleMetricSelect} 
+                  metricsData={metricsData}
+                />
+              )}
+              <div className="chartsInfo">
+                <div className="filter-options" style={{ display: 'flex' }}>
+                  {pageConfig.components.includes("periodSelecter") && (
+                    <FilterPeriod onPeriodChange={handlePeriodChange} />
+                  )}
+                  {pageConfig.components.includes("dateSelecter") && (
+                    <FilterPeriod onPeriodChange={handleDateChange} />
+                  )}
+                  </div>
+                {pageConfig.components.includes("DataOverviewTable") &&
+                  chartsConfig.map((chartConfig, index) => (
+                    <div key={index} className="data-overview-section">
+                      <DataOverviewTable 
+                        fetchDataFunction={chartConfig.function} 
+                      />
+                    </div>
+                  ))}
+                {pageConfig.components.includes("GraphRenderer") && renderCharts()}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default VisitPage;
