@@ -72,6 +72,7 @@ export const visitCharts_time = [
       type: 'bar',
       metrics: ["nb_visits"],
       data : [],
+      labels: [],
       function: visitTime_getByDayOfWeek,
       async getData(idSite){
         this.data = await visitTime_getByDayOfWeek(idSite, this.period, this.date)

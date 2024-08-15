@@ -128,8 +128,7 @@ const VisitPage = ({ pageConfig }) => {
                   </div>
                 {pageConfig.components.includes("DataOverviewTable") &&
                   chartsConfig.map((chartConfig, index) => (
-                    <div key={index} className="data-table-section">
-                      <h2>{chartConfig.title}</h2>
+                    <div key={index} className="data-overview-section">
                       <DataOverviewTable 
                         fetchDataFunction={chartConfig.function} 
                       />
