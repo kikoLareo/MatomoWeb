@@ -65,7 +65,7 @@ export const fetchData = async (idSite, requestData) => {
 
     
     const data = {
-      value: responseData.toArray(),
+      value: responseData,
       info: processedData ? processedData : {}
     };
 
