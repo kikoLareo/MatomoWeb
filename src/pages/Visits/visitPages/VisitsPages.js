@@ -3,7 +3,7 @@ import ChartOptions from '../../../components/chartOptions';
 import { setTitle } from '../../../components/Header';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 import DataOverviewTable from '../../../components/tableComponent';
-import GraphRenderer from '../../../components/GraphRenderer';
+import GraphRenderer from '../../../utils/GraphRenderer';
 
 const VisitPage = ({ pageConfig }) => {
   const chartsConfig = pageConfig.chartsConfig;
