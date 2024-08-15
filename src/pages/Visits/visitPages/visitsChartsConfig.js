@@ -105,7 +105,7 @@ export const visitCharts_time = [
       module: 'VisitorInterest',
       period: 'year',
       date: 'yesterday',
-      type: 'bubble',
+      type: 'bar',
       metrics: {
         nb_actions:"Acciones",
       },
@@ -138,7 +138,7 @@ export const visitCharts_time = [
       module: 'VisitorInterest',
       period: 'year',
       date: 'yesterday',
-      type: 'bubble',
+      type: 'bar',
       metrics: {
         "nb_visits": "Visitas",
 
@@ -173,7 +173,7 @@ export const visitCharts_time = [
       module: 'VisitorInterest',
       period: 'year',
       date: 'yesterday',
-      type: 'bubble',
+      type: 'bar',
       metrics: {
         "nb_visits": "Visitas",
 
