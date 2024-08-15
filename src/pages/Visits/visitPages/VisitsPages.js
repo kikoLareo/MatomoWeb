@@ -64,12 +64,9 @@ const VisitPage = ({ pageConfig }) => {
 
   const renderCharts = () => {
     return chartsConfig.map((chartConfig, index) => {
-      let metrics;
-      if(!pageConfig.components.includes("chartOptions")){
-        metrics = chartConfig.data.info.metadata.metrics;
-      }else{
-        metrics = selectedMetrics[chartConfig.title] || [];
-      }
+    
+      const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
+
       if (metrics.length === 0) return null;
       console.log('Rendering chart:', chartConfig);
       return (
