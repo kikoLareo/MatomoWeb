@@ -23,7 +23,7 @@ function useGraph(chartConfig, selectedMetrics) {
 
 
   useEffect(() => {
-    if (!selectedMetrics || Object.keys(selectedMetrics).length === 0) {
+    if (!selectedMetrics) {
       setCharts(<p>No charts to render</p>);
       return;
     }
