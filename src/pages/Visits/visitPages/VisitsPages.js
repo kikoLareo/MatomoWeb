@@ -68,7 +68,7 @@ const VisitPage = ({ pageConfig }) => {
     }
   }, [selectedMetrics]);
 
-  const chartsToRender = useGraph(chartsConfig, selectedMetrics, loading);
+  console.log(chartsConfig, selectedMetrics);
 
   return (
     <div className="page">
@@ -80,25 +80,25 @@ const VisitPage = ({ pageConfig }) => {
             <div>Loading data...</div>
           ) : (
             <>
-              <ChartOptions 
-                chartConfig={chartsConfig} 
-                selectedMetrics={selectedMetrics} 
-                onMetricSelect={handleMetricSelect} 
-                metricsData={metricsData}
-              />
-              <div className="chartsInfo">
-                {chartsConfig.map((chartConfig, index) => (
-                  <div key={index} className="data-table-section">
-                    <h2>{chartConfig.title}</h2>
-                    <DataOverviewTable 
-                      fetchDataFunction={chartConfig.function} 
-                    />
-                  </div>
-                ))}
-                {chartsToRender}
-              </div>
-            </>
+            <ChartOptions 
+              chartConfig={chartsConfig} 
+              selectedMetrics={selectedMetrics} 
+              onMetricSelect={handleMetricSelect} 
+              metricsData={metricsData}
+            />
+            <div className="chartsInfo">
+              {chartsConfig.map((chartConfig, index) => (
+                <div key={index} className="data-table-section">
+                  <h2>{chartConfig.title}</h2>
+                  <DataOverviewTable 
+                    fetchDataFunction={chartConfig.function} 
+                  />
+                </div>
+              ))}
+            </div>
+          </>
           )}
+          {useGraph(chartsConfig, selectedMetrics)}
         </div>
       </div>
     </div>
