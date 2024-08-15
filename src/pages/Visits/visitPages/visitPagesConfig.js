@@ -11,7 +11,7 @@ export const pagesConfig = [
     path: '/visitTime',
     title: 'Visitas - Tiempo',
     chartsConfig: visitCharts_time,
-    components: ["GraphRenderer"]
+    components: ["GraphRenderer", "periodSelecter"]
   },
   {
     path: '/visitFrequency',

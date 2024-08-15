@@ -4,9 +4,9 @@ import { setTitle } from '../../../components/Header';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 import DataOverviewTable from '../../../components/tableComponent';
 import GraphRenderer from '../../../utils/GraphRenderer';
+import FilterPeriod from '../../../components/filterPeriod';
 
 const VisitPage = ({ pageConfig }) => {
-  console.log('VisitPage:', pageConfig);
   const chartsConfig = pageConfig.chartsConfig;
 
   const [selectedMetrics, setSelectedMetrics] = useState(() => {
@@ -17,7 +17,10 @@ const VisitPage = ({ pageConfig }) => {
   const [metricsData, setMetricsData] = useState({});
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
+  const [period, setPeriod] = useState('day'); 
+  const [date, setDate] = useState('yesterday');
 
+  
   useEffect(() => {
     setTitle(pageConfig.title);
   }, [pageConfig.title]);
@@ -28,12 +31,12 @@ const VisitPage = ({ pageConfig }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);  // Start loading
+      setLoading(true); 
       const data = {};
       for (const chart of chartsConfig) {
         if (chart.getData) {
           try {
-            const chartData = await chart.getData(idSite);
+            const chartData = await chart.getData(idSite, period, date);
             data[chart.title] = chartData.metrics;
           } catch (error) {
             console.error(`Error fetching data for chart ${chart.title}:`, error);
@@ -43,10 +46,10 @@ const VisitPage = ({ pageConfig }) => {
         }
       }
       setMetricsData(data);
-      setLoading(false);  // Stop loading
+      setLoading(false);
     };
     fetchData();
-  }, [idSite, chartsConfig]);
+  }, [idSite, chartsConfig, period, date]);
 
   const handleMetricSelect = (chart, metric) => {
     const chartTitle = chart.title;
@@ -60,6 +63,14 @@ const VisitPage = ({ pageConfig }) => {
         [chartTitle]: metrics,
       };
     });
+  };
+
+  const handlePeriodChange = (newPeriod) => {
+    setPeriod(newPeriod); // Update the period state
+  };
+
+  const handleDateChange = (newDate) => {
+    setDate(newDate); // Update the date state
   };
 
   const renderCharts = () => {
@@ -107,6 +118,14 @@ const VisitPage = ({ pageConfig }) => {
                 />
               )}
               <div className="chartsInfo">
+                <div className="filter-options" style={{ display: 'flex' }}>
+                  {pageConfig.components.includes("periodSelecter") && (
+                    <FilterPeriod onPeriodChange={handlePeriodChange} />
+                  )}
+                  {pageConfig.components.includes("dateSelecter") && (
+                    <FilterPeriod onPeriodChange={handleDateChange} />
+                  )}
+                  </div>
                 {pageConfig.components.includes("DataOverviewTable") &&
                   chartsConfig.map((chartConfig, index) => (
                     <div key={index} className="data-table-section">

@@ -42,8 +42,8 @@ export const visitCharts_time = [
       data : [],
       labels: [],
       function: visitTime_getVisitInformationPerLocalTime,
-      async getData(idSite){
-        this.data = await visitTime_getVisitInformationPerLocalTime(idSite, this.period, this.date)
+      async getData(idSite, period = this.period, date = this.date){
+        this.data = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
