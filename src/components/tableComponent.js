@@ -17,8 +17,6 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
                     setDate('yesterday');
 
                 const result = await fetchDataFunction(idSite, period, date);
-                console.log(result, fetchDataFunction, idSite, period, date);
-
                 setData(result.value);
                 setMetadata(result.info.columns);
             } catch (error) {

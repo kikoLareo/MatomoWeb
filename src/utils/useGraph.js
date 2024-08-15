@@ -8,10 +8,27 @@ function useGraph(chartConfig, selectedMetrics) {
   const [charts, setCharts] = useState([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await chartConfig.getData(idSite);
+          
+      } catch (error) {
+          console.error("Error fetching data:", error);
+      }
+  };
+
+  fetchData();
+  }, [idSite, chartConfig]);
+
+
+
+  useEffect(() => {
     if (!selectedMetrics || Object.keys(selectedMetrics).length === 0) {
       setCharts(<p>No charts to render</p>);
       return;
     }
+
+
 
     const renderedCharts = chartConfig.map((chart) => {
       const metrics = selectedMetrics[chart.title] || [];
