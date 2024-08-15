@@ -4,7 +4,7 @@ import { pagesConfig } from './visitPages/visitPagesConfig';
 
 const visitsOptions = pagesConfig.map(page => ({
   value: page.path,
-  label: page.title.split(' - ')[1],
+  label: page.title,
 }));
 
 const VisitDropDown = () => {

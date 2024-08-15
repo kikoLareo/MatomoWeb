@@ -115,7 +115,13 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
+          if(this.data.info.columns){
+            this.metrics = Object.keys(this.data.info.columns);
+            console.log("metrics", this.metrics);
+          }else if(this.data.info.metadata.metrics){
+            this.metrics = Object.keys(this.data.info.metadata.metrics);
+            console.log("metrics", this.metrics);
+          }
         }
         console.log('Fetched data for chart:', this, this.data);
 
@@ -138,7 +144,13 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
+          if(this.data.info.columns){
+            this.metrics = Object.keys(this.data.info.columns);
+            console.log("metrics", this.metrics);
+          }else if(this.data.info.metadata.metrics){
+            this.metrics = Object.keys(this.data.info.metadata.metrics);
+            console.log("metrics", this.metrics);
+          }
         }
         console.log('Fetched data for chart:', this, this.data);
 
@@ -242,6 +254,7 @@ export const visitCharts_time = [
               "2024-03-10": [],
               "2024-03-11": [],
               "2024-03-12": {
+                  "label": "2024-03-12",
                   "nb_uniq_visitors": 1,
                   "nb_users": 0,
                   "nb_visits": 1,
@@ -260,6 +273,7 @@ export const visitCharts_time = [
               "2024-03-16": [],
               "2024-03-17": [],
               "2024-03-18": {
+                  "label": "2024-03-18",
                   "nb_uniq_visitors": 1,
                   "nb_users": 0,
                   "nb_visits": 1,
@@ -915,9 +929,10 @@ export const visitCharts_time = [
               "nb_users_new": "Nuevos usuarios",
               "max_actions_new": "max_actions_new"
           },
-          "data": {
-              "value": {
-                  "2024-03": {
+          data: {
+              value:[ {
+                
+                    "label": "Lunes",
                       "nb_visits_new": 3,
                       "nb_actions_new": 5,
                       "nb_visits_converted_new": 0,
@@ -937,7 +952,9 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 1,
                       "avg_time_on_site_returning": 0
                   },
-                  "2024-04": {
+                  {
+                    "label": "Martes",
+
                       "nb_visits_new": 2,
                       "nb_actions_new": 2,
                       "nb_visits_converted_new": 0,
@@ -957,7 +974,9 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 1.5,
                       "avg_time_on_site_returning": 31
                   },
-                  "2024-05": {
+                  {
+                    "label": "Miercoles",
+
                       "nb_visits_new": 2,
                       "nb_actions_new": 6,
                       "nb_visits_converted_new": 0,
@@ -977,7 +996,9 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 1,
                       "avg_time_on_site_returning": 0
                   },
-                  "2024-06": {
+                  {
+                    "label": "Jueves",
+
                       "nb_visits_new": 11,
                       "nb_actions_new": 43,
                       "nb_visits_converted_new": 0,
@@ -997,7 +1018,9 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 5.5,
                       "avg_time_on_site_returning": 1064
                   },
-                  "2024-07": {
+                  {
+                    "label": "Viernes",
+
                       "nb_visits_new": 22,
                       "nb_actions_new": 62,
                       "nb_visits_converted_new": 0,
@@ -1017,7 +1040,8 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 3.1,
                       "avg_time_on_site_returning": 676
                   },
-                  "2024-08": {
+                  {
+                    "label": "Sabado",
                       "nb_visits_new": 2,
                       "nb_actions_new": 2,
                       "nb_visits_converted_new": 0,
@@ -1037,7 +1061,8 @@ export const visitCharts_time = [
                       "nb_actions_per_visit_returning": 3,
                       "avg_time_on_site_returning": 544
                   }
-              },
+                ],
+              
               "info": {
                   "website": "Tiivii-pre OTT",
                   "prettyDate": "2024",
@@ -1130,7 +1155,32 @@ export const visitCharts_time = [
                   "reportTotal": [],
                   "timerMillis": "92"
               }
+            
+        },
+        async getData() {
+          if(this.data.info.columns){
+            this.metrics = Object.keys(this.data.info.columns);
+            console.log("metrics", this.metrics);
+          }else if(this.data.info.metadata.metrics){
+            this.metrics = Object.keys(this.data.info.metadata.metrics);
+            console.log("metrics", this.metrics);
           }
+
+          if(this.data.value){
+            console.log("data", this.data.value);
+            this.labels = this.data.value.map((value) => {
+              console.log(value);
+              if (value.hasOwnProperty('label')) {
+                
+                  console.log(value['label']);
+                  return value['label'];
+                }
+              
+              return null;
+            });
+            console.log("labels", this.labels);
+          }
+        }
       
     }
   ]
