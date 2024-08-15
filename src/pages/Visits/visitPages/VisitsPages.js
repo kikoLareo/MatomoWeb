@@ -83,6 +83,7 @@ const VisitPage = ({ pageConfig }) => {
       return (
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
+          
           <div className="chart-group">
             {metrics.map((metric, metricIndex) => (
               <GraphRenderer

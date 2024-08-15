@@ -24,7 +24,7 @@ export const pagesConfig = [
     path: '/visitorInterest',
     title: 'Visitas - Interés del visitante',
     chartsConfig: visitCharts_interest,
-    components: ["chartOptions", "DataOverviewTable", "GraphRenderer"],
+    components: [ "GraphRenderer"],
 
   }
  
