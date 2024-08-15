@@ -110,19 +110,14 @@ export const visitCharts_time = [
         nb_actions:"Acciones",
       },
        data : [],
+       labels: [],
+
       function: visitorInterest_getNumberOfVisitsPerVisitDuration,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          if(this.data.info.columns){
-            this.metrics = Object.keys(this.data.info.columns);
-            console.log("metrics", this.metrics);
-          }else if(this.data.info.metadata.metrics){
-            this.metrics = Object.keys(this.data.info.metadata.metrics);
-            console.log("metrics", this.metrics);
-          }
           this.data.value.forEach((value) => {
             if (value.hasOwnProperty('label')) {
               if(!this.labels.includes(value['label'])){
@@ -144,29 +139,28 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bubble',
-      metrics: ["nb_visits"],
-      data : [],
+      metrics: {
+        "nb_visits": "Visitas",
+
+      },
+            data : [],
+      labels: [],
+
       function: visitorInterest_getNumberOfVisitsPerPage,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          if(this.data.info.columns){
-            this.metrics = Object.keys(this.data.info.columns);
-            console.log("metrics", this.metrics);
-          }else if(this.data.info.metadata.metrics){
-            this.metrics = Object.keys(this.data.info.metadata.metrics);
-            console.log("metrics", this.metrics);
-          }
-        }
-        this.data.value.forEach((value) => {
+          this.data.value.forEach((value) => {
           if (value.hasOwnProperty('label')) {
             if(!this.labels.includes(value['label'])){
               this.labels.push(value['label']);
             }
           }
         });
+        }
+        
         console.log('Fetched data for chart:', this, this.data);
 
         return this;
@@ -180,21 +174,19 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bubble',
-      metrics: ["nb_visits"],
+      metrics: {
+        "nb_visits": "Visitas",
+
+      },
       data : [],
+      labels: [],
+
       function: visitorInterest_getNumberOfVisitsByDaysSinceLast,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
-          this.title = this.data.info.metadata.name;
-          if(this.data.info.columns){
-            this.metrics = Object.keys(this.data.info.columns);
-            console.log("metrics", this.metrics);
-          }else if(this.data.info.metadata.metrics){
-            this.metrics = Object.keys(this.data.info.metadata.metrics);
-            console.log("metrics", this.metrics);
-          }        
+          this.title = this.data.info.metadata.name;    
           this.data.value.forEach((value) => {
             if (value.hasOwnProperty('label')) {
               if(!this.labels.includes(value['label'])){
