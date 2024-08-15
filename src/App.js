@@ -14,6 +14,7 @@ import './css/graph.css';
 import './css/dashboard.css';
 import './css/Home.css';
 import './css/Visits.css';
+import './css/Overview.css';
 import { IdSiteProvider } from './contexts/idSiteContext';
 
 function App() {

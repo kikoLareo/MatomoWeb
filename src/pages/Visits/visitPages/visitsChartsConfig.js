@@ -82,7 +82,7 @@ export const visitCharts_time = [
       action: "getNumberOfVisitsPerVisitDuration",
       module: 'VisitorInterest',
       period: 'year',
-      date: '2024-03-01,yesterday',
+      date: 'yesterday',
       type: 'bubble',
       metrics: ["nb_visits"],
       data : [],
@@ -151,17 +151,25 @@ export const visitCharts_time = [
       description: 'Get the summary of visits.',
       action: "get",
       module: 'Visits',
-      period: 'month',
-      date: 'yesterday',
+      period: 'day',
+      date: '2024-03-01,yesterday',
       type: 'lineal',
-      metrics: ["nb_visits", "nb_uniq_visitors"],
+      metrics: {
+        "sum_visit_length": "Duración total de las visitas (en segundos)",
+        "nb_uniq_visitors": "Visitantes únicos",
+        "nb_visits": "Visitas",
+        "nb_actions": "Acciones",
+        "max_actions": "Acciones máximas en una visita",
+        "bounce_rate": "Porcentaje de rebote",
+        "nb_actions_per_visit": "Acciones por visita",
+        "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
+      },
       data : [],
       async getData(idSite){
         this.data = await visitsSummary_get(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
         }
         console.log('Fetched data for chart:', this, this.data);
 

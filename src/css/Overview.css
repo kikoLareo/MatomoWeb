@@ -1,0 +1,52 @@
+/* src/DataOverviewTable.css */
+.data-overview-table {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.filter-options {
+    margin-bottom: 20px;
+}
+
+.filter-options label {
+    margin-right: 20px;
+}
+
+.filter-options select,
+.filter-options input {
+    margin-left: 10px;
+}
+
+.table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.table-row {
+    width: 48%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-cell {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.table-cell span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .table-row {
+        width: 100%;
+    }
+}

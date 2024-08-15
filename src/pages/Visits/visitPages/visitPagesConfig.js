@@ -1,15 +1,15 @@
-import { exampleCharts2, visitsCharts_frequency,visitCharts_interest,visitCharts_summary } from './visitsChartsConfig';
+import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time } from './visitsChartsConfig';
 
 export const pagesConfig = [
   {
-    path: '/visotorSummary',
+    path: '/visitorSummary',
     title: 'Visitas - Resumen del visitante',
-    chartsConfig: visitCharts_summary
+    chartsConfig:visitCharts_summary
   },
   {
     path: '/visitTime',
     title: 'Visitas - Tiempo',
-    chartsConfig: exampleCharts2,
+    chartsConfig: visitCharts_time,
   },
   {
     path: '/visitFrequency',

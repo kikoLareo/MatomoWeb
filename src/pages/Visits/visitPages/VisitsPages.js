@@ -4,6 +4,7 @@ import ChartOptions from '../../../components/chartOptions';
 import useGraph from '../../../utils/useGraph';
 import { setTitle } from '../../../components/Header';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
+import {DataOverviewTable} from '../../../components/tableComponent';
 
 const VisitPage = ({ pageConfig }) => {
   const chartsConfig = pageConfig.chartsConfig;
@@ -60,6 +61,14 @@ const VisitPage = ({ pageConfig }) => {
     <div className="page">
       <div className="title">
       </div>
+      {chartsConfig.map((chartConfig, index) => (
+        <div key={index} className="data-table-section">
+          <h2>{chartConfig.title}</h2>
+          <DataOverviewTable 
+            fetchDataFunction={chartConfig.getData} 
+          />
+        </div>
+      ))}
       <div className="visitsGraphs">
         <ChartOptions 
           chartConfig={chartsConfig} 
