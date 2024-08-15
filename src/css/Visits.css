@@ -1,5 +1,14 @@
 .visitsGraphs {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+@media (min-width: 1000px) {
+    .data-table-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 

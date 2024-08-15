@@ -38,7 +38,7 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bar',
-      metrics: [],
+      metrics: ["nb_visits"],
       data : [],
       labels: [],
       function: visitTime_getVisitInformationPerLocalTime,
@@ -47,7 +47,6 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
           this.data.value.forEach((value) => {
             if (value.hasOwnProperty('label')) {
               this.labels.push(value.label);
@@ -68,7 +67,7 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bar',
-      metrics: [],
+      metrics: ["nb_visits"],
       data : [],
       function: visitTime_getByDayOfWeek,
       async getData(idSite){
@@ -76,7 +75,11 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
+          this.data.value.forEach((value) => {
+            if (value.hasOwnProperty('label')) {
+              this.labels.push(value.label);
+            }
+          });
         }
         console.log('Fetched data for chart:', this, this.data);
 
