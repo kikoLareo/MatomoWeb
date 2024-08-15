@@ -52,7 +52,7 @@ export const visitCharts_time = [
             if (value.hasOwnProperty('label')) {
               this.labels.push(value.label);
             }else{
-              this.labels.push(value);
+              this.labels.push(Object.keys(value)[0]);
             }
           }); 
         }
