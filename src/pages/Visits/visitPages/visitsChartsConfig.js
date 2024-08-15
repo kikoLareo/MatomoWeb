@@ -274,7 +274,6 @@ export const visitCharts_time = [
               "2024-03-10": [],
               "2024-03-11": [],
               "2024-03-12": {
-                  "label": "2024-03-12",
                   "nb_uniq_visitors": 1,
                   "nb_users": 0,
                   "nb_visits": 1,
