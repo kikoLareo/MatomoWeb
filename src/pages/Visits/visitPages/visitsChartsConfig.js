@@ -70,7 +70,9 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bar',
-      metrics: ["nb_visits"],
+      metrics: {
+        nb_actions:"Acciones",
+      },
       data : [],
       labels: [],
       function: visitTime_getByDayOfWeek,
@@ -81,7 +83,9 @@ export const visitCharts_time = [
           this.title = this.data.info.metadata.name;
           this.data.value.forEach((value) => {
             if (value.hasOwnProperty('label')) {
-              this.labels.push(value.label);
+              if(!this.labels.includes(value['label'])){
+                this.labels.push(value['label']);
+              }
             }
           });
         }
@@ -101,8 +105,10 @@ export const visitCharts_time = [
       period: 'year',
       date: 'yesterday',
       type: 'bubble',
-      metrics: ["nb_visits"],
-      data : [],
+      metrics: {
+        nb_actions:"Acciones",
+      },
+       data : [],
       function: visitorInterest_getNumberOfVisitsPerVisitDuration,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, this.period, this.date)
