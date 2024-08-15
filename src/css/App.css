@@ -28,3 +28,14 @@
   align-items: center;
   justify-content: center;
 }
+
+.pageBody{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.chartsInfo{
+  
+}

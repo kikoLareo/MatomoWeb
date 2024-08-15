@@ -59,25 +59,27 @@ const VisitPage = ({ pageConfig }) => {
 
   return (
     <div className="page">
-      <div className="title">
-      </div>
-      {chartsConfig.map((chartConfig, index) => (
-        <div key={index} className="data-table-section">
-          <h2>{chartConfig.title}</h2>
-          <DataOverviewTable 
-            fetchDataFunction={chartConfig.function} 
+      <div className="title"></div>
+
+      <div className="pageBody">
+        <div className="visitsGraphs">
+          <ChartOptions 
+            chartConfig={chartsConfig} 
+            selectedMetrics={selectedMetrics} 
+            onMetricSelect={handleMetricSelect} 
+            metricsData={metricsData}
           />
-        </div>
-      ))}
-      <div className="visitsGraphs">
-        <ChartOptions 
-          chartConfig={chartsConfig} 
-          selectedMetrics={selectedMetrics} 
-          onMetricSelect={handleMetricSelect} 
-          metricsData={metricsData}
-        />
-        <div>
-          {chartsToRender}
+          <div className="chartsInfo">
+              {chartsConfig.map((chartConfig, index) => (
+              <div key={index} className="data-table-section">
+                <h2>{chartConfig.title}</h2>
+                <DataOverviewTable 
+                  fetchDataFunction={chartConfig.function} 
+                />
+              </div>
+            ))}
+            {chartsToRender}
+          </div>
         </div>
       </div>
     </div>
