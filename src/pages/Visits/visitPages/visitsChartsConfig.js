@@ -88,6 +88,7 @@ export const visitCharts_time = [
               }
             }
           });
+          
         }
         console.log('Fetched data for chart:', this, this.data);
 
@@ -122,6 +123,13 @@ export const visitCharts_time = [
             this.metrics = Object.keys(this.data.info.metadata.metrics);
             console.log("metrics", this.metrics);
           }
+          this.data.value.forEach((value) => {
+            if (value.hasOwnProperty('label')) {
+              if(!this.labels.includes(value['label'])){
+                this.labels.push(value['label']);
+              }
+            }
+          });
         }
         console.log('Fetched data for chart:', this, this.data);
 
@@ -152,6 +160,13 @@ export const visitCharts_time = [
             console.log("metrics", this.metrics);
           }
         }
+        this.data.value.forEach((value) => {
+          if (value.hasOwnProperty('label')) {
+            if(!this.labels.includes(value['label'])){
+              this.labels.push(value['label']);
+            }
+          }
+        });
         console.log('Fetched data for chart:', this, this.data);
 
         return this;
@@ -173,7 +188,20 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
+          if(this.data.info.columns){
+            this.metrics = Object.keys(this.data.info.columns);
+            console.log("metrics", this.metrics);
+          }else if(this.data.info.metadata.metrics){
+            this.metrics = Object.keys(this.data.info.metadata.metrics);
+            console.log("metrics", this.metrics);
+          }        
+          this.data.value.forEach((value) => {
+            if (value.hasOwnProperty('label')) {
+              if(!this.labels.includes(value['label'])){
+                this.labels.push(value['label']);
+              }
+            }
+          });
         }
         console.log('Fetched data for chart:', this, this.data);
 
