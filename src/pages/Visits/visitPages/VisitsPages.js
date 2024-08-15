@@ -6,6 +6,7 @@ import DataOverviewTable from '../../../components/tableComponent';
 import GraphRenderer from '../../../utils/GraphRenderer';
 
 const VisitPage = ({ pageConfig }) => {
+  console.log('VisitPage:', pageConfig);
   const chartsConfig = pageConfig.chartsConfig;
 
   const [selectedMetrics, setSelectedMetrics] = useState(() => {
@@ -65,7 +66,7 @@ const VisitPage = ({ pageConfig }) => {
     return chartsConfig.map((chartConfig, index) => {
       const metrics = selectedMetrics[chartConfig.title] || [];
       if (metrics.length === 0) return null;
-
+      console.log('Rendering chart:', chartConfig);
       return (
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
@@ -89,23 +90,22 @@ const VisitPage = ({ pageConfig }) => {
 
   return (
     <div className="page">
-      <div className="title">{pageConfig.title}</div>
       <div className="pageBody">
         <div className="visitsGraphs">
           {loading ? (
             <div>Loading data...</div>
           ) : (
             <>
-              {pageConfig.components.includes("chartOptions") && (
+              {pageConfig.components.includes("chartOptions")? (
                 <ChartOptions 
                   chartConfig={chartsConfig} 
                   selectedMetrics={selectedMetrics} 
                   onMetricSelect={handleMetricSelect} 
                   metricsData={metricsData}
                 />
-              )}
+              ) : null}
               <div className="chartsInfo">
-                {pageConfig.components.includes("DataOverviewTable") &&
+                {pageConfig.components.includes("DataOverviewTable")?
                   chartsConfig.map((chartConfig, index) => (
                     <div key={index} className="data-table-section">
                       <h2>{chartConfig.title}</h2>
@@ -113,8 +113,8 @@ const VisitPage = ({ pageConfig }) => {
                         fetchDataFunction={chartConfig.function} 
                       />
                     </div>
-                  ))}
-                {pageConfig.components.includes("GraphRenderer") && renderCharts()}
+                  )) : null}
+                {pageConfig.components.includes("GraphRenderer")? renderCharts() : null}
               </div>
             </>
           )}

@@ -4,6 +4,7 @@ import { Bar } from 'react-chartjs-2';
 // src/components/BarChartComponent.js
 
 const BarChartComponent = ({ labels, data, title }) => {
+    console.log('Rendering BarChartComponent:', { labels, data, title });
     const chartData = {
         labels,
         datasets: [
