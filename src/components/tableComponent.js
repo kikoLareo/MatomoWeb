@@ -11,6 +11,11 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                if(!period)
+                    setPeriod('day');
+                if(!date)
+                    setDate('yesterday');
+                
                 const result = await fetchDataFunction(idSite, period, date);
                 setData(result.value);
                 setMetadata(result.info.metadata.columns);
