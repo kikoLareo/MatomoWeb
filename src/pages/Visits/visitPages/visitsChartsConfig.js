@@ -165,7 +165,8 @@ export const visitCharts_time = [
         "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
       },
       data : [],
-      async getData(idSite){
+      function: visitsSummary_get,
+      async getData(idSite){ 
         this.data = await visitsSummary_get(idSite, this.period, this.date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;

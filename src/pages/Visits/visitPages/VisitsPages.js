@@ -65,7 +65,7 @@ const VisitPage = ({ pageConfig }) => {
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
           <DataOverviewTable 
-            fetchDataFunction={chartConfig.getData} 
+            fetchDataFunction={chartConfig.function} 
           />
         </div>
       ))}
