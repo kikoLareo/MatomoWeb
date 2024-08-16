@@ -1,6 +1,6 @@
 import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
-
+import { token_auth } from "../../config";
 const module = "API";
 
 
@@ -100,7 +100,7 @@ export const visitLive_getMap = async (idSite) => {
     return `
   <div id="widgetIframe">
     <iframe width="100%" height="350" 
-        src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=realTimeAudienceMap&idSite=${idSite}&period=day&date=yesterday" scrolling="yes" frameborder="0" marginheight="0" marginwidth="0">
+        src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=realTimeAudienceMap&idSite=${idSite}&period=day&date=yesterday&token_auth=${token_auth}" scrolling="yes" frameborder="0" marginheight="0" marginwidth="0">
     </iframe>
   </div> `
 }
