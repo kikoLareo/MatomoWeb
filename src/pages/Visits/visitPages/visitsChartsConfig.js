@@ -208,7 +208,7 @@ export const visitCharts_time = [
       title: 'Visits - Summary',
       description: 'Get the summary of visits.',
       action: "get",
-      module: 'Visits',
+      module: 'VisitsSummary',
       period: 'day',
       date: '2024-03-01,yesterday',
       type: 'lineal',
@@ -229,6 +229,7 @@ export const visitCharts_time = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
+          this.metrics = this.data.info.columns? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
         }
         console.log('Fetched data for chart:', this, this.data);
 

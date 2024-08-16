@@ -6,7 +6,7 @@ import BubbleChartComponent from '../components/BubbleChartComponent';
 import BarChartComponent from '../components/BarChartComponent';
 
 const GraphRenderer = ({ chart, chartIndex }) => {
-  const { type, labels, data, title } = chart;
+  const { type, labels, data, title, metricType } = chart;
 
   console.log('Rendering chart:', chart);
 
@@ -19,6 +19,7 @@ const GraphRenderer = ({ chart, chartIndex }) => {
             data={data}
             label={title}
             title={title}
+            metricType={metricType}
           />
         </div>
       );

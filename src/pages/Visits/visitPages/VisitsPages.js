@@ -100,7 +100,25 @@ const VisitPage = ({ pageConfig }) => {
         console.warn(`No labels available for chart: ${chartConfig.title}`);
         return null;
       }
-  
+
+
+      metrics.forEach(metric => {
+        if (chartConfig.data.info) {
+          if (chartConfig.data.info.metadata.metricTypes) {
+            if (chartConfig.data.info.metadata.metricTypes[metric] === "percent") {
+              dataPoints[metric] = dataPoints[metric].map(value => {
+                if (!value || value === 0) {
+                  return 0;
+                }
+                // Eliminar el símbolo "%" y convertir a número
+                return parseFloat(value.replace('%', ''));
+              });
+            }
+          }
+        }
+      });
+
+
       return (
         <div key={index} className="data-table-section">
           <h2>{chartConfig.title}</h2>
@@ -113,6 +131,7 @@ const VisitPage = ({ pageConfig }) => {
                   labels: labels,
                   data: dataPoints[metric],
                   title: chartConfig.metrics[metric],
+                  metricType: chartConfig.data.info?.metadata.metricTypes[metric] || 'number',
                 }}
               />
             ))}

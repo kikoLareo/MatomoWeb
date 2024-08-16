@@ -2,7 +2,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const ChartComponent = ({ data, labels, title }) => {
+const ChartComponent = ({ data, labels, title, metricType }) => {
   const chartData = {
     labels,
     datasets: [
@@ -16,6 +16,9 @@ const ChartComponent = ({ data, labels, title }) => {
     ],
   };
 
+  if(metricType === 'percentage') {
+    chartData.datasets[0].yAxisID = 'percentage';
+  }
   const options = {
     scales: {
       x: {

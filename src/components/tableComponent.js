@@ -8,6 +8,21 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
     const [date, setDate] = useState('yesterday');
     const { idSite } = useContext(IdSiteContext);
 
+    function formatDuration(seconds) {
+        if (seconds < 3600) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes} min ${remainingSeconds}s`;
+        } else {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+            return `${hours} hour ${minutes} min ${remainingSeconds}s`;
+        }
+    }
+    
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -15,8 +30,13 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
                     setPeriod('year');
                 if(!date)
                     setDate('yesterday');
-
+               
                 const result = await fetchDataFunction(idSite, period, date);
+                if (result.info.metricTypes.find(metric => metric === 'duration_s')) {
+                    const metricKey = Object.keys(result.info.metrics).find(key => result.info.metrics[key] === 'duration_s');
+                    const durationInSeconds = result.value[metricKey];
+                    result.value[metricKey] = formatDuration(durationInSeconds);
+                }
                 setData(result.value);
                 setMetadata(result.info.columns);
             } catch (error) {
