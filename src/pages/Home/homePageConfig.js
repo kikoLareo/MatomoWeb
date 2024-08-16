@@ -2,7 +2,7 @@ import {Live_getCounter } from "../../modules/Live/Live-actions";
 import { visitLive_getMap } from "../../modules/Live/Live-actions";
 import { visitsSummary_get } from "../../modules/Visits/visits_actions";
 
-export const homeCharts_LiveSection = [
+export const homeCharts_LiveSection =
     {
         title: 'Live - Counter',
         description: 'Get the live counter information.',
@@ -23,8 +23,7 @@ export const homeCharts_LiveSection = [
             this.data = await Live_getCounter(idSite, lastMinutes);
             return this;
         }
-    },
-  ];
+    };
 
   export const homeIframes = [
     {
@@ -85,7 +84,7 @@ export const  homeCharts_VisitsSection_Evolution =
             module: 'VisitsSummary',
             period: 'year',
             date: '2024-03-01,yesterday',
-            type: 'line',
+            type: 'lineal',
             metrics: {
               "nb_visits": "Visitas",
             },
