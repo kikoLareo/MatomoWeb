@@ -20,6 +20,7 @@ const VisitPage = ({ pageConfig }) => {
   const [loading, setLoading] = useState(true);
   const [period, setPeriod] = useState('day'); 
   const [date, setDate] = useState('yesterday');
+  const [iframeHtml, setIframeHtml] = useState(null); // Estado para almacenar el iframe
 
   
   useEffect(() => {
@@ -74,10 +75,21 @@ const VisitPage = ({ pageConfig }) => {
     setDate(newDate); // Update the date state
   };
 
-  const renderIframe = async () => {
-    if (pageConfig.components.includes("iframe") && await pageConfig.iframe) {
+  useEffect(() => {
+    const loadIframe = async () => {
+      if (pageConfig.components.includes("iframe") && pageConfig.iframe) {
+        const iframeContent = await pageConfig.iframe(idSite); // Espera la resolución del iframe
+        setIframeHtml(iframeContent); // Almacena el HTML del iframe en el estado
+      }
+    };
+    loadIframe();
+  }, [idSite, pageConfig]); // Ejecuta este efecto cuando idSite o pageConfig cambian
+
+
+  const renderIframe = () => {
+    if (iframeHtml) {
       return (
-        <div className="iframe-container" dangerouslySetInnerHTML={{ __html: pageConfig.iframe(idSite) }} />
+        <div className="iframe-container" dangerouslySetInnerHTML={{ __html: iframeHtml }} />
       );
     }
     return null;
