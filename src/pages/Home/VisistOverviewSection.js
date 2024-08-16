@@ -1,3 +1,4 @@
+// VisitsOverviewSection.js
 import React, { useEffect, useState, useContext } from 'react';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { homeCharts_VisitsSection_Evolution } from './homePageConfig';
@@ -10,20 +11,18 @@ const VisitsOverviewSection = () => {
   const [loading, setLoading] = useState(true);
   const [visitsEvolution, setVisitsEvolution] = useState(null);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        
-        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite);
-        
+        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite); 
+        console.log('evolutionData', evolutionData);
         setVisitsEvolution(evolutionData);
       } catch (error) {
         console.error('Error fetching visits data:', error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchData();
   }, [idSite]);

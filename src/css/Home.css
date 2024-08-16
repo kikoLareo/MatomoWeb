@@ -46,3 +46,7 @@
 .visits-summary{
     width: 100%;
 }
+
+.visits-overview-section .graph_component{
+    width: 35vw !important;
+}
