@@ -62,7 +62,7 @@ const LiveSectionHome = () => {
         <>
           <div className="chartsInfo">
               <div className="data-overview-section">
-                <DataOverviewTable  fetchDataFunction={Live_getCounter}/>
+                <DataOverviewTable  fetchDataFunction={Live_getCounter} params={["lastMinutes"]}/>
               </div>
             {renderIframe()}
           </div>

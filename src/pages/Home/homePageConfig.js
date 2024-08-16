@@ -18,6 +18,7 @@ export const homeCharts_LiveSection =
             "visitsConverted": "Visits Converted",
         },
         data: [],
+        params: ["lastMinutes"],
         function: Live_getCounter(),
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
@@ -59,6 +60,7 @@ export const homeCharts_LiveSection =
             metrics: {
               "nb_visits": "Visitas",
             },
+            params: ["period", "date"],
             data : [],
             function: visitsSummary_get,
             async getData(idSite){ 
