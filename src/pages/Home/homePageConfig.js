@@ -1,7 +1,7 @@
-import {Live_getCounter, Live_getLastVisitsDetails, Live_getMostRecentVisitsDateTime } from "../../modules/Live/Live-actions";
-import { visitLive_getMap } from "../../modules/Visits/visits_actions";
+import {Live_getCounter } from "../../modules/Live/Live-actions";
+import { visitLive_getMap } from "../../modules/Live/Live-actions";
 
-export const homeCharts = [
+export const homeCharts_LiveSection = [
     {
         title: 'Live - Counter',
         description: 'Get the live counter information.',
@@ -23,40 +23,6 @@ export const homeCharts = [
             return this;
         }
     },
-    {
-        title: 'Live - Last Visits Details',
-        description: 'Get the last visits details.',
-        action: "getLastVisitsDetails",
-        module: 'Live',
-        period: 'day',
-        date: 'today',
-        type: 'table',
-        metrics: {},
-        data: [],
-        function: Live_getLastVisitsDetails,
-        async getData(idSite) {
-            this.data = await Live_getLastVisitsDetails(idSite, this.period, this.date);
-            return this;
-        }
-    },
-    {
-        title: 'Live - Most Recent Visits DateTime',
-        description: 'Get the most recent visits date and time.',
-        action: "getMostRecentVisitsDateTime",
-        module: 'Live',
-        period: 'day',
-        date: 'today',
-        type: 'table',
-        metrics: {},
-        data: [],
-        function: Live_getMostRecentVisitsDateTime,
-        async getData(idSite) {
-            this.data = await Live_getMostRecentVisitsDateTime(idSite);
-            return this;
-        }
-    },
-
- 
   ];
 
   export const homeIframes = [

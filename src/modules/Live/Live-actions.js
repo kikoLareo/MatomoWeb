@@ -1,5 +1,8 @@
 import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
+import { token_auth } from "../../config";
+
+
 const methodBase = "Live";
 const module = "API";
 
@@ -63,4 +66,15 @@ export const LiveActions = {
     getMostRecentVisitorId: Live_getMostRecentVisitorId,
     getMostRecentVisitsDateTime: Live_getMostRecentVisitsDateTime,
     widget: Live_widget
+}
+
+export const visitLive_getMap = async (idSite) => {
+    console.log('visitLive_getMap', idSite);
+    return `
+    <h1>Live map</h1>
+  <div id="widgetIframe">
+    <iframe width="35vw" height="100%" 
+        src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=realTimeAudienceMap&idSite=${idSite}&period=day&date=yesterday&token_auth=${token_auth}" scrolling="yes" frameborder="0" marginheight="0" marginwidth="0">
+    </iframe>
+  </div> `
 }
