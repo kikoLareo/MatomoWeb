@@ -33,6 +33,7 @@ export const homeCharts = [
         type: 'table',
         metrics: {},
         data: [],
+        function: Live_getLastVisitsDetails,
         async getData(idSite) {
             this.data = await Live_getLastVisitsDetails(idSite, this.period, this.date);
             return this;
@@ -48,6 +49,7 @@ export const homeCharts = [
         type: 'table',
         metrics: {},
         data: [],
+        function: Live_getMostRecentVisitsDateTime,
         async getData(idSite) {
             this.data = await Live_getMostRecentVisitsDateTime(idSite);
             return this;

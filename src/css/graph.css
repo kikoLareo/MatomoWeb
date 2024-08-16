@@ -154,10 +154,11 @@
 }
 
 .iframe-container {
-  width: 100vw;
-  height: 60vh;
   display: flex;
-  justify-content: center;
+  height: 75vh;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
 }
 
 div#widgetIframe {
