@@ -149,7 +149,7 @@ const VisitPage = ({ pageConfig }) => {
             <div>Loading data...</div>
           ) : (
             <>
-              {pageConfig.components.includes("iframe") && chartsConfig.iframe}
+              {pageConfig.components.includes("iframe") && pageConfig.iframe}
               {pageConfig.components.includes("chartOptions") && (
                 <ChartOptions 
                   chartConfig={chartsConfig} 
