@@ -32,8 +32,9 @@ export const DataOverviewTable = ({ fetchDataFunction }) => {
                     setDate('yesterday');
                
                 const result = await fetchDataFunction(idSite, period, date);
-                if (result.info.metricTypes.find(metric => metric === 'duration_s')) {
-                    const metricKey = Object.keys(result.info.metrics).find(key => result.info.metrics[key] === 'duration_s');
+                console.log('result', result);
+                if (result.info.metadata.metricTypes.find(metric => metric === 'duration_s')) {
+                    const metricKey = Object.keys(result.info.metadata.metrics).find(key => result.info.metadata.metrics[key] === 'duration_s');
                     const durationInSeconds = result.value[metricKey];
                     result.value[metricKey] = formatDuration(durationInSeconds);
                 }
