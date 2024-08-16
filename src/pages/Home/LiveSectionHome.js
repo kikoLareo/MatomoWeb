@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { setTitle } from '../../components/Header';
 import { IdSiteContext } from '../../contexts/idSiteContext';
-import DataOverviewTable from '../../components/tableComponent';
 import { homeCharts_LiveSection, homeIframes } from './homePageConfig';
 import FilterMinutes from '../../components/LastMinutesFilter'; // Importar el componente
 import { Live_getCounter } from '../../modules/Live/Live-actions'; // Importar la función
@@ -57,14 +56,14 @@ const LiveSectionHome = () => {
             }
             return null;
           }));
-          setIframeHtml(iframeContent.filter(content => content !== null)); // Almacena el HTML del iframe en el estado
+          setIframeHtml(iframeContent.filter(content => content !== null)); 
         } catch (error) {
           console.error("Error loading iframes:", error);
         }
       }
     };
     loadIframe();
-  }, [idSite]); // Ejecuta este efecto cuando idSite o pageConfig cambian
+  }, [idSite]); 
 
   useEffect(() => {
     const fetchCounterData = async () => {
