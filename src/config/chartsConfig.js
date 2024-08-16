@@ -1,6 +1,5 @@
 // src/config/chartConfig.js
 import { MediaAnalytics_getChartData } from "../modules/mediaAnalytics/mediaAnalytics";
-import {visitFrequency_get} from "../modules/Visits/visits_actions";
 
 export const language = 'es';
 
