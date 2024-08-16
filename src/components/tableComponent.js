@@ -20,6 +20,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
         if (params.includes("lastMinutes")) args.push(lastMinutes);
         console.log('args', args);
         const result = await fetchDataFunction(...args);
+        console.log('result', result);
         setData(result.data);
         setMetadata(result.metadata);
       } catch (error) {
