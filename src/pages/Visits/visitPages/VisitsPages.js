@@ -4,8 +4,6 @@ import { setTitle } from '../../../components/Header';
 import { IdSiteContext } from '../../../contexts/idSiteContext';
 import DataOverviewTable from '../../../components/tableComponent';
 import GraphRenderer from '../../../utils/GraphRenderer';
-import FilterPeriod from '../../../components/filterPeriod';
-import FilterData from '../../../components/filterDate';
 
 const VisitPage = ({ pageConfig }) => {
   console.log('pageConfig', pageConfig);
@@ -66,14 +64,6 @@ const VisitPage = ({ pageConfig }) => {
         [chartTitle]: metrics,
       };
     });
-  };
-
-  const handlePeriodChange = (newPeriod) => {
-    setPeriod(newPeriod); // Update the period state
-  };
-
-  const handleDateChange = (newDate) => {
-    setDate(newDate); // Update the date state
   };
 
   useEffect(() => {
