@@ -19,7 +19,7 @@ export const homeCharts_LiveSection =
         },
         data: [],
         params: ["lastMinutes"],
-        function: Live_getCounter(),
+        function: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
             return this;
@@ -84,7 +84,7 @@ export const  homeCharts_VisitsSection_Evolution =
             description: 'Get the evolution of visits over time.',
             action: "get",
             module: 'VisitsSummary',
-            period: 'year',
+            period: 'day',
             date: '2024-03-01,yesterday',
             type: 'lineal',
             metrics: {

@@ -15,7 +15,7 @@ const VisitsOverviewSection = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite); 
+        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite).data; 
         console.log('evolutionData', evolutionData);
         setVisitsEvolution(evolutionData);
       } catch (error) {
