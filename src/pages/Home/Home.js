@@ -65,12 +65,16 @@ const Home = () => {
 
   const renderIframe = () => {
     if (iframeHtml) {
+      try {
         iframeHtml.map((iframe, index) => {
             return (
                 <div key={index} className="iframe-container" dangerouslySetInnerHTML={{ __html: iframe }} />
             );
         });
         return iframeHtml;
+      } catch (error) {
+        console.error("Error rendering iframe:", error);
+      }
     }
     return null;
   };
