@@ -1,5 +1,6 @@
 import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
+import { token_auth } from "../../config";
 
 const module = "API";
 
@@ -93,6 +94,15 @@ export const visitsSummary_get = async (idSite, period, date, segment) => {
 
 export const visitsSummaryActions = {
     get: visitsSummary_get
+}
+
+export const visitLive_getMap = async (idSite) => {
+    return `
+     <iframe
+            src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&moduleToWidgetize=UserCountryMap&actionToWidgetize=visitorMap&columns[]=nb_visits&language=en&disableLink=1&idSite=${idSite}&period=day&date=yesterday&token_auth=${token_auth}"
+            frameborder="0"
+            style="width: 100%; height: 500px;">
+        </iframe>" `
 }
 
 
