@@ -43,8 +43,8 @@ const Home = () => {
   useEffect(() => {
     const loadIframe = async () => {
       if (homeIframes) {
-
         const iframeContent = homeIframes.map(async (iframe) => {
+          console.log(iframe);
             if (iframe.getData) {
                 try {
                     const iframeData = await iframe.getData(idSite);

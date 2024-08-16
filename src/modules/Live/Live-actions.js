@@ -4,8 +4,8 @@ const methodBase = "Live";
 const module = "API";
 
 export const Live_getCounter = async (idSite,  lastMinutes) => {
-    const action = `getCounter`;
-    const method = `${methodBase}.getCounter`;
+    const action = `getCounters`;
+    const method = `${methodBase}.getCounters`;
     const params = { idSite, lastMinutes };
 
     return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });

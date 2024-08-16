@@ -73,6 +73,7 @@ export const homeCharts = [
         function: visitLive_getMap,
         async getData(idSite){
           this.data = await visitLive_getMap(idSite)
+            return this.data;
         } 
       },  
     ];
