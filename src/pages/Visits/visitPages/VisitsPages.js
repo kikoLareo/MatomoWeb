@@ -7,6 +7,7 @@ import GraphRenderer from '../../../utils/GraphRenderer';
 import FilterPeriod from '../../../components/filterPeriod';
 
 const VisitPage = ({ pageConfig }) => {
+  console.log('pageConfig', pageConfig);
   const chartsConfig = pageConfig.chartsConfig;
 
   const [selectedMetrics, setSelectedMetrics] = useState(() => {
@@ -72,6 +73,16 @@ const VisitPage = ({ pageConfig }) => {
   const handleDateChange = (newDate) => {
     setDate(newDate); // Update the date state
   };
+
+  const renderIframe = () => {
+    if (pageConfig.components.includes("iframe") && pageConfig.iframe) {
+      return (
+        <div className="iframe-container" dangerouslySetInnerHTML={{ __html: pageConfig.iframe(idSite) }} />
+      );
+    }
+    return null;
+  };
+
   const renderCharts = () => {
     return chartsConfig.map((chartConfig, index) => {
       const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
@@ -149,7 +160,7 @@ const VisitPage = ({ pageConfig }) => {
             <div>Loading data...</div>
           ) : (
             <>
-              {pageConfig.components.includes("iframe") && pageConfig.iframe}
+              {renderIframe()}
               {pageConfig.components.includes("chartOptions") && (
                 <ChartOptions 
                   chartConfig={chartsConfig} 

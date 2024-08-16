@@ -97,6 +97,7 @@ export const visitsSummaryActions = {
 }
 
 export const visitLive_getMap = async (idSite) => {
+    console.log('visitLive_getMap', idSite);
     return `
      <iframe
             src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&moduleToWidgetize=UserCountryMap&actionToWidgetize=visitorMap&columns[]=nb_visits&language=en&disableLink=1&idSite=${idSite}&period=day&date=yesterday&token_auth=${token_auth}"
