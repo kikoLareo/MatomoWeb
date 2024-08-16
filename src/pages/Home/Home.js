@@ -10,12 +10,11 @@ const Home = () => {
   // const [metricsData, setMetricsData] = useState({});
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
-  const [iframeHtml, setIframeHtml] = useState(null); // Estado para almacenar el iframe
+  const [iframeHtml, setIframeHtml] = useState([]); // Estado para almacenar el iframe
 
   useEffect(() => {
     setTitle("Home");
-  });
-
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,35 +42,36 @@ const Home = () => {
   useEffect(() => {
     const loadIframe = async () => {
       if (homeIframes) {
-        const iframeContent = homeIframes.map(async (iframe) => {
-          console.log(iframe);
+        try {
+          const iframeContent = await Promise.all(homeIframes.map(async (iframe) => {
+            console.log(iframe);
             if (iframe.getData) {
-                try {
-                    const iframeData = await iframe.getData(idSite);
-                    console.log(iframeData);
-                    return iframeData;
-                } catch (error) {
-                    console.error(`Error fetching data for iframe ${iframe.title}:`, error);
-                }
+              try {
+                const iframeData = await iframe.getData(idSite);
+                console.log(iframeData);
+                return iframeData;
+              } catch (error) {
+                console.error(`Error fetching data for iframe ${iframe.title}:`, error);
+                return null;
+              }
             }
-        });
-
-        setIframeHtml(iframeContent); // Almacena el HTML del iframe en el estado
+            return null;
+          }));
+          setIframeHtml(iframeContent.filter(content => content !== null)); // Almacena el HTML del iframe en el estado
+        } catch (error) {
+          console.error("Error loading iframes:", error);
+        }
       }
     };
     loadIframe();
   }, [idSite]); // Ejecuta este efecto cuando idSite o pageConfig cambian
 
-
   const renderIframe = () => {
-    if (iframeHtml) {
+    if (iframeHtml.length > 0) {
       try {
-        iframeHtml.map((iframe, index) => {
-            return (
-                <div key={index} className="iframe-container" dangerouslySetInnerHTML={{ __html: iframe }} />
-            );
-        });
-        return iframeHtml;
+        return iframeHtml.map((iframe, index) => (
+          <div key={index} className="iframe-container" dangerouslySetInnerHTML={{ __html: iframe }} />
+        ));
       } catch (error) {
         console.error("Error rendering iframe:", error);
       }
@@ -87,16 +87,14 @@ const Home = () => {
             <div>Loading data...</div>
           ) : (
             <>
-              
               <div className="chartsInfo">
                 {homeCharts.map((chartConfig, index) => (
-                    <div key={index} className="data-overview-section">
-                      <DataOverviewTable 
-                        fetchDataFunction={chartConfig.function} 
-                      />
-                    </div>
-                  ))}
-               
+                  <div key={index} className="data-overview-section">
+                    <DataOverviewTable 
+                      fetchDataFunction={chartConfig.function} 
+                    />
+                  </div>
+                ))}
                 {renderIframe()}
               </div>
             </>
