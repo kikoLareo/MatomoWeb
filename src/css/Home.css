@@ -33,6 +33,7 @@
     flex-direction: row;
     align-items: flex-start;
     width: 100vw;
+    gap: 1vw;
 }
 
 .visits-overview-section{
@@ -40,4 +41,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.visits-summary{
+    width: 100%;
 }

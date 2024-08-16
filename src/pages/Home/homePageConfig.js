@@ -48,14 +48,14 @@ export const homeCharts_LiveSection = [
     ];
     
 
-    export const homeCharts_VisitsSection = [
+    export const homeCharts_VisitsSection_Overview = [
         {
             title: 'Visits - Summary',
             description: 'Get the summary of visits.',
             action: "get",
             module: 'VisitsSummary',
-            period: 'day',
-            date: '2024-03-01,yesterday',
+            period: 'year',
+            date: 'yesterday',
             type: 'lineal',
             metrics: {
               "nb_visits": "Visitas",
@@ -74,13 +74,16 @@ export const homeCharts_LiveSection = [
       
               return this;
             }
-        },
+        }
+    ];
+    
+export const  homeCharts_VisitsSection_Evolution = [
         {
             title: 'Visits - Evolution',
             description: 'Get the evolution of visits over time.',
-            action: "getEvolution",
-            module: 'VisitsEvolution',
-            period: 'month',
+            action: "get",
+            module: 'VisitsSummary',
+            period: 'year',
             date: '2024-03-01,yesterday',
             type: 'line',
             metrics: {

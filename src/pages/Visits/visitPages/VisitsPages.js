@@ -5,6 +5,7 @@ import { IdSiteContext } from '../../../contexts/idSiteContext';
 import DataOverviewTable from '../../../components/tableComponent';
 import GraphRenderer from '../../../utils/GraphRenderer';
 import FilterPeriod from '../../../components/filterPeriod';
+import FilterData from '../../../components/filterDate';
 
 const VisitPage = ({ pageConfig }) => {
   console.log('pageConfig', pageConfig);
@@ -182,14 +183,6 @@ const VisitPage = ({ pageConfig }) => {
                 />
               )}
               <div className="chartsInfo">
-                <div className="filter-options" style={{ display: 'flex' }}>
-                  {pageConfig.components.includes("periodSelecter") && (
-                    <FilterPeriod onPeriodChange={handlePeriodChange} />
-                  )}
-                  {pageConfig.components.includes("dateSelecter") && (
-                    <FilterPeriod onPeriodChange={handleDateChange} />
-                  )}
-                  </div>
                 {pageConfig.components.includes("DataOverviewTable") &&
                   chartsConfig.map((chartConfig, index) => (
                     <div key={index} className="data-overview-section">
