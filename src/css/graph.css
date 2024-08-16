@@ -152,3 +152,16 @@
 .chartsInfo {
   padding: 0 4vw;
 }
+
+.iframe-container {
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+}
+
+div#widgetIframe {
+  width: 60vw;
+  height: 100%;
+  filter: contrast(0.9);
+}

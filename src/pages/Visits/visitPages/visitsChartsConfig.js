@@ -1,4 +1,5 @@
-import {visitLive_getMap, visitFrequency_get, visitorInterest_getNumberOfVisitsByDaysSinceLast, visitorInterest_getNumberOfVisitsPerPage, visitorInterest_getNumberOfVisitsPerVisitDuration, visitsSummary_get, visitTime_getByDayOfWeek, visitTime_getVisitInformationPerLocalTime } from "../../../modules/Visits/visits_actions";
+
+import { visitFrequency_get, visitorInterest_getNumberOfVisitsByDaysSinceLast, visitorInterest_getNumberOfVisitsPerPage, visitorInterest_getNumberOfVisitsPerVisitDuration, visitsSummary_get, visitTime_getByDayOfWeek, visitTime_getVisitInformationPerLocalTime } from "../../../modules/Visits/visits_actions";
 
 export const visitsCharts_frequency = [
     {
@@ -238,25 +239,7 @@ export const visitCharts_time = [
     },
   ];
 
-  export const visitCharts_live = [
-    {
-      title: 'Visits - Live',
-      description: 'Get the live visits information.',
-      action: "getLive",
-      module: 'VisitsLive',
-      period: 'day',
-      date: 'today',
-      type: 'iframe',
-      metrics: {
-       
-      },
-      data : [],
-      function: visitLive_getMap,
-      async getData(idSite){
-        this.data = await visitLive_getMap(idSite)
-      } 
-    },  
-  ];
+
 
   
   

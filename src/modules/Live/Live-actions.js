@@ -1,58 +1,66 @@
+import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
 const methodBase = "Live";
+const module = "API";
 
-export const Live_getCounter = (idSite, apiModule, apiAction, lastMinutes) => {
+export const Live_getCounter = async (idSite,  lastMinutes) => {
+    const action = `getCounter`;
     const method = `${methodBase}.getCounter`;
-    const params = { idSite, apiModule, apiAction, lastMinutes };
+    const params = { idSite, lastMinutes };
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Counter' };
+    return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 
-export const Live_getLastVisitsDetails = (idSite, period, date, segment, countVisitorsToFetch) => {
+export const Live_getLastVisitsDetails = async (idSite, period, date, segment, countVisitorsToFetch) => {
+    const action = `getLastVisitsDetails`;
     const method = `${methodBase}.getLastVisitsDetails`;
     const params = { idSite, period, date };
 
     if (segment) params.segment = segment;
     if (countVisitorsToFetch) params.countVisitorsToFetch = countVisitorsToFetch;
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Last Visits Details' };
+    return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 
-export const Live_getVisitorProfile = (idSite, visitorId, segment) => {
+export const Live_getVisitorProfile = async (idSite, visitorId, segment) => {
+    const action = `getVisitorProfile`;
     const method = `${methodBase}.getVisitorProfile`;
     const params = { idSite, visitorId };
 
     if (segment) params.segment = segment;
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Visitor Profile' };
+    return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 
-export const Love_getMostRecentVisitorId = (idSite) => {
+export const Live_getMostRecentVisitorId = async (idSite) => {
+    const action = `getMostRecentVisitorId`;
     const method = `${methodBase}.getMostRecentVisitorId`;
     const params = { idSite };
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Most Recent Visitor ID' };
+    return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 
-export const Live_getMostRecentVisitsDateTime = (idSite) => {
+export const Live_getMostRecentVisitsDateTime = async (idSite) => {
+    const action = `getMostRecentVisitsDateTime`;
     const method = `${methodBase}.getMostRecentVisitsDateTime`;
     const params = { idSite };
 
-    return { url: getBaseUrl(methodBase,method, params), title: 'Most Recent Visits Date Time' };
+    return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 
-export const Live_widget = (idSite, period ="day",  disableLink =0, widget=1) => {
+export const Live_widget = async (idSite, period = "day", disableLink = 0, widget = 1) => {
+    const action = `widget`;
     const method = `${methodBase}.widget`;
     const params = { idSite, period, disableLink, widget };
 
-    return { url: getBaseUrl('API',method, params), title: 'Widget' };
+    return await fetchData(idSite, { module: module, action, url: getBaseUrl(module, method, params) });
 }
 
 export const LiveActions = {
     getCounter: Live_getCounter,
     getLastVisitsDetails: Live_getLastVisitsDetails,
     getVisitorProfile: Live_getVisitorProfile,
-    getMostRecentVisitorId: Love_getMostRecentVisitorId,
+    getMostRecentVisitorId: Live_getMostRecentVisitorId,
     getMostRecentVisitsDateTime: Live_getMostRecentVisitsDateTime,
     widget: Live_widget
 }

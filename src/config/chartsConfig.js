@@ -135,35 +135,6 @@ export const devicesDetectionCharts = [
 
 
 
-export const visitsCharts_frequency = [
-  {
-    title: 'Visits - Frequency',
-    description: 'Get the frequency of visits.',
-    action: "get",
-    module: 'Visits',
-    period: 'month',
-    date: '2024-03-01,yesterday',
-    type: 'lineal',
-    metrics: ["nb_visits_new", "nb_visits_returning"],
-    data : [],
-    async getData(idSite){
-      this.data = await visitFrequency_get(idSite, this.period, this.date)
-      if(this.data.info.metadata){
-        this.description = this.data.info.metadata.documentation;
-        this.title = this.data.info.metadata.name;
-        this.metrics = this.data.info.metadata.metrics;
-      }
-      console.log('Fetched data for chart:', this, this.data);
-
-      return this;
-    }
-    
-  }
-];
-
-
-
-
 
 
 export var exampleCharts = [ 

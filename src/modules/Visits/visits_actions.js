@@ -98,8 +98,9 @@ export const visitsSummaryActions = {
 export const visitLive_getMap = async (idSite) => {
     console.log('visitLive_getMap', idSite);
     return `
+    <h1>Live map</h1>
   <div id="widgetIframe">
-    <iframe width="100%" height="350" 
+    <iframe width="100%" height="100%" 
         src="https://tiivii-ott.matomo.cloud/index.php?module=Widgetize&action=iframe&disableLink=1&widget=1&moduleToWidgetize=MediaAnalytics&actionToWidgetize=realTimeAudienceMap&idSite=${idSite}&period=day&date=yesterday&token_auth=${token_auth}" scrolling="yes" frameborder="0" marginheight="0" marginwidth="0">
     </iframe>
   </div> `
