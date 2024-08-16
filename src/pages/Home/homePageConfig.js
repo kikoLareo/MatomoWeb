@@ -77,7 +77,7 @@ export const homeCharts_LiveSection = [
         }
     ];
     
-export const  homeCharts_VisitsSection_Evolution = [
+export const  homeCharts_VisitsSection_Evolution = 
         {
             title: 'Visits - Evolution',
             description: 'Get the evolution of visits over time.',
@@ -96,5 +96,4 @@ export const  homeCharts_VisitsSection_Evolution = [
               console.log('Fetched data for chart:', this, this.data);
               return this;
             }
-        }
-    ];
+        } ;
