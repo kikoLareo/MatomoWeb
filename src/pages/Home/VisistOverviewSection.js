@@ -40,8 +40,8 @@ const VisitsOverviewSection = () => {
       <GraphRenderer
         chart={{
           type: homeCharts_VisitsSection_Evolution.type,
-          labels: Object.keys(visitsEvolution.value),
-          data: Object.values(visitsEvolution.value),
+          labels: Object.keys(visitsEvolution.data.value),
+          data: Object.values(visitsEvolution.data.value),
           title: "Visits - Evolution",
           metricType: 'number',
         }}
