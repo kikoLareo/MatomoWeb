@@ -17,8 +17,6 @@ const VisitPage = ({ pageConfig }) => {
   const [metricsData, setMetricsData] = useState({});
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState('day'); 
-  const [date, setDate] = useState('yesterday');
   const [iframeHtml, setIframeHtml] = useState(null); // Estado para almacenar el iframe
 
   
@@ -37,7 +35,7 @@ const VisitPage = ({ pageConfig }) => {
       for (const chart of chartsConfig) {
         if (chart.getData) {
           try {
-            const chartData = await chart.getData(idSite, period, date);
+            const chartData = await chart.getData(idSite);
             data[chart.title] = chartData.metrics;
           } catch (error) {
             console.error(`Error fetching data for chart ${chart.title}:`, error);
@@ -50,7 +48,7 @@ const VisitPage = ({ pageConfig }) => {
       setLoading(false);
     };
     fetchData();
-  }, [idSite, chartsConfig, period, date]);
+  }, [idSite, chartsConfig]);
 
   const handleMetricSelect = (chart, metric) => {
     const chartTitle = chart.title;
