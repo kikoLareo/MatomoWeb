@@ -1,6 +1,5 @@
 import { fetchData } from "../../utils/fetchDataHelper";
 import { getBaseUrl } from "../common/common";
-import { token_auth } from "../../config";
 
 const module = "API";
 
