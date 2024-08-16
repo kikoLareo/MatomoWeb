@@ -17,7 +17,7 @@ export const homeCharts_LiveSection = [
             "visitsConverted": "Visits Converted",
         },
         data: [],
-        function: Live_getCounter,
+        function: Live_getCounter(),
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
             return this;

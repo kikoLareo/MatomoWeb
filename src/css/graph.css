@@ -150,7 +150,11 @@
 }
 
 .chartsInfo {
-  padding: 0 4vw;
+  padding: 0 0;
+}
+
+.LiveSection .iframe-container{
+  width: 35vw !important;
 }
 
 .iframe-container {
@@ -162,7 +166,7 @@
 }
 
 div#widgetIframe {
-  width: 60vw;
+  width: 100%;
   height: 100%;
   filter: contrast(0.9);
 }

@@ -4,12 +4,14 @@ import { IdSiteContext } from '../../contexts/idSiteContext';
 import DataOverviewTable from '../../components/tableComponent';
 import { homeCharts_LiveSection, homeIframes } from './homePageConfig';
 import FilterMinutes from '../../components/LastMinutesFilter'; // Importar el componente
+import { Live_getCounter } from '../../modules/Live/Live-actions'; // Importar la función
 
 const LiveSectionHome = () => {
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
   const [iframeHtml, setIframeHtml] = useState([]); // Estado para almacenar el iframe
   const [lastMinutes, setLastMinutes] = useState(30); // Estado para almacenar los minutos seleccionados
+  const [counterData, setCounterData] = useState(null); // Estado para almacenar los datos del contador
 
   useEffect(() => {
     setTitle("Home");
@@ -64,6 +66,18 @@ const LiveSectionHome = () => {
     loadIframe();
   }, [idSite]); // Ejecuta este efecto cuando idSite o pageConfig cambian
 
+  useEffect(() => {
+    const fetchCounterData = async () => {
+      try {
+        const data = await Live_getCounter(idSite, lastMinutes);
+        setCounterData(data);
+      } catch (error) {
+        console.error("Error fetching counter data:", error);
+      }
+    };
+    fetchCounterData();
+  }, [idSite, lastMinutes]); 
+
   const renderIframe = () => {
     if (iframeHtml.length > 0) {
       try {
@@ -83,8 +97,7 @@ const LiveSectionHome = () => {
 
   return (
     <div className="LiveSection" style={{ width: "35vw" }}>
-      <FilterMinutes onMinutesChange={handleMinutesChange} /> {/* Añadir el componente */}
-      <div className="visitsGraphs">
+      <div className="LiveGraph">
         {loading ? (
           <div>Loading data...</div>
         ) : (
@@ -92,9 +105,15 @@ const LiveSectionHome = () => {
             <div className="chartsInfo">
               {homeCharts_LiveSection.map((chartConfig, index) => (
                 <div key={index} className="data-overview-section">
-                  <DataOverviewTable 
-                    fetchDataFunction={chartConfig.function} 
-                  />
+                  <FilterMinutes onMinutesChange={handleMinutesChange} />
+                  <div>
+                    {counterData && (
+                      <div>
+                        <h3>Live Counter Data</h3>
+                        <pre>{JSON.stringify(counterData, null, 2)}</pre>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
               {renderIframe()}
