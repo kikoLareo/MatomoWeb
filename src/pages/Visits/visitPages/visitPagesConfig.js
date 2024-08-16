@@ -32,7 +32,7 @@ export const pagesConfig = [
     title: 'Live',
     chartsConfig: [],
     components: ["iframe", "GraphRenderer"],
-    iframe: visitLive_getMap,
+    iframe: await visitLive_getMap,
   },
   {
     path: '/example',

@@ -74,8 +74,8 @@ const VisitPage = ({ pageConfig }) => {
     setDate(newDate); // Update the date state
   };
 
-  const renderIframe = () => {
-    if (pageConfig.components.includes("iframe") && pageConfig.iframe) {
+  const renderIframe = async () => {
+    if (pageConfig.components.includes("iframe") && await pageConfig.iframe) {
       return (
         <div className="iframe-container" dangerouslySetInnerHTML={{ __html: pageConfig.iframe(idSite) }} />
       );
