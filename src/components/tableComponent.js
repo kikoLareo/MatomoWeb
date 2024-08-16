@@ -21,8 +21,11 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
         console.log('args', args);
         const result = await fetchDataFunction(...args);
         console.log('result', result);
-        setData(result.data);
-        setMetadata(result.metadata);
+        const data = result.data? result.data : result;
+        setData(data);
+
+        const metadata = result.metadata ? result.metadata : {};
+        setMetadata(metadata);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
