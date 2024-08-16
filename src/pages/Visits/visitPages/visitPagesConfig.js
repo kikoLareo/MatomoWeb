@@ -1,5 +1,5 @@
-import {visitLive_getMap,  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time,  exampleCharts2 } from './visitsChartsConfig';
-
+import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time,  exampleCharts2 } from './visitsChartsConfig';
+import { visitLive_getMap } from '../../../modules/Visits/visits_actions';
 export const pagesConfig = [
   {
     path: '/visitorSummary',
