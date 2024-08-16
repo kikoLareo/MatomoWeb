@@ -15,7 +15,7 @@ const VisitsOverviewSection = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite).data; 
+        const evolutionData = await homeCharts_VisitsSection_Evolution.getData(idSite); 
         console.log('evolutionData', evolutionData);
         setVisitsEvolution(evolutionData);
       } catch (error) {
@@ -40,8 +40,8 @@ const VisitsOverviewSection = () => {
       <GraphRenderer
         chart={{
           type: homeCharts_VisitsSection_Evolution.type,
-          labels: Object.keys(visitsEvolution.data),
-          data: Object.values(visitsEvolution.data),
+          labels: Object.keys(visitsEvolution.value),
+          data: Object.values(visitsEvolution.value),
           title: "Visits - Evolution",
           metricType: 'number',
         }}
