@@ -18,15 +18,23 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
 
 
   const formatDataForTable = (data) => {
-    return data.map(item => {
-      if (item.label && item.value !== undefined) {
-        return {
-          label: item.label,
-          value: item.value
-        };
-      }
-      return item;
-    });
+    if(Array.isArray(data)) {
+      return data.map(item => {
+        if (item.label && item.value !== undefined) {
+          return {
+            label: item.label,
+            value: item.value
+          };
+        }
+        return item;
+      });
+    }else if(data){
+      return Object.keys(data).reduce((acc, key) => {
+        acc[key] = data[key];
+        return acc;
+      }, {});
+    }
+
   };
 
   useEffect(() => {
@@ -46,7 +54,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         } else {
             auxData = result.value;
         } 
-
+        console.log('auxData', auxData);
         console.log(formatDataForTable(auxData));
         setData(formatDataForTable(auxData));
 
