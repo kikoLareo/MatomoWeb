@@ -6,7 +6,7 @@ export const FilterMinutes = ({ onMinutesChange }) => {
     const handleTimeChange = (e) => {
         const value = e.target.value;
         setTime(value);
-        onMinutesChange(value); // Notify parent component
+        onMinutesChange(value); 
     };
 
     return (

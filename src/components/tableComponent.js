@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
+import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date"] }) => {
   const [data, setData] = useState(null);
@@ -9,11 +10,12 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
   const [period, setPeriod] = useState('day');
   const [date, setDate] = useState('yesterday');
   const { idSite } = useContext(IdSiteContext);
-  const [lastMinutes, setLastMinutes] = useState(30);
-
+  const [lastMinutes, setLastMinutes] = useState({});
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(fetchDataFunction, idSite, period, date, lastMinutes, params);
         const args = [idSite];
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
@@ -76,7 +78,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
         {Object.entries(data).map(([key, value]) => (
           <div className="table-row" key={key}>
             <div className="table-cell">
-              <span>{value}</span> {metadata[key]}
+              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || {key}} 
             </div>
           </div>
         ))}
