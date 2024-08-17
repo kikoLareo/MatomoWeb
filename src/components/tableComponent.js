@@ -20,10 +20,21 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
     // Si data es un array
     if (Array.isArray(data)) {
-      return data.map((item) => ({
-          label: item.label ? item.label : chart.metrics['value'] || titles['value'] || 'Value',
-          value: item.value
-      }));
+      return data.map((item) => {
+          // Caso 1: Formato con label y value
+          if ('label' in item && 'value' in item) {
+              return {
+                  label: item.label,
+                  value: item.value,
+              };
+          }
+
+          // Caso 2: Formato genérico de objeto dentro de array
+          return Object.keys(item).map(key => ({
+              label: chart.metrics[key] || titles[key] || key,
+              value: item[key]
+          }));
+      }).flat();  // Flatten en caso de que el segundo formato genere arrays anidados
   }
 
     // Si data es un objeto
