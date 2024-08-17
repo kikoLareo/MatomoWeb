@@ -41,7 +41,7 @@ const VisitsOverviewSection = () => {
         chart={{
           type: homeCharts_VisitsSection_Evolution.type,
           labels: Object.keys(visitsEvolution.data.value),
-          data: Object.values(visitsEvolution.data.value).map(((value) => value["nb_visits"])),
+          data: Object.values(visitsEvolution.data.value).map(((value) => value["nb_visits"])||0),
           title: "Visits - Evolution",
           metricType: 'number',
         }}
