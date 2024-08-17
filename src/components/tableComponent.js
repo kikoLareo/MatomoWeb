@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
-export const DataOverviewTable = ({ fetchDataFunction, params}) => {
+export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date"] }) => {
   const [data, setData] = useState(null);
   const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
@@ -12,20 +12,18 @@ export const DataOverviewTable = ({ fetchDataFunction, params}) => {
   const { idSite } = useContext(IdSiteContext);
   const [lastMinutes, setLastMinutes] = useState(30);
   
-  
-  const memoizedParams = useMemo(() => params, [params]);
-
   if(!params) {
     params = ["period", "date"];
   }
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(fetchDataFunction, idSite, period, date, lastMinutes, memoizedParams);
+        console.log(fetchDataFunction, idSite, period, date, lastMinutes, params);
         const args = [idSite];
-        if (memoizedParams.includes("period")) args.push(period);
-        if (memoizedParams.includes("date")) args.push(date);
-        if (memoizedParams.includes("lastMinutes")) args.push(lastMinutes);
+        if (params.includes("period")) args.push(period);
+        if (params.includes("date")) args.push(date);
+        if (params.includes("lastMinutes")) args.push(lastMinutes);
         console.log('args', args);
         const result = await fetchDataFunction(...args);
         console.log('result', result);
@@ -38,7 +36,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params}) => {
     };
 
     fetchData();
-  }, [fetchDataFunction, idSite, period, date, lastMinutes, memoizedParams]);
+  }, [fetchDataFunction, idSite, period, date, lastMinutes, params]);
 
   const handlePeriodChange = (e) => {
     setPeriod(e.target.value);
