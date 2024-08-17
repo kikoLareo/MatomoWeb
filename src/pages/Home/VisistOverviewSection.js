@@ -33,8 +33,9 @@ const VisitsOverviewSection = () => {
   return (
     <div className="visits-overview-section">
       <h2>Visits Overview</h2>
-      <DataOverviewTable  chartConfig={homeCharts_VisitsSection_Overview}
-      />
+      {homeCharts_VisitsSection_Overview.map((chart) => (
+      <DataOverviewTable  chartConfig={chart} />
+      ))}
       <GraphRenderer
         chart={{
           type: homeCharts_VisitsSection_Evolution.type,
