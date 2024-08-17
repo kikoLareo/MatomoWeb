@@ -11,7 +11,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params}) => {
   const [date, setDate] = useState('yesterday');
   const { idSite } = useContext(IdSiteContext);
   const [lastMinutes, setLastMinutes] = useState(30);
-  
+  console.log('params', params);
   if(!params) {
     params = ["period", "date"];
   }
