@@ -19,6 +19,10 @@ export const titles = {
     nb_users : "Usuarios",
     nb_visits : "Visitas",
     nb_visits_converted : "Visitas convertidas",
-    sum_visit_length : "Duración de la visita"
+    sum_visit_length : "Duración de la visita",
+    actions : "Acciones",
+    visitors : "Visitantes",
+    visits : "Visitas",
+    visitsConverted : "Visitas convertidas",
 
 }
