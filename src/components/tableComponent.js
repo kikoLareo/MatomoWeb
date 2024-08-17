@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
+import titles from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ chartConfig }) => {
   console.log('chartConfig', chartConfig);
@@ -17,11 +18,16 @@ export const DataOverviewTable = ({ chartConfig }) => {
   const formatDataForTable = (chart) => {
     let data = chart.data.value;
     if (Array.isArray(data)) {
-      data = data[0];
+      return data.map((item) => {
+          return Object.keys(data).map(key => ({
+            label:item.label? item.label : chart.metrics[key] || titles[key] || key,
+            value: item.value? item.value:  data[key]
+          }));
+      });
     } 
   
       return Object.keys(data).map(key => ({
-        label: chart.metrics[key] || key,
+        label: chart.metrics[key] || titles[key] || key,
         value: data[key]
       }));
     
@@ -36,10 +42,9 @@ export const DataOverviewTable = ({ chartConfig }) => {
         if (params.includes("lastMinutes")) args.push(lastMinutes);
 
         const data = await chartConfig.getData(...args);
-        console.log(data);
         const result = data.data;
 
-        if (result.value && result.value.length > 0) {
+        if (result.value) {
           setData(formatDataForTable(data));
         } else {
           setData([{ label: 'No Data', value: 'No Data Available' }]);
@@ -90,7 +95,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
         {data.map((item, index) => (
           <div className="table-row" key={index}>
             <div className="table-cell">
-              <span>{item.value}</span> { item.label}
+              <span>{item.value}</span> {item.label}
             </div>
           </div>
         ))}
