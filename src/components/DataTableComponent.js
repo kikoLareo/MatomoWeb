@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 const DataTable = ({ chart }) => {
-  const [sortedData, setSortedData] = useState(chart);
+    var data = chart.data.value;
+  const [sortedData, setSortedData] = useState(data);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
   useEffect(() => {
-    setSortedData(chart);
-  }, [chart]);
+    setSortedData(data);
+  }, [data]);
 
   const sortData = (key) => {
     let direction = 'ascending';
