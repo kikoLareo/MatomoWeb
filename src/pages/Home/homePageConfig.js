@@ -21,6 +21,8 @@ export const homeCharts_LiveSection =
             "visitsConverted": "Visits Converted",
         },
         data: [],
+        labels: {},
+
         params: ["lastMinutes"],
         fetchDataFunction: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
@@ -42,6 +44,7 @@ export const homeCharts_LiveSection =
         type: 'iframe',
         metrics: {},
         data : [],
+
         fetchDataFunction: visitLive_getMap,
         async getData(idSite){
           this.data = await visitLive_getMap(idSite)
@@ -66,6 +69,8 @@ export const homeCharts_LiveSection =
             },
             params: ["period", "date"],
             data : [],
+            labels: {},
+
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
@@ -97,6 +102,8 @@ export const  homeCharts_VisitsSection_Evolution =
             },
             params: ["period", "date"],
             data : [],
+            labels: {},
+
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
@@ -121,6 +128,8 @@ export const homeCharts_MediaSection = [
         },
         data: [],
         params: ["lastMinutes"],
+        labels: {},
+
         fetchDataFunction: MediaAnalytics_getCurrentNumPlays,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
@@ -141,6 +150,8 @@ export const homeCharts_MediaSection = [
             "value": "Time Spent",
         },
         data: [],
+        labels: {},
+
         params: ["lastMinutes"],
         fetchDataFunction: MediaAnalytics_getCurrentSumTimeSpent,
         async getData(idSite, lastMinutes = 180) {
@@ -162,6 +173,7 @@ export const homeCharts_MediaSection = [
         metrics: {"value": "Plays"},
         data: [],
         params: ["lastMinutes"],
+        labels: {},
         fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
@@ -185,7 +197,7 @@ const getLabels = (chart) => {
     console.log('labels', labels);
 
     if(chart.data.info){
-        labels.map(label => {
+       chart.labels = labels.map(label => {
             if(chart.data.info.columns[label]){
                 return chart.data.info.columns[label];
             }else if(chart.data.info.metadata.metrics[label]){
