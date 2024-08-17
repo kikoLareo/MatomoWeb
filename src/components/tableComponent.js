@@ -49,7 +49,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         const result = await fetchDataFunction(...args);
         console.log('result', result);
         var auxData=null;
-        if(result.value && result.value.length === 0) {
+        if(result.value && result.value.length > 0) {
           if (Array.isArray(result.value)) {
               auxData= result.value[0];
           } else {
