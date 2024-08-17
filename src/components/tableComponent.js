@@ -33,6 +33,8 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         acc[key] = data[key];
         return acc;
       }, {});
+    }else{
+      return data;
     }
 
   };
