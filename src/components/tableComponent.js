@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
@@ -12,14 +12,17 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
   const { idSite } = useContext(IdSiteContext);
   const [lastMinutes, setLastMinutes] = useState(30);
   
+  
+  const memoizedParams = useMemo(() => params, [params]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(fetchDataFunction, idSite, period, date, lastMinutes, params);
+        console.log(fetchDataFunction, idSite, period, date, lastMinutes, memoizedParams);
         const args = [idSite];
-        if (params.includes("period")) args.push(period);
-        if (params.includes("date")) args.push(date);
-        if (params.includes("lastMinutes")) args.push(lastMinutes);
+        if (memoizedParams.includes("period")) args.push(period);
+        if (memoizedParams.includes("date")) args.push(date);
+        if (memoizedParams.includes("lastMinutes")) args.push(lastMinutes);
         console.log('args', args);
         const result = await fetchDataFunction(...args);
         console.log('result', result);
@@ -32,7 +35,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
     };
 
     fetchData();
-  }, [fetchDataFunction, idSite, period, date, lastMinutes, params]);
+  }, [fetchDataFunction, idSite, period, date, lastMinutes, memoizedParams]);
 
   const handlePeriodChange = (e) => {
     setPeriod(e.target.value);
