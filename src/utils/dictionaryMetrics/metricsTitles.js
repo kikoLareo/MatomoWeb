@@ -8,5 +8,17 @@ export const titles = {
     nb_users_new: "Nuevos usuarios",
     nb_users_returning: "Usuarios que retornan",
     nb_visits_new: "Nuevas Visitas",
-    nb_visits_returning: "Visitantes que han vuelto"
+    nb_visits_returning: "Visitantes que han vuelto",
+    avg_time_on_site : "Tiempo promedio en el sitio",
+    bounce_count : "Número de rebotes",
+    bounce_rate : "Tasa de rebote",
+    max_actions : "Máximas acciones en una visita", 
+    nb_actions : "Número de acciones",
+    nb_actions_per_visit : "Número de acciones por visita",
+    nb_uniq_visitors : "Visitantes únicos",
+    nb_users : "Usuarios",
+    nb_visits : "Visitas",
+    nb_visits_converted : "Visitas convertidas",
+    sum_visit_length : "Duración de la visita"
+
 }

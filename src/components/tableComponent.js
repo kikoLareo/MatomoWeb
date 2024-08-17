@@ -10,7 +10,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
   const [period, setPeriod] = useState('day');
   const [date, setDate] = useState('yesterday');
   const { idSite } = useContext(IdSiteContext);
-  const [lastMinutes, setLastMinutes] = useState({});
+  const [lastMinutes, setLastMinutes] = useState(30);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +78,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params = ["period", "date
         {Object.entries(data).map(([key, value]) => (
           <div className="table-row" key={key}>
             <div className="table-cell">
-              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || {key}} 
+              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || key} 
             </div>
           </div>
         ))}
