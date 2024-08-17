@@ -8,7 +8,7 @@ const VideoDataPage = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      videoPageTableConfig.getData(idSite);
+      await videoPageTableConfig.getData(idSite);
     };
 
     loadData();
