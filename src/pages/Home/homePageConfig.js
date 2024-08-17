@@ -21,7 +21,7 @@ export const homeCharts_LiveSection =
         },
         data: [],
         params: ["lastMinutes"],
-        function: Live_getCounter,
+        fetchDataFunction: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
             getLabels(this);
@@ -43,7 +43,7 @@ export const homeCharts_LiveSection =
          
         },
         data : [],
-        function: visitLive_getMap,
+        fetchDataFunction: visitLive_getMap,
         async getData(idSite){
           this.data = await visitLive_getMap(idSite)
 
@@ -67,7 +67,7 @@ export const homeCharts_LiveSection =
             },
             params: ["period", "date"],
             data : [],
-            function: visitsSummary_get,
+            fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
               if(this.data.info.metadata){
@@ -96,8 +96,9 @@ export const  homeCharts_VisitsSection_Evolution =
             metrics: {
               "nb_visits": "Visitas",
             },
+            params: ["period", "date"],
             data : [],
-            function: visitsSummary_get,
+            fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
               getLabels(this);
@@ -121,7 +122,7 @@ export const homeCharts_MediaSection = [
         },
         data: [],
         params: ["lastMinutes"],
-        function: MediaAnalytics_getCurrentNumPlays,
+        fetchDataFunction: MediaAnalytics_getCurrentNumPlays,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
             getLabels(this);
@@ -142,7 +143,7 @@ export const homeCharts_MediaSection = [
         },
         data: [],
         params: ["lastMinutes"],
-        function: MediaAnalytics_getCurrentSumTimeSpent,
+        fetchDataFunction: MediaAnalytics_getCurrentSumTimeSpent,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentSumTimeSpent(idSite, lastMinutes);
             getLabels(this);
@@ -163,7 +164,7 @@ export const homeCharts_MediaSection = [
         data: [],
         params: ["lastMinutes"],
         metadata: {},
-        function: MediaAnalytics_getCurrentMostPlays,
+        fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
             getLabels(this);
@@ -182,7 +183,7 @@ const getLabels = (chart) => {
             return acc;
         }, {});
     } else if (typeof chart.data.value === 'object') {
-        chart.metadata = chart.data.info?.metadata?.columns || {};
+        chart.metadata = chart.data.info?.metadata?.columns || Object.keys(chart.data.value);
     } else {
         chart.metadata = {};
     }
