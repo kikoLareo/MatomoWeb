@@ -5,6 +5,7 @@ const DataTable = ({ chart }) => {
   const [sortedData, setSortedData] = useState(data);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
+  console.log("Video page data: ", data, chart);
   useEffect(() => {
     setSortedData(data);
   }, [data]);
