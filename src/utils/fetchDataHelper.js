@@ -63,14 +63,13 @@ export const fetchData = async (idSite, requestData) => {
     const response1 = await fetch(requestData.url);
     const responseData = await response1.json();
 
-    
     const data = {
       value: responseData,
       info: processedData ? processedData : {}
     };
 
     newChartData = data;
-
+    console.log('Data fetched:', newChartData);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
