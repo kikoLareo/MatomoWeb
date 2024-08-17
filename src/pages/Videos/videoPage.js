@@ -12,6 +12,7 @@ const VideoDataPage = () => {
 
   useEffect(() => {
     const loadData = async () => {
+        console.log("Loading data for site: ", idSite);
       const updatedConfig = await videoPageTableConfig.getData(idSite);
       console.log("Updated config: ", updatedConfig);
       setChartConfig({ ...updatedConfig });
