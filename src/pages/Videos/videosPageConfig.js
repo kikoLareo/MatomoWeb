@@ -15,7 +15,7 @@ export const videoPageTableConfig = {
     period: 'year',
     date: 'yesterday',
     data: [],
-    getData: async function (idSite) {
+    async getData(idSite) {
         const dataFetch = await MediaAnalytics_getVideoTitles(idSite, this.period, this.date);
         console.log("Data fetch: ", dataFetch);
         this.data = dataFetch.value || [];
