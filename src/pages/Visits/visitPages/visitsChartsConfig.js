@@ -12,7 +12,8 @@ export const visitsCharts_frequency = [
       type: 'lineal',
       metrics: ["nb_visits_new", "nb_visits_returning"],
       data : [],
-      function: visitFrequency_get,
+      params: ["period", "date"],
+      fetchDataFunction: visitFrequency_get,
       async getData(idSite){
         this.data = await visitFrequency_get(idSite, this.period, this.date)
         if(this.data.info.metadata){
@@ -42,7 +43,9 @@ export const visitCharts_time = [
       metrics: ["nb_visits"],
       data : [],
       labels: [],
-      function: visitTime_getVisitInformationPerLocalTime,
+      params: ["period", "date"],
+
+      fetchDataFunction: visitTime_getVisitInformationPerLocalTime,
       async getData(idSite, period = this.period, date = this.date){
         this.data = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
         if(this.data.info.metadata){
@@ -76,7 +79,9 @@ export const visitCharts_time = [
       },
       data : [],
       labels: [],
-      function: visitTime_getByDayOfWeek,
+      params: ["period", "date"],
+
+      fetchDataFunction: visitTime_getByDayOfWeek,
       async getData(idSite){
         this.data = await visitTime_getByDayOfWeek(idSite, this.period, this.date)
         if(this.data.info.metadata){
@@ -112,8 +117,9 @@ export const visitCharts_time = [
       },
        data : [],
        labels: [],
+       params: ["period", "date"],
 
-      function: visitorInterest_getNumberOfVisitsPerVisitDuration,
+      fetchDataFunction: visitorInterest_getNumberOfVisitsPerVisitDuration,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, this.period, this.date)
         if(this.data.info.metadata){
@@ -144,10 +150,11 @@ export const visitCharts_time = [
         "nb_visits": "Visitas",
 
       },
-            data : [],
+      data : [],
       labels: [],
+      params: ["period", "date"],
 
-      function: visitorInterest_getNumberOfVisitsPerPage,
+      fetchDataFunction: visitorInterest_getNumberOfVisitsPerPage,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, this.period, this.date)
         if(this.data.info.metadata){
@@ -181,8 +188,9 @@ export const visitCharts_time = [
       },
       data : [],
       labels: [],
+      params: ["period", "date"],
 
-      function: visitorInterest_getNumberOfVisitsByDaysSinceLast,
+      fetchDataFunction: visitorInterest_getNumberOfVisitsByDaysSinceLast,
       async getData(idSite){
         this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, this.period, this.date)
         if(this.data.info.metadata){
@@ -224,7 +232,9 @@ export const visitCharts_time = [
         "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
       },
       data : [],
-      function: visitsSummary_get,
+      params: ["period", "date"],
+
+      fetchDataFunction: visitsSummary_get,
       async getData(idSite){ 
         this.data = await visitsSummary_get(idSite, this.period, this.date)
         if(this.data.info.metadata){

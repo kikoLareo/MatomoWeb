@@ -41,8 +41,8 @@ export const DataOverviewTable = ({ chartConfig }) => {
     const fetchData = async () => {
       try {
         const args = [idSite];
-        console.log('params', params);
-       
+        console.log('chart', chartConfig, params, fetchDataFunction);
+        
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
         if (params.includes("lastMinutes")) args.push(lastMinutes);
