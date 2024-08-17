@@ -1,7 +1,6 @@
 
 // LiveSectionHome.js
 import React, { useState, useEffect, useContext } from 'react';
-import { setTitle } from '../../components/Header';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { homeIframes } from './homePageConfig';
 import { Live_getCounter } from '../../modules/Live/Live-actions';
@@ -11,9 +10,6 @@ const LiveSectionHome = () => {
   const { idSite } = useContext(IdSiteContext);
   const [iframeHtml, setIframeHtml] = useState([]);
 
-  useEffect(() => {
-    setTitle("Home");
-  }, []);
 
   useEffect(() => {
     const loadIframe = async () => {
@@ -55,6 +51,7 @@ const LiveSectionHome = () => {
 
   return (
     <div className="LiveSection" style={{ width: "35vw" }}>
+      <h1>Live Overview</h1>
       <div className="LiveGraph">
         <div className="chartsInfo">
           <div className="data-overview-section">

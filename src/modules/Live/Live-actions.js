@@ -10,7 +10,6 @@ export const Live_getCounter = async (idSite,  lastMinutes) => {
     const action = `getCounters`;
     const method = `${methodBase}.getCounters`;
     const params = { idSite, lastMinutes };
-    console.log('params', params);
     return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, params) });
 }
 

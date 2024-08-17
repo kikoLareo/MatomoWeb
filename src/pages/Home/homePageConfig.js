@@ -2,6 +2,8 @@ import {Live_getCounter } from "../../modules/Live/Live-actions";
 import { visitLive_getMap } from "../../modules/Live/Live-actions";
 import { visitsSummary_get } from "../../modules/Visits/visits_actions";
 
+import { MediaAnalytics_getCurrentMostPlays,MediaAnalytics_getCurrentSumTimeSpent,MediaAnalytics_getCurrentNumPlays } from "../../modules/mediaAnalytics/mediaAnalytics";
+
 export const homeCharts_LiveSection =
     {
         title: 'Live - Counter',
@@ -97,4 +99,64 @@ export const  homeCharts_VisitsSection_Evolution =
               console.log('Fetched data for chart:', this, this.data);
               return this;
             }
-        } ;
+} ;
+
+export const homeCharts_MediaSection = [
+    {
+        title: 'Media - Current Number of Plays',
+        description: 'Get the current number of plays in the last 180 minutes.',
+        action: "getCurrentNumPlays",
+        module: 'MediaAnalytics',
+        period: 'day',
+        date: 'today',
+        type: 'table',
+        metrics: {
+            "plays": "Plays",
+        },
+        data: [],
+        params: ["lastMinutes"],
+        function: MediaAnalytics_getCurrentNumPlays,
+        async getData(idSite, lastMinutes = 180) {
+            this.data = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
+            return this;
+        }
+    },
+    {
+        title: 'Media - Current Sum Time Spent',
+        description: 'Get the current sum of time spent in the last 180 minutes.',
+        action: "getCurrentSumTimeSpent",
+        module: 'MediaAnalytics',
+        period: 'day',
+        date: 'today',
+        type: 'table',
+        metrics: {
+            "timeSpent": "Time Spent",
+        },
+        data: [],
+        params: ["lastMinutes"],
+        function: MediaAnalytics_getCurrentSumTimeSpent,
+        async getData(idSite, lastMinutes = 180) {
+            this.data = await MediaAnalytics_getCurrentSumTimeSpent(idSite, lastMinutes);
+            return this;
+        }
+    },
+    {
+        title: 'Media - Current Most Plays',
+        description: 'Get the current most plays in the last 180 minutes.',
+        action: "getCurrentMostPlays",
+        module: 'MediaAnalytics',
+        period: 'day',
+        date: 'today',
+        type: 'table',
+        metrics: {
+            "mostPlays": "Most Plays",
+        },
+        data: [],
+        params: ["lastMinutes"],
+        function: MediaAnalytics_getCurrentMostPlays,
+        async getData(idSite, lastMinutes = 180, filter_limit = '5') {
+            this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
+            return this;
+        }
+    }
+]
