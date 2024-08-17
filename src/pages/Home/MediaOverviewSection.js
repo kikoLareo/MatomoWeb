@@ -17,6 +17,7 @@ const MediaSectionHome = () => {
             <DataOverviewTable fetchDataFunction={chart.function} params={chart.params} title={chart.title} />
             ))}
           </div>
+          
       </div>
     </div>
   );

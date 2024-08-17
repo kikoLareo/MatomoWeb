@@ -16,6 +16,19 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
     params = ["period", "date"];
   }
 
+
+  const formatDataForTable = (data) => {
+    return data.map(item => {
+      if (item.label && item.value !== undefined) {
+        return {
+          label: item.label,
+          value: item.value
+        };
+      }
+      return item;
+    });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,11 +40,16 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         console.log('args', args);
         const result = await fetchDataFunction(...args);
         console.log('result', result);
+        var auxData=null;
         if (Array.isArray(result.value)) {
-            setData(result.value[0]);
+            auxData= result.value[0];
         } else {
-            setData(result.value);
+            auxData = result.value;
         } 
+
+        console.log(formatDataForTable(auxData));
+        setData(formatDataForTable(auxData));
+
          setMetadata(result.info.metadata? result.info.metadata :titles || {});
 
       } catch (error) {
@@ -42,6 +60,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
     fetchData();
   }, [fetchDataFunction, idSite, period, date, lastMinutes, params]);
 
+  console.log(data, metadata);
   const handlePeriodChange = (e) => {
     setPeriod(e.target.value);
   };
