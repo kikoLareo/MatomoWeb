@@ -5,7 +5,7 @@ import { IdSiteContext } from '../../contexts/idSiteContext';
 import { homeIframes } from './homePageConfig';
 import { Live_getCounter } from '../../modules/Live/Live-actions';
 import DataOverviewTable from '../../components/tableComponent';
-
+import { homeCharts_LiveSection } from './homePageConfig';
 const LiveSectionHome = () => {
   const { idSite } = useContext(IdSiteContext);
   const [iframeHtml, setIframeHtml] = useState([]);
@@ -55,7 +55,7 @@ const LiveSectionHome = () => {
       <div className="LiveGraph">
         <div className="chartsInfo">
           <div className="data-overview-section">
-            <DataOverviewTable fetchDataFunction={Live_getCounter} params={["lastMinutes"]} />
+            <DataOverviewTable fetchDataFunction={Live_getCounter} params={["lastMinutes"]}  title={homeCharts_LiveSection.title} />
           </div>
           {renderIframe()}
         </div>

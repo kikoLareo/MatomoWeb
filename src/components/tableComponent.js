@@ -4,7 +4,7 @@ import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
-export const DataOverviewTable = ({ fetchDataFunction, params}) => {
+export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
   const [data, setData] = useState(null);
   const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
@@ -60,6 +60,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params}) => {
 
   return (
     <div className="data-overview-table">
+      <h2>{title}</h2>
       <div className="filter-options">
         {params.includes("period") && (
           <label>

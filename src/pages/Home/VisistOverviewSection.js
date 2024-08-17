@@ -5,7 +5,7 @@ import { homeCharts_VisitsSection_Evolution } from './homePageConfig';
 import DataOverviewTable from '../../components/tableComponent';
 import { visitsSummary_get } from '../../modules/Visits/visits_actions';
 import GraphRenderer from '../../utils/GraphRenderer';
-
+import { homeCharts_VisitsSection_Overview } from './homePageConfig';
 const VisitsOverviewSection = () => {
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const VisitsOverviewSection = () => {
     <div className="visits-overview-section">
       <h2>Visits Overview</h2>
       <DataOverviewTable 
-        fetchDataFunction={visitsSummary_get} params={["period", "date"]}
+        fetchDataFunction={visitsSummary_get} params={["period", "date"]} title={homeCharts_VisitsSection_Overview.title}
       />
       <GraphRenderer
         chart={{

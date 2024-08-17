@@ -176,6 +176,7 @@ const VisitPage = ({ pageConfig }) => {
                     <div key={index} className="data-overview-section">
                       <DataOverviewTable 
                         fetchDataFunction={chartConfig.function} params={chartConfig.params? chartConfig.params : ["period", "date"]}
+                        title={chartConfig.title}
                       />
                     </div>
                   ))}

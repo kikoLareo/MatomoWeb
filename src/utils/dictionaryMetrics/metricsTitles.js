@@ -24,5 +24,8 @@ export const titles = {
     visitors : "Visitantes",
     visits : "Visitas",
     visitsConverted : "Visitas convertidas",
+    plays : "Reproducciones",
+    timeSpent : "Tiempo de reproducción",
+    mostPlays : "Más reproducidos",
 
 }
