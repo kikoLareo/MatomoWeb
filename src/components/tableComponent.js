@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
-import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ chartConfig }) => {
   console.log('chartConfig', chartConfig);
