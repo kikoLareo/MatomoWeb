@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { homeIframes } from './homePageConfig';
-import { Live_getCounter } from '../../modules/Live/Live-actions';
 import DataOverviewTable from '../../components/tableComponent';
 import { homeCharts_LiveSection } from './homePageConfig';
 const LiveSectionHome = () => {
