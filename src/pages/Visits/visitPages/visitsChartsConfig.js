@@ -263,8 +263,8 @@ export const visitCharts_time = [
       params: ["period", "date"],
 
       fetchDataFunction: visitsSummary_get,
-      async getData(idSite){ 
-        this.data = await visitsSummary_get(idSite, this.period, this.date)
+      async getData(idSite, period = this.period, date = this.date){ 
+        this.data = await visitsSummary_get(idSite, period,date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
@@ -275,40 +275,7 @@ export const visitCharts_time = [
         return this;
       }
     },
-    {
-      title: 'Visits - Summary',
-      description: 'Get the summary of visits.',
-      action: "get",
-      module: 'VisitsSummary',
-      period: 'year',
-      date: 'yesterday',
-      type: 'table',
-      metrics: {
-        "sum_visit_length": "Duración total de las visitas (en segundos)",
-        "nb_uniq_visitors": "Visitantes únicos",
-        "nb_visits": "Visitas",
-        "nb_actions": "Acciones",
-        "max_actions": "Acciones máximas en una visita",
-        "bounce_rate": "Porcentaje de rebote",
-        "nb_actions_per_visit": "Acciones por visita",
-        "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
-      },
-      data : [],
-      params: ["period", "date"],
-
-      fetchDataFunction: visitsSummary_get,
-      async getData(idSite){ 
-        this.data = await visitsSummary_get(idSite, this.period, this.date)
-        if(this.data.info.metadata){
-          this.description = this.data.info.metadata.documentation;
-          this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.columns? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
-        }
-        console.log('Fetched data for chart:', this, this.data);
-
-        return this;
-      }
-    },
+   
   ];
 
 
