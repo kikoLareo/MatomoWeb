@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const DataTable = ({ data }) => {
-  const [sortedData, setSortedData] = useState(data);
+const DataTable = ({ chart }) => {
+  const [sortedData, setSortedData] = useState(chart);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
   useEffect(() => {
-    setSortedData(data);
-  }, [data]);
+    setSortedData(chart);
+  }, [chart]);
 
   const sortData = (key) => {
     let direction = 'ascending';
@@ -32,7 +32,7 @@ const DataTable = ({ data }) => {
     <table>
       <thead>
         <tr>
-          {data.columns.map((column) => (
+          {chart.columns.map((column) => (
             <th key={column.key} onClick={() => sortData(column.key)}>
               {column.label}
             </th>
@@ -42,7 +42,7 @@ const DataTable = ({ data }) => {
       <tbody>
         {sortedData.map((item, index) => (
           <tr key={index}>
-            {data.columns.map((column) => (
+            {chart.columns.map((column) => (
               <td key={column.key}>{item[column.key]}</td>
             ))}
           </tr>
