@@ -27,9 +27,13 @@ export const DataOverviewTable = ({ fetchDataFunction, params}) => {
         console.log('args', args);
         const result = await fetchDataFunction(...args);
         console.log('result', result);
-        
-        setData(result.value);
-        setMetadata(result.info? result.info.metadata :titles || {});
+        if (Array.isArray(result.value)) {
+            setData(result.value[0]);
+        } else {
+            setData(result.value);
+        } 
+         setMetadata(result.info.metadata? result.info.metadata :titles || {});
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
