@@ -3,7 +3,6 @@ import { visitLive_getMap } from "../../modules/Live/Live-actions";
 import { visitsSummary_get } from "../../modules/Visits/visits_actions";
 
 import { MediaAnalytics_getCurrentMostPlays,MediaAnalytics_getCurrentSumTimeSpent,MediaAnalytics_getCurrentNumPlays } from "../../modules/mediaAnalytics/mediaAnalytics";
-import { titles } from "../../utils/dictionaryMetrics/metricsTitles";
 
 export const homeCharts_LiveSection =
     {
@@ -15,20 +14,18 @@ export const homeCharts_LiveSection =
         date: 'today',
         type: 'table',
         metrics: {
-            "visits": "Visits",
-            "actions": "Actions",
-            "visitors": "Visitors",
-            "visitsConverted": "Visits Converted",
+            "visits": "Visitas",
+            "actions": "Acciones",
+            "visitors": "Visitantes",
+            "visitsConverted": "Visitantes Convertidos",
         },
         data: [],
-        labels: {},
+        labels: ["Visits","Actions","Visitors","Visits Converted",],
 
         params: ["lastMinutes"],
         fetchDataFunction: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
-            getLabels(this);
-
             return this;
         }
     };
@@ -69,7 +66,7 @@ export const homeCharts_LiveSection =
             },
             params: ["period", "date"],
             data : [],
-            labels: {},
+            labels: ["Visitas"],
 
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
@@ -78,8 +75,6 @@ export const homeCharts_LiveSection =
                 this.description = this.data.info.metadata.documentation;
                 this.title = this.data.info.metadata.name;
                 this.metrics = this.data.info.columns? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
-                getLabels(this);
-
               }
               console.log('Fetched data for chart:', this, this.data);
       
@@ -107,8 +102,6 @@ export const  homeCharts_VisitsSection_Evolution =
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
-              getLabels(this);
-
               console.log('Fetched data for chart:', this, this.data);
               return this;
             }
@@ -124,16 +117,15 @@ export const homeCharts_MediaSection = [
         date: 'today',
         type: 'table',
         metrics: {
-            "value": "Plays",
+            "value": "Reproducciones",
         },
         data: [],
         params: ["lastMinutes"],
-        labels: {},
+        labels: ["Reproducciones"],
 
         fetchDataFunction: MediaAnalytics_getCurrentNumPlays,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
-            getLabels(this);
 
             return this;
         }
@@ -147,17 +139,15 @@ export const homeCharts_MediaSection = [
         date: 'today',
         type: 'table',
         metrics: {
-            "value": "Time Spent",
+            "value": "Tiempo de reproducción",
         },
         data: [],
-        labels: {},
+        labels: ["Tiempo de reproducción"],
 
         params: ["lastMinutes"],
         fetchDataFunction: MediaAnalytics_getCurrentSumTimeSpent,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentSumTimeSpent(idSite, lastMinutes);
-            getLabels(this);
-
             return this;
         }
     },
@@ -173,11 +163,10 @@ export const homeCharts_MediaSection = [
         metrics: {"value": "Plays"},
         data: [],
         params: ["lastMinutes"],
-        labels: {},
+        labels: ["Plays"],
         fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
-            getLabels(this);
             console.log('Fetched data for chart:', this, this.data);
             return this;
             }
@@ -185,29 +174,4 @@ export const homeCharts_MediaSection = [
     
 ]
 
-const getLabels = (chart) => {
-    var labels = [];
-    if (Array.isArray(chart.data.value)) {
-        labels = chart.data.value[0].map(item => item.label? item.label : chart.metrics.value);
-    } else if (typeof chart.data.value === 'object') {
-        labels = Object.keys(chart.data.value);
-    } else {
-        labels = Object.keys(chart.metrics);
-    }
-    console.log('labels', labels);
 
-    if(chart.data.info){
-       chart.labels = labels.map(label => {
-            if(chart.data.info.columns[label]){
-                return chart.data.info.columns[label];
-            }else if(chart.data.info.metadata.metrics[label]){
-                return chart.data.info.metadata.metrics[label];
-            }else if(chart.metrics[label]){
-                return chart.metrics[label];
-            }else if(titles[label]){
-                return titles[label];
-            }else return label;
-        });
-    }
-}
-// export const homeCharts_MediaSection_MostPlays = 
