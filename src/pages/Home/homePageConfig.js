@@ -140,27 +140,28 @@ export const homeCharts_MediaSection = [
             return this;
         }
     },
+    {
+
+        title: 'Media - Current Most Plays',
+        description: 'Get the current most plays in the last 180 minutes.',
+        action: "getCurrentMostPlays",
+        module: 'MediaAnalytics',
+        period: 'day',
+        date: 'today',
+        type: 'table',
+        metrics: {"value": "Plays"},
+        data: [],
+        params: ["lastMinutes"],
+        function: MediaAnalytics_getCurrentMostPlays,
+        async getData(idSite, lastMinutes = 180, filter_limit = '5') {
+            this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
+            this.labels = this.data.value.map((value) => value.label);
+    
+            console.log('Fetched data for chart:', this, this.data);
+            return this;
+            }
+        }
     
 ]
 
-export const homeCharts_MediaSection_MostPlays = {
-
-    title: 'Media - Current Most Plays',
-    description: 'Get the current most plays in the last 180 minutes.',
-    action: "getCurrentMostPlays",
-    module: 'MediaAnalytics',
-    period: 'day',
-    date: 'today',
-    type: 'table',
-    metrics: {"value": "Plays"},
-    data: [],
-    params: ["lastMinutes"],
-    function: MediaAnalytics_getCurrentMostPlays,
-    async getData(idSite, lastMinutes = 180, filter_limit = '5') {
-        this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
-        this.labels = this.data.value.map((value) => value.label);
-
-        console.log('Fetched data for chart:', this, this.data);
-        return this;
-        }
-    }
+// export const homeCharts_MediaSection_MostPlays = 
