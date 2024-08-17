@@ -2,6 +2,7 @@
 .data-overview-table {
     font-family: Arial, sans-serif;
     margin: 20px;
+    width: 90%;
 }
 
 .filter-options {
@@ -27,12 +28,6 @@
     border-radius: 8px;
 }
 
-.table-row {
-    width: 48%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
 
 .table-cell {
     margin-bottom: 10px;
@@ -44,9 +39,4 @@
     color: #333;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .table-row {
-        width: 100%;
-    }
-}
+

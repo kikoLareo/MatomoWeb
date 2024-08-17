@@ -20,13 +20,11 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
     // Si data es un array
     if (Array.isArray(data)) {
-        return data.map((item) => {
-            return Object.keys(item).map(key => ({
-                label: item.label ? item.label : chart.metrics[key] || titles[key] || key,
-                value: item[key]
-            }));
-        }).flat();
-    }
+      return data.map((item) => ({
+          label: item.label ? item.label : chart.metrics['value'] || titles['value'] || 'Value',
+          value: item.value
+      }));
+  }
 
     // Si data es un objeto
     return Object.keys(data).map(key => ({
