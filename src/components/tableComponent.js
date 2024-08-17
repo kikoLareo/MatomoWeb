@@ -9,39 +9,28 @@ export const DataOverviewTable = ({ chartConfig }) => {
     params = ["period", "date"];
   }
   const [data, setData] = useState(null);
-  const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
   const [date, setDate] = useState('yesterday');
   const { idSite } = useContext(IdSiteContext);
   const [lastMinutes, setLastMinutes] = useState(30);
 
-  const formatDataForTable = (data) => {
+  const formatDataForTable = (chart) => {
+    let data = chart.data.value;
     if (Array.isArray(data)) {
-      return data.map(item => {
-        if (item.label && item.value !== undefined) {
-          return {
-            label: item.label,
-            value: item.value
-          };
-        }
-        return item;
-      });
-    } else if (typeof data === 'object') {
+      data = data[0];
+    } 
+  
       return Object.keys(data).map(key => ({
-        label: key,
+        label: chart.metrics[key] || key,
         value: data[key]
       }));
-    } else {
-      return [{ label: 'No Data', value: 'No Data Available' }];
-    }
+    
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const args = [idSite];
-        console.log('chart', params, fetchDataFunction);
-        
+        const args = [idSite];        
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
         if (params.includes("lastMinutes")) args.push(lastMinutes);
@@ -51,12 +40,10 @@ export const DataOverviewTable = ({ chartConfig }) => {
         const result = data.data;
 
         if (result.value && result.value.length > 0) {
-          setData(formatDataForTable(result.value));
+          setData(formatDataForTable(data));
         } else {
           setData([{ label: 'No Data', value: 'No Data Available' }]);
         }
-
-        setMetadata(chartConfig.labels || {});
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -103,7 +90,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
         {data.map((item, index) => (
           <div className="table-row" key={index}>
             <div className="table-cell">
-              <span>{item.value}</span> {metadata[item.label] || item.label}
+              <span>{item.value}</span> { item.label}
             </div>
           </div>
         ))}

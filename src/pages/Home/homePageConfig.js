@@ -20,8 +20,6 @@ export const homeCharts_LiveSection =
             "visitsConverted": "Visitantes Convertidos",
         },
         data: [],
-        labels: ["Visits","Actions","Visitors","Visits Converted",],
-
         params: ["lastMinutes"],
         fetchDataFunction: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
@@ -66,7 +64,6 @@ export const homeCharts_LiveSection =
             },
             params: ["period", "date"],
             data : [],
-            labels: ["Visitas"],
 
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
@@ -97,7 +94,6 @@ export const  homeCharts_VisitsSection_Evolution =
             },
             params: ["period", "date"],
             data : [],
-            labels: {},
 
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
@@ -121,7 +117,6 @@ export const homeCharts_MediaSection = [
         },
         data: [],
         params: ["lastMinutes"],
-        labels: ["Reproducciones"],
 
         fetchDataFunction: MediaAnalytics_getCurrentNumPlays,
         async getData(idSite, lastMinutes = 180) {
@@ -142,8 +137,6 @@ export const homeCharts_MediaSection = [
             "value": "Tiempo de reproducción",
         },
         data: [],
-        labels: ["Tiempo de reproducción"],
-
         params: ["lastMinutes"],
         fetchDataFunction: MediaAnalytics_getCurrentSumTimeSpent,
         async getData(idSite, lastMinutes = 180) {
@@ -163,7 +156,6 @@ export const homeCharts_MediaSection = [
         metrics: {"value": "Plays"},
         data: [],
         params: ["lastMinutes"],
-        labels: ["Plays"],
         fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);

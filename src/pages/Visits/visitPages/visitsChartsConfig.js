@@ -10,7 +10,10 @@ export const visitsCharts_frequency = [
       period: 'month',
       date: '2024-03-01,yesterday',
       type: 'lineal',
-      metrics: ["nb_visits_new", "nb_visits_returning"],
+      metrics: {
+        "nb_visits_new" : "Nuevas visitas",
+        "nb_visits_returning": "Visitas que regresan"
+      },
       data : [],
       params: ["period", "date"],
       fetchDataFunction: visitFrequency_get,
@@ -19,7 +22,7 @@ export const visitsCharts_frequency = [
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
           this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
+          this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
         }
         console.log('Fetched data for chart:', this, this.data);
   
