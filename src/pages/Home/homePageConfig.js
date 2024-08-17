@@ -161,7 +161,6 @@ export const homeCharts_MediaSection = [
         metrics: {"value": "Plays"},
         data: [],
         params: ["lastMinutes"],
-        metadata: {},
         fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
@@ -175,15 +174,11 @@ export const homeCharts_MediaSection = [
 
 const getLabels = (chart) => {
     if (Array.isArray(chart.data.value)) {
-        chart.labels = chart.data.value.map(item => item.label? item.label : item
-        chart.metadata = chart.data.value.reduce((acc, item) => {
-            acc[item.label] = item.value;
-            return acc;
-        }, {});
+        chart.labels = chart.data.value.map(item => item.label? item.label : chart.metrics.value);
     } else if (typeof chart.data.value === 'object') {
-        chart.metadata = chart.data.info?.metadata?.columns || Object.keys(chart.data.value);
+        chart.labels = Object.keys(chart.data.value);
     } else {
-        chart.metadata = {};
+        chart.label = chart.metrics.value;
     }
 
 }
