@@ -176,7 +176,7 @@ export const homeCharts_MediaSection = [
 const getLabels = (chart) => {
     var labels = [];
     if (Array.isArray(chart.data.value)) {
-        labels = chart.data.value.map(item => item.label? item.label : chart.metrics.value);
+        labels = chart.data.value[0].map(item => item.label? item.label : chart.metrics.value);
     } else if (typeof chart.data.value === 'object') {
         labels = Object.keys(chart.data.value);
     } else {
