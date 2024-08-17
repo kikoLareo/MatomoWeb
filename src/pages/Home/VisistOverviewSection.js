@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { homeCharts_VisitsSection_Evolution } from './homePageConfig';
 import DataOverviewTable from '../../components/tableComponent';
-import { visitsSummary_get } from '../../modules/Visits/visits_actions';
 import GraphRenderer from '../../utils/GraphRenderer';
 import { homeCharts_VisitsSection_Overview } from './homePageConfig';
 const VisitsOverviewSection = () => {
