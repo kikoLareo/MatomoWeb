@@ -7,6 +7,7 @@ import Devices from './pages/Devices';
 import Reproductions from './pages/Reproductions';
 import VisitPage from './pages/Visits/visitPages/VisitsPages';
 import { pagesConfig } from './pages/Visits/visitPages/visitPagesConfig';
+import VideoDataPage from './pages/Videos/videoPage';
 import './css/App.css';
 import './css/Sidebar.css';
 import './css/Header.css';
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/reproductions" element={<Reproductions />} />
                 <Route path="/devices" element={<Devices />} />
+                <Route path="/videos" element={<VideoDataPage />} />
                 {pagesConfig.map((page) => (
                   <Route
                     key={page.path}
@@ -36,6 +38,7 @@ function App() {
                     element={<VisitPage pageConfig={page} />}
                   />
                 ))}
+
               </Routes>
             </div>
           </div>

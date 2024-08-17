@@ -19,6 +19,7 @@ const Header = () => {
             <li className="menu-item" ><Link to="/">Home</Link></li>
             <li className="menu-item" ><Link to="/reproductions">Reproductions</Link></li> 
             <li className="menu-item" ><Link to="/devices">Devices</Link></li>
+            <li className="menu-item" ><Link to="/videos">Videos</Link></li>
             <li className="menu-item" ><VisitDropDown/></li>
           </ul>
         </nav>

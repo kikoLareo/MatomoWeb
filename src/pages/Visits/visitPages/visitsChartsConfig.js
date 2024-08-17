@@ -30,31 +30,6 @@ export const visitsCharts_frequency = [
       }
       
     },
-    {
-      title: 'Visits - Frequency',
-      description: 'Get the frequency of visits.',
-      action: "get",
-      module: 'Visits',
-      period: 'year',
-      date: 'yesterday',
-      type: 'table',
-      metrics: ["nb_visits_new", "nb_visits_returning"],
-      data : [],
-      params: ["period"],
-      fetchDataFunction: visitFrequency_get,
-      async getData(idSite, period = this.period, date = this.date){
-        this.data = await visitFrequency_get(idSite, period, date)
-        if(this.data.info.metadata){
-          this.description = this.data.info.metadata.documentation;
-          this.title = this.data.info.metadata.name;
-          this.metrics = this.data.info.metadata.metrics;
-        }
-        console.log('Fetched data for chart:', this, this.data);
-  
-        return this;
-      }
-      
-    },
    
   ];
   

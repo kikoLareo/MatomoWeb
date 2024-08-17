@@ -41,7 +41,7 @@ export const MediaAnalytics_getAudioResources = async (idSite, period = 'day', d
   return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, { idSite, period, date }) });
 };
 
-export const MediaAnalytics_getVideoTitles = async (idSite, period = 'day', date = '2023-12-01,2024-07-01') => {
+export const MediaAnalytics_getVideoTitles = async (idSite, period = 'year', date = 'yesterday') => {
   const action = 'getVideoTitles';
   const method = `${methodBase}.getVideoTitles`;
   return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, { idSite, period, date }) });
