@@ -4,6 +4,7 @@ import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ chartConfig }) => {
+  console.group('DataOverviewTable', chartConfig.title);
   console.log('chartConfig', chartConfig);
   var { fetchDataFunction, params, title } = chartConfig;
   if(!params) {
@@ -41,7 +42,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
     const fetchData = async () => {
       try {
         const args = [idSite];
-        console.log('chart', chartConfig, params, fetchDataFunction);
+        console.log('chart', params, fetchDataFunction);
         
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
@@ -111,4 +112,5 @@ export const DataOverviewTable = ({ chartConfig }) => {
   );
 };
 
+console.groupEnd();
 export default DataOverviewTable;
