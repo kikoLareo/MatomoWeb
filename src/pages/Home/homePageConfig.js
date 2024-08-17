@@ -3,6 +3,7 @@ import { visitLive_getMap } from "../../modules/Live/Live-actions";
 import { visitsSummary_get } from "../../modules/Visits/visits_actions";
 
 import { MediaAnalytics_getCurrentMostPlays,MediaAnalytics_getCurrentSumTimeSpent,MediaAnalytics_getCurrentNumPlays } from "../../modules/mediaAnalytics/mediaAnalytics";
+import { titles } from "../../utils/dictionaryMetrics/metricsTitles";
 
 export const homeCharts_LiveSection =
     {
@@ -173,13 +174,28 @@ export const homeCharts_MediaSection = [
 ]
 
 const getLabels = (chart) => {
+    var labels = [];
     if (Array.isArray(chart.data.value)) {
-        chart.labels = chart.data.value.map(item => item.label? item.label : chart.metrics.value);
+        labels = chart.data.value.map(item => item.label? item.label : chart.metrics.value);
     } else if (typeof chart.data.value === 'object') {
-        chart.labels = Object.keys(chart.data.value);
+        labels = Object.keys(chart.data.value);
     } else {
-        chart.label = chart.metrics.value;
+        labels = Object.keys(chart.metrics);
     }
+    console.log('labels', labels);
 
+    if(chart.data.info){
+        labels.map(label => {
+            if(chart.data.info.columns[label]){
+                return chart.data.info.columns[label];
+            }else if(chart.data.info.metadata.metrics[label]){
+                return chart.data.info.metadata.metrics[label];
+            }else if(chart.metrics[label]){
+                return chart.metrics[label];
+            }else if(titles[label]){
+                return titles[label];
+            }else return label;
+        });
+    }
 }
 // export const homeCharts_MediaSection_MostPlays = 
