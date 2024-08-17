@@ -24,6 +24,8 @@ export const homeCharts_LiveSection =
         function: Live_getCounter,
         async getData(idSite ,lastMinutes = 30) {
             this.data = await Live_getCounter(idSite, lastMinutes);
+            this.getLabels(this);
+
             return this;
         }
     };
@@ -44,6 +46,7 @@ export const homeCharts_LiveSection =
         function: visitLive_getMap,
         async getData(idSite){
           this.data = await visitLive_getMap(idSite)
+
             return this.data;
         } 
       },  
@@ -71,6 +74,7 @@ export const homeCharts_LiveSection =
                 this.description = this.data.info.metadata.documentation;
                 this.title = this.data.info.metadata.name;
                 this.metrics = this.data.info.columns? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
+                this.getLabels(this);
 
               }
               console.log('Fetched data for chart:', this, this.data);
@@ -96,6 +100,8 @@ export const  homeCharts_VisitsSection_Evolution =
             function: visitsSummary_get,
             async getData(idSite){ 
               this.data = await visitsSummary_get(idSite, this.period, this.date)
+              this.getLabels(this);
+
               console.log('Fetched data for chart:', this, this.data);
               return this;
             }
@@ -118,6 +124,8 @@ export const homeCharts_MediaSection = [
         function: MediaAnalytics_getCurrentNumPlays,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
+            this.getLabels(this);
+
             return this;
         }
     },
@@ -137,6 +145,8 @@ export const homeCharts_MediaSection = [
         function: MediaAnalytics_getCurrentSumTimeSpent,
         async getData(idSite, lastMinutes = 180) {
             this.data = await MediaAnalytics_getCurrentSumTimeSpent(idSite, lastMinutes);
+            this.getLabels(this);
+
             return this;
         }
     },
@@ -152,11 +162,11 @@ export const homeCharts_MediaSection = [
         metrics: {"value": "Plays"},
         data: [],
         params: ["lastMinutes"],
+        metadata: {},
         function: MediaAnalytics_getCurrentMostPlays,
         async getData(idSite, lastMinutes = 180, filter_limit = '5') {
             this.data = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
-            this.labels = this.data.value.map((value) => value.label);
-    
+            this.getLabels(this);
             console.log('Fetched data for chart:', this, this.data);
             return this;
             }
@@ -164,4 +174,18 @@ export const homeCharts_MediaSection = [
     
 ]
 
+const getLabels = (chart) => {
+    if (Array.isArray(chart.data.value)) {
+        chart.labels = chart.data.value.map(item => item.label || '');
+        chart.metadata = chart.data.value.reduce((acc, item) => {
+            acc[item.label] = item.value;
+            return acc;
+        }, {});
+    } else if (typeof chart.data.value === 'object') {
+        chart.metadata = chart.data.info?.metadata?.columns || {};
+    } else {
+        chart.metadata = {};
+    }
+
+}
 // export const homeCharts_MediaSection_MostPlays = 

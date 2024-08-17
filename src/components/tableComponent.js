@@ -1,26 +1,19 @@
-
 import React, { useState, useEffect, useContext } from 'react';
 import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
-export const DataOverviewTable = ({chartConfig }) => {
-  var {fetchDataFunction, params, title}  =chartConfig;
-
+export const DataOverviewTable = ({ chartConfig }) => {
+  const { fetchDataFunction, params, title } = chartConfig;
   const [data, setData] = useState(null);
   const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
   const [date, setDate] = useState('yesterday');
   const { idSite } = useContext(IdSiteContext);
   const [lastMinutes, setLastMinutes] = useState(30);
-  console.log('params', params);
-  if(!params) {
-    params = ["period", "date"];
-  }
-
 
   const formatDataForTable = (data) => {
-    if(Array.isArray(data)) {
+    if (Array.isArray(data)) {
       return data.map(item => {
         if (item.label && item.value !== undefined) {
           return {
@@ -30,45 +23,33 @@ export const DataOverviewTable = ({chartConfig }) => {
         }
         return item;
       });
-    }else if(data){
-      return Object.keys(data).reduce((acc, key) => {
-        acc[key] = data[key];
-        return acc;
-      }, {});
-    }else{
-      return data;
+    } else if (typeof data === 'object') {
+      return Object.keys(data).map(key => ({
+        label: key,
+        value: data[key]
+      }));
+    } else {
+      return [{ label: 'No Data', value: 'No Data Available' }];
     }
-
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(fetchDataFunction, idSite, period, date, lastMinutes, params);
         const args = [idSite];
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
         if (params.includes("lastMinutes")) args.push(lastMinutes);
-        console.log('args', args);
+
         const result = await fetchDataFunction(...args);
-        console.log('result', result);
-        var auxData=null;
-        if(result.value && result.value.length > 0) {
-          if (Array.isArray(result.value)) {
-              auxData= result.value[0];
-          } else {
-              auxData = result.value;
-          } 
+
+        if (result.value && result.value.length > 0) {
+          setData(formatDataForTable(result.value));
         } else {
-          auxData = 0;
-          
+          setData([{ label: 'No Data', value: 'No Data Available' }]);
         }
-        console.log('auxData', auxData);
-        console.log(formatDataForTable(auxData));
-        setData(formatDataForTable(auxData));
 
-         setMetadata(result.info.metadata? result.info.metadata :titles || {});
-
+        setMetadata(result.info?.metadata?.columns || titles || {});
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -77,20 +58,7 @@ export const DataOverviewTable = ({chartConfig }) => {
     fetchData();
   }, [fetchDataFunction, idSite, period, date, lastMinutes, params]);
 
-  console.log(data, metadata);
-  const handlePeriodChange = (e) => {
-    setPeriod(e.target.value);
-  };
-
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
-  };
-
-  const handleMinutesChange = (value) => {
-    setLastMinutes(value);
-  };
-
-  if (!data || !metadata) {
+  if (!data) {
     return <div>Loading...</div>;
   }
 
@@ -101,7 +69,7 @@ export const DataOverviewTable = ({chartConfig }) => {
         {params.includes("period") && (
           <label>
             Period:
-            <select value={period} onChange={handlePeriodChange}>
+            <select value={period} onChange={(e) => setPeriod(e.target.value)}>
               <option value="day">Day</option>
               <option value="week">Week</option>
               <option value="month">Month</option>
@@ -112,18 +80,23 @@ export const DataOverviewTable = ({chartConfig }) => {
         {params.includes("date") && (
           <label>
             Date:
-            <input type="text" value={date} onChange={handleDateChange} placeholder="yyyy-mm-dd or 'today', 'yesterday'" />
+            <input
+              type="text"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              placeholder="yyyy-mm-dd or 'today', 'yesterday'"
+            />
           </label>
         )}
         {params.includes("lastMinutes") && (
-          <FilterMinutes onMinutesChange={handleMinutesChange} />
+          <FilterMinutes onMinutesChange={(value) => setLastMinutes(value)} />
         )}
       </div>
       <div className="table">
-        {Object.entries(data).map(([key, value]) => (
-          <div className="table-row" key={key}>
+        {data.map((item, index) => (
+          <div className="table-row" key={index}>
             <div className="table-cell">
-              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || chartConfig.metrics[key] || key} 
+              <span>{item.value}</span> {metadata[item.label] || item.label}
             </div>
           </div>
         ))}
