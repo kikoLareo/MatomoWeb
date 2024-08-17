@@ -39,9 +39,7 @@ export const homeCharts_LiveSection =
         period: 'day',
         date: 'today',
         type: 'iframe',
-        metrics: {
-         
-        },
+        metrics: {},
         data : [],
         fetchDataFunction: visitLive_getMap,
         async getData(idSite){
