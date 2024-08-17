@@ -57,7 +57,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
           setData([{ label: 'No Data', value: 'No Data Available' }]);
         }
 
-        setMetadata(result.info?.metadata?.columns || titles || {});
+        setMetadata(chartConfig.labels || {});
       } catch (error) {
         console.error('Error fetching data:', error);
       }
