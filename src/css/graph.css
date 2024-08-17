@@ -171,7 +171,30 @@ div#widgetIframe {
   filter: contrast(0.9);
 }
 
+@media (min-width: 600px) {
+  .table{
+    display: flex;
+    flex-direction: row;
+
+  }
+  
+}
 .table{
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 600px) {
+  .table-row{
+    display: flex;
+    flex-direction: row;
+    width: 48%;
+
+  }
+}
+.table-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
 }

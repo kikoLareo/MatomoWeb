@@ -134,7 +134,7 @@ export const homeCharts_MediaSection = [
         date: 'today',
         type: 'table',
         metrics: {
-            "value": "Tiempo de reproducción",
+            "value": "Tiempo de reproducción (seg)",
         },
         data: [],
         params: ["lastMinutes"],

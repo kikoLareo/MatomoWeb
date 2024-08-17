@@ -17,21 +17,23 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
   const formatDataForTable = (chart) => {
     let data = chart.data.value;
+
+    // Si data es un array
     if (Array.isArray(data)) {
-      return data.map((item) => {
-          return Object.keys(data).map(key => ({
-            label:item.label? item.label : chart.metrics[key] || titles[key] || key,
-            value: item.value? item.value:  data[key]
-          }));
-      });
-    } 
-  
-      return Object.keys(data).map(key => ({
+        return data.map((item) => {
+            return Object.keys(item).map(key => ({
+                label: item.label ? item.label : chart.metrics[key] || titles[key] || key,
+                value: item[key]
+            }));
+        }).flat();
+    }
+
+    // Si data es un objeto
+    return Object.keys(data).map(key => ({
         label: chart.metrics[key] || titles[key] || key,
         value: data[key]
-      }));
-    
-  };
+    }));
+};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +100,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
         {data.map((item, index) => (
           <div className="table-row" key={index}>
             <div className="table-cell">
-              <span>{item.value}</span> {item.label}
+              {item.label}  <span>{item.value}</span>
             </div>
           </div>
         ))}
