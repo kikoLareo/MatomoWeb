@@ -37,8 +37,10 @@ export const DataOverviewTable = ({ chartConfig }) => {
     const fetchData = async () => {
       try {
         const args = [idSite];        
-        if (params.includes("period")) args.push(period);
-        if (params.includes("date")) args.push(date);
+        if (params.includes("period")){
+          args.push(period);
+          args.push(date);
+        } 
         if (params.includes("lastMinutes")) args.push(lastMinutes);
 
         const data = await chartConfig.getData(...args);
@@ -46,6 +48,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
         if (result.value) {
           setData(formatDataForTable(data));
+          console.log('Fomatted data:', formatDataForTable(data));
         } else {
           setData([{ label: 'No Data', value: 'No Data Available' }]);
         }

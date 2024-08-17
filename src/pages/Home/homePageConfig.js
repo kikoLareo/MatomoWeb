@@ -62,7 +62,7 @@ export const homeCharts_LiveSection =
             metrics: {
               "nb_visits": "Visitas",
             },
-            params: ["period", "date"],
+            params: ["period"],
             data : [],
 
             fetchDataFunction: visitsSummary_get,
@@ -92,7 +92,7 @@ export const  homeCharts_VisitsSection_Evolution =
             metrics: {
               "nb_visits": "Visitas",
             },
-            params: ["period", "date"],
+            params: ["period"],
             data : [],
 
             fetchDataFunction: visitsSummary_get,

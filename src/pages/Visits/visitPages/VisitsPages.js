@@ -172,8 +172,7 @@ const VisitPage = ({ pageConfig }) => {
               )}
               <div className="chartsInfo">
                 {pageConfig.components.includes("DataOverviewTable") &&
-                  chartsConfig.filter(chartConfig => chartConfig.type === "table").map((chartConfig, index) => (
-                
+                  chartsConfig.map((chartConfig, index) => (
                     <div key={index} className="data-overview-section">
                       <DataOverviewTable 
                         chartConfig={chartConfig}
