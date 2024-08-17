@@ -49,11 +49,16 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         const result = await fetchDataFunction(...args);
         console.log('result', result);
         var auxData=null;
-        if (Array.isArray(result.value)) {
-            auxData= result.value[0];
+        if(result.value && result.value.length === 0) {
+          if (Array.isArray(result.value)) {
+              auxData= result.value[0];
+          } else {
+              auxData = result.value;
+          } 
         } else {
-            auxData = result.value;
-        } 
+          auxData = 0;
+          
+        }
         console.log('auxData', auxData);
         console.log(formatDataForTable(auxData));
         setData(formatDataForTable(auxData));
