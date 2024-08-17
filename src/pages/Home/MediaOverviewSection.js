@@ -14,7 +14,7 @@ const MediaSectionHome = () => {
         <div className="chartsInfo">
           <div className="data-overview-section">
             {homeCharts_MediaSection.map((chart) => (
-            <DataOverviewTable fetchDataFunction={chart.function} params={chart.params} title={chart.title} />
+            <DataOverviewTable chartConfig={chart} />
             ))}
           </div>
           

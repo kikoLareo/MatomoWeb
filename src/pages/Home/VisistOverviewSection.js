@@ -34,8 +34,7 @@ const VisitsOverviewSection = () => {
   return (
     <div className="visits-overview-section">
       <h2>Visits Overview</h2>
-      <DataOverviewTable 
-        fetchDataFunction={visitsSummary_get} params={["period", "date"]} title={homeCharts_VisitsSection_Overview.title}
+      <DataOverviewTable  chartConfig={homeCharts_VisitsSection_Overview}
       />
       <GraphRenderer
         chart={{

@@ -4,7 +4,9 @@ import { IdSiteContext } from '../contexts/idSiteContext';
 import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
-export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
+export const DataOverviewTable = ({chartConfig }) => {
+  var {fetchDataFunction, params, title}  =chartConfig;
+
   const [data, setData] = useState(null);
   const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
@@ -121,7 +123,7 @@ export const DataOverviewTable = ({ fetchDataFunction, params, title}) => {
         {Object.entries(data).map(([key, value]) => (
           <div className="table-row" key={key}>
             <div className="table-cell">
-              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || key} 
+              <span>{value}</span> {metadata[key]? metadata[key] : titles[key] || chartConfig.metrics[key] || key} 
             </div>
           </div>
         ))}
