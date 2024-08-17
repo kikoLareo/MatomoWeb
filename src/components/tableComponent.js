@@ -4,7 +4,11 @@ import FilterMinutes from './LastMinutesFilter';
 import { titles } from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ chartConfig }) => {
-  const { fetchDataFunction, params, title } = chartConfig;
+  console.log('chartConfig', chartConfig);
+  var { fetchDataFunction, params, title } = chartConfig;
+  if(!params) {
+    params = ["period", "date"];
+  }
   const [data, setData] = useState(null);
   const [metadata, setMetadata] = useState({});
   const [period, setPeriod] = useState('day');
@@ -38,6 +42,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
       try {
         const args = [idSite];
         console.log('params', params);
+       
         if (params.includes("period")) args.push(period);
         if (params.includes("date")) args.push(date);
         if (params.includes("lastMinutes")) args.push(lastMinutes);
