@@ -26,8 +26,15 @@
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    flex-direction: row;
 }
 
+  
+  .table-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 
 .table-cell {
     margin-bottom: 10px;
