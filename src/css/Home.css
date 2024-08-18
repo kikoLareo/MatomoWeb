@@ -122,8 +122,17 @@
 
 }
 
-.LiveSection .iframe-container, .VisitsSection .graph_component, .MediaSection .graph_component {
+.LiveSection .iframe-container, .VisitsSection .graph_component  {
     grid-row: span 6; /* El gráfico ocupa 7/10 del espacio */
+}
+.MediaSection .graph_component{
+    grid-row: span 7; /* El gráfico ocupa 7/10 del espacio */
+
+}
+
+.MediaSection .graph{
+    height: 100%;
+    width: 100%;
 }
 
 .MediaSection .data-overview-table {
