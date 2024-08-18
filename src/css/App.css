@@ -1,10 +1,10 @@
 :root {
-  --primary-color: #1E3A8A; /* Azul Marino */
-  --secondary-color: #14B8A6; /* Verde Azulado */
-  --accent-color: #FBBF24; /* Amarillo Dorado */
-  --neutral-color: #E5E7EB; /* Gris Claro */
-  --background-color: #f4f4f4;
-  --text-color: #333;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+  --skeleton-color: #e0e0e0;
 }
 
 

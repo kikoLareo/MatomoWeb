@@ -7,7 +7,7 @@ import MediaSectionHome from './MediaOverviewSection';
 const Home = () => {
 
   useEffect(() => {
-    setTitle("Home");
+    setTitle("Portada");
   }, []);
 
 

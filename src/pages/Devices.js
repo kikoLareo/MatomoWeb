@@ -5,7 +5,7 @@ import PieChartComponent from '../components/PieChartComponent';
 import { devicesDetectionCharts } from '../config/chartsConfig';
 import { GetDevicesPromt } from '../utils/gpt/gptPromts/devicesPromt';
 import { chatGpt } from '../utils/gpt/chatGptCall';
-
+import { setTitle } from '../components/Header';
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
@@ -20,6 +20,10 @@ const Devices = () => {
     chartDataRef.current = chartData;
     isLoadingRef.current = isLoading;
   }, [chartData, isLoading]);
+
+  useEffect(() => {
+    setTitle("Dispositivos");
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

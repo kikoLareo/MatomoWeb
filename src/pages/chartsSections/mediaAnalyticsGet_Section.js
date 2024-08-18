@@ -7,10 +7,16 @@ import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics'
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
 import { API_getProcessedReport } from '../../modules/API/Api_actions';
+import { fetchAndSaveAnalysis } from '../../utils/gpt/fetchAndSave';
 
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
+  const [showDescription, setShowDescription] = useState({});
+  const [showMore, setShowMore] = useState({});
+  const [analysis, setAnalysis] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,35 +56,101 @@ const MediaAnalyticsGetSection = () => {
     fetchData();
   }, [idSite]);
 
+
+
+  useEffect(() => {
+    const fetchAnalysis = async (metric) => {
+        const { title, description, idSite, data, module, action } = chartData[metric];
+        try {
+            setLoading(true);
+            const result = await fetchAndSaveAnalysis({ module, action, title, description, idSite, data });
+            setAnalysis(prevAnalysis => ({
+                ...prevAnalysis,
+                [metric]: result,
+            }));
+        } catch (err) {
+            console.error(err);
+            setError('Error fetching analysis. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    Object.keys(showMore).forEach(metric => {
+        if (showMore[metric] && !analysis[metric]) {
+            fetchAnalysis(metric);
+        }
+    });
+}, [showMore, analysis, chartData]);
+
+
+  const toggleDescription = (metric) => {
+    setShowDescription(prevState => ({
+        ...prevState,
+        [metric]: !prevState[metric]
+    }));
+};
+
+const handleShowMore = (metric) => {
+    setShowMore(prevState => ({
+        ...prevState,
+        [metric]: !prevState[metric],
+    }));
+};
+
+
+
   return (
-    <div className="reproductions">
-      <div className="graphDashBoard">
-        {Object.keys(MediaAnalytics_get_metrics).map((metric) => (
-          <div key={metric} className="graph_component">
-            {chartData[metric] ? (
-                <>
-                  <ChartComponent
-                    data={chartData[metric].data}
-                    labels={chartData[metric].labels}
-                    label={chartData[metric].title}
-                  />
-                  <ChartInfo
-                    title={chartData[metric].title}
-                    description={chartData[metric].description}
-                    data={chartData[metric].data}
-                    module={chartData[metric].module}
-                    action={chartData[metric].action}
-                  />
-                </>
-              
-            ) : (
-              <p>Loading...</p>
-            )}
-          </div>
-        ))}
-      </div>
+    <div className="graphDashBoard">
+        <div className="graphGrid">
+            {Object.keys(chartData).map((metric) => (
+                <div key={metric} className="graph_component">
+                    {chartData[metric] ? (
+                        <>
+                            <h3>{chartData[metric].title}</h3>
+                            <ChartComponent
+                                data={chartData[metric].data}
+                                labels={chartData[metric].labels}
+                                title={chartData[metric].title}
+                            />
+                            <div className="chart-controls">
+                                <button onClick={() => toggleDescription(metric)}>
+                                    {showDescription[metric] ? 'Hide Details' : 'Show Details'}
+                                </button>
+                                <button onClick={() => handleShowMore(metric)}>
+                                    Show More
+                                </button>
+                            </div>
+                            {showDescription[metric] && (
+                                <ChartInfo
+                                    title={chartData[metric].title}
+                                    description={chartData[metric].description}
+                                    data={chartData[metric].data}
+                                />
+                            )}
+                            {showMore[metric] && (
+                                <div className="detailed-info">
+                                    {loading ? (
+                                        <div className="skeleton-chart"></div>
+                                    ) : error ? (
+                                        <p>{error}</p>
+                                    ) : (
+                                        <p>{analysis[metric]}</p>
+                                    )}
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="skeleton">
+                            <div className="skeleton-title"></div>
+                            <div className="skeleton-chart"></div>
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
     </div>
-  );
+);
 };
 
 export default MediaAnalyticsGetSection;

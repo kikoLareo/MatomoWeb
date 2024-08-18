@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 2vw;
+  padding: 2vw;
 }
 
 .graphGrid {
@@ -33,22 +33,22 @@
 }
 
 .graph_component {
-  width: 100%;
   background-color: #fff;
-  margin: 2vh 0;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1vh 1vw;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  padding: 1vh 1vw;
-  box-sizing: border-box;
-  min-width: 40vw;
+  position: relative;
 }
 
+
 .graph_component h3 {
-  text-align: center;
+  font-size: 18px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .graph_component .graph {
@@ -64,6 +64,85 @@
   align-items: center;
   width: 100%;
 }
+
+
+/* Controles de los gráficos */
+.chart-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.chart-controls button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.chart-controls button:hover {
+  background-color: darken(var(--primary-color), 10%);
+}
+
+/* Skeleton para la carga de gráficos */
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.skeleton-title {
+  width: 50%;
+  height: 20px;
+  background-color: var(--skeleton-color);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-chart {
+  width: 100%;
+  height: 200px;
+  background-color: var(--skeleton-color);
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+      background-color: var(--skeleton-color);
+  }
+  50% {
+      background-color: lighten(var(--skeleton-color), 10%);
+  }
+  100% {
+      background-color: var(--skeleton-color);
+  }
+}
+
+/* Información detallada */
+.chart-info {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.chart-info button {
+  padding: 5px 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
 
 /* Estilos responsivos */
 @media (min-width: 600px) {
