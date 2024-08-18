@@ -3,7 +3,7 @@ import MultiChartComponent from '../../components/MultiChartComponent';
 import { comparisonChartsConfig } from './ComparatorList';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import ChartOptions from '../../components/chartOptions';
-import './Comparator.css';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const ChartComparator = () => {
     const [datasets, setDatasets] = useState([]);
@@ -11,8 +11,7 @@ const ChartComparator = () => {
     const [loading, setLoading] = useState(false);
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
-    const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-    const [collapsedSections, setCollapsedSections] = useState({});
+    const [activeSection, setActiveSection] = useState(null);
 
     useEffect(() => {
         const fetchMetricsData = async () => {
@@ -38,7 +37,6 @@ const ChartComparator = () => {
 
     const handleMetricSelect = async (chart, metric) => {
         const chartTitle = chart.title;
-        console.log('Selected metric:', chartTitle, metric, selectedMetrics);
         setSelectedMetrics(prevSelectedMetrics => {
             const chartInfo = prevSelectedMetrics[chartTitle] || [];
             const metrics = chartInfo.includes(metric)
@@ -49,14 +47,11 @@ const ChartComparator = () => {
                 ...prevSelectedMetrics,
                 [chartTitle]: metrics,
             };
-        
-            console.log('Updated metrics:', updatedMetrics); 
             return updatedMetrics;
         });
     
         const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
         if (selectedChartConfig) {
-            console.log('Selected chart config:', selectedChartConfig, selectedMetrics);
             setLoading(true);
             const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
             const newDatasets = {
@@ -65,8 +60,6 @@ const ChartComparator = () => {
                 labels: Object.keys(updatedChartConfig.data.value),
                 color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
             };
-
-            console.log('New datasets:', newDatasets);
 
             setDatasets(prevDatasets => [
                 ...prevDatasets,
@@ -81,50 +74,34 @@ const ChartComparator = () => {
         setDatasets(prevDatasets => prevDatasets.filter((_, index) => index !== indexToRemove));
     };
 
-    const toggleSidebar = () => {
-        setIsSidebarVisible(!isSidebarVisible);
-    };
-
-    const toggleSectionCollapse = (section) => {
-        setCollapsedSections(prevCollapsedSections => ({
-            ...prevCollapsedSections,
-            [section]: !prevCollapsedSections[section],
-        }));
+    const toggleSection = (section) => {
+        setActiveSection(activeSection === section ? null : section);
     };
 
     return (
-        <div className={`comparator-container ${isSidebarVisible ? '' : 'collapsed-sidebar'}`}>
-            <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
-                {isSidebarVisible ? 'Esconder' : 'Mostrar'} Menú
-            </button>
+        <div className="comparator-container">
+            <nav className="top-menu">
+                <ul>
+                    {comparisonChartsConfig.map((chart) => (
+                        <li key={chart.title} onClick={() => toggleSection(chart.title)}>
+                            {chart.title} {activeSection === chart.title ? <FaChevronUp /> : <FaChevronDown />}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
 
-            {isSidebarVisible && (
-                <div className="chart-options-container">
-                    {comparisonChartsConfig.length > 0 && (
-                        <div>
-                            <h2 onClick={() => toggleSectionCollapse('metrics')}>Métricas principales</h2>
-                            {!collapsedSections['metrics'] && (
-                                <ChartOptions
-                                    chartConfig={comparisonChartsConfig}
-                                    selectedMetrics={selectedMetrics}
-                                    onMetricSelect={handleMetricSelect}
-                                    metricsData={metricsData}
-                                />
-                            )}
-
-                            <h2 onClick={() => toggleSectionCollapse('visitSummary')}>Resumen de visitas</h2>
-                            {!collapsedSections['visitSummary'] && (
-                                <ChartOptions
-                                    chartConfig={comparisonChartsConfig}
-                                    selectedMetrics={selectedMetrics}
-                                    onMetricSelect={handleMetricSelect}
-                                    metricsData={metricsData}
-                                />
-                            )}
-                        </div>
+            {comparisonChartsConfig.map((chart) => (
+                <div className={`dropdown-section ${activeSection === chart.title ? 'active' : ''}`} key={chart.title}>
+                    {activeSection === chart.title && (
+                        <ChartOptions
+                            chartConfig={[chart]} // Only pass the current chart config
+                            selectedMetrics={selectedMetrics}
+                            onMetricSelect={handleMetricSelect}
+                            metricsData={metricsData}
+                        />
                     )}
                 </div>
-            )}
+            ))}
 
             <div className='MultiChartPage'>
                 <MultiChartComponent datasets={datasets} labels={datasets[0]?.labels || []} title="Comparación de Gráficas" loading={loading} />

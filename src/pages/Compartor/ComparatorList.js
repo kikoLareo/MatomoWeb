@@ -4,6 +4,9 @@ import {  visitCharts_summary,  visitsCharts_frequency } from '../Visits/visitPa
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 import { getBaseUrl } from '../../modules/common/common';
 
+
+
+
 export const mediaAnalyticsCharts = [
   {
     title: 'Video Analytics',
