@@ -58,7 +58,7 @@
 }
 
 /* Ajuste para las secciones para ocupar bien el espacio */
-.LiveSection, .vVisitsSection, .MediaSection {
+.LiveSection, .VisitsSection, .MediaSection {
     grid-gap: 10px;
     background-color: #fff;
     border-radius: 8px;
