@@ -11,14 +11,10 @@ const MediaSectionHome = () => {
   return (
     <div className="MediaSection">
       <h1>Media Overview</h1>
-        <div className="chartsInfo">
-          <div className="data-overview-section">
-            {homeCharts_MediaSection.map((chart) => (
-            <DataOverviewTable chartConfig={chart} />
-            ))}
-          </div>
-          
-      </div>
+        {homeCharts_MediaSection.map((chart) => (
+        <DataOverviewTable chartConfig={chart} />
+        ))}
+      
     </div>
   );
 };
