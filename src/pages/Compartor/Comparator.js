@@ -37,6 +37,7 @@ const ChartComparator = () => {
 
     const handleMetricSelect = async (chart, metric) => {
         const chartTitle = chart.title;
+        console.log('Selected metric:', chartTitle, metric, selectedMetrics);
         setSelectedMetrics(prevSelectedMetrics => {
             const chartInfo = prevSelectedMetrics[chartTitle] || [];
             const metrics = chartInfo.includes(metric)
@@ -71,7 +72,7 @@ const ChartComparator = () => {
     };
 
     return (
-        <div>
+        <div style={{ display: "flex" }}>
             {loading && <p>Cargando datos...</p>}
 
             <div>

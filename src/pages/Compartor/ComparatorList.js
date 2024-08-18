@@ -1,12 +1,12 @@
 // comparisonChartsConfig.js
 import { fetchData } from '../../utils/fetchDataHelper';
-import { visitCharts_interest, visitCharts_summary, visitCharts_time } from '../Visits/visitPages/visitsChartsConfig';
+import { visitCharts_interest, visitCharts_summary, visitCharts_time, visitsCharts_frequency } from '../Visits/visitPages/visitsChartsConfig';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 
 
 export const mediaAnalyticsCharts = [
   {
-    title: 'Video Titles Overview',
+    title: 'Video Analytics',
     description: 'Shows the titles of videos and their statistics.',
     action: 'get',
     module: 'MediaAnalytics',
@@ -36,6 +36,6 @@ export const mediaAnalyticsCharts = [
   },
 ];
 
-export const comparisonChartsConfig = [...mediaAnalyticsCharts, ...visitCharts_interest,...visitCharts_summary,...visitCharts_time];
+export const comparisonChartsConfig = [...mediaAnalyticsCharts,...visitCharts_summary,...visitsCharts_frequency];
 
 console.log('comparisonChartsConfig:', comparisonChartsConfig);
