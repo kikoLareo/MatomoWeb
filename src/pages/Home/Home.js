@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="page">
       <div className="pageBody">
-        <div className="pageSections">
+        <div className="HomePage">
           <LiveSectionHome />
           <VisitsOverviewSection />
           <MediaSectionHome />

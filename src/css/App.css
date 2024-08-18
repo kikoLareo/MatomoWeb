@@ -30,7 +30,8 @@
 
 .page{
     width: 100%;
-    padding: 3vh 0 0 0;
+    padding:0;
+    height: 100%;
 }
 
 .title{

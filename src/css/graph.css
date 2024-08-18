@@ -153,9 +153,7 @@
   padding: 0 0;
 }
 
-.LiveSection .iframe-container{
-  width: 35vw !important;
-}
+
 
 .iframe-container {
   display: flex;

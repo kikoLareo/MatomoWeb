@@ -52,13 +52,11 @@ const LiveSectionHome = () => {
     <div className="LiveSection" style={{ width: "35vw" }}>
       <h1>Live Overview</h1>
       <div className="LiveGraph">
-        <div className="chartsInfo">
           <div className="data-overview-section">
             <DataOverviewTable chartConfig={homeCharts_LiveSection} />
           </div>
           {renderIframe()}
-        </div>
-      </div>
+       </div>
     </div>
   );
 };
