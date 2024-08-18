@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Table.css'; // Asegúrate de importar el archivo CSS
-
+import "../css/Table.css";
 const DataTable = ({ chart }) => {
     var data = chart.data.value;
     const [sortedData, setSortedData] = useState(data);
