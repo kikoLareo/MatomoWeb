@@ -107,7 +107,6 @@ const handleShowMore = (metric) => {
                 <div key={metric} className="graph_component">
                     {chartData[metric] ? (
                         <>
-                            <h3>{chartData[metric].title}</h3>
                             <ChartComponent
                                 data={chartData[metric].data}
                                 labels={chartData[metric].labels}

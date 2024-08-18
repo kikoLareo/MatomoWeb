@@ -117,7 +117,7 @@
 }
 
 
- .v isitsSection .data-overview-table {
+ .VisitsSection .data-overview-table {
     grid-row: span 2; /* El resumen ocupa 2/10 del espacio */
 
 }

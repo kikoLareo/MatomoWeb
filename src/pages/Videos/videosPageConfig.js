@@ -1,7 +1,7 @@
 import { MediaAnalytics_getVideoTitles } from "../../modules/mediaAnalytics/mediaAnalytics";
 
 export var videoPageTableConfig = {
-    title: 'Video Data Overview',
+    title: 'Videos',
     columns: [
         { key: 'label', label: 'Video' },
         { key: 'nb_plays', label: 'Reproducciones' },
