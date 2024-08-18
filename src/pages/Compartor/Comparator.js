@@ -56,7 +56,7 @@ const ChartComparator = () => {
             console.log('Deselected metric:', metric, datasets);
             // Remove the corresponding dataset if the metric was deselected
             setDatasets(prevDatasets =>
-                prevDatasets.filter(ds => ds.title !== `${chartTitle} - ${metric}`)
+                prevDatasets.filter(ds => ds.id !== `${chartTitle}-${metric}`)
             );
             console.log('Datasets:', datasets);
         } else {
@@ -65,6 +65,7 @@ const ChartComparator = () => {
                 setLoading(true);
                 const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
                 const newDataset = {
+                    id: `${chartTitle}-${metric}`,
                     title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
                     data: Object.entries(updatedChartConfig.data.value).map(([date, metrics]) => metrics[metric] || 0),
                     labels: Object.keys(updatedChartConfig.data.value),
