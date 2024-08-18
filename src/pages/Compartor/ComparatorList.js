@@ -2,14 +2,15 @@
 import { fetchData } from '../../utils/fetchDataHelper';
 import {  visitCharts_summary,  visitsCharts_frequency } from '../Visits/visitPages/visitsChartsConfig';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
-
+import { getBaseUrl } from '../../modules/common/common';
 
 export const mediaAnalyticsCharts = [
   {
     title: 'Video Analytics',
     description: 'Shows the titles of videos and their statistics.',
     action: 'get',
-    module: 'MediaAnalytics',
+    module: 'API',
+    method: 'MediaAnalytics.get',
     period: 'year',
     date: 'yesterday',
     type: 'line',
@@ -23,7 +24,7 @@ export const mediaAnalyticsCharts = [
     params: ["period"],
     fetchDataFunction: MediaAnalytics_get,
     async getData(idSite, period = this.period, date = this.date) {
-        this.data = await fetchData(idSite, { module: this.module, action: this.action, period, date });
+        this.data = await fetchData(idSite, { module: this.module, action: this.action, url: getBaseUrl(this.module ,this.method, { idSite, period, date }) });
         if (this.data.info.metadata) {
             this.description = this.data.info.metadata.documentation;
             this.title = this.data.info.metadata.name;
