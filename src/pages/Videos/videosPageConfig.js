@@ -16,11 +16,13 @@ export var videoPageTableConfig = {
     date: 'yesterday',
     data: [],
     async getData(idSite) {
-        console.error("Getting data for site: ", idSite);
         const dataFetch = await MediaAnalytics_getVideoTitles(idSite, this.period, this.date);
         console.log("Data fetch: ", dataFetch);
-        this.data = dataFetch.value || [];
-        console.log("Data: ", this.data);
-        return this;
+        const newConfig = { 
+            ...this,
+            data: dataFetch.value || []
+        };
+        console.log("New Config: ", newConfig);
+        return newConfig;
     }
 };

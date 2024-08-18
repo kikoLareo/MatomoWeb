@@ -16,10 +16,13 @@ const VideoDataPage = () => {
   }, []);
 
   useEffect(() => {
+    console.log("idSite is:", idSite);
+    if (!idSite) console.log("No idSite"); // Detén la ejecución si idSite no está disponible
     console.log("Loading data for site: ", idSite);
     const loadData = async () => {
       try {
         const updatedConfig = await videoPageTableConfig.getData(idSite);
+        console.log("Updated config: ", updatedConfig);
         setChartConfig({ ...updatedConfig });
       } catch (error) {
         console.error("Error loading data: ", error);
