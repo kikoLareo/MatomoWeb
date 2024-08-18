@@ -42,6 +42,7 @@ export const MediaAnalytics_getAudioResources = async (idSite, period = 'day', d
 };
 
 export const MediaAnalytics_getVideoTitles = async (idSite, period = 'year', date = 'yesterday') => {
+  console.error("MediaAnalytics_getVideoTitles: ", idSite, period, date);
   const action = 'getVideoTitles';
   const method = `${methodBase}.getVideoTitles`;
   return await fetchData(idSite, { module: methodBase, action, url: getBaseUrl(module, method, { idSite, period, date }) });

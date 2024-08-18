@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import DataTable from '../../components/DataTableComponent';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { videoPageTableConfig } from './videosPageConfig';
+import { setTitle } from '../../components/Header';
 
 const VideoDataPage = () => {
     const { idSite } = useContext(IdSiteContext);
@@ -9,6 +10,10 @@ const VideoDataPage = () => {
     console.log(idSite);
   console.log(videoPageTableConfig);
   console.log("Video page data: ", chartConfig);
+
+  useEffect(() => {
+    setTitle(videoPageTableConfig.title);
+    }, []);
 
   useEffect(() => {
     console.log("Loading data for site: ", idSite);
@@ -23,9 +28,9 @@ const VideoDataPage = () => {
         }
       };
     
-      if (idSite) {
+  
         loadData();
-      }
+      
     }, [idSite]);
     
   return (
