@@ -4,7 +4,7 @@ import { IdSiteContext } from '../../contexts/idSiteContext';
 import { videoPageTableConfig } from './videosPageConfig';
 import { setTitle } from '../../components/Header';
 
-const VideoDataPage = async () => {
+const VideoDataPage = () => {
     const { idSite } = useContext(IdSiteContext);
     const [chartConfig, setChartConfig] = useState(videoPageTableConfig);
     console.log(idSite);
@@ -15,8 +15,12 @@ const VideoDataPage = async () => {
     setTitle(videoPageTableConfig.title);
     }, []);
 
-    await videoPageTableConfig.getData(idSite);
-    console.log("Updated config: ", videoPageTableConfig);
+    // useEffect(() => {
+    //     await videoPageTableConfig.getData(idSite);
+    //     console.log("Updated config: ", videoPageTableConfig);
+    //     setChartConfig({ ...videoPageTableConfig });
+    // },[]);
+
   useEffect(() => {
       console.log("Loading data for site: ", idSite);
       const loadData = async () => {
