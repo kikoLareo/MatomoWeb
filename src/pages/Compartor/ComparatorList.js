@@ -1,6 +1,6 @@
 // comparisonChartsConfig.js
 import { fetchData } from '../../utils/fetchDataHelper';
-import { visitCharts_interest, visitCharts_summary, visitCharts_time, visitsCharts_frequency } from '../Visits/visitPages/visitsChartsConfig';
+import {  visitCharts_summary,  visitsCharts_frequency } from '../Visits/visitPages/visitsChartsConfig';
 import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics';
 
 
