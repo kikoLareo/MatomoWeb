@@ -49,4 +49,65 @@
       background-color: #eee;
     }
   }
+
   
+  /* Comparator.css */
+
+.comparator-container {
+    display: flex;
+    transition: margin-left 0.3s ease;
+}
+
+.collapsed-sidebar .chart-options-container {
+    width: 0;
+    overflow: hidden;
+}
+
+.toggle-sidebar-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chart-options-container {
+    width: 300px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+    transition: width 0.3s ease;
+}
+
+.chart-options-container h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.MultiChartPage {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.datasets-buttons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.datasets-buttons button {
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

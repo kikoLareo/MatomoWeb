@@ -1,9 +1,9 @@
-// Comparator.js
 import React, { useState, useContext, useEffect } from 'react';
 import MultiChartComponent from '../../components/MultiChartComponent';
 import { comparisonChartsConfig } from './ComparatorList';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import ChartOptions from '../../components/chartOptions';
+import './Comparator.css';
 
 const ChartComparator = () => {
     const [datasets, setDatasets] = useState([]);
@@ -11,8 +11,9 @@ const ChartComparator = () => {
     const [loading, setLoading] = useState(false);
     const [selectedMetrics, setSelectedMetrics] = useState({});
     const [metricsData, setMetricsData] = useState({});
+    const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+    const [collapsedSections, setCollapsedSections] = useState({});
 
-    // Función para cargar las métricas disponibles para cada gráfica
     useEffect(() => {
         const fetchMetricsData = async () => {
             setLoading(true);
@@ -80,18 +81,50 @@ const ChartComparator = () => {
         setDatasets(prevDatasets => prevDatasets.filter((_, index) => index !== indexToRemove));
     };
 
+    const toggleSidebar = () => {
+        setIsSidebarVisible(!isSidebarVisible);
+    };
+
+    const toggleSectionCollapse = (section) => {
+        setCollapsedSections(prevCollapsedSections => ({
+            ...prevCollapsedSections,
+            [section]: !prevCollapsedSections[section],
+        }));
+    };
+
     return (
-        <div className="comparator-container">
-            <div className="chart-options-container">
-                {comparisonChartsConfig.length > 0 && (
-                    <ChartOptions
-                        chartConfig={comparisonChartsConfig}
-                        selectedMetrics={selectedMetrics}
-                        onMetricSelect={handleMetricSelect}
-                        metricsData={metricsData}
-                    />
-                )}
-            </div>
+        <div className={`comparator-container ${isSidebarVisible ? '' : 'collapsed-sidebar'}`}>
+            <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
+                {isSidebarVisible ? 'Esconder' : 'Mostrar'} Menú
+            </button>
+
+            {isSidebarVisible && (
+                <div className="chart-options-container">
+                    {comparisonChartsConfig.length > 0 && (
+                        <div>
+                            <h2 onClick={() => toggleSectionCollapse('metrics')}>Métricas principales</h2>
+                            {!collapsedSections['metrics'] && (
+                                <ChartOptions
+                                    chartConfig={comparisonChartsConfig}
+                                    selectedMetrics={selectedMetrics}
+                                    onMetricSelect={handleMetricSelect}
+                                    metricsData={metricsData}
+                                />
+                            )}
+
+                            <h2 onClick={() => toggleSectionCollapse('visitSummary')}>Resumen de visitas</h2>
+                            {!collapsedSections['visitSummary'] && (
+                                <ChartOptions
+                                    chartConfig={comparisonChartsConfig}
+                                    selectedMetrics={selectedMetrics}
+                                    onMetricSelect={handleMetricSelect}
+                                    metricsData={metricsData}
+                                />
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
 
             <div className='MultiChartPage'>
                 <MultiChartComponent datasets={datasets} labels={datasets[0]?.labels || []} title="Comparación de Gráficas" loading={loading} />
