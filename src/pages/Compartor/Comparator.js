@@ -69,8 +69,9 @@ const ChartComparator = () => {
 
             setDatasets(prevDatasets => [
                 ...prevDatasets,
-                ...newDatasets
+                newDatasets
             ]);
+
             setLoading(false);
         }
     };
