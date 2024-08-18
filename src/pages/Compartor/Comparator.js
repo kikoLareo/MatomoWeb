@@ -4,6 +4,8 @@ import { comparisonChartsConfig } from './ComparatorList';
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import ChartOptions from '../../components/chartOptions';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { IoIosClose } from "react-icons/io";
+import { setTitle } from '../../components/Header';
 
 const ChartComparator = () => {
     const [datasets, setDatasets] = useState([]);
@@ -13,6 +15,10 @@ const ChartComparator = () => {
     const [metricsData, setMetricsData] = useState({});
     const [activeSection, setActiveSection] = useState(null);
 
+    useEffect(() => {
+        setTitle('Comparador de Gráficas');
+    }, []);
+    
     useEffect(() => {
         const fetchMetricsData = async () => {
             setLoading(true);
@@ -122,7 +128,7 @@ const ChartComparator = () => {
             <div className="datasets-buttons">
                 {datasets.map((dataset, index) => (
                     <button key={index} onClick={() => handleRemoveDataset(index)}>
-                        Quitar {dataset.title}
+                        {dataset.title}<IoIosClose />
                     </button>
                 ))}
             </div>
