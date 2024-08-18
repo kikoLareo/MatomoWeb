@@ -37,9 +37,11 @@ const ChartComparator = () => {
 
     const handleMetricSelect = async (chart, metric) => {
         const chartTitle = chart.title;
+        const isDeselected = selectedMetrics[chartTitle]?.includes(metric);
+
         setSelectedMetrics(prevSelectedMetrics => {
             const chartInfo = prevSelectedMetrics[chartTitle] || [];
-            const metrics = chartInfo.includes(metric)
+            const metrics = isDeselected
                 ? chartInfo.filter(m => m !== metric)
                 : [...chartInfo, metric];
            
@@ -49,26 +51,34 @@ const ChartComparator = () => {
             };
             return updatedMetrics;
         });
-    
-        const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
-        if (selectedChartConfig) {
-            setLoading(true);
-            const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
-            const newDatasets = {
-                title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
-                data: Object.entries(updatedChartConfig.data.value).map(([date, metrics]) => metrics[metric] || 0),
-                labels: Object.keys(updatedChartConfig.data.value),
-                color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
-            };
 
-            setDatasets(prevDatasets => [
-                ...prevDatasets,
-                newDatasets
-            ]);
+        if (isDeselected) {
+            // Remove the corresponding dataset if the metric was deselected
+            setDatasets(prevDatasets =>
+                prevDatasets.filter(ds => ds.title !== `${chartTitle} - ${metric}`)
+            );
+        } else {
+            const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
+            if (selectedChartConfig) {
+                setLoading(true);
+                const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
+                const newDataset = {
+                    title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
+                    data: Object.entries(updatedChartConfig.data.value).map(([date, metrics]) => metrics[metric] || 0),
+                    labels: Object.keys(updatedChartConfig.data.value),
+                    color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
+                };
 
-            setLoading(false);
+                setDatasets(prevDatasets => [
+                    ...prevDatasets,
+                    newDataset
+                ]);
+
+                setLoading(false);
+            }
         }
     };
+
 
     const handleRemoveDataset = (indexToRemove) => {
         setDatasets(prevDatasets => prevDatasets.filter((_, index) => index !== indexToRemove));
