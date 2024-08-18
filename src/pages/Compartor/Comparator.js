@@ -81,8 +81,8 @@ const ChartComparator = () => {
     };
 
     return (
-        <div style={{ display: "flex" }}>
-            <div>
+        <div className="comparator-container">
+            <div className="chart-options-container">
                 {comparisonChartsConfig.length > 0 && (
                     <ChartOptions
                         chartConfig={comparisonChartsConfig}
@@ -94,15 +94,10 @@ const ChartComparator = () => {
             </div>
 
             <div className='MultiChartPage'>
-                {loading && <p>Cargando datos...</p>}
-                {datasets.length > 0 ? (
-                    <MultiChartComponent datasets={datasets} labels={datasets[0].labels} title="Comparación de Gráficas" />
-                ) : (
-                    <p>Seleccione gráficos para comparar.</p>
-                )}
+                <MultiChartComponent datasets={datasets} labels={datasets[0]?.labels || []} title="Comparación de Gráficas" loading={loading} />
             </div>
 
-            <div>
+            <div className="datasets-buttons">
                 {datasets.map((dataset, index) => (
                     <button key={index} onClick={() => handleRemoveDataset(index)}>
                         Quitar {dataset.title}

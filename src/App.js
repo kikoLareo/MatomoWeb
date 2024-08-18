@@ -16,6 +16,7 @@ import './css/dashboard.css';
 import './css/Home.css';
 import './css/Visits.css';
 import './css/Overview.css'; 
+import './css/MultiChart.css';
 import { IdSiteProvider } from './contexts/idSiteContext';
 import ChartComparator from './pages/Compartor/Comparator';
 

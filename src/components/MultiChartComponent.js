@@ -1,8 +1,17 @@
-// src/components/ChartComponent.js
+// src/components/MultiChartComponent.js
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const MultiChartComponent = ({ datasets, labels, title }) => {
+const MultiChartComponent = ({ datasets, labels, title, loading }) => {
+  if (loading) {
+    return (
+      <div className="skeleton-wrapper">
+        <div className="skeleton-title"></div>
+        <div className="skeleton-chart"></div>
+      </div>
+    );
+  }
+
   const chartData = {
     labels,
     datasets: datasets.map((dataset, index) => ({
