@@ -11,6 +11,7 @@ const VideoDataPage = () => {
   console.log("Video page data: ", chartConfig);
 
   useEffect(() => {
+    console.log("Loading data for site: ", idSite);
     const loadData = async () => {
         try {
           console.log("Loading data for site: ", idSite);
