@@ -4,20 +4,37 @@ th {
     background-color: #f2f2f2;
     text-align: left;
     border-bottom: 2px solid #ddd;
-  }
-  
-  th:hover {
-    background-color: #e0e0e0; /* Cambia el color de fondo al pasar el cursor */
-  }
-  
-  th:active {
-    background-color: #d0d0d0; /* Cambia el color de fondo cuando se hace clic */
-  }
-  
+}
 
-  .sortable-column {
+th:hover {
+    background-color: #e0e0e0; 
+}
+
+th:active {
+    background-color: #d0d0d0; 
+}
+
+.sortable-column {
     cursor: pointer;
     padding: 1vh 1vw;
     background-color: #f2f2f2;
     text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
