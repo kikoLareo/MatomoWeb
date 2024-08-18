@@ -15,9 +15,19 @@ export const mediaAnalyticsCharts = [
     date: 'yesterday',
     type: 'line',
     metrics: {
-      "nb_plays": "Reproducciones",
-      "nb_unique_visitors": "Visitantes Únicos",
-      "nb_impressions": "Impresiones"
+      finish_rate  : "Ratio de finalización",
+      nb_finishes  : "Finalizaciones",
+      nb_impressions  : "Impresiones",
+      nb_plays  : "Reproducciones",
+      nb_unique_visitors_impressions  : "Visitantes únicos (impresiones)",
+      nb_unique_visitors_plays  : "Visitantes únicos (reproducciones)",
+      play_rate  : "Ratio de reproducción",
+      sum_total_audio_impressions  : "Total de impresiones de audio",
+      sum_total_audio_plays  : "Total de reproducciones de audio",
+      sum_total_time_watched  : "Tiempo total de visualización",
+      sum_total_video_impressions  : "Total de impresiones de vídeo",
+      sum_total_video_plays  : "Total de reproducciones de vídeo" 
+    
     },
     data: [],
     labels: [],
@@ -28,7 +38,6 @@ export const mediaAnalyticsCharts = [
         if (this.data.info.metadata) {
             this.description = this.data.info.metadata.documentation;
             this.title = this.data.info.metadata.name;
-            this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
         }
       console.log('Fetched data for chart:', this, this.data);
       return this;

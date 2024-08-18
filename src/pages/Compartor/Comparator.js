@@ -58,12 +58,12 @@ const ChartComparator = () => {
             console.log('Selected chart config:', selectedChartConfig, selectedMetrics);
             setLoading(true);
             const updatedChartConfig = await selectedChartConfig.getData(idSite);
-            const newDatasets = selectedMetrics.map(metric => ({
+            const newDatasets = {
                 title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
                 data: updatedChartConfig.data.value.map(item => item[metric] || 0),
-                labels: updatedChartConfig.labels,
+                labels: Object.keys(updatedChartConfig.data.value),
                 color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
-            }));
+            };
             setDatasets(prevDatasets => [
                 ...prevDatasets.filter(ds => ds.title.split(' - ')[0] !== chartTitle),
                 ...newDatasets
