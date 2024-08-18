@@ -59,15 +59,19 @@
 
 /* Ajuste para las secciones para ocupar bien el espacio */
 .LiveSection, .VisitsSection, .MediaSection {
-    display: grid;
-    grid-template-rows: repeat(10, 1fr);
-    gap: 10px;
-    background-color: white;
-    padding: 20px;
+    grid-gap: 10px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 100%;
+    box-shadow: 0 4px 8px #0000001a;
     box-sizing: border-box;
+    display: grid;
+    gap: 10px;
+    grid-template-rows: repeat(10, 1fr);
+    height: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0 1vw;
+    justify-items: center;
 }
 
 /* Ajuste para que el contenido se distribuya bien en pantallas grandes */
@@ -102,14 +106,27 @@
     grid-row: span 1; /* El título ocupa 1/10 del espacio */
 }
 
-.LiveSection .data-overview-table, .VisitsSection .data-overview-table {
+.LiveSection .data-overview-section{
+    grid-row: span 1;
+        height: 100%;
+}
+
+.LiveSection .iframe-container{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+ .v isitsSection .data-overview-table {
     grid-row: span 2; /* El resumen ocupa 2/10 del espacio */
+
 }
 
 .LiveSection .iframe-container, .VisitsSection .graph_component, .MediaSection .graph_component {
-    grid-row: span 7; /* El gráfico ocupa 7/10 del espacio */
+    grid-row: span 6; /* El gráfico ocupa 7/10 del espacio */
 }
 
 .MediaSection .data-overview-table {
-    grid-row: span 3; /* Ajuste adicional para MediaSection */
+    grid-row: span 2; /* Ajuste adicional para MediaSection */
+    overflow: scroll;
 }

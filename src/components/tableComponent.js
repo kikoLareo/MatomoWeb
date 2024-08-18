@@ -77,7 +77,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
   return (
     <div className="data-overview-table">
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <div className="filter-options">
         {params.includes("period") && (
           <label>

@@ -32,7 +32,7 @@ const VisitsOverviewSection = () => {
 
   return (
     <div className="visitsSection">
-      <h1>Visits Overview</h1>
+      <h1>Visitas</h1>
       {homeCharts_VisitsSection_Overview.map((chart) => (
       <DataOverviewTable  chartConfig={chart} />
       ))}
