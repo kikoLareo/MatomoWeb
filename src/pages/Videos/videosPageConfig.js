@@ -20,7 +20,7 @@ export var videoPageTableConfig = {
         console.log("Data fetch: ", dataFetch);
         const newConfig = { 
             ...this,
-            data: dataFetch.value || []
+            data: dataFetch || []
         };
         console.log("New Config: ", newConfig);
         return newConfig;
