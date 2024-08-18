@@ -27,7 +27,24 @@
     gap: 2vw;
     justify-content: space-between;
 }
-/* Ajustes para la HomePage */
+
+
+.LiveSection {
+    grid-area: LiveSection;
+    
+  }
+  
+  .VisitsSection {
+    grid-area: VisitsSection;
+  
+  }
+  
+  .MediaSection {
+    grid-area: MediaSection;
+    
+  }
+  
+  /* Ajustes para la HomePage */
 .HomePage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -37,6 +54,7 @@
     height: 100vh; /* Ocupa todo el alto de la pantalla */
     box-sizing: border-box;
     padding: 20px; /* Espaciado interno para evitar desbordamientos */
+    width: 100vw;
 }
 
 /* Ajuste para las secciones para ocupar bien el espacio */
