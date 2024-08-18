@@ -60,7 +60,7 @@ const ChartComparator = () => {
             const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
             const newDatasets = {
                 title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
-                data: updatedChartConfig.data.value.map(item => item[metric] || 0),
+                data: Object.entries(updatedChartConfig.data.value).map(([date, metrics]) => metrics[metric] || 0),
                 labels: Object.keys(updatedChartConfig.data.value),
                 color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
             };
