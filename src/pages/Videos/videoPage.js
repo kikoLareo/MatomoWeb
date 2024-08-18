@@ -4,7 +4,7 @@ import { IdSiteContext } from '../../contexts/idSiteContext';
 import { videoPageTableConfig } from './videosPageConfig';
 import { setTitle } from '../../components/Header';
 
-const VideoDataPage = () => {
+const VideoDataPage = async () => {
     const { idSite } = useContext(IdSiteContext);
     const [chartConfig, setChartConfig] = useState(videoPageTableConfig);
     console.log(idSite);
@@ -15,23 +15,24 @@ const VideoDataPage = () => {
     setTitle(videoPageTableConfig.title);
     }, []);
 
+    await videoPageTableConfig.getData(idSite);
+    console.log("Updated config: ", videoPageTableConfig);
   useEffect(() => {
-    console.log("Loading data for site: ", idSite);
-    const loadData = async () => {
-        try {
-          console.log("Loading data for site: ", idSite);
-          const updatedConfig = await videoPageTableConfig.getData(idSite);
-          console.log("Updated config: ", updatedConfig);
-          setChartConfig({ ...updatedConfig });
-        } catch (error) {
-          console.error("Error loading data: ", error);
-        }
-      };
-    
-  
-        loadData();
+      console.log("Loading data for site: ", idSite);
+      const loadData = async () => {
+          try {
+            console.log("Loading data for site: ", idSite);
+            const updatedConfig = await videoPageTableConfig.getData(idSite);
+            console.log("Updated config: ", updatedConfig);
+            setChartConfig({ ...updatedConfig });
+          } catch (error) {
+            console.error("Error loading data: ", error);
+          }
+        };
       
-    }, [idSite]);
+        loadData();
+        
+      }, [idSite]);
     
   return (
     <div>
