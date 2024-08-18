@@ -64,8 +64,11 @@ const ChartComparator = () => {
                 labels: Object.keys(updatedChartConfig.data.value),
                 color: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
             };
+
+            console.log('New datasets:', newDatasets);
+
             setDatasets(prevDatasets => [
-                ...prevDatasets.filter(ds => ds.title.split(' - ')[0] !== chartTitle),
+                ...prevDatasets,
                 ...newDatasets
             ]);
             setLoading(false);
