@@ -52,7 +52,7 @@ const ChartComparator = () => {
         if (selectedChartConfig) {
             setLoading(true);
             const updatedChartConfig = await selectedChartConfig.getData(idSite);
-            const newDatasets = metric.map(metric => ({
+            const newDatasets = selectedMetrics.map(metric => ({
                 title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
                 data: updatedChartConfig.data.value.map(item => item[metric] || 0),
                 labels: updatedChartConfig.labels,
