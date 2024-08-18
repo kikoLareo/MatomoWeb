@@ -20,7 +20,7 @@ const ChartComparator = () => {
             for (const chart of comparisonChartsConfig) {
                 if (chart.getData) {
                     try {
-                        const chartData = await chart.getData(idSite);
+                        const chartData = await chart.getData(idSite, "day", "2024-03-01,yesterday");
                         data[chart.title] = chartData.metrics;
                     } catch (error) {
                         console.error(`Error fetching data for chart ${chart.title}:`, error);
@@ -57,7 +57,7 @@ const ChartComparator = () => {
         if (selectedChartConfig) {
             console.log('Selected chart config:', selectedChartConfig, selectedMetrics);
             setLoading(true);
-            const updatedChartConfig = await selectedChartConfig.getData(idSite);
+            const updatedChartConfig = await selectedChartConfig.getData(idSite, "day", "2024-03-01,yesterday");
             const newDatasets = {
                 title: `${updatedChartConfig.title} - ${updatedChartConfig.metrics[metric]}`,
                 data: updatedChartConfig.data.value.map(item => item[metric] || 0),

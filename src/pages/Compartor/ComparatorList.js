@@ -11,7 +11,7 @@ export const mediaAnalyticsCharts = [
     action: 'get',
     module: 'API',
     method: 'MediaAnalytics.get',
-    period: 'year',
+    period: 'day',
     date: '2024-03-01,yesterday',
     type: 'line',
     metrics: {
