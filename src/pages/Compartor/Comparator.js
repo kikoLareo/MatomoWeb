@@ -93,7 +93,7 @@ const ChartComparator = () => {
                 )}
             </div>
 
-            <div>
+            <div className='MultiChartPage'>
                 {loading && <p>Cargando datos...</p>}
                 {datasets.length > 0 ? (
                     <MultiChartComponent datasets={datasets} labels={datasets[0].labels} title="Comparación de Gráficas" />

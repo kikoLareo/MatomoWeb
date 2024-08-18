@@ -26,7 +26,7 @@ const MultiChartComponent = ({ datasets, labels, title }) => {
   };
 
   return (
-    <div className="graph">
+    <div className="multigraph">
       <h2>{title}</h2>
       <Line data={chartData} options={options} />
     </div>
