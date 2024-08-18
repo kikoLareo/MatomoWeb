@@ -12,7 +12,7 @@ export const mediaAnalyticsCharts = [
     module: 'API',
     method: 'MediaAnalytics.get',
     period: 'year',
-    date: 'yesterday',
+    date: '2024-03-01,yesterday',
     type: 'line',
     metrics: {
       finish_rate  : "Ratio de finalización",
