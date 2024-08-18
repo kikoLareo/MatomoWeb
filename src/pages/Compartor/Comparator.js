@@ -43,10 +43,14 @@ const ChartComparator = () => {
             const metrics = chartInfo.includes(metric)
                 ? chartInfo.filter(m => m !== metric)
                 : [...chartInfo, metric];
-            return {
+           
+            const updatedMetrics = {
                 ...prevSelectedMetrics,
                 [chartTitle]: metrics,
             };
+        
+            console.log('Updated metrics:', updatedMetrics); 
+            return updatedMetrics;
         });
     
         const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
@@ -74,8 +78,6 @@ const ChartComparator = () => {
 
     return (
         <div style={{ display: "flex" }}>
-            {loading && <p>Cargando datos...</p>}
-
             <div>
                 {comparisonChartsConfig.length > 0 && (
                     <ChartOptions
@@ -88,6 +90,7 @@ const ChartComparator = () => {
             </div>
 
             <div>
+                {loading && <p>Cargando datos...</p>}
                 {datasets.length > 0 ? (
                     <MultiChartComponent datasets={datasets} labels={datasets[0].labels} title="Comparación de Gráficas" />
                 ) : (

@@ -30,7 +30,6 @@ export const mediaAnalyticsCharts = [
             this.title = this.data.info.metadata.name;
             this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
         }
-      this.labels = this.data.value.map(item => item.label);
       console.log('Fetched data for chart:', this, this.data);
       return this;
     }
