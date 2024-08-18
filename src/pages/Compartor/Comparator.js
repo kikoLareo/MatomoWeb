@@ -53,10 +53,12 @@ const ChartComparator = () => {
         });
 
         if (isDeselected) {
+            console.log('Deselected metric:', metric, datasets);
             // Remove the corresponding dataset if the metric was deselected
             setDatasets(prevDatasets =>
                 prevDatasets.filter(ds => ds.title !== `${chartTitle} - ${metric}`)
             );
+            console.log('Datasets:', datasets);
         } else {
             const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
             if (selectedChartConfig) {
@@ -78,7 +80,6 @@ const ChartComparator = () => {
             }
         }
     };
-
 
     const handleRemoveDataset = (indexToRemove) => {
         setDatasets(prevDatasets => prevDatasets.filter((_, index) => index !== indexToRemove));
