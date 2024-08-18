@@ -6,6 +6,8 @@ import { devicesDetectionCharts } from '../config/chartsConfig';
 import { GetDevicesPromt } from '../utils/gpt/gptPromts/devicesPromt';
 import { chatGpt } from '../utils/gpt/chatGptCall';
 import { setTitle } from '../components/Header';
+import PieChartSkeleton from '../components/skeletons/pieSkeleton';
+
 const Devices = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
@@ -91,22 +93,36 @@ const Devices = () => {
   }, [isLoading, loadingDots]);
 
   if (isLoading) {
-    return <div className="loading">Cargando datos{".".repeat(loadingDots)}</div>;
+    return (
+      <div className="Devices">
+        <p>{deviceSummary}</p>
+        <div className="devicesGraphs">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <PieChartSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="Devices">
-      <h1>Dispositivos</h1>
       <p dangerouslySetInnerHTML={{ __html: deviceSummary.replace(/\n/g, '<br/>') }}></p>
       <div className="devicesGraphs">
         {devicesDetectionCharts.map((chart) => (
-          <PieChartComponent
-            key={chart.title}
-            labels={chartData[chart.title]?.labels || []}
-            data={chartData[chart.title]?.data || []}
-            title={chartData[chart.title]?.chartTitle + "-" + chartData[chart.title]?.title || ''}
-            description={chartData[chart.title]?.description || ''}
-          />
+          <div key={chart.title} className="chart-container">
+            <h2>{chart.title || 'Gráfico sin título'}</h2>
+            {chartData[chart.title] && chartData[chart.title].labels.length > 0 ? (
+              <PieChartComponent
+                labels={chartData[chart.title]?.labels || []}
+                data={chartData[chart.title]?.data || []}
+                title={chartData[chart.title]?.chartTitle || chart.title}
+                description={chartData[chart.title]?.description || ''}
+              />
+            ) : (
+              <PieChartSkeleton />
+            )}
+          </div>
         ))}
       </div>
     </div>

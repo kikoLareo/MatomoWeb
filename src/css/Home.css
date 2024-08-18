@@ -118,19 +118,20 @@
 
 
  .VisitsSection .data-overview-table {
-    grid-row: span 2; /* El resumen ocupa 2/10 del espacio */
+    grid-row: auto; /* El resumen ocupa 2/10 del espacio */
 
 }
 
 .LiveSection .iframe-container, .VisitsSection .graph_component  {
     grid-row: span 6; /* El gráfico ocupa 7/10 del espacio */
+    width: 90%;
 }
 .MediaSection .graph_component{
     grid-row: span 7; /* El gráfico ocupa 7/10 del espacio */
 
 }
 
-.MediaSection .graph{
+.VisitsSection .graph{
     height: 100%;
     width: 100%;
 }

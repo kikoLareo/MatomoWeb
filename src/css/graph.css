@@ -207,6 +207,8 @@
   grid-template-columns: 1fr;
   grid-gap: 2vw;
   width: 100%;
+  justify-items: center;
+    align-items: center;
 }
 
 @media (min-width: 600px) {

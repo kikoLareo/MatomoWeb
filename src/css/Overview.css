@@ -1,13 +1,34 @@
 /* src/DataOverviewTable.css */
 .data-overview-table {
-    font-family: Arial, sans-serif;
     margin: 0;
     width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px; /* Espacio entre los elementos, opcional */
 }
+
+    .data-overview-table h3{
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
 
 .filter-options {
     margin-bottom: 20px;
 }
+
+    .data-overview-table .filter-options{
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+
+    .data-overview-table .table{
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+
+
 
 .filter-options label {
     margin-right: 20px;
