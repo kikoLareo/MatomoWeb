@@ -27,76 +27,71 @@
     gap: 2vw;
     justify-content: space-between;
 }
-
+/* Ajustes para la HomePage */
 .HomePage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas: 
       "LiveSection VisitsSection MediaSection";
     gap: 20px;
-  }
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
+    box-sizing: border-box;
+    padding: 20px; /* Espaciado interno para evitar desbordamientos */
+}
 
-.LiveSection {
-    grid-area: LiveSection;
-    
-  }
-  
-  .VisitsSection {
-    grid-area: VisitsSection;
-  
-  }
-  
-  .MediaSection {
-    grid-area: MediaSection;
-    
-  }
-
-  .LiveSection, .VisitsSection, .MediaSection {
+/* Ajuste para las secciones para ocupar bien el espacio */
+.LiveSection, .VisitsSection, .MediaSection {
     display: grid;
     grid-template-rows: repeat(10, 1fr);
-    gap: 10px; 
+    gap: 10px;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    box-sizing: border-box;
 }
-  
-  /* Responsividad */
-  @media (max-width: 1200px) {
+
+/* Ajuste para que el contenido se distribuya bien en pantallas grandes */
+.LiveSection, .VisitsSection, .MediaSection {
+    height: auto;
+    min-height: 0;
+}
+
+/* Ajustes de Responsividad */
+@media (max-width: 1200px) {
     .HomePage {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas: 
-        "LiveSection VisitsSection"
-        "MediaSection MediaSection";
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+          "LiveSection VisitsSection"
+          "MediaSection MediaSection";
+        height: auto;
     }
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .HomePage {
-      grid-template-columns: 1fr;
-      grid-template-areas: 
-        "LiveSection"
-        "VisitsSection"
-        "MediaSection";
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+          "LiveSection"
+          "VisitsSection"
+          "MediaSection";
+        height: auto;
     }
-  }
+}
 
-    .LiveSection h1, .VisitsSection h1, .MediaSection h1 {
-        grid-row: span 1; 
-    }
+.LiveSection h1, .VisitsSection h1, .MediaSection h1 {
+    grid-row: span 1; /* El título ocupa 1/10 del espacio */
+}
 
-     .LiveSection .data-overview-table, .VisitsSection .data-overview-table{
-        grid-row: span 2;
-    }
+.LiveSection .data-overview-table, .VisitsSection .data-overview-table {
+    grid-row: span 2; /* El resumen ocupa 2/10 del espacio */
+}
 
-    .LiveSection .iframe-container, .VisitsSection .graph_component{
-        grid-row: span 7;
-     }
-   
+.LiveSection .iframe-container, .VisitsSection .graph_component, .MediaSection .graph_component {
+    grid-row: span 7; /* El gráfico ocupa 7/10 del espacio */
+}
 
-   
-    .MediaSection .data-overview-table{
-        grid-row: span 3;
-    }
-
-
+.MediaSection .data-overview-table {
+    grid-row: span 3; /* Ajuste adicional para MediaSection */
+}
