@@ -17,7 +17,10 @@ const VideoDataPage = () => {
 
   useEffect(() => {
     console.log("idSite is:", idSite);
-    if (!idSite) console.log("No idSite"); // Detén la ejecución si idSite no está disponible
+    if (!idSite){
+         console.log("No idSite");
+         return ; // Detén la ejecución si idSite no está disponible
+    }
     console.log("Loading data for site: ", idSite);
     const loadData = async () => {
       try {
