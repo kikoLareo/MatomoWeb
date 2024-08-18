@@ -51,6 +51,7 @@ const ChartComparator = () => {
     
         const selectedChartConfig = comparisonChartsConfig.find(c => c.title === chartTitle);
         if (selectedChartConfig) {
+            console.log('Selected chart config:', selectedChartConfig, selectedMetrics);
             setLoading(true);
             const updatedChartConfig = await selectedChartConfig.getData(idSite);
             const newDatasets = selectedMetrics.map(metric => ({
