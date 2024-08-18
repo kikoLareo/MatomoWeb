@@ -1,0 +1,23 @@
+th {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f2f2f2;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  th:hover {
+    background-color: #e0e0e0; /* Cambia el color de fondo al pasar el cursor */
+  }
+  
+  th:active {
+    background-color: #d0d0d0; /* Cambia el color de fondo cuando se hace clic */
+  }
+  
+
+  .sortable-column {
+    cursor: pointer;
+    padding: 1vh 1vw;
+    background-color: #f2f2f2;
+    text-align: left;
+}

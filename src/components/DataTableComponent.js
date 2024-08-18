@@ -35,7 +35,9 @@ const DataTable = ({ chart }) => {
       <thead>
         <tr>
           {chart.columns.map((column) => (
-            <th key={column.key} onClick={() => sortData(column.key)}>
+            <th key={column.key} 
+                onClick={() => sortData(column.key)}
+                >
               {column.label}
             </th>
           ))}
