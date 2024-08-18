@@ -129,3 +129,4 @@ export async function MediaAnalytics_getChartData(idSite) {
     console.error('Error fetching data:', error);
   }
 }
+

@@ -39,7 +39,6 @@ const VideoDataPage = () => {
 
   return (
     <div>
-      <h1>{chartConfig.title}</h1>
       {loading ? (
         <Skeleton count={5} height={40} />
       ) : (

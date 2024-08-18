@@ -16,11 +16,12 @@ const Header = () => {
       <div className="headerMenu">
         <nav>
           <ul>
-            <li className="menu-item" ><Link to="/">Home</Link></li>
-            <li className="menu-item" ><Link to="/reproductions">Reproductions</Link></li> 
-            <li className="menu-item" ><Link to="/devices">Devices</Link></li>
+            <li className="menu-item" ><Link to="/">Portada</Link></li>
+            <li className="menu-item" ><Link to="/reproductions">Reproducciones</Link></li> 
+            <li className="menu-item" ><Link to="/devices">Dispositivos</Link></li>
             <li className="menu-item" ><Link to="/videos">Videos</Link></li>
             <li className="menu-item" ><VisitDropDown/></li>
+            <li className="menu-item" ><Link to="/comparator">Comparador</Link></li>
           </ul>
         </nav>
         <div className="pageTitle"></div>

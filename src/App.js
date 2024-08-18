@@ -17,6 +17,7 @@ import './css/Home.css';
 import './css/Visits.css';
 import './css/Overview.css'; 
 import { IdSiteProvider } from './contexts/idSiteContext';
+import ChartComparator from './pages/Compartor/Comparator';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                     element={<VisitPage pageConfig={page} />}
                   />
                 ))}
+                <Route path="/comparator" element={<ChartComparator />} />
 
               </Routes>
             </div>
