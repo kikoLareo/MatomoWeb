@@ -60,8 +60,8 @@ export const fetchData = async (idSite, requestData) => {
     }
 
     // Usar la función de API general
-    const response1 = await fetch(requestData.url);
-    const responseData = await response1.json();
+    const response1 = await axios.get(requestData.url);
+    const responseData = response1.data;
 
     const data = {
       value: responseData,

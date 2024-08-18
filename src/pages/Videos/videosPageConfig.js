@@ -1,6 +1,6 @@
 import { MediaAnalytics_getVideoTitles } from "../../modules/mediaAnalytics/mediaAnalytics";
 
-export const videoPageTableConfig = {
+export var videoPageTableConfig = {
     title: 'Video Data Overview',
     columns: [
         { key: 'label', label: 'Video' },
