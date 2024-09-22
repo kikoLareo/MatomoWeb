@@ -1,4 +1,4 @@
-import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time,  exampleCharts2 } from './visitsChartsConfig';
+import {  visitsCharts_frequency,visitCharts_interest,visitCharts_summary, visitCharts_time } from './visitsChartsConfig';
 export const pagesConfig = [
   {
     path: '/visitorSummary',
