@@ -23,6 +23,13 @@ const ChartComponent = ({ data, labels, title, metricType }) => {
     scales: {
       x: {
         beginAtZero: true,
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45,
+          callback: function (val, index) {
+            return index % 7 === 0 ? this.getLabelForValue(val) : '';
+          },
+        },
       },
       y: {
         beginAtZero: true,

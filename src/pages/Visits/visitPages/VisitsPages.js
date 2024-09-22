@@ -132,9 +132,7 @@ const VisitPage = ({ pageConfig }) => {
 
 
       return (
-        <div key={index} >
-          <div >
-            {metrics.map((metric, metricIndex) => (
+            metrics.map((metric, metricIndex) => (
               <GraphRenderer
                 key={metricIndex}
                 chart={{
@@ -145,9 +143,8 @@ const VisitPage = ({ pageConfig }) => {
                   metricType: chartConfig.data.info?.metadata.metricTypes[metric] || 'number',
                 }}
               />
-            ))}
-          </div>
-        </div>
+            ))
+          
       );
     });
   };

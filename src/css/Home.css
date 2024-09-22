@@ -140,3 +140,7 @@
 .MediaSection .data-overview-table {
     grid-row: span 2; /* Ajuste adicional para MediaSection */
 }
+
+.VisitsSection .graph_component {
+    width: 30vw;
+}
