@@ -5,7 +5,7 @@ import {titles} from '../utils/dictionaryMetrics/metricsTitles';
 
 export const DataOverviewTable = ({ chartConfig }) => {
   console.log('chartConfig', chartConfig);
-  var { fetchDataFunction, params, title } = chartConfig;
+  var { fetchDataFunction, params } = chartConfig;
   if(!params) {
     params = ["period", "date"];
   }
@@ -77,7 +77,6 @@ export const DataOverviewTable = ({ chartConfig }) => {
 
   return (
     <div className="data-overview-table">
-      <h3>{title}</h3>
       <div className="filter-options">
         {params.includes("period") && (
           <label>

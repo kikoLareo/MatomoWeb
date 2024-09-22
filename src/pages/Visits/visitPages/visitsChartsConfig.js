@@ -3,7 +3,7 @@ import { visitFrequency_get, visitorInterest_getNumberOfVisitsByDaysSinceLast, v
 
 export const visitsCharts_frequency = [
     {
-      title: 'Visits - Frequency',
+      title: 'Visitas - Frequencia',
       description: 'Get the frequency of visits.',
       action: "get",
       module: 'Visits',
@@ -21,7 +21,6 @@ export const visitsCharts_frequency = [
         this.data = await visitFrequency_get(idSite, period, date)
         if(this.data.info.metadata){
           this.description = this.data.info.metadata.documentation;
-          this.title = this.data.info.metadata.name;
           this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
         }
         console.log('Fetched data for chart:', this, this.data);
@@ -217,7 +216,7 @@ export const visitCharts_time = [
 
   export const visitCharts_summary = [
     {
-      title: 'Visits - Summary',
+      title: 'Visitas - Resumen',
       description: 'Get the summary of visits.',
       action: "get",
       module: 'VisitsSummary',

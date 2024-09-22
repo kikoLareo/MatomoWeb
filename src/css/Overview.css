@@ -16,10 +16,6 @@
     }
 
 
-.filter-options {
-    margin-bottom: 20px;
-}
-
     .data-overview-table .filter-options{
         grid-column: 2/3;
         grid-row: 1/2;

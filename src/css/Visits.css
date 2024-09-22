@@ -3,6 +3,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: center;
+    min-height: 100vh
 }
 
 @media (min-width: 1000px) {
