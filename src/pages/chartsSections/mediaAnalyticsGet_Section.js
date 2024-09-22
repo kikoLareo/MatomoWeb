@@ -14,6 +14,7 @@ const MediaAnalyticsGetSection = () => {
   const [showDescription, setShowDescription] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isExpanded, setIsExpanded] = useState({});
 
 
   useEffect(() => {
@@ -64,6 +65,11 @@ const MediaAnalyticsGetSection = () => {
       ...prevState,
       [metric]: !prevState[metric]
     }));
+
+    setIsExpanded((prevState) => ({
+      ...prevState,
+      [metric]: !prevState[metric] // Alternar el estado de "expanded" para la métrica correspondiente
+    }));
   };
 
   /*
@@ -92,7 +98,7 @@ const MediaAnalyticsGetSection = () => {
         ))
         ) : (
           Object.keys(chartData).map((metric) => (
-            <div key={metric} className="graph_component">
+            <div key={metric} className={`graph_component ${isExpanded[metric] ? 'expanded' : ''}`}>
               <>
                 <ChartComponent
                   data={chartData[metric].data}
