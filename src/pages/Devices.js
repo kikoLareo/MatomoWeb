@@ -107,7 +107,7 @@ const Devices = () => {
 
   return (
     <div className="Devices">
-      <p dangerouslySetInnerHTML={{ __html: deviceSummary.replace(/\n/g, '<br/>') }}></p>
+      <p className="deviceSummary" dangerouslySetInnerHTML={{ __html: deviceSummary.replace(/\n/g, '<br/>') }}></p>
       <div className="devicesGraphs">
         {devicesDetectionCharts.map((chart) => (
           <div key={chart.title} className="chart-container">
