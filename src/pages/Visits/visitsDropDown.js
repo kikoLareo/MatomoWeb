@@ -22,7 +22,7 @@ const VisitDropDown = () => {
 
   return (
     <div className="menu-item" onClick={handleMenuClick}>
-      Visits
+      Visitas
       {dropdownVisible && (
         <div className="dropdown-menu">
           {visitsOptions.map((option) => (

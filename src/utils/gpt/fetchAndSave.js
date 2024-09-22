@@ -5,7 +5,6 @@ import { getSiteName } from '../../config';
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 const fetchAndSaveAnalysis = async ({ module, action, title, description, idSite,data }) => {
-  // Fetch the context from the database
   const generalContext = await fetchData('idSitesData', { idSite });
   const moduleData = await fetchData('moduleData',  { idSite, module, action });
 
