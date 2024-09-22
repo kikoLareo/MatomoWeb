@@ -26,11 +26,6 @@ export const pagesConfig = [
     components: [ "GraphRenderer"],
 
   },
-  {
-    path: '/example',
-    title: 'Example',
-    chartsConfig: exampleCharts2,
-    components: ["chartOptions", "GraphRenderer", "periodSelecter", "dateSelecter"],
-  },
+
  
 ];
