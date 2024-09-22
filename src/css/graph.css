@@ -258,3 +258,6 @@ div#widgetIframe {
   filter: contrast(0.9);
 }
 
+.graph_component.expanded{
+  grid-column: span 2;
+}

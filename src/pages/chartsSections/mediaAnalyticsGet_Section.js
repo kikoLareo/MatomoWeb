@@ -6,17 +6,15 @@ import { MediaAnalytics_get } from '../../modules/mediaAnalytics/mediaAnalytics'
 import { IdSiteContext } from '../../contexts/idSiteContext';
 import { MediaAnalytics_get_metrics } from '../../chart_config/MediaAnalytics/get_Info';
 import { API_getProcessedReport } from '../../modules/API/Api_actions';
-import { fetchAndSaveAnalysis } from '../../utils/gpt/fetchAndSave';
 import BarChartSkeleton from '../../components/skeletons/chartSkeleton';
 
 const MediaAnalyticsGetSection = () => {
   const { idSite } = useContext(IdSiteContext);
   const [chartData, setChartData] = useState({});
   const [showDescription, setShowDescription] = useState({});
-  const [showMore, setShowMore] = useState({});
-  const [analysis, setAnalysis] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,30 +58,6 @@ const MediaAnalyticsGetSection = () => {
     fetchData();
   }, [idSite]);
 
-  useEffect(() => {
-    const fetchAnalysis = async (metric) => {
-      const { title, description, idSite, data, module, action } = chartData[metric];
-      try {
-        setLoading(true);
-        const result = await fetchAndSaveAnalysis({ module, action, title, description, idSite, data });
-        setAnalysis(prevAnalysis => ({
-          ...prevAnalysis,
-          [metric]: result,
-        }));
-      } catch (err) {
-        console.error(err);
-        setError('Error fetching analysis. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    Object.keys(showMore).forEach(metric => {
-      if (showMore[metric] && !analysis[metric]) {
-        fetchAnalysis(metric);
-      }
-    });
-  }, [showMore, analysis, chartData]);
 
   const toggleDescription = (metric) => {
     setShowDescription(prevState => ({
@@ -92,6 +66,7 @@ const MediaAnalyticsGetSection = () => {
     }));
   };
 
+  /*
   const handleShowMore = (metric) => {
     setShowMore(prevState => ({
       ...prevState,
@@ -99,6 +74,13 @@ const MediaAnalyticsGetSection = () => {
     }));
   };
 
+
+<button onClick={() => handleShowMore(metric)}>
+                    Show More
+                  </button>
+
+
+            */
   return (
     <div className="graphDashBoard">
       <div className="graphGrid">
@@ -121,9 +103,7 @@ const MediaAnalyticsGetSection = () => {
                   <button onClick={() => toggleDescription(metric)}>
                     {showDescription[metric] ? 'Hide Details' : 'Show Details'}
                   </button>
-                  <button onClick={() => handleShowMore(metric)}>
-                    Show More
-                  </button>
+                  
                 </div>
                 {showDescription[metric] && (
                   <ChartInfo
@@ -132,17 +112,7 @@ const MediaAnalyticsGetSection = () => {
                     data={chartData[metric].data}
                   />
                 )}
-                {showMore[metric] && (
-                  <div className="detailed-info">
-                    {loading ? (
-                      <div className="skeleton-chart"></div>
-                    ) : error ? (
-                      <p>{error}</p>
-                    ) : (
-                      <p>{analysis[metric]}</p>
-                    )}
-                  </div>
-                )}
+              
               </>
             </div>
           ))
