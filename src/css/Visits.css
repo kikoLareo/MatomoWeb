@@ -17,3 +17,23 @@
     width: 100%;
 }
 
+
+.charts-section{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around
+}
+
+.visitsGraphs .data-overview-section{
+    padding: 2vh 1vw;
+}
+
+ .data-overview-table{
+    grid-template-areas:
+        "options options"
+        "table table";
+
+}

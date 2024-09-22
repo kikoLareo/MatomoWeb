@@ -17,7 +17,7 @@ const VisitPage = ({ pageConfig }) => {
   const [metricsData, setMetricsData] = useState({});
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
-  const [iframeHtml, setIframeHtml] = useState(null); // Estado para almacenar el iframe
+  const [iframeHtml, setIframeHtml] = useState(null);
 
   
   useEffect(() => {
@@ -67,12 +67,12 @@ const VisitPage = ({ pageConfig }) => {
   useEffect(() => {
     const loadIframe = async () => {
       if (pageConfig.components.includes("iframe") && pageConfig.iframe) {
-        const iframeContent = await pageConfig.iframe(idSite); // Espera la resolución del iframe
-        setIframeHtml(iframeContent); // Almacena el HTML del iframe en el estado
+        const iframeContent = await pageConfig.iframe(idSite); 
+        setIframeHtml(iframeContent);
       }
     };
     loadIframe();
-  }, [idSite, pageConfig]); // Ejecuta este efecto cuando idSite o pageConfig cambian
+  }, [idSite, pageConfig]); 
 
 
   const renderIframe = () => {
@@ -132,8 +132,7 @@ const VisitPage = ({ pageConfig }) => {
 
 
       return (
-        <div key={index}>
-          <h2>{chartConfig.title}</h2>
+        <div key={index} >
           <div >
             {metrics.map((metric, metricIndex) => (
               <GraphRenderer
@@ -180,7 +179,9 @@ const VisitPage = ({ pageConfig }) => {
                     </div>
                   ))}
                  
+              <div className="charts-section">
                 {pageConfig.components.includes("GraphRenderer") && renderCharts()}
+              </div>
               </div>
             </>
           )}

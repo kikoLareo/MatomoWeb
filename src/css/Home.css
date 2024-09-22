@@ -59,13 +59,13 @@
 
 /* Ajuste para las secciones para ocupar bien el espacio */
 .LiveSection, .VisitsSection, .MediaSection {
-    grid-gap: 10px;
+    grid-gap: 0;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px #0000001a;
     box-sizing: border-box;
     display: grid;
-    gap: 10px;
+    gap: 0;
     grid-template-rows: repeat(10, 1fr);
     height: 100%;
     height: auto;
@@ -124,7 +124,7 @@
 
 .LiveSection .iframe-container, .VisitsSection .graph_component  {
     grid-row: span 6; /* El gráfico ocupa 7/10 del espacio */
-    width: 90%;
+    width: 25vw
 }
 .MediaSection .graph_component{
     grid-row: span 7; /* El gráfico ocupa 7/10 del espacio */

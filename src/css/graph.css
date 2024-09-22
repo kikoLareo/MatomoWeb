@@ -36,6 +36,7 @@
 .graph_component {
   background-color: #fff;
   padding: 1vh 1vw;
+  margin: 1vh 1vw;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -237,7 +238,6 @@
 .chartsInfo {
   padding: 0 0;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column
 }
