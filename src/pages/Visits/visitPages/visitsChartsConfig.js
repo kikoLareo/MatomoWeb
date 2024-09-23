@@ -10,28 +10,28 @@ export const visitsCharts_frequency = [
     date: '2024-03-01,yesterday',
     type: 'lineal',
     metrics: {
-    "nb_visits_new" : "Nuevas visitas",
-    "nb_visits_returning": "Visitas que regresan"
+      "nb_visits_new": "Nuevas visitas",
+      "nb_visits_returning": "Visitas que regresan"
     },
-    data : [],
+    data: [],
     data_table: [],
     params: ["period"],
     fetchDataFunction: visitFrequency_get,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitFrequency_get(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
-    }
-    console.log('Fetched data for chart:', this, this.data);
-  
-    return this;
-    },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitFrequency_get(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitFrequency_get(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.metrics = this.data.info.columns || this.data.info.metadata.metrics || this.metrics;
+      }
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
+    },
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitFrequency_get(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
+
+      return this;
     }
   },
 ];
@@ -46,34 +46,34 @@ export const visitCharts_time = [
     date: 'yesterday',
     type: 'bar',
     metrics: ["nb_visits"],
-    data : [],
+    data: [],
     data_table: [],
     labels: [],
     params: ["period"],
     fetchDataFunction: visitTime_getVisitInformationPerLocalTime,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;
-      this.data.value.forEach((value) => {
-      console.log('Value:', value);
-      if (value.hasOwnProperty('label')) {
-        this.labels.push(value.label);
-      } else {
-        this.labels.push(Object.keys(value)[0]);
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.data.value.forEach((value) => {
+          console.log('Value:', value);
+          if (value.hasOwnProperty('label')) {
+            this.labels.push(value.label);
+          } else {
+            this.labels.push(Object.keys(value)[0]);
+          }
+        });
       }
-      }); 
-    }
-    console.log('Fetched data for chart:', this, this.data);
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitTime_getVisitInformationPerLocalTime(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   },
   {
@@ -85,35 +85,35 @@ export const visitCharts_time = [
     date: 'yesterday',
     type: 'bar',
     metrics: {
-    nb_actions:"Acciones",
+      nb_actions: "Acciones",
     },
-    data : [],
+    data: [],
     data_table: [],
     labels: [],
     params: ["period"],
     fetchDataFunction: visitTime_getByDayOfWeek,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitTime_getByDayOfWeek(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;
-      this.data.value.forEach((value) => {
-      if (value.hasOwnProperty('label')) {
-        if(!this.labels.includes(value['label'])){
-        this.labels.push(value['label']);
-        }
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitTime_getByDayOfWeek(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.data.value.forEach((value) => {
+          if (value.hasOwnProperty('label')) {
+            if (!this.labels.includes(value['label'])) {
+              this.labels.push(value['label']);
+            }
+          }
+        });
       }
-      });
-    }
-    console.log('Fetched data for chart:', this, this.data);
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitTime_getByDayOfWeek(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitTime_getByDayOfWeek(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   }
 ];
@@ -128,35 +128,35 @@ export const visitCharts_interest = [
     date: 'yesterday',
     type: 'bar',
     metrics: {
-    nb_actions:"Acciones",
+      nb_actions: "Acciones",
     },
-    data : [],
+    data: [],
     data_table: [],
     labels: [],
     params: ["period"],
     fetchDataFunction: visitorInterest_getNumberOfVisitsPerVisitDuration,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;
-      this.data.value.forEach((value) => {
-      if (value.hasOwnProperty('label')) {
-        if(!this.labels.includes(value['label'])){
-        this.labels.push(value['label']);
-        }
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.data.value.forEach((value) => {
+          if (value.hasOwnProperty('label')) {
+            if (!this.labels.includes(value['label'])) {
+              this.labels.push(value['label']);
+            }
+          }
+        });
       }
-      });
-    }
-    console.log('Fetched data for chart:', this, this.data);
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitorInterest_getNumberOfVisitsPerVisitDuration(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   },
   {
@@ -168,35 +168,35 @@ export const visitCharts_interest = [
     date: 'yesterday',
     type: 'bar',
     metrics: {
-    "nb_visits": "Visitas",
+      "nb_visits": "Visitas",
     },
-    data : [],
+    data: [],
     data_table: [],
     labels: [],
     params: ["period"],
     fetchDataFunction: visitorInterest_getNumberOfVisitsPerPage,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;
-      this.data.value.forEach((value) => {
-      if (value.hasOwnProperty('label')) {
-        if(!this.labels.includes(value['label'])){
-        this.labels.push(value['label']);
-        }
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitorInterest_getNumberOfVisitsPerPage(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.data.value.forEach((value) => {
+          if (value.hasOwnProperty('label')) {
+            if (!this.labels.includes(value['label'])) {
+              this.labels.push(value['label']);
+            }
+          }
+        });
       }
-      });
-    }
-    console.log('Fetched data for chart:', this, this.data);
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitorInterest_getNumberOfVisitsPerPage(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitorInterest_getNumberOfVisitsPerPage(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   },
   {
@@ -208,35 +208,35 @@ export const visitCharts_interest = [
     date: 'yesterday',
     type: 'bar',
     metrics: {
-    "nb_visits": "Visitas",
+      "nb_visits": "Visitas",
     },
-    data : [],
+    data: [],
     data_table: [],
     labels: [],
     params: ["period"],
     fetchDataFunction: visitorInterest_getNumberOfVisitsByDaysSinceLast,
-    async getData(idSite, period = this.period, date = this.date){
-    this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;    
-      this.data.value.forEach((value) => {
-      if (value.hasOwnProperty('label')) {
-        if(!this.labels.includes(value['label'])){
-        this.labels.push(value['label']);
-        }
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.data.value.forEach((value) => {
+          if (value.hasOwnProperty('label')) {
+            if (!this.labels.includes(value['label'])) {
+              this.labels.push(value['label']);
+            }
+          }
+        });
       }
-      });
-    }
-    console.log('Fetched data for chart:', this, this.data);
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitorInterest_getNumberOfVisitsByDaysSinceLast(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   }
 ];
@@ -251,35 +251,35 @@ export const visitCharts_summary = [
     date: '2024-03-01,yesterday',
     type: 'lineal',
     metrics: {
-    "sum_visit_length": "Duración total de las visitas (en segundos)",
-    "nb_uniq_visitors": "Visitantes únicos",
-    "nb_visits": "Visitas",
-    "nb_actions": "Acciones",
-    "max_actions": "Acciones máximas en una visita",
-    "bounce_rate": "Porcentaje de rebote",
-    "nb_actions_per_visit": "Acciones por visita",
-    "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
+      "sum_visit_length": "Duración total de las visitas (en segundos)",
+      "nb_uniq_visitors": "Visitantes únicos",
+      "nb_visits": "Visitas",
+      "nb_actions": "Acciones",
+      "max_actions": "Acciones máximas en una visita",
+      "bounce_rate": "Porcentaje de rebote",
+      "nb_actions_per_visit": "Acciones por visita",
+      "avg_time_on_site": "Promedio de duración de las visitas (en segundos)"
     },
-    data : [],
+    data: [],
     data_table: [],
     params: ["period"],
     fetchDataFunction: visitsSummary_get,
-    async getData(idSite, period = this.period, date = this.date){ 
-    this.data = await visitsSummary_get(idSite, period, date)
-    if(this.data.info.metadata){
-      this.description = this.data.info.metadata.documentation;
-      this.title = this.data.info.metadata.name;
-      this.metrics = this.data.info.columns ? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
-    }
-    console.log('Fetched data for chart:', this, this.data);
+    async getData(idSite, period = this.period, date = this.date) {
+      this.data = await visitsSummary_get(idSite, period, date)
+      if (this.data.info.metadata) {
+        this.description = this.data.info.metadata.documentation;
+        this.title = this.data.info.metadata.name;
+        this.metrics = this.data.info.columns ? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
+      }
+      console.log('Fetched data for chart:', this, this.data);
 
-    return this;
+      return this;
     },
-    async getTableData(idSite, period = this.period, date = this.date){
-    this.data_table = await visitsSummary_get(idSite, period, date)
-    console.log('Fetched data for chart:', this, this.data_table);
+    async getTableData(idSite, period = this.period, date = this.date) {
+      this.data_table = await visitsSummary_get(idSite, period, date)
+      console.log('Fetched data for chart:', this, this.data_table);
 
-    return this;
+      return this;
     }
   },
 ];

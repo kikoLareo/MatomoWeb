@@ -20,6 +20,7 @@ export const homeCharts_LiveSection =
       "visitsConverted": "Visitantes Convertidos",
     },
     data: [],
+    data_table: [],
     params: ["lastMinutes"],
     fetchDataFunction: Live_getCounter,
     async getData(idSite ,lastMinutes = 30) {
@@ -43,6 +44,7 @@ export const homeIframes = [
     type: 'iframe',
     metrics: {},
     data : [],
+    data_table: [],
 
     fetchDataFunction: visitLive_getMap,
     async getData(idSite){
@@ -70,6 +72,7 @@ export const homeCharts_VisitsSection_Overview = [
     },
     params: ["period"],
     data : [],
+    data_table: [],
 
     fetchDataFunction: visitsSummary_get,
     async getData(idSite){ 
@@ -105,6 +108,7 @@ export const homeCharts_VisitsSection_Evolution =
     },
     params: ["period"],
     data : [],
+    data_table: [],
 
     fetchDataFunction: visitsSummary_get,
     async getData(idSite){ 
@@ -131,6 +135,7 @@ export const homeCharts_MediaSection = [
       "value": "Reproducciones",
     },
     data: [],
+    data_table: [],
     params: ["lastMinutes"],
 
     fetchDataFunction: MediaAnalytics_getCurrentNumPlays,
@@ -155,6 +160,7 @@ export const homeCharts_MediaSection = [
       "value": "Tiempo de reproducción (seg)",
     },
     data: [],
+    data_table: [],
     params: ["lastMinutes"],
     fetchDataFunction: MediaAnalytics_getCurrentSumTimeSpent,
     async getData(idSite, lastMinutes = 180) {
@@ -176,6 +182,7 @@ export const homeCharts_MediaSection = [
     type: 'table',
     metrics: {"value": "Plays"},
     data: [],
+    data_table: [],
     params: ["lastMinutes"],
     fetchDataFunction: MediaAnalytics_getCurrentMostPlays,
     async getData(idSite, lastMinutes = 180, filter_limit = '5') {
