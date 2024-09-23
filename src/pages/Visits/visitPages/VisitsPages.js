@@ -95,6 +95,7 @@ const VisitPage = ({ pageConfig }) => {
   
       // Caso 1: Formato con array y label
       if (Array.isArray(chartConfig.data.value)) {
+        console.log('chartConfig.data.value 1', chartConfig.data.value);
         labels = chartConfig.data.value.map(item => item.label);
         metrics.forEach(metric => {
           dataPoints[metric] = chartConfig.data.value.map(item => item[metric] || 0);
@@ -102,6 +103,7 @@ const VisitPage = ({ pageConfig }) => {
       }
       // Caso 2: Formato con objeto y fechas como claves
       else if (typeof chartConfig.data.value === 'object') {
+        console.log('chartConfig.data.value 2', chartConfig.data.value);
         labels = Object.keys(chartConfig.data.value);
         metrics.forEach(metric => {
           dataPoints[metric] = labels.map(label => chartConfig.data.value[label]?.[metric] || 0);

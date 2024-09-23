@@ -20,13 +20,11 @@ const ChartComponent = ({ data, labels, title, metricType, xlabels = true }) => 
     chartData.datasets[0].yAxisID = 'percentage';
   }
 
-  if(xlabels) {
-    chartData.datasets[0].xAxisID = 'x-axis';
-  }else{
+  if(!xlabels) {
     chartData.labels = [];
   }
 
-  
+
   const options = {
     scales: {
       x: {
