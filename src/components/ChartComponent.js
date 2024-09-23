@@ -2,7 +2,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const ChartComponent = ({ data, labels, title, metricType }) => {
+const ChartComponent = ({ data, labels, title, metricType, xlabels = true }) => {
   const chartData = {
     labels,
     datasets: [
@@ -19,6 +19,14 @@ const ChartComponent = ({ data, labels, title, metricType }) => {
   if(metricType === 'percentage') {
     chartData.datasets[0].yAxisID = 'percentage';
   }
+
+  if(xlabels) {
+    chartData.datasets[0].xAxisID = 'x-axis';
+  }else{
+    chartData.labels = [];
+  }
+
+  
   const options = {
     scales: {
       x: {
@@ -27,7 +35,7 @@ const ChartComponent = ({ data, labels, title, metricType }) => {
           maxRotation: 45,
           minRotation: 45,
           callback: function (val, index) {
-            return index % 7 === 0 ? this.getLabelForValue(val) : '';
+            return index % 3 === 0 ? this.getLabelForValue(val) : '';
           },
         },
       },

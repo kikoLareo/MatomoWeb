@@ -44,6 +44,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  width: 35vw;
 }
 
 
@@ -260,6 +261,7 @@ div#widgetIframe {
 
 .graph_component.expanded{
   grid-column: span 2;
+  width: auto;
 }
 
  button:hover {

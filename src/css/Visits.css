@@ -19,12 +19,11 @@
 
 
 .charts-section{
+    align-items: center;
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-around
+    flex-wrap: wrap;
 }
 
 .visitsGraphs .data-overview-section{

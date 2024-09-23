@@ -43,6 +43,7 @@ const VisitsOverviewSection = () => {
           data: Object.values(visitsEvolution.data.value).map(((value) => value["nb_visits"] || 0)),
           title: "Visits - Evolution",
           metricType: 'number',
+          xlabel:false
         }}
         />
       
