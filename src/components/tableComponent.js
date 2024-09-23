@@ -54,7 +54,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
         } 
         if (params.includes("lastMinutes")) args.push(lastMinutes);
 
-        const data = await chartConfig.getData(...args);
+        const data = await chartConfig.getTableData(...args);
         const result = data.data;
 
         if (result.value) {
