@@ -5,6 +5,17 @@ import { IdSiteContext } from '../../../contexts/idSiteContext';
 import DataOverviewTable from '../../../components/tableComponent';
 import GraphRenderer from '../../../utils/GraphRenderer';
 
+/**
+ * VisitPage component renders a page with various charts and data based on the provided configuration.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.pageConfig - The configuration object for the page.
+ * @param {Array} props.pageConfig.chartsConfig - Array of chart configurations.
+ * @param {string} props.pageConfig.title - The title of the page.
+ * @param {Array} props.pageConfig.components - Array of components to be included in the page.
+ *
+ * @returns {JSX.Element} The rendered VisitPage component.
+ */
 const VisitPage = ({ pageConfig }) => {
   console.log('pageConfig', pageConfig);
   const chartsConfig = pageConfig.chartsConfig;
@@ -17,7 +28,6 @@ const VisitPage = ({ pageConfig }) => {
   const [metricsData, setMetricsData] = useState({});
   const { idSite } = useContext(IdSiteContext);
   const [loading, setLoading] = useState(true);
-  const [iframeHtml, setIframeHtml] = useState(null);
 
   
   useEffect(() => {
@@ -30,6 +40,7 @@ const VisitPage = ({ pageConfig }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('Step 1: Start fetching data for charts');
       setLoading(true); 
       const data = {};
       for (const chart of chartsConfig) {
@@ -64,30 +75,12 @@ const VisitPage = ({ pageConfig }) => {
     });
   };
 
-  useEffect(() => {
-    const loadIframe = async () => {
-      if (pageConfig.components.includes("iframe") && pageConfig.iframe) {
-        const iframeContent = await pageConfig.iframe(idSite); 
-        setIframeHtml(iframeContent);
-      }
-    };
-    loadIframe();
-  }, [idSite, pageConfig]); 
-
-
-  const renderIframe = () => {
-    if (iframeHtml) {
-      return (
-        <div className="iframe-container" dangerouslySetInnerHTML={{ __html: iframeHtml }} />
-      );
-    }
-    return null;
-  };
-
   const renderCharts = () => {
+    console.log('Step 4: Rendering charts');
     return chartsConfig.map((chartConfig, index) => {
+      console.log('Step ' + (index + 5) + ': Rendering chart:', chartConfig);
       const metrics = selectedMetrics[chartConfig.title] || (pageConfig.components.includes("chartOptions") ? [] : Object.keys(chartConfig.metrics));
-  
+    
       if (metrics.length === 0) return null;
   
       let labels = [];
@@ -159,7 +152,6 @@ const VisitPage = ({ pageConfig }) => {
             <div>Loading data...</div>
           ) : (
             <>
-              {renderIframe()}
               {pageConfig.components.includes("chartOptions") && (
                 <ChartOptions 
                   chartConfig={chartsConfig} 
