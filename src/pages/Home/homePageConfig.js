@@ -76,7 +76,7 @@ export const homeCharts_VisitsSection_Overview = [
     data_table: [],
 
     fetchDataFunction: visitsSummary_get,
-    async getData(idSite) {
+    async getData(idSite, period = 'year', date = 'yesterday') {
       console.log('Step 2: Getting data for chart:', this);
       this.data = await visitsSummary_get(idSite, this.period, this.date);
       if (this.data.info.metadata) {
@@ -88,8 +88,8 @@ export const homeCharts_VisitsSection_Overview = [
 
       return this;
     },
-    async getTableData(idSite) {
-      this.data_table = await visitsSummary_get(idSite, this.period, this.date);
+    async getTableData(idSite, period = 'year', date = 'yesterday') {
+      this.data_table = await visitsSummary_get(idSite, period, date);
       console.log('Fetched data for chart:', this, this.data_table);
       return this;
     }
