@@ -29,6 +29,7 @@ export const homeCharts_LiveSection = {
   async getTableData(idSite, lastMinutes = 30) {
     this.data_table = await Live_getCounter(idSite, lastMinutes);
     console.log('Fetched data for chart:', this, this.data_table);
+    return this;
   }
 };
 
@@ -53,6 +54,7 @@ export const homeIframes = [
     async getTableData(idSite) {
       this.data_table = await visitLive_getMap(idSite);
       console.log('Fetched data for chart:', this, this.data_table);
+      return this.data_table;
     }
   },
 ];
@@ -89,6 +91,7 @@ export const homeCharts_VisitsSection_Overview = [
     async getTableData(idSite) {
       this.data_table = await visitsSummary_get(idSite, this.period, this.date);
       console.log('Fetched data for chart:', this, this.data_table);
+      return this;
     }
   }
 ];
@@ -117,6 +120,7 @@ export const homeCharts_VisitsSection_Evolution = {
   async getTableData(idSite) {
     this.data_table = await visitsSummary_get(idSite, this.period, this.date);
     console.log('Fetched data for chart:', this, this.data_table);
+    return this;
   }
 };
 
@@ -144,6 +148,7 @@ export const homeCharts_MediaSection = [
     async getTableData(idSite, lastMinutes = 180) {
       this.data_table = await MediaAnalytics_getCurrentNumPlays(idSite, lastMinutes);
       console.log('Fetched data for chart:', this, this.data_table);
+      return this;
     }
   },
   {
@@ -168,6 +173,7 @@ export const homeCharts_MediaSection = [
     async getTableData(idSite, lastMinutes = 180) {
       this.data_table = await MediaAnalytics_getCurrentSumTimeSpent(idSite, lastMinutes);
       console.log('Fetched data for chart:', this, this.data_table);
+      return this;
     }
   },
   {
@@ -191,6 +197,7 @@ export const homeCharts_MediaSection = [
     async getTableData(idSite, lastMinutes = 180, filter_limit = '5') {
       this.data_table = await MediaAnalytics_getCurrentMostPlays(idSite, lastMinutes, filter_limit);
       console.log('Fetched data for chart:', this, this.data_table);
+      return this;
     }
   }
 ];
