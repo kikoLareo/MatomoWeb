@@ -16,7 +16,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
   const [lastMinutes, setLastMinutes] = useState(30);
 
   const formatDataForTable = (chart) => {
-    let data = chart.data.value;
+    let data = chart.data_table.value;
 
     // Si data es un array
     if (Array.isArray(data)) {
@@ -55,7 +55,7 @@ export const DataOverviewTable = ({ chartConfig }) => {
         if (params.includes("lastMinutes")) args.push(lastMinutes);
 
         const data = await chartConfig.getTableData(...args);
-        const result = data.data;
+        const result = data.data_table;
 
         if (result.value) {
           setData(formatDataForTable(data));
