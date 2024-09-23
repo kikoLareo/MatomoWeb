@@ -6,7 +6,7 @@ export const visitsCharts_frequency = [
     description: 'Get the frequency of visits.',
     action: "get",
     module: 'Visits',
-    period: 'year',
+    period: 'day',
     date: '2024-03-01,yesterday',
     type: 'lineal',
     metrics: {
