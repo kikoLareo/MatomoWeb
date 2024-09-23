@@ -67,13 +67,14 @@ export const homeCharts_LiveSection =
 
             fetchDataFunction: visitsSummary_get,
             async getData(idSite){ 
+              console.log('Step 2: Getting data for chart:', this);
               this.data = await visitsSummary_get(idSite, this.period, this.date)
               if(this.data.info.metadata){
                 this.description = this.data.info.metadata.documentation;
                 this.title = this.data.info.metadata.name;
                 this.metrics = this.data.info.columns? this.data.info.columns : this.data.info.metadata.metrics || this.metrics;
               }
-              console.log('Fetched data for chart:', this, this.data);
+              console.log('Step 3: Fetched data for chart:', this);
       
               return this;
             }
